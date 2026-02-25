@@ -1,0 +1,34 @@
+modLoader = "javafml"
+loaderVersion = "[1,)"
+issueTrackerURL = "https://github.com/JustMili0/LeftForgotten/issues"
+license = "MIT"
+
+[[mods]]
+modId = "left_forgotten"
+version = "${mod_version}"
+displayName = "Left Forgotten"
+description = "Alpha Minecraft under the bedrock, but an empty and desolate land left forgotten years ago."
+credits = "" #I think this is the same as Fabric's "contributors"
+authors = "JustMili"
+logoFile = "icon.png"
+
+[[dependencies.left_forgotten]]
+modId = "forge"
+mandatory = true
+versionRange = "[${forge_version_range},)"
+ordering = "NONE"
+side = "BOTH"
+
+[[dependencies.left_forgotten]]
+modId = "minecraft"
+mandatory = true
+versionRange = "[${minecraft_version}]"
+ordering = "NONE"
+side = "BOTH"
+
+[[dependencies.left_forgotten]]
+modId = "architectury"
+mandatory = true
+versionRange = "[${architectury_api_version},)"
+ordering = "AFTER"
+side = "BOTH"

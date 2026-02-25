@@ -1,0 +1,39 @@
+{
+  "schemaVersion": 1,
+  "id": "left_forgotten",
+  "version": "${mod_version}",
+  "name": "Left Forgotten",
+  "description": "Alpha Minecraft under the bedrock, but an empty and desolate land left forgotten years ago.",
+  "authors": [
+    "JustMili"
+  ],
+  "contributors": [
+    ""
+  ],
+  "contact": {
+    "homepage": "https://modrinth.com/mod/left-forgotten",
+    "sources": "https://github.com/JustMili0/LeftForgotten/",
+    "issues": "https://github.com/JustMili0/LeftForgotten/issues"
+  },
+  "license": "MIT",
+  "icon": "icon.png",
+  "environment": "*",
+  "entrypoints": {
+    "main": [
+      "net.justmili.leftforgotten.fabric.LeftForgottenFabric"
+    ],
+    "client": [
+      "net.justmili.leftforgotten.fabric.client.FabricClient"
+    ]
+  },
+  "mixins": [
+    "left_forgotten.mixins.json"
+  ],
+  "depends": {
+    "fabricloader": ">=${fabric_loader_version}",
+    "minecraft": "${minecraft_version}",
+    "java": ">=17",
+    "architectury": ">=${architectury_api_version}",
+    "fabric-api": "*"
+  }
+}
