@@ -1,0 +1,18 @@
+{
+    "type": "minecraft:ore",
+    "config": {
+      "size": 8,
+      "discard_chance_on_air_exposure": 1,
+      "targets": [
+        {
+          "target": {
+            "predicate_type": "tag_match",
+            "tag": "left_forgotten:oregen_replacable"
+          },
+          "state": {
+            "Name": "left_forgotten:diamond_ore"
+          }
+        }
+      ]
+    }
+  }

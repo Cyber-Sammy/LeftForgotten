@@ -1,0 +1,5 @@
+{
+  "type": "minecraft:add",
+  "argument1": "left_forgotten:alpha/final_density",
+  "argument2": 0.3
+}

@@ -1,0 +1,5 @@
+- oregen_replacable tag
+- inedible tag
+- add special blocks and items to minecraft/forge/fabric/c tags
+- blockstates, block models
+- item models, item definition files
