@@ -20,11 +20,12 @@ public class DimChange {
         ServerLevel newLevel = player.getServer().getLevel(DimKeys.ALPHA_MINECRAFT);
         if (newLevel == null) return EventResult.pass();
 
+        player.setHealth(player.getMaxHealth());
         player.teleportTo(newLevel, player.getX(), player.getY(), player.getZ(), player.getYRot(), player.getXRot());
         // make the player face downwards
         // I'll finish it later, at the time of writing this it's 2:30am
 
-        return EventResult.pass();
+        return EventResult.interruptFalse();
     }
 
     public static EventResult attemptDimExit(LivingEntity entity, DamageSource source, float v) {
