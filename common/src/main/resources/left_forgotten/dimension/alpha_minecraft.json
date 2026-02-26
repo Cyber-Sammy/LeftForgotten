@@ -1,12 +1,12 @@
 {
-  "type": "true_end:beyond_the_dream",
+  "type": "left_forgotten:alpha_minecraft",
   "generator": {
     "type": "minecraft:noise",
     "biome_source": {
       "type": "minecraft:multi_noise",
       "biomes": [
         {
-          "biome": "true_end:forest",
+          "biome": "left_forgotten:forest",
           "parameters": {
             "temperature": 0,
             "humidity": -0.5,
@@ -18,7 +18,7 @@
           }
         },
         {
-          "biome": "true_end:plains",
+          "biome": "left_forgotten:plains",
           "parameters": {
             "temperature": 0,
             "humidity": 0.5,
@@ -31,6 +31,6 @@
         }
       ]
     },
-    "settings": "true_end:alpha_noise_settings"
+    "settings": "left_forgotten:alpha_noise_settings"
   }
 }

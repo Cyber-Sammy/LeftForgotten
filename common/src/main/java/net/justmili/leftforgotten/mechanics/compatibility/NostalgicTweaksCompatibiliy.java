@@ -7,7 +7,6 @@ import net.minecraft.world.entity.player.Player;
 import static net.justmili.leftforgotten.init.DimKeys.ALPHA_MINECRAFT;
 
 public class NostalgicTweaksCompatibiliy {
-
     public static boolean justOut = false;
 
     public static void onPlayerTick(Player player) {

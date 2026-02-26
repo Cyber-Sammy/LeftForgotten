@@ -15,7 +15,7 @@ import net.minecraft.world.level.Level;
 import static net.justmili.leftforgotten.init.DimKeys.ALPHA_MINECRAFT;
 
 public class WoolDrop {
-    public static EventResult onEntityAttacked(LivingEntity entity, DamageSource source, float amount) {
+    public static EventResult onEntityHurt(LivingEntity entity, DamageSource source, float amount) {
         if (!(entity instanceof Sheep sheep && (entity.level().dimension()) == ALPHA_MINECRAFT)) return EventResult.pass();
         Level world = sheep.level();
         if (world.isClientSide()) return EventResult.pass();

@@ -21,18 +21,13 @@ import org.spongepowered.asm.mixin.injection.callback.CallbackInfo;
 import static net.justmili.leftforgotten.init.DimKeys.ALPHA_MINECRAFT;
 
 
-@Mixin(Gui.class) // replace with the real class
+@Mixin(Gui.class)
 public abstract class GuiMixin {
     @Shadow @Final private Minecraft minecraft;
     @Shadow private int screenWidth;
 
-    @WrapOperation(
-            method = "renderPlayerHealth(Lnet/minecraft/client/gui/GuiGraphics;)V",
-            at = @At(
-                    value = "INVOKE",
-                    target = "Lnet/minecraft/client/gui/Gui;getVehicleMaxHearts(Lnet/minecraft/world/entity/LivingEntity;)I"
-            )
-    )
+    @WrapOperation(method = "renderPlayerHealth(Lnet/minecraft/client/gui/GuiGraphics;)V", at = @At(value = "INVOKE",
+        target = "Lnet/minecraft/client/gui/Gui;getVehicleMaxHearts(Lnet/minecraft/world/entity/LivingEntity;)I"))
     private int wrapVehicleHearts(Gui instance, LivingEntity vehicle, Operation<Integer> original) {
         if (this.minecraft.player.level().dimension() != ALPHA_MINECRAFT) {return this.getVehicleMaxHearts(vehicle);}
         return -1;
@@ -55,23 +50,13 @@ public abstract class GuiMixin {
         }
     }
 
-    // "ordinal" = which int local to target, since there are multiple ints in the method
-    @ModifyVariable(
-            method = "renderPlayerHealth",
-            at = @At("STORE"), // right after it's stored
-            ordinal = 4     // <-- need to match the correct int local
-    )
+    @ModifyVariable(method = "renderPlayerHealth", at = @At("STORE"), ordinal = 4)
     private int modifyBubblesX(int original) {
         if (this.minecraft.player.level().dimension() != ALPHA_MINECRAFT) {return original;}
         return original - 101; // shift it down 20 px, or whatever you want
     }
 
-    // "ordinal" = which int local to target, since there are multiple ints in the method
-    @ModifyVariable(
-            method = "renderPlayerHealth",
-            at = @At("STORE"), // right after it's stored
-            ordinal = 5     // <-- need to match the correct int local
-    )
+    @ModifyVariable(method = "renderPlayerHealth", at = @At("STORE"), ordinal = 5)
     private int modifyBubblesY(int original) {
         if (this.minecraft.player.level().dimension() != ALPHA_MINECRAFT) {return original;}
         if (Platform.isModLoaded("nostalgic_tweaks")) {

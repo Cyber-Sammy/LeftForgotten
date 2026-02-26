@@ -1,6 +1,9 @@
 package net.justmili.leftforgotten;
 
+import dev.architectury.event.events.common.TickEvent;
 import net.justmili.leftforgotten.init.AlphaBlocks;
+import net.justmili.leftforgotten.init.AlphaItems;
+import net.justmili.leftforgotten.init.Events;
 import net.minecraft.resources.ResourceLocation;
 
 import java.util.Iterator;
@@ -10,7 +13,11 @@ public final class LeftForgotten {
     public static final String MOD_ID = "left_forgotten";
 
     public static void init() {
+        TickEvent.SERVER_POST.register(server -> processQueue());
         AlphaBlocks.register();
+        AlphaItems.register();
+
+        Events.register();
     }
 
     private static final ConcurrentLinkedQueue<WorkItem> workQueue = new ConcurrentLinkedQueue<>();

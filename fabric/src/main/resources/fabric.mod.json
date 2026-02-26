@@ -23,7 +23,7 @@
       "net.justmili.leftforgotten.fabric.LeftForgottenFabric"
     ],
     "client": [
-      "net.justmili.leftforgotten.fabric.client.FabricClient"
+      "net.justmili.leftforgotten.client.fabric.FabricClient"
     ]
   },
   "mixins": [
