@@ -1,17 +1,17 @@
 
-package net.justmili.leftforgotten.block.building.wood;
+package net.justmili.leftforgotten.block.building.bricks;
 
 import net.justmili.leftforgotten.block.Common;
 import net.minecraft.core.BlockPos;
 import net.minecraft.world.level.BlockGetter;
-import net.minecraft.world.level.block.FenceBlock;
 import net.minecraft.world.level.block.SoundType;
+import net.minecraft.world.level.block.WallBlock;
 import net.minecraft.world.level.block.state.BlockState;
 import net.minecraft.world.level.material.MapColor;
 
-public class WoodenFence extends FenceBlock {
-	public WoodenFence() {
-		super(Properties.of().mapColor(MapColor.WOOD).sound(SoundType.WOOD).strength(2f, 3f).noOcclusion().isRedstoneConductor(Common::never).forceSolidOn());
+public class BrickWall extends WallBlock {
+	public BrickWall() {
+		super(Properties.of().mapColor(MapColor.STONE).sound(SoundType.STONE).strength(0.6f).noOcclusion().isRedstoneConductor(Common::never).forceSolidOn());
 	}
 
 	@Override

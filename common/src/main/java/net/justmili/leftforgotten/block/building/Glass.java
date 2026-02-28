@@ -20,7 +20,7 @@ public class Glass extends Block {
                 .sound(SoundType.GLASS)
                 .strength(0.3f)
                 .noOcclusion()
-                .isRedstoneConductor((bs, br, bp) -> false)
+                .isRedstoneConductor(Common::never)
                 .isSuffocating(Common::never)
                 .isViewBlocking(Common::never));
     }

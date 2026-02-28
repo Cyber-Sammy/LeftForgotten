@@ -1,6 +1,7 @@
 
 package net.justmili.leftforgotten.block.building.cobble;
 
+import net.justmili.leftforgotten.block.Common;
 import net.minecraft.core.BlockPos;
 import net.minecraft.world.level.BlockGetter;
 import net.minecraft.world.level.block.SoundType;
@@ -10,7 +11,7 @@ import net.minecraft.world.level.material.MapColor;
 
 public class MossyCobblestoneWall extends WallBlock {
 	public MossyCobblestoneWall() {
-		super(Properties.of().mapColor(MapColor.STONE).sound(SoundType.STONE).strength(2f, 6f).noOcclusion().isRedstoneConductor((bs, br, bp) -> false).forceSolidOn());
+		super(Properties.of().mapColor(MapColor.STONE).sound(SoundType.STONE).strength(2f, 6f).noOcclusion().isRedstoneConductor(Common::never).forceSolidOn());
 	}
 
 	@Override

@@ -4,6 +4,7 @@ import dev.architectury.registry.registries.DeferredRegister;
 import dev.architectury.registry.registries.RegistrySupplier;
 import net.justmili.leftforgotten.LeftForgotten;
 import net.justmili.leftforgotten.block.building.*;
+import net.justmili.leftforgotten.block.building.bricks.Bricks;
 import net.justmili.leftforgotten.block.building.cobble.*;
 import net.justmili.leftforgotten.block.building.iron.IronDoor;
 import net.justmili.leftforgotten.block.building.stone.StoneButton;
@@ -62,6 +63,7 @@ public class AlphaBlocks {
     public static final RegistrySupplier<Block> MOSSY_COBBLESTONE_WALL = REGISTRY.register("mossy_cobblestone_wall", MossyCobblestoneWall::new);
     public static final RegistrySupplier<Block> CLAY = REGISTRY.register("clay", Clay::new);
     public static final RegistrySupplier<Block> BRICKS = REGISTRY.register("bricks", Bricks::new);
+    public static final RegistrySupplier<Block> BOOKSHELF = REGISTRY.register("bookshelf", Bookshelf::new);
     public static final RegistrySupplier<Block> TNT = REGISTRY.register("tnt", Tnt::new);
     public static final RegistrySupplier<Block> IRON_DOOR = REGISTRY.register("iron_door", IronDoor::new);
     public static final RegistrySupplier<Block> GLASS_PANE = REGISTRY.register("glass_pane", GlassPane::new);

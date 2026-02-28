@@ -9,9 +9,9 @@ import net.minecraft.world.level.block.SoundType;
 import net.minecraft.world.level.block.state.BlockState;
 import net.minecraft.world.level.material.MapColor;
 
-public class Bricks extends Block {
-    public Bricks() {
-        super(Properties.of().mapColor(MapColor.COLOR_RED).sound(SoundType.GRAVEL).strength(0.6f, 0.6f));
+public class Bookshelf extends Block {
+    public Bookshelf() {
+        super(Properties.of().mapColor(MapColor.WOOD).sound(SoundType.WOOD).strength(1.5f, 1.5f));
     }
 
     @Override

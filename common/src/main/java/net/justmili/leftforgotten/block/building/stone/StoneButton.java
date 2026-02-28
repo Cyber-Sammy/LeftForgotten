@@ -1,6 +1,7 @@
 
 package net.justmili.leftforgotten.block.building.stone;
 
+import net.justmili.leftforgotten.block.Common;
 import net.minecraft.core.BlockPos;
 import net.minecraft.world.level.BlockGetter;
 import net.minecraft.world.level.block.ButtonBlock;
@@ -11,7 +12,7 @@ import net.minecraft.world.level.material.MapColor;
 
 public class StoneButton extends ButtonBlock {
 	public StoneButton() {
-		super(Properties.of().mapColor(MapColor.STONE).sound(SoundType.STONE).strength(1.5f, 6f).noOcclusion().isRedstoneConductor((bs, br, bp) -> false), BlockSetType.STONE, 20, false);
+		super(Properties.of().mapColor(MapColor.STONE).sound(SoundType.STONE).strength(1.5f, 6f).noOcclusion().isRedstoneConductor(Common::never), BlockSetType.STONE, 20, false);
 	}
 
 	@Override

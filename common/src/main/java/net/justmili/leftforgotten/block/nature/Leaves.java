@@ -1,6 +1,7 @@
 package net.justmili.leftforgotten.block.nature;
 
 import net.justmili.leftforgotten.LeftForgotten;
+import net.justmili.leftforgotten.block.Common;
 import net.minecraft.core.BlockPos;
 import net.minecraft.core.Direction;
 import net.minecraft.core.registries.Registries;
@@ -31,7 +32,7 @@ public class Leaves extends Block implements SimpleWaterloggedBlock {
 
 
 	public Leaves() {
-		super(Properties.of().mapColor(MapColor.COLOR_LIGHT_GREEN).sound(SoundType.GRASS).strength(0.2f).noOcclusion().isRedstoneConductor((bs, br, bp) -> false).randomTicks());
+		super(Properties.of().mapColor(MapColor.COLOR_LIGHT_GREEN).sound(SoundType.GRASS).strength(0.2f).noOcclusion().isRedstoneConductor(Common::never).randomTicks());
 		this.registerDefaultState(this.stateDefinition.any().setValue(WATERLOGGED, false).setValue(DISTANCE, 7));
 	}
 

@@ -56,6 +56,7 @@ public class AlphaItems {
     public static final RegistrySupplier<Item> MOSSY_COBBLESTONE_WALL = block(AlphaBlocks.MOSSY_COBBLESTONE_WALL);
     public static final RegistrySupplier<Item> CLAY = block(AlphaBlocks.CLAY);
     public static final RegistrySupplier<Item> BRICKS = block(AlphaBlocks.BRICKS);
+    public static final RegistrySupplier<Item> BOOKSHELF = block(AlphaBlocks.BOOKSHELF);
     public static final RegistrySupplier<Item> TNT = block(AlphaBlocks.TNT);
     public static final RegistrySupplier<Item> IRON_DOOR = doubleBlock(AlphaBlocks.IRON_DOOR);
     public static final RegistrySupplier<Item> GLASS_PANE = block(AlphaBlocks.GLASS_PANE);

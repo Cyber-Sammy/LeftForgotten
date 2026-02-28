@@ -1,6 +1,7 @@
 
 package net.justmili.leftforgotten.block.building.wood;
 
+import net.justmili.leftforgotten.block.Common;
 import net.minecraft.core.BlockPos;
 import net.minecraft.world.level.BlockGetter;
 import net.minecraft.world.level.block.PressurePlateBlock;
@@ -11,7 +12,7 @@ import net.minecraft.world.level.material.MapColor;
 
 public class WoodenPressurePlate extends PressurePlateBlock {
 	public WoodenPressurePlate() {
-		super(Sensitivity.EVERYTHING, Properties.of().mapColor(MapColor.WOOD).sound(SoundType.WOOD).strength(0.5f).noOcclusion().isRedstoneConductor((bs, br, bp) -> false).forceSolidOn(), BlockSetType.OAK);
+		super(Sensitivity.EVERYTHING, Properties.of().mapColor(MapColor.WOOD).sound(SoundType.WOOD).strength(0.5f).noOcclusion().isRedstoneConductor(Common::never).forceSolidOn(), BlockSetType.OAK);
 	}
 
 	@Override
