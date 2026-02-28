@@ -22,7 +22,7 @@ public class LFResources {
 
     public static class BlockRegistry {
         static final BlockRegistry INSTANCE = new BlockRegistry();
-        private final List<RegistrySupplier<Block>> all = List.of(
+        private final List<RegistrySupplier<Block>> suppliers = List.of(
             LFBlocks.RED_FLOWER, LFBlocks.YELLOW_FLOWER,
             LFBlocks.GRASS_BLOCK, LFBlocks.DIRT, LFBlocks.FARMLAND,
             LFBlocks.STONE, LFBlocks.STONE_STAIRS, LFBlocks.STONE_SLAB, LFBlocks.STONE_PRESSURE_PLATE, LFBlocks.STONE_BUTTON,
@@ -37,25 +37,25 @@ public class LFResources {
         );
 
         public List<RegistrySupplier<Block>> suppliers() {
-            return all;
+            return suppliers;
         }
         public List<String> codeIDs() {
-            return all.stream().map(s -> s.getId().getPath().toUpperCase().replace('-', '_')).collect(Collectors.toList());
+            return suppliers.stream().map(s -> s.getId().getPath().toUpperCase().replace('-', '_')).collect(Collectors.toList());
         }
         public List<String> IDs() {
-            return all.stream().map(s -> s.getId().getPath()).collect(Collectors.toList());
+            return suppliers.stream().map(s -> s.getId().getPath()).collect(Collectors.toList());
         }
         public List<String> inGameIDs() {
-            return all.stream().map(s -> s.getId().toString()).collect(Collectors.toList());
+            return suppliers.stream().map(s -> s.getId().toString()).collect(Collectors.toList());
         }
         public List<ResourceKey<Block>> resourceKeys() {
-            return all.stream().map(s -> ResourceKey.create(Registries.BLOCK, s.getId())).collect(Collectors.toList());
+            return suppliers.stream().map(s -> ResourceKey.create(Registries.BLOCK, s.getId())).collect(Collectors.toList());
         }
     }
 
     public static class ItemRegistry {
         static final ItemRegistry INSTANCE = new ItemRegistry();
-        private final List<RegistrySupplier<Item>> all = List.of(
+        private final List<RegistrySupplier<Item>> suppliers = List.of(
             LFItems.RED_FLOWER, LFItems.YELLOW_FLOWER,
             LFItems.GRASS_BLOCK, LFItems.DIRT, LFItems.FARMLAND,
             LFItems.STONE, LFItems.STONE_STAIRS, LFItems.STONE_SLAB, LFItems.STONE_PRESSURE_PLATE, LFItems.STONE_BUTTON,
@@ -71,19 +71,19 @@ public class LFResources {
         );
 
         public List<RegistrySupplier<Item>> suppliers() {
-            return all;
+            return suppliers;
         }
         public List<String> codeIDs() {
-            return all.stream().map(s -> s.getId().getPath().toUpperCase().replace('-', '_')).collect(Collectors.toList());
+            return suppliers.stream().map(s -> s.getId().getPath().toUpperCase().replace('-', '_')).collect(Collectors.toList());
         }
         public List<String> IDs() {
-            return all.stream().map(s -> s.getId().getPath()).collect(Collectors.toList());
+            return suppliers.stream().map(s -> s.getId().getPath()).collect(Collectors.toList());
         }
         public List<String> inGameIDs() {
-            return all.stream().map(s -> s.getId().toString()).collect(Collectors.toList());
+            return suppliers.stream().map(s -> s.getId().toString()).collect(Collectors.toList());
         }
         public List<ResourceKey<Item>> resourceKeys() {
-            return all.stream().map(s -> ResourceKey.create(Registries.ITEM, s.getId())).collect(Collectors.toList());
+            return suppliers.stream().map(s -> ResourceKey.create(Registries.ITEM, s.getId())).collect(Collectors.toList());
         }
     }
 
