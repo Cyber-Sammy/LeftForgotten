@@ -2,9 +2,8 @@ package net.justmili.leftforgotten.mechanics.compatibility;
 
 import dev.architectury.injectables.annotations.ExpectPlatform;
 import dev.architectury.platform.Platform;
+import net.justmili.leftforgotten.init.LFResources;
 import net.minecraft.world.entity.player.Player;
-
-import static net.justmili.leftforgotten.init.DimKeys.ALPHA_MINECRAFT;
 
 public class NostalgicTweaksCompatibiliy {
     public static boolean justOut = false;
@@ -12,7 +11,7 @@ public class NostalgicTweaksCompatibiliy {
     public static void onPlayerTick(Player player) {
         // check for client side
         if (!Platform.isModLoaded("nostalgic_tweaks")) return;
-        if (player.level().dimension() == ALPHA_MINECRAFT) {
+        if (player.level().dimension() == LFResources.getLevels.ALPHA_MINECRAFT) {
             loadVars();
             justOut = true;
         } else {

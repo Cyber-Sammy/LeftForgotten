@@ -1,6 +1,7 @@
 package net.justmili.leftforgotten.init;
 
 import dev.architectury.event.events.common.*;
+import net.justmili.leftforgotten.LeftForgotten;
 import net.justmili.leftforgotten.mechanics.advancements.OnARail;
 import net.justmili.leftforgotten.mechanics.advancements.WhenPigsFly;
 import net.justmili.leftforgotten.mechanics.compatibility.NostalgicTweaksCompatibiliy;
@@ -10,9 +11,20 @@ import net.justmili.leftforgotten.mechanics.gameplay.NoCooldown;
 import net.justmili.leftforgotten.mechanics.gameplay.NoSprint;
 import net.justmili.leftforgotten.mechanics.gameplay.WoolDrop;
 import net.justmili.leftforgotten.mechanics.logic.FoodLvlReset;
+import net.minecraft.server.level.ServerLevel;
 
 public class Events {
     public static void register() {
+        LifecycleEvent.SERVER_STARTED.register(server -> {
+            server.getAllLevels().forEach(level ->
+                LeftForgotten.LOGGER.info("Loaded dimension: {}", level.dimension().location())
+            );
+            ServerLevel alpha = server.getLevel(LFResources.getLevels.ALPHA_MINECRAFT);
+            if (alpha == null) {
+                LeftForgotten.LOGGER.error("ALPHA_MINECRAFT dimension failed to load!");
+            }
+        });
+
         TickEvent.PLAYER_POST.register(NoSprint::onPlayerTick);
         TickEvent.PLAYER_POST.register(OnARail::onPlayerTick);
         TickEvent.PLAYER_POST.register(NostalgicTweaksCompatibiliy::onPlayerTick);
@@ -25,7 +37,7 @@ public class Events {
         EntityEvent.LIVING_HURT.register(WoolDrop::onEntityHurt);
 
         EntityEvent.LIVING_HURT.register(DimChange::attemptDimEntry);
-        EntityEvent.LIVING_HURT.register(DimChange::attemptDimExit);
+        //EntityEvent.LIVING_HURT.register(DimChange::attemptDimExit);
 
         InteractionEvent.RIGHT_CLICK_ITEM.register(AlphaFoodSystem::onRightClickItem);
         InteractionEvent.RIGHT_CLICK_BLOCK.register(AlphaFoodSystem::onRightClickBlock);

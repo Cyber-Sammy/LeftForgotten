@@ -1,7 +1,7 @@
 package net.justmili.leftforgotten.block.nature;
 
 
-import net.justmili.leftforgotten.init.AlphaBlocks;
+import net.justmili.leftforgotten.init.LFBlocks;
 import net.minecraft.core.BlockPos;
 import net.minecraft.server.level.ServerLevel;
 import net.minecraft.sounds.SoundEvents;
@@ -36,7 +36,7 @@ public class Dirt extends Block {
             // Keep as dirt
         } else {
             if (!world.isClientSide()) {
-                world.setBlock(pos, AlphaBlocks.GRASS_BLOCK.get().defaultBlockState(), 3);
+                world.setBlock(pos, LFBlocks.GRASS_BLOCK.get().defaultBlockState(), 3);
             }
         }
     }
@@ -49,7 +49,7 @@ public class Dirt extends Block {
         float pitch = 0.9f + world.getRandom().nextFloat() * 0.2f;
 
         if (player.getMainHandItem().is(ItemTags.HOES)) {
-            world.setBlock(BlockPos.containing(x, y, z), AlphaBlocks.FARMLAND.get().defaultBlockState(), 3);
+            world.setBlock(BlockPos.containing(x, y, z), LFBlocks.FARMLAND.get().defaultBlockState(), 3);
             world.playSound(null, x, y, z, SoundEvents.HOE_TILL, SoundSource.BLOCKS, 1.0f, pitch);
             player.getMainHandItem().hurtAndBreak(1, player, p -> p.broadcastBreakEvent(hand));
 
@@ -77,7 +77,7 @@ public class Dirt extends Block {
                     BlockPos neighborPos = pos.offset(x, y, z);
                     BlockState neighborState = world.getBlockState(neighborPos);
 
-                    if (neighborState.is(AlphaBlocks.GRASS_BLOCK.get())) {
+                    if (neighborState.is(LFBlocks.GRASS_BLOCK.get())) {
                         return true;
                     }
                 }

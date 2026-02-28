@@ -2,6 +2,7 @@
 package net.justmili.leftforgotten.mechanics.gameplay;
 
 import dev.architectury.platform.Platform;
+import net.justmili.leftforgotten.init.LFResources;
 import net.minecraft.resources.ResourceKey;
 import net.minecraft.server.level.ServerPlayer;
 import net.minecraft.world.entity.ai.attributes.AttributeInstance;
@@ -13,8 +14,6 @@ import net.minecraft.world.level.Level;
 import java.util.HashSet;
 import java.util.Set;
 import java.util.UUID;
-
-import static net.justmili.leftforgotten.init.DimKeys.ALPHA_MINECRAFT;
 
 public class NoCooldown {
     private static final UUID MODIFIER_UUID = UUID.fromString("9b91a426-cc5c-4a08-a0e5-7d00627cb3ef");
@@ -56,7 +55,7 @@ public class NoCooldown {
 
         // then add the modifier to the player
         AttributeModifier modifier = Platform.isModLoaded("bettercombat") ? bcModifier : baseModifier;
-        if (toDim.equals(ALPHA_MINECRAFT)) {
+        if (toDim.equals(LFResources.getLevels.ALPHA_MINECRAFT)) {
             attackSpeedAttr.addTransientModifier(modifier);
         } else {
             attackSpeedAttr.removeModifier(modifier);

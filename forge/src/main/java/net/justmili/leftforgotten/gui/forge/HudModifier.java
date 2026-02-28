@@ -2,6 +2,7 @@ package net.justmili.leftforgotten.gui.forge;
 
 import dev.architectury.platform.Platform;
 import mod.adrenix.nostalgic.tweak.config.CandyTweak;
+import net.justmili.leftforgotten.init.LFResources;
 import net.minecraft.client.Minecraft;
 import net.minecraft.client.gui.GuiGraphics;
 import net.minecraft.resources.ResourceLocation;
@@ -15,8 +16,6 @@ import net.minecraftforge.client.gui.overlay.NamedGuiOverlay;
 import net.minecraftforge.client.gui.overlay.VanillaGuiOverlay;
 import net.minecraftforge.eventbus.api.SubscribeEvent;
 import net.minecraftforge.fml.common.Mod;
-
-import static net.justmili.leftforgotten.init.DimKeys.ALPHA_MINECRAFT;
 
 @Mod.EventBusSubscriber(value = Dist.CLIENT)
 public class HudModifier {
@@ -32,9 +31,9 @@ public class HudModifier {
         GuiGraphics gui = event.getGuiGraphics();
         float pt = event.getPartialTick();
 
-        boolean inBTD = player.level().dimension().equals(ALPHA_MINECRAFT);
+        boolean inAlpha = player.level().dimension().equals(LFResources.getLevels.ALPHA_MINECRAFT);
 
-        if (inBTD) {
+        if (inAlpha) {
             int w = mc.getWindow().getGuiScaledWidth();
             int h = mc.getWindow().getGuiScaledHeight();
 
@@ -76,7 +75,7 @@ public class HudModifier {
             }
         }
         if (Platform.isModLoaded("nostalgic_tweaks")) {
-            if (inBTD) {
+            if (inAlpha) {
                 String ns = id.getNamespace();
                 String path = id.getPath().toLowerCase();
                 if (!("nostalgic_tweaks".equals(ns))) return;

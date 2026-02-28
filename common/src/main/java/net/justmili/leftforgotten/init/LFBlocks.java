@@ -4,6 +4,9 @@ import dev.architectury.registry.registries.DeferredRegister;
 import dev.architectury.registry.registries.RegistrySupplier;
 import net.justmili.leftforgotten.LeftForgotten;
 import net.justmili.leftforgotten.block.building.*;
+import net.justmili.leftforgotten.block.building.bricks.BrickSlab;
+import net.justmili.leftforgotten.block.building.bricks.BrickStairs;
+import net.justmili.leftforgotten.block.building.bricks.BrickWall;
 import net.justmili.leftforgotten.block.building.bricks.Bricks;
 import net.justmili.leftforgotten.block.building.cobble.*;
 import net.justmili.leftforgotten.block.building.iron.IronDoor;
@@ -18,7 +21,7 @@ import net.justmili.leftforgotten.block.wood.*;
 import net.minecraft.core.registries.Registries;
 import net.minecraft.world.level.block.Block;
 
-public class AlphaBlocks {
+public class LFBlocks {
     public static final DeferredRegister<Block> REGISTRY = DeferredRegister.create(LeftForgotten.MOD_ID, Registries.BLOCK);
 
     public static final RegistrySupplier<Block> RED_FLOWER = REGISTRY.register("red_flower", RedFlower::new);
@@ -63,6 +66,9 @@ public class AlphaBlocks {
     public static final RegistrySupplier<Block> MOSSY_COBBLESTONE_WALL = REGISTRY.register("mossy_cobblestone_wall", MossyCobblestoneWall::new);
     public static final RegistrySupplier<Block> CLAY = REGISTRY.register("clay", Clay::new);
     public static final RegistrySupplier<Block> BRICKS = REGISTRY.register("bricks", Bricks::new);
+    public static final RegistrySupplier<Block> BRICK_STAIRS = REGISTRY.register("brick_stairs", BrickStairs::new);
+    public static final RegistrySupplier<Block> BRICK_SLAB = REGISTRY.register("brick_slab", BrickSlab::new);
+    public static final RegistrySupplier<Block> BRICK_WALL = REGISTRY.register("brick_wall", BrickWall::new);
     public static final RegistrySupplier<Block> BOOKSHELF = REGISTRY.register("bookshelf", Bookshelf::new);
     public static final RegistrySupplier<Block> TNT = REGISTRY.register("tnt", Tnt::new);
     public static final RegistrySupplier<Block> IRON_DOOR = REGISTRY.register("iron_door", IronDoor::new);

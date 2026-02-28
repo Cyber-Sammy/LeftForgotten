@@ -6,7 +6,7 @@ import net.minecraft.world.entity.LivingEntity;
 
 public class WhenPigsFly {
     public static EventResult onEntityDeath(LivingEntity entity, DamageSource source) {
-        return null;
+        return EventResult.pass();
     }
     //Coming in 1.1
 }

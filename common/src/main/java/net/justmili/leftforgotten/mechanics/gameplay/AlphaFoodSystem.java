@@ -3,6 +3,7 @@ package net.justmili.leftforgotten.mechanics.gameplay;
 import dev.architectury.event.CompoundEventResult;
 import dev.architectury.event.EventResult;
 import net.justmili.leftforgotten.LeftForgotten;
+import net.justmili.leftforgotten.init.LFResources;
 import net.minecraft.core.BlockPos;
 import net.minecraft.core.Direction;
 import net.minecraft.core.registries.BuiltInRegistries;
@@ -18,15 +19,13 @@ import net.minecraft.world.item.Items;
 import net.minecraft.world.level.Level;
 import net.minecraft.world.level.LevelAccessor;
 
-import static net.justmili.leftforgotten.init.DimKeys.ALPHA_MINECRAFT;
-
 public class AlphaFoodSystem {
 
     private static final ResourceLocation tagId = LeftForgotten.asResource("inedible");
     private static final TagKey<Item> INEDIBLE = TagKey.create(BuiltInRegistries.ITEM.key(), tagId);
 
     public static CompoundEventResult<ItemStack> onRightClickItem(Player player, InteractionHand hand) {
-        if (player.level().dimension() != ALPHA_MINECRAFT) return CompoundEventResult.pass();
+        if (player.level().dimension() != LFResources.getLevels.ALPHA_MINECRAFT) return CompoundEventResult.pass();
         if (hand != InteractionHand.MAIN_HAND) return CompoundEventResult.interruptTrue(player.getItemInHand(hand));
         ItemStack stack = player.getItemInHand(hand);
         float newHealth = player.getHealth();
@@ -85,7 +84,7 @@ public class AlphaFoodSystem {
 
         ItemStack stack = player.getItemInHand(hand);
 
-        if (player.level().dimension() != ALPHA_MINECRAFT) return EventResult.pass();
+        if (player.level().dimension() != LFResources.getLevels.ALPHA_MINECRAFT) return EventResult.pass();
 
         int consumed;
         if (stack.is(INEDIBLE)) {

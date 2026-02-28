@@ -1,10 +1,9 @@
 package net.justmili.leftforgotten.client;
 
+import net.justmili.leftforgotten.init.LFResources;
 import net.minecraft.client.Minecraft;
 
 import java.util.Random;
-
-import static net.justmili.leftforgotten.init.DimKeys.ALPHA_MINECRAFT;
 
 public class VersionOverlay {
     private static final String BASE_TEXT = "Minecraft Alpha v1.1.2_10";
@@ -18,7 +17,7 @@ public class VersionOverlay {
     private static final Random random = new Random();
 
     public static void onClientTick(Minecraft mc) {
-        if (mc.level == null || mc.level.dimension() != ALPHA_MINECRAFT) {
+        if (mc.level == null || mc.level.dimension() != LFResources.getLevels.ALPHA_MINECRAFT) {
             currentText = BASE_TEXT;
             flashTicks = 0;
             return;

@@ -1,21 +1,23 @@
 package net.justmili.leftforgotten;
 
 import dev.architectury.event.events.common.TickEvent;
-import net.justmili.leftforgotten.init.AlphaBlocks;
-import net.justmili.leftforgotten.init.AlphaItems;
-import net.justmili.leftforgotten.init.Events;
+import net.justmili.leftforgotten.init.*;
 import net.minecraft.resources.ResourceLocation;
+import org.slf4j.Logger;
+import org.slf4j.LoggerFactory;
 
 import java.util.Iterator;
 import java.util.concurrent.ConcurrentLinkedQueue;
 
 public final class LeftForgotten {
+    public static final Logger LOGGER = LoggerFactory.getLogger(LeftForgotten.class);
     public static final String MOD_ID = "left_forgotten";
 
     public static void init() {
         TickEvent.SERVER_POST.register(server -> processQueue());
-        AlphaBlocks.register();
-        AlphaItems.register();
+        LFBlocks.register();
+        LFItems.register();
+        LFTab.register();
 
         Events.register();
     }
@@ -48,5 +50,8 @@ public final class LeftForgotten {
 
     public static ResourceLocation asResource(String path) {
         return new ResourceLocation(MOD_ID, path);
+    }
+    public static ResourceLocation asPath(String path) {
+        return new ResourceLocation(path);
     }
 }

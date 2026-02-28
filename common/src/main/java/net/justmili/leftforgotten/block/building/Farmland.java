@@ -1,6 +1,6 @@
 package net.justmili.leftforgotten.block.building;
 
-import net.justmili.leftforgotten.init.AlphaBlocks;
+import net.justmili.leftforgotten.init.LFBlocks;
 import net.minecraft.core.BlockPos;
 import net.minecraft.core.Direction;
 import net.minecraft.server.level.ServerLevel;
@@ -52,7 +52,7 @@ public class Farmland extends Block {
 	}
 
 	public BlockState getStateForPlacement(BlockPlaceContext blockPlaceContext) {
-		return !this.defaultBlockState().canSurvive(blockPlaceContext.getLevel(), blockPlaceContext.getClickedPos()) ? AlphaBlocks.DIRT.get().defaultBlockState() : super.getStateForPlacement(blockPlaceContext);
+		return !this.defaultBlockState().canSurvive(blockPlaceContext.getLevel(), blockPlaceContext.getClickedPos()) ? LFBlocks.DIRT.get().defaultBlockState() : super.getStateForPlacement(blockPlaceContext);
 	}
 
 	public boolean useShapeForLightOcclusion(BlockState blockState) {
@@ -93,7 +93,7 @@ public class Farmland extends Block {
 	}
 
 	public static void turnToDirt(@Nullable Entity entity, BlockState blockState, Level level, BlockPos blockPos) {
-		BlockState blockState2 = pushEntitiesUp(blockState, AlphaBlocks.DIRT.get().defaultBlockState(), level, blockPos);
+		BlockState blockState2 = pushEntitiesUp(blockState, LFBlocks.DIRT.get().defaultBlockState(), level, blockPos);
 		level.setBlockAndUpdate(blockPos, blockState2);
 		level.gameEvent(GameEvent.BLOCK_CHANGE, blockPos, Context.of(entity, blockState2));
 	}
