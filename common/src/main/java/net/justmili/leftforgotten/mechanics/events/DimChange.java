@@ -33,7 +33,7 @@ public class DimChange {
         }
 
         player.setHealth(player.getMaxHealth());
-        player.teleportTo(newLevel, player.getX(), 256, player.getZ(), player.getYRot(), 90f);
+        player.teleportTo(newLevel, player.getX(), 150, player.getZ(), player.getYRot(), 90f);
         player.addEffect(new MobEffectInstance(MobEffects.SLOW_FALLING, 200, 0, false, false));
 
         return EventResult.interruptFalse();

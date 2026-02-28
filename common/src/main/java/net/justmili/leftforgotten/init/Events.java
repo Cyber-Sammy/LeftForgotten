@@ -1,7 +1,6 @@
 package net.justmili.leftforgotten.init;
 
 import dev.architectury.event.events.common.*;
-import net.justmili.leftforgotten.LeftForgotten;
 import net.justmili.leftforgotten.mechanics.advancements.OnARail;
 import net.justmili.leftforgotten.mechanics.advancements.WhenPigsFly;
 import net.justmili.leftforgotten.mechanics.compatibility.NostalgicTweaksCompatibiliy;
@@ -15,16 +14,6 @@ import net.minecraft.server.level.ServerLevel;
 
 public class Events {
     public static void register() {
-        LifecycleEvent.SERVER_STARTED.register(server -> {
-            server.getAllLevels().forEach(level ->
-                LeftForgotten.LOGGER.info("Loaded dimension: {}", level.dimension().location())
-            );
-            ServerLevel alpha = server.getLevel(LFResources.getLevels.ALPHA_MINECRAFT);
-            if (alpha == null) {
-                LeftForgotten.LOGGER.error("ALPHA_MINECRAFT dimension failed to load!");
-            }
-        });
-
         TickEvent.PLAYER_POST.register(NoSprint::onPlayerTick);
         TickEvent.PLAYER_POST.register(OnARail::onPlayerTick);
         TickEvent.PLAYER_POST.register(NostalgicTweaksCompatibiliy::onPlayerTick);
