@@ -5,10 +5,9 @@ import net.minecraft.world.phys.Vec3;
 import org.jetbrains.annotations.NotNull;
 
 public class AlphaMinecraft extends DimensionSpecialEffects {
-    public AlphaMinecraft(float cloudLevel, boolean hasGround, SkyType skyType, boolean forceBrightLightmap, boolean constantAmbientLight) {
-        super(cloudLevel, hasGround, skyType, forceBrightLightmap, constantAmbientLight);
+    public AlphaMinecraft() {
+        super(110f, true, SkyType.NONE, false, false);
     }
-
     @Override
     public @NotNull Vec3 getBrightnessDependentFogColor(@NotNull Vec3 color, float sunHeight) {
         return color;

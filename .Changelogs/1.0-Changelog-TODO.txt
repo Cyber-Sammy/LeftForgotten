@@ -10,7 +10,7 @@ TODO:
 - Get rid of tag dependency in AlphaFoodSystem
 
 ISSUES:
-- alpha_minecraft fails to load, in result failing to teleport the player to the dimension
+-- none found --
 
 
 
