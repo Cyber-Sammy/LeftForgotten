@@ -1,12 +1,17 @@
+DEBUG STUFF IN FILES:
+- DimChange (mechanics/events)
+- Events (init)
+
 TODO:
 - Finish DimChange (exit method)
 - Do datagen (block/item tags, block models, blockstates, item models etc)
 - Make the logical or build limit of left_forgotten:alpha_minecraft to 416 and add a flat bedrock roof
 - Heavily change up LFResources to more easily do everything
-
+- Get rid of tag dependency in AlphaFoodSystem
 
 ISSUES:
 - alpha_minecraft fails to load, in result failing to teleport the player to the dimension
+
 
 
 Whole idea/plan:
