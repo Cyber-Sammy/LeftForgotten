@@ -6,7 +6,7 @@ import org.jetbrains.annotations.NotNull;
 
 public class AlphaMinecraft extends DimensionSpecialEffects {
     public AlphaMinecraft() {
-        super(110f, true, SkyType.NONE, false, false);
+        super(112f, true, SkyType.END, false, false);
     }
     @Override
     public @NotNull Vec3 getBrightnessDependentFogColor(@NotNull Vec3 color, float sunHeight) {
