@@ -1,7 +1,3 @@
-DEBUG STUFF IN FILES:
-- DimChange (mechanics/events)
-- Events (init)
-
 TODO:
 - Finish DimChange (exit method) (TD#1)
 - Do datagen (block/item tags, block models, blockstates, item models etc) (TD#2)
