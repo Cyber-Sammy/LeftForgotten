@@ -11,7 +11,7 @@ import net.minecraft.world.level.block.Block;
 public final class FabricClient implements ClientModInitializer {
     @Override
     public void onInitializeClient() {
-        for (RegistrySupplier<Block> block : LFResources.getBlocks().suppliers()) {
+        for (RegistrySupplier<Block> block : LFResources.getBlocks()) {
             BlockRenderLayerMap.INSTANCE.putBlock(block.get(), RenderType.cutout());
         }
         CommonClient.register();
