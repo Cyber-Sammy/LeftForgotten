@@ -21,7 +21,7 @@ public class LFItems {
 
             LFResources.registerItemSupplier(entry.codeID(), supplier);
         }
-        for (LFResources.ItemEntry entry : LFResources.ITEM_ONLY_ENTRIES) {
+        for (LFResources.ItemEntry entry : LFResources.ITEM_ENTRIES) {
             RegistrySupplier<Item> supplier = REGISTRY.register(entry.path(), entry.constructor());
             LFResources.registerItemSupplier(entry.codeID(), supplier);
         }

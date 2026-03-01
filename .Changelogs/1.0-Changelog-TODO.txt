@@ -2,8 +2,6 @@ TODO:
 - Finish DimChange (exit method) (TD#1)
 - Do datagen (block/item tags, block models, blockstates, item models etc) (TD#2)
 - Add bedrock ceiling at y223 (TD#3)
-- Heavily change up LFResources to more easily do everything (TD#4)
-- Get rid of tag dependency in AlphaFoodSystem (TD#5)
 - Get rid of fade-out chunk fog in dimension (TD#6)
 
 ISSUES:

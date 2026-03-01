@@ -80,7 +80,7 @@ public class LFResources {
         new BlockEntry("IRON_DOOR", "iron_door", IronDoor::new),
         new BlockEntry("GLASS_PANE", "glass_pane", GlassPane::new)
     );
-    public static final List<ItemEntry> ITEM_ONLY_ENTRIES = List.of(
+    public static final List<ItemEntry> ITEM_ENTRIES = List.of(
         new ItemEntry("CLAY_BALL", "clay_ball", ClayBall::new),
         new ItemEntry("BRICK", "brick", Brick::new)
     );
@@ -125,14 +125,12 @@ public class LFResources {
     public static Collection<RegistrySupplier<Item>> getBlockItems() {
         return ITEM_SUPPLIERS.entrySet().stream()
             .filter(entry -> BLOCK_SUPPLIERS.containsKey(entry.getKey()))
-            .map(Map.Entry::getValue)
-            .collect(Collectors.toList());
+            .map(Map.Entry::getValue).collect(Collectors.toList());
     }
     public static Collection<RegistrySupplier<Item>> getItems() {
         return ITEM_SUPPLIERS.entrySet().stream()
             .filter(entry -> !BLOCK_SUPPLIERS.containsKey(entry.getKey()))
-            .map(Map.Entry::getValue)
-            .collect(Collectors.toList());
+            .map(Map.Entry::getValue).collect(Collectors.toList());
     }
     public static Collection<RegistrySupplier<Item>> getAllItems() {
         return ITEM_SUPPLIERS.values();
