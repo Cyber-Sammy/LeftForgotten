@@ -10,7 +10,6 @@ import net.justmili.leftforgotten.mechanics.gameplay.NoCooldown;
 import net.justmili.leftforgotten.mechanics.gameplay.NoSprint;
 import net.justmili.leftforgotten.mechanics.gameplay.WoolDrop;
 import net.justmili.leftforgotten.mechanics.logic.FoodLvlReset;
-import net.minecraft.server.level.ServerLevel;
 
 public class Events {
     public static void register() {
