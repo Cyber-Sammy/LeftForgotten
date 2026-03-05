@@ -27,20 +27,20 @@ public abstract class GuiMixin {
     @WrapOperation(method = "renderPlayerHealth(Lnet/minecraft/client/gui/GuiGraphics;)V", at = @At(value = "INVOKE",
         target = "Lnet/minecraft/client/gui/Gui;getVehicleMaxHearts(Lnet/minecraft/world/entity/LivingEntity;)I"))
     private int wrapVehicleHearts(Gui instance, LivingEntity vehicle, Operation<Integer> original) {
-        if (this.minecraft.player.level().dimension() != LFResources.ALPHA_MINECRAFT_DIMENSION) {return this.getVehicleMaxHearts(vehicle);}
+        if (this.minecraft.player.level().dimension() != LFResources.Levels.ALPHA_MINECRAFT) {return this.getVehicleMaxHearts(vehicle);}
         return -1;
     }
 
     @Inject(at = @At("HEAD"), method = "renderExperienceBar", cancellable = true)
     private void renderExperienceBar(CallbackInfo ci) {
-        if (minecraft.player.level().dimension() == LFResources.ALPHA_MINECRAFT_DIMENSION) {
+        if (minecraft.player.level().dimension() == LFResources.Levels.ALPHA_MINECRAFT) {
             ci.cancel();
         }
     }
 
     @ModifyVariable(method = "renderHearts", at = @At("HEAD"), ordinal = 1, argsOnly = true)
     private int moveHeartsDown(int y) {
-        if (this.minecraft.player.level().dimension() != LFResources.ALPHA_MINECRAFT_DIMENSION) {return y;}
+        if (this.minecraft.player.level().dimension() != LFResources.Levels.ALPHA_MINECRAFT) {return y;}
         if (Platform.isModLoaded("nostalgic_tweaks")) {
             return y +7 ;
         } else {
@@ -50,13 +50,13 @@ public abstract class GuiMixin {
 
     @ModifyVariable(method = "renderPlayerHealth", at = @At("STORE"), ordinal = 4)
     private int modifyBubblesX(int original) {
-        if (this.minecraft.player.level().dimension() != LFResources.ALPHA_MINECRAFT_DIMENSION) {return original;}
+        if (this.minecraft.player.level().dimension() != LFResources.Levels.ALPHA_MINECRAFT) {return original;}
         return original - 101; // shift it down 20 px, or whatever you want
     }
 
     @ModifyVariable(method = "renderPlayerHealth", at = @At("STORE"), ordinal = 5)
     private int modifyBubblesY(int original) {
-        if (this.minecraft.player.level().dimension() != LFResources.ALPHA_MINECRAFT_DIMENSION) {return original;}
+        if (this.minecraft.player.level().dimension() != LFResources.Levels.ALPHA_MINECRAFT) {return original;}
         if (Platform.isModLoaded("nostalgic_tweaks")) {
             return original;
         } else {
@@ -73,7 +73,7 @@ public abstract class GuiMixin {
     @Inject(at = @At("HEAD"), method = "render")
     public void render(GuiGraphics guiGraphics, float partialTick, CallbackInfo ci) {
 
-        if (this.minecraft.player.level().dimension() != LFResources.ALPHA_MINECRAFT_DIMENSION) return;
+        if (this.minecraft.player.level().dimension() != LFResources.Levels.ALPHA_MINECRAFT) return;
 
         this.minecraft.getProfiler().push("demo");
         Component component = Component.literal(VersionOverlay.currentText);

@@ -217,12 +217,12 @@ public class LFResources {
     public static final ResourceKey<Item> GLASS_PANE_ITEM = ResourceKey.create(
         Registries.ITEM, LeftForgotten.asResource("glass_pane"));
 
-    public static final class getLevels {
+    public static final class Levels {
         public static final ResourceKey<Level> ALPHA_MINECRAFT = ResourceKey.create(
             Registries.DIMENSION, LeftForgotten.asResource("alpha_minecraft"));
     }
 
-    public static final class tabs {
+    public static final class Tabs {
         public static final String creativeTabID = "left_forgotten";
         public static final String transKey = "left_forgotten.tab";
     }

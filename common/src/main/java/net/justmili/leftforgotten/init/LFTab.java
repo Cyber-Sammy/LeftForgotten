@@ -13,10 +13,10 @@ import net.minecraft.world.item.ItemStack;
 public class LFTab {
     public static final DeferredRegister<CreativeModeTab> REGISTRY = DeferredRegister.create(LeftForgotten.MOD_ID, Registries.CREATIVE_MODE_TAB);
 
-    public static final DeferredSupplier<CreativeModeTab> LEFT_FORGOTTEN = REGISTRY.register(LFResources.tabs.creativeTabID, () ->
-        CreativeModeTab.builder(CreativeModeTab.Row.TOP, 0).title(Component.translatable(LFResources.tabs.transKey))
+    public static final DeferredSupplier<CreativeModeTab> LEFT_FORGOTTEN = REGISTRY.register(LFResources.Tabs.creativeTabID, () ->
+        CreativeModeTab.builder(CreativeModeTab.Row.TOP, 0).title(Component.translatable(LFResources.Tabs.transKey))
             .icon(() -> new ItemStack(LFBlocks.GRASS_BLOCK.get())).displayItems((parameters, tabData) -> {
-                for (RegistrySupplier<Item> item : LFResources.getAllItems()) {
+                for (RegistrySupplier<Item> item : LFItems.REGISTRY) {
                     tabData.accept(item.get());
                 }
             })

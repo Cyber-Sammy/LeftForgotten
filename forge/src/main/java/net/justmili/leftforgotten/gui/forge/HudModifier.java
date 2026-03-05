@@ -31,7 +31,7 @@ public class HudModifier {
         GuiGraphics gui = event.getGuiGraphics();
         float pt = event.getPartialTick();
 
-        boolean inAlpha = player.level().dimension().equals(LFResources.ALPHA_MINECRAFT_DIMENSION);
+        boolean inAlpha = player.level().dimension().equals(LFResources.Levels.ALPHA_MINECRAFT);
 
         if (inAlpha) {
             int w = mc.getWindow().getGuiScaledWidth();

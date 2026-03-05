@@ -17,7 +17,7 @@ public class VersionOverlay {
     private static final Random random = new Random();
 
     public static void onClientTick(Minecraft mc) {
-        if (mc.level == null || mc.level.dimension() != LFResources.ALPHA_MINECRAFT_DIMENSION) {
+        if (mc.level == null || mc.level.dimension() != LFResources.Levels.ALPHA_MINECRAFT) {
             currentText = BASE_TEXT;
             flashTicks = 0;
             return;
