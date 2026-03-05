@@ -1,5 +1,6 @@
 package net.justmili.leftforgotten.init;
 
+import com.google.common.collect.Streams;
 import net.justmili.leftforgotten.LeftForgotten;
 import net.minecraft.core.registries.Registries;
 import net.minecraft.resources.ResourceKey;
@@ -7,61 +8,13 @@ import net.minecraft.world.item.Item;
 import net.minecraft.world.level.Level;
 import net.minecraft.world.level.block.Block;
 
+import java.util.function.Supplier;
+
 @SuppressWarnings("NullableProblems")
 public class LFResources {
 
     public static Block[] getBlocks() {
-        return new Block[] {
-            LFBlocks.RED_FLOWER,
-            LFBlocks.YELLOW_FLOWER,
-            LFBlocks.GRASS_BLOCK,
-            LFBlocks.DIRT,
-            LFBlocks.FARMLAND,
-            LFBlocks.STONE,
-            LFBlocks.STONE_STAIRS,
-            LFBlocks.STONE_SLAB,
-            LFBlocks.STONE_PRESSURE_PLATE,
-            LFBlocks.STONE_BUTTON,
-            LFBlocks.GRAVEL,
-            LFBlocks.SAND,
-            LFBlocks.GLASS,
-            LFBlocks.COAL_ORE,
-            LFBlocks.IRON_ORE,
-            LFBlocks.GOLD_ORE,
-            LFBlocks.REDSTONE_ORE,
-            LFBlocks.DIAMOND_ORE,
-            LFBlocks.OBSIDIAN,
-            LFBlocks.WOOD,
-            LFBlocks.WOOD_6_SIDED,
-            LFBlocks.LEAVES,
-            LFBlocks.SAPLING,
-            LFBlocks.WOODEN_PLANKS,
-            LFBlocks.WOODEN_STAIRS,
-            LFBlocks.WOODEN_SLAB,
-            LFBlocks.FENCE,
-            LFBlocks.FENCE_GATE,
-            LFBlocks.TRAPDOOR,
-            LFBlocks.DOOR,
-            LFBlocks.PRESSURE_PLATE,
-            LFBlocks.BUTTON,
-            LFBlocks.COBBLESTONE,
-            LFBlocks.COBBLESTONE_STAIRS,
-            LFBlocks.COBBLESTONE_SLAB,
-            LFBlocks.COBBLESTONE_WALL,
-            LFBlocks.MOSSY_COBBLESTONE,
-            LFBlocks.MOSSY_COBBLESTONE_STAIRS,
-            LFBlocks.MOSSY_COBBLESTONE_SLAB,
-            LFBlocks.MOSSY_COBBLESTONE_WALL,
-            LFBlocks.CLAY,
-            LFBlocks.BRICKS,
-            LFBlocks.BRICK_STAIRS,
-            LFBlocks.BRICK_SLAB,
-            LFBlocks.BRICK_WALL,
-            LFBlocks.BOOKSHELF,
-            LFBlocks.TNT,
-            LFBlocks.IRON_DOOR,
-            LFBlocks.GLASS_PANE
-        };
+        return Streams.stream(LFBlocks.REGISTRY).map(Supplier::get).toArray(Block[]::new);
     }
 
     // ResourceKeys - Blocks

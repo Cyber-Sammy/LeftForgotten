@@ -55,7 +55,7 @@ public class NoCooldown {
 
         // then add the modifier to the player
         AttributeModifier modifier = Platform.isModLoaded("bettercombat") ? bcModifier : baseModifier;
-        if (toDim.equals(LFResources.Levels.ALPHA_MINECRAFT)) {
+        if (toDim.equals(LFResources.ALPHA_MINECRAFT_DIMENSION)) {
             attackSpeedAttr.addTransientModifier(modifier);
         } else {
             attackSpeedAttr.removeModifier(modifier);
