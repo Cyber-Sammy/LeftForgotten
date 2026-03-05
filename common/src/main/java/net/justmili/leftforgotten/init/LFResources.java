@@ -4,6 +4,7 @@ import net.justmili.leftforgotten.LeftForgotten;
 import net.minecraft.core.registries.Registries;
 import net.minecraft.resources.ResourceKey;
 import net.minecraft.world.item.Item;
+import net.minecraft.world.level.Level;
 import net.minecraft.world.level.block.Block;
 
 @SuppressWarnings("NullableProblems")
@@ -11,55 +12,55 @@ public class LFResources {
 
     public static Block[] getBlocks() {
         return new Block[] {
-            LFBlocks.RED_FLOWER.get(),
-            LFBlocks.YELLOW_FLOWER.get(),
-            LFBlocks.GRASS_BLOCK.get(),
-            LFBlocks.DIRT.get(),
-            LFBlocks.FARMLAND.get(),
-            LFBlocks.STONE.get(),
-            LFBlocks.STONE_STAIRS.get(),
-            LFBlocks.STONE_SLAB.get(),
-            LFBlocks.STONE_PRESSURE_PLATE.get(),
-            LFBlocks.STONE_BUTTON.get(),
-            LFBlocks.GRAVEL.get(),
-            LFBlocks.SAND.get(),
-            LFBlocks.GLASS.get(),
-            LFBlocks.COAL_ORE.get(),
-            LFBlocks.IRON_ORE.get(),
-            LFBlocks.GOLD_ORE.get(),
-            LFBlocks.REDSTONE_ORE.get(),
-            LFBlocks.DIAMOND_ORE.get(),
-            LFBlocks.OBSIDIAN.get(),
-            LFBlocks.WOOD.get(),
-            LFBlocks.WOOD_6_SIDED.get(),
-            LFBlocks.LEAVES.get(),
-            LFBlocks.SAPLING.get(),
-            LFBlocks.WOODEN_PLANKS.get(),
-            LFBlocks.WOODEN_STAIRS.get(),
-            LFBlocks.WOODEN_SLAB.get(),
-            LFBlocks.FENCE.get(),
-            LFBlocks.FENCE_GATE.get(),
-            LFBlocks.TRAPDOOR.get(),
-            LFBlocks.DOOR.get(),
-            LFBlocks.PRESSURE_PLATE.get(),
-            LFBlocks.BUTTON.get(),
-            LFBlocks.COBBLESTONE.get(),
-            LFBlocks.COBBLESTONE_STAIRS.get(),
-            LFBlocks.COBBLESTONE_SLAB.get(),
-            LFBlocks.COBBLESTONE_WALL.get(),
-            LFBlocks.MOSSY_COBBLESTONE.get(),
-            LFBlocks.MOSSY_COBBLESTONE_STAIRS.get(),
-            LFBlocks.MOSSY_COBBLESTONE_SLAB.get(),
-            LFBlocks.MOSSY_COBBLESTONE_WALL.get(),
-            LFBlocks.CLAY.get(),
-            LFBlocks.BRICKS.get(),
-            LFBlocks.BRICK_STAIRS.get(),
-            LFBlocks.BRICK_SLAB.get(),
-            LFBlocks.BRICK_WALL.get(),
-            LFBlocks.BOOKSHELF.get(),
-            LFBlocks.TNT.get(),
-            LFBlocks.IRON_DOOR.get(),
-            LFBlocks.GLASS_PANE.get()
+            LFBlocks.RED_FLOWER,
+            LFBlocks.YELLOW_FLOWER,
+            LFBlocks.GRASS_BLOCK,
+            LFBlocks.DIRT,
+            LFBlocks.FARMLAND,
+            LFBlocks.STONE,
+            LFBlocks.STONE_STAIRS,
+            LFBlocks.STONE_SLAB,
+            LFBlocks.STONE_PRESSURE_PLATE,
+            LFBlocks.STONE_BUTTON,
+            LFBlocks.GRAVEL,
+            LFBlocks.SAND,
+            LFBlocks.GLASS,
+            LFBlocks.COAL_ORE,
+            LFBlocks.IRON_ORE,
+            LFBlocks.GOLD_ORE,
+            LFBlocks.REDSTONE_ORE,
+            LFBlocks.DIAMOND_ORE,
+            LFBlocks.OBSIDIAN,
+            LFBlocks.WOOD,
+            LFBlocks.WOOD_6_SIDED,
+            LFBlocks.LEAVES,
+            LFBlocks.SAPLING,
+            LFBlocks.WOODEN_PLANKS,
+            LFBlocks.WOODEN_STAIRS,
+            LFBlocks.WOODEN_SLAB,
+            LFBlocks.FENCE,
+            LFBlocks.FENCE_GATE,
+            LFBlocks.TRAPDOOR,
+            LFBlocks.DOOR,
+            LFBlocks.PRESSURE_PLATE,
+            LFBlocks.BUTTON,
+            LFBlocks.COBBLESTONE,
+            LFBlocks.COBBLESTONE_STAIRS,
+            LFBlocks.COBBLESTONE_SLAB,
+            LFBlocks.COBBLESTONE_WALL,
+            LFBlocks.MOSSY_COBBLESTONE,
+            LFBlocks.MOSSY_COBBLESTONE_STAIRS,
+            LFBlocks.MOSSY_COBBLESTONE_SLAB,
+            LFBlocks.MOSSY_COBBLESTONE_WALL,
+            LFBlocks.CLAY,
+            LFBlocks.BRICKS,
+            LFBlocks.BRICK_STAIRS,
+            LFBlocks.BRICK_SLAB,
+            LFBlocks.BRICK_WALL,
+            LFBlocks.BOOKSHELF,
+            LFBlocks.TNT,
+            LFBlocks.IRON_DOOR,
+            LFBlocks.GLASS_PANE
         };
     }
 
@@ -262,4 +263,14 @@ public class LFResources {
         Registries.ITEM, LeftForgotten.asResource("iron_door"));
     public static final ResourceKey<Item> GLASS_PANE_ITEM = ResourceKey.create(
         Registries.ITEM, LeftForgotten.asResource("glass_pane"));
+
+    public static final class getLevels {
+        public static final ResourceKey<Level> ALPHA_MINECRAFT = ResourceKey.create(
+            Registries.DIMENSION, LeftForgotten.asResource("alpha_minecraft"));
+    }
+
+    public static final class tabs {
+        public static final String creativeTabID = "left_forgotten";
+        public static final String transKey = "left_forgotten.tab";
+    }
 }

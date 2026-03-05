@@ -1,5 +1,6 @@
 package net.justmili.leftforgotten.client.fabric;
 
+import dev.architectury.registry.registries.RegistrySupplier;
 import net.fabricmc.api.ClientModInitializer;
 import net.fabricmc.fabric.api.blockrenderlayer.v1.BlockRenderLayerMap;
 import net.justmili.leftforgotten.client.CommonClient;
@@ -10,7 +11,7 @@ import net.minecraft.world.level.block.Block;
 public final class FabricClient implements ClientModInitializer {
     @Override
     public void onInitializeClient() {
-        for (Block block : LFResources.getBlocks()) {
+        for (RegistrySupplier<Block> block : LFResources.getBlocks()) {
             BlockRenderLayerMap.INSTANCE.putBlock(block, RenderType.cutout());
         }
         CommonClient.register();
