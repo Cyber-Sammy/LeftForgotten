@@ -18,7 +18,7 @@ public class DimChange {
         if (!player.level().dimension().equals(Level.OVERWORLD)) return EventResult.pass();
         if (!source.is(DamageTypes.FELL_OUT_OF_WORLD)) return EventResult.pass();
 
-        ServerLevel newLevel = player.getServer().getLevel(LFResources.getLevels.ALPHA_MINECRAFT);
+        ServerLevel newLevel = player.getServer().getLevel(LFResources.Levels.ALPHA_MINECRAFT);
         if (newLevel == null) return EventResult.pass();
 
         player.setHealth(player.getMaxHealth());

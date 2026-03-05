@@ -1,5 +1,6 @@
 package net.justmili.leftforgotten.init;
 
+import dev.architectury.registry.CreativeTabRegistry;
 import dev.architectury.registry.registries.DeferredRegister;
 import dev.architectury.registry.registries.DeferredSupplier;
 import dev.architectury.registry.registries.RegistrySupplier;
@@ -14,13 +15,13 @@ public class LFTab {
     public static final DeferredRegister<CreativeModeTab> REGISTRY =
         DeferredRegister.create(LeftForgotten.MOD_ID, Registries.CREATIVE_MODE_TAB);
 
-    public static final DeferredSupplier<CreativeModeTab> LEFT_FORGOTTEN = REGISTRY.register(LFResources.tabs.creativeTabID, () ->
-        CreativeModeTab.builder(CreativeModeTab.Row.TOP, 0).title(Component.translatable(LFResources.tabs.transKey))
-            .icon(() -> new ItemStack(LFBlocks.GRASS_BLOCK().get())).displayItems((parameters, tabData) -> {
-                for (RegistrySupplier<Item> item : LFResources.getAllItems()) {
+    public static final DeferredSupplier<CreativeModeTab> LEFT_FORGOTTEN = REGISTRY.register(LFResources.Tabs.creativeTabID, () ->
+        CreativeTabRegistry.create(builder -> builder.title(Component.translatable(LFResources.Tabs.transKey))
+            .icon(() -> new ItemStack(LFBlocks.GRASS_BLOCK.get())).displayItems((parameters, tabData) -> {
+                for (RegistrySupplier<Item> item : LFItems.REGISTRY) {
                     tabData.accept(item.get());
                 }
-        }).build());
+        })));
     public static void register() {
         REGISTRY.register();
     }

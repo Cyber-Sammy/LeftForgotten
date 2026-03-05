@@ -25,7 +25,7 @@ public class SheepEatGrass {
     @ModifyReturnValue(method = "canUse", at = @At("RETURN"))
     public boolean canUse(boolean original) {
         BlockPos blockPos = this.mob.blockPosition();
-        if (this.level.getBlockState(blockPos.below()).is(LFBlocks.GRASS_BLOCK().get())) {
+        if (this.level.getBlockState(blockPos.below()).is(LFBlocks.GRASS_BLOCK.get())) {
             return true;
         } else {
             return original;
@@ -41,7 +41,7 @@ public class SheepEatGrass {
 
         BlockPos blockPos = this.mob.blockPosition();
         BlockPos blockPos2 = blockPos.below();
-        if (state.is(LFBlocks.GRASS_BLOCK().get())) {
+        if (state.is(LFBlocks.GRASS_BLOCK.get())) {
 
             if (this.level.getGameRules().getBoolean(GameRules.RULE_MOBGRIEFING)) {
                 this.level.levelEvent(2001, blockPos.below(), Block.getId(Blocks.GRASS_BLOCK.defaultBlockState()));
