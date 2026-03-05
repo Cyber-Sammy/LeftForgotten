@@ -11,16 +11,17 @@ import net.minecraft.world.item.Item;
 import net.minecraft.world.item.ItemStack;
 
 public class LFTab {
-    public static final DeferredRegister<CreativeModeTab> REGISTRY =
-        DeferredRegister.create(LeftForgotten.MOD_ID, Registries.CREATIVE_MODE_TAB);
+    public static final DeferredRegister<CreativeModeTab> REGISTRY = DeferredRegister.create(LeftForgotten.MOD_ID, Registries.CREATIVE_MODE_TAB);
 
     public static final DeferredSupplier<CreativeModeTab> LEFT_FORGOTTEN = REGISTRY.register(LFResources.tabs.creativeTabID, () ->
         CreativeModeTab.builder(CreativeModeTab.Row.TOP, 0).title(Component.translatable(LFResources.tabs.transKey))
-            .icon(() -> new ItemStack(LFBlocks.GRASS_BLOCK().get())).displayItems((parameters, tabData) -> {
+            .icon(() -> new ItemStack(LFBlocks.GRASS_BLOCK.get())).displayItems((parameters, tabData) -> {
                 for (RegistrySupplier<Item> item : LFResources.getAllItems()) {
                     tabData.accept(item.get());
                 }
-        }).build());
+            })
+            .build()
+    );
     public static void register() {
         REGISTRY.register();
     }
