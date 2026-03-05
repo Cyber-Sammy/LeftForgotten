@@ -2,9 +2,25 @@ plugins {
     id 'com.gradleup.shadow'
 }
 
+def generatedResources = file("src/generated")
+
+sourceSets {
+    main {
+        resources.srcDir generatedResources
+    }
+}
+
 loom {
     forge {
         mixinConfig "underthestars.mixins.json"
+    }
+
+    runs {
+        data {
+            data()
+            programArgs "--all", "--mod", "left_forgotten"
+            programArgs "--output", generatedResources.absolutePath
+        }
     }
 }
 

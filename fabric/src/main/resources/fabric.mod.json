@@ -24,6 +24,9 @@
     ],
     "client": [
       "net.justmili.leftforgotten.client.fabric.FabricClient"
+    ],
+    "fabric-datagen": [
+      "net.justmili.leftforgotten.datagen.fabric.FabricDatagen"
     ]
   },
   "mixins": [

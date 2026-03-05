@@ -7,6 +7,7 @@
     "GuiMixin"
   ],
   "mixins": [
+    "BlockLootSubProviderMixin"
   ],
   "injectors": {
     "defaultRequire": 1
