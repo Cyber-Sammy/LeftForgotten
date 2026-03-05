@@ -17,15 +17,18 @@ import net.justmili.leftforgotten.block.building.stone.StoneStairs;
 import net.justmili.leftforgotten.block.building.wood.*;
 import net.justmili.leftforgotten.block.nature.*;
 import net.justmili.leftforgotten.block.stone.*;
+<<<<<<< Updated upstream
 import net.justmili.leftforgotten.block.wood.Wood;
 import net.justmili.leftforgotten.block.wood.Wood6Sided;
 import net.justmili.leftforgotten.block.wood.WoodenPlanks;
+=======
+import net.justmili.leftforgotten.block.wood.*;
+>>>>>>> Stashed changes
 import net.minecraft.core.registries.Registries;
 import net.minecraft.world.level.block.Block;
 
 public class LFBlocks {
-    public static final DeferredRegister<Block> REGISTRY =
-        DeferredRegister.create(LeftForgotten.MOD_ID, Registries.BLOCK);
+    public static final DeferredRegister<Block> REGISTRY = DeferredRegister.create(LeftForgotten.MOD_ID, Registries.BLOCK);
 
     public static final RegistrySupplier<Block> RED_FLOWER = REGISTRY.register("red_flower", RedFlower::new);
     public static final RegistrySupplier<Block> YELLOW_FLOWER = REGISTRY.register("yellow_flower", YellowFlower::new);

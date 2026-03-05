@@ -14,8 +14,7 @@ import net.minecraft.world.level.block.Block;
 import java.util.function.Function;
 
 public class LFItems {
-    public static final DeferredRegister<Item> REGISTRY =
-        DeferredRegister.create(LeftForgotten.MOD_ID, Registries.ITEM);
+    public static final DeferredRegister<Item> REGISTRY = DeferredRegister.create(LeftForgotten.MOD_ID, Registries.ITEM);
 
     public static final RegistrySupplier<Item> RED_FLOWER = block(LFBlocks.RED_FLOWER);
     public static final RegistrySupplier<Item> YELLOW_FLOWER = block(LFBlocks.YELLOW_FLOWER);
@@ -70,29 +69,17 @@ public class LFItems {
     public static final RegistrySupplier<Item> CLAY_BALL = register("clay_ball", ClayBall::new);
     public static final RegistrySupplier<Item> BRICK = register("brick", Brick::new);
 
-    // if you want to just register blocks as block items automatically
-    /*static {
-        for (RegistrySupplier<Block> entry : LFBlocks.REGISTRY) {
-            register(
-                entry.getId().getPath(), properties -> new BlockItem(entry.get(), properties)
-            );
-        }
-    }*/
-
-    private static RegistrySupplier<Item> block(RegistrySupplier<Block> block) {
-        return register(block.getId().getPath(), properties -> new BlockItem(block.get(), properties));
-    }
-
-    private static RegistrySupplier<Item> doubleBlock(RegistrySupplier<Block> block) {
-        return register(block.getId().getPath(), properties -> new DoubleHighBlockItem(block.get(), properties));
-    }
-
     private static <T extends Item> RegistrySupplier<T> register(String name, Function<Item.Properties, T> itemBuilder) {
         //var key = ResourceKey.create(Registries.ITEM, LeftForgotten.asResource(name)); // not needed right now
         return REGISTRY.register(name, () -> itemBuilder.apply(new Item.Properties()));
     }
-
-    public static void register() {
+    private static RegistrySupplier<Item> block (RegistrySupplier < Block > block) {
+        return REGISTRY.register(block.getId().getPath(), () -> new BlockItem(block.get(), new Item.Properties()));
+    }
+    private static RegistrySupplier<Item> doubleBlock (RegistrySupplier < Block > block) {
+        return REGISTRY.register(block.getId().getPath(), () -> new DoubleHighBlockItem(block.get(), new Item.Properties()));
+    }
+    public static void register () {
         REGISTRY.register();
     }
 }

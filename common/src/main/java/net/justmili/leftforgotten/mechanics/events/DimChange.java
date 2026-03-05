@@ -22,7 +22,7 @@ public class DimChange {
         if (newLevel == null) return EventResult.pass();
 
         player.setHealth(player.getMaxHealth());
-        player.teleportTo(newLevel, player.getX(), 150, player.getZ(), player.getYRot(), 90f);
+        player.teleportTo(newLevel, player.getX(), 150, player.getZ(), player.getYRot(), player.getXRot());
         player.addEffect(new MobEffectInstance(MobEffects.SLOW_FALLING, 200, 0, false, false));
 
         return EventResult.interruptFalse();
