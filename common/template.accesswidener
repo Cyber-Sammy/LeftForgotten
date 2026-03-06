@@ -43,7 +43,6 @@ transitive-extendable method net/minecraft/data/server/tag/TagProvider$ProvidedT
 transitive-accessible method net/minecraft/data/client/TexturedModel makeFactory (Ljava/util/function/Function;Lnet/minecraft/data/client/Model;)Lnet/minecraft/data/client/TexturedModel$Factory;
 
 transitive-accessible class net/minecraft/data/models/BlockModelGenerators$TintState
-# gradlew fails to autogenerate with TintState but works fine with Yarn's TintType??
 transitive-accessible class net/minecraft/data/models/BlockModelGenerators$BlockTexturePool
 transitive-accessible class net/minecraft/data/models/BlockModelGenerators$LogTexturePool
 transitive-accessible class net/minecraft/data/models/BlockModelGenerators$BuiltinModelPool
