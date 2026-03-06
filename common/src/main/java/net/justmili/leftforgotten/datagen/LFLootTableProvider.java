@@ -28,7 +28,7 @@ public class LFLootTableProvider extends LootTableProvider {
         }
 
         @Override
-        protected void generate() {
+        public void generate() {
 
         }
 
