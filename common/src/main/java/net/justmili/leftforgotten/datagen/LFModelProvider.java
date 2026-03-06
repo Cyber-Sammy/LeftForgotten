@@ -27,7 +27,7 @@ public class LFModelProvider extends ImprovedModelProvider {
     // "createStoneFamily" - Stone -> Stairs, Slab, Wall (toggle with bool cuz normal stone doesn't have it)
     // "createRedstoneFamily" - Planks/Stone -> Pressure Plate, Button
     // "createCubeAll" - Basic cube (parent: block/cube_all) + Rotation mode
-    //                 (No rot., SWNE y-axis face-player, SWNE y-axis face-block, DUNSWE face-player, DUNSWE face-block, log XYZ)
+    //                 (No rot., S/W/N/E y-axis, D/U/N/S/W/E, log XYZ)
     // "createCube" - Basic cube but can put specific textures on a block face (parent: block/cube)
     //       Items
     // "createFlatItem" - Basic flat item
