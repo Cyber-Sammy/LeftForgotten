@@ -16,12 +16,13 @@ public class LFTab {
     public static final DeferredSupplier<CreativeModeTab> LEFT_FORGOTTEN = REGISTRY.register(LFResources.Tabs.creativeTabID, () ->
         CreativeModeTab.builder(CreativeModeTab.Row.TOP, 0).title(Component.translatable(LFResources.Tabs.transKey))
             .icon(() -> new ItemStack(LFBlocks.GRASS_BLOCK.get())).displayItems((parameters, tabData) -> {
+
                 for (RegistrySupplier<Item> item : LFItems.REGISTRY) {
                     tabData.accept(item.get());
                 }
-            })
-            .build()
-    );
+
+            }).build());
+    
     public static void register() {
         REGISTRY.register();
     }

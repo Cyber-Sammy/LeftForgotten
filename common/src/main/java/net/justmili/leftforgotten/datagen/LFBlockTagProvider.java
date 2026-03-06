@@ -11,8 +11,8 @@ import net.minecraft.world.level.block.Block;
 
 import java.util.concurrent.CompletableFuture;
 
-public class LeftForgottenBlockTagProvider extends IntrinsicHolderTagsProvider<Block> {
-    public LeftForgottenBlockTagProvider(PackOutput output, CompletableFuture<HolderLookup.Provider> lookupProvider) {
+public class LFBlockTagProvider extends IntrinsicHolderTagsProvider<Block> {
+    public LFBlockTagProvider(PackOutput output, CompletableFuture<HolderLookup.Provider> lookupProvider) {
         super(output, Registries.BLOCK, lookupProvider, block -> BuiltInRegistries.BLOCK.getResourceKey(block).orElseThrow());
     }
 
@@ -41,8 +41,9 @@ public class LeftForgottenBlockTagProvider extends IntrinsicHolderTagsProvider<B
             .add(LFBlocks.OBSIDIAN.get());
 
         this.tag(BlockTags.MINEABLE_WITH_AXE)
-            .add(LFBlocks.WOODEN_PLANKS.get(), LFBlocks.WOOD.get(), LFBlocks.WOOD_6_SIDED.get()
-                // slabs are not included for the reason above, and most things did not break with an axe until Beta 1.9.
+            .add(LFBlocks.WOODEN_PLANKS.get(), LFBlocks.WOOD.get(), LFBlocks.WOOD_6_SIDED.get(), LFBlocks.WOODEN_SLAB.get()
+                // BluSpring: slabs are not included for the reason above, and most things did not break with an axe until Beta 1.9.
+                // Millie: Yeah idc, I'm making it mineable with axes too
             );
 
         this.tag(BlockTags.MINEABLE_WITH_SHOVEL)

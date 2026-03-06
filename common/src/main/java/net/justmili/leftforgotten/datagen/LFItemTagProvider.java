@@ -9,8 +9,8 @@ import net.minecraft.world.item.Item;
 
 import java.util.concurrent.CompletableFuture;
 
-public class LeftForgottenItemTagProvider extends IntrinsicHolderTagsProvider<Item> {
-    public LeftForgottenItemTagProvider(PackOutput output, CompletableFuture<HolderLookup.Provider> lookupProvider) {
+public class LFItemTagProvider extends IntrinsicHolderTagsProvider<Item> {
+    public LFItemTagProvider(PackOutput output, CompletableFuture<HolderLookup.Provider> lookupProvider) {
         super(output, Registries.ITEM, lookupProvider, item -> BuiltInRegistries.ITEM.getResourceKey(item).orElseThrow());
     }
 

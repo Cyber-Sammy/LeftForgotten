@@ -15,8 +15,8 @@ import java.util.Set;
 import java.util.function.Supplier;
 import java.util.stream.Stream;
 
-public class LeftForgottenLootTableProvider extends LootTableProvider {
-    public LeftForgottenLootTableProvider(PackOutput output) {
+public class LFLootTableProvider extends LootTableProvider {
+    public LFLootTableProvider(PackOutput output) {
         super(output, Set.of(), List.of(
             new SubProviderEntry(LeftForgottenBlockLootProvider::new, LootContextParamSets.BLOCK)
         ));

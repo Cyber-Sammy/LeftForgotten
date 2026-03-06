@@ -8,8 +8,8 @@ modId = "left_forgotten"
 version = "${mod_version}"
 displayName = "Left Forgotten"
 description = "Alpha Minecraft under the bedrock, but an empty and desolate land left forgotten years ago."
-credits = "" #I think this is the same as Fabric's "contributors"
 authors = "JustMili"
+credits = "BluSpring"
 logoFile = "icon.png"
 
 [[dependencies.left_forgotten]]
