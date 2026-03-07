@@ -27,8 +27,9 @@ public class Events {
         EntityEvent.LIVING_DEATH.register(WhenPigsFly::onEntityDeath);
         EntityEvent.LIVING_HURT.register(WoolDrop::onEntityHurt);
 
-        EntityEvent.LIVING_HURT.register(DimChange::attemptDimEntry);
-        //EntityEvent.LIVING_HURT.register(DimChange::attemptDimExit);
+        EntityEvent.LIVING_HURT.register(DimChange::onEntityHurt);
+        EntityEvent.LIVING_HURT.register(DimChange::onEntityHurt1);
+        TickEvent.PLAYER_POST.register(DimChange::onPlayerTick);
 
         InteractionEvent.RIGHT_CLICK_ITEM.register(AlphaFoodSystem::onRightClickItem);
         InteractionEvent.RIGHT_CLICK_BLOCK.register(AlphaFoodSystem::onRightClickBlock);

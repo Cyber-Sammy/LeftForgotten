@@ -10,7 +10,7 @@ import net.minecraft.world.level.block.Block;
 public final class FabricClient implements ClientModInitializer {
     @Override
     public void onInitializeClient() {
-        for (Block block : LFResources.getTranslucentBlocks()) {
+        for (Block block : LFResources.getBlocks()) {
             BlockRenderLayerMap.INSTANCE.putBlock(block, RenderType.cutout());
         }
         CommonClient.register();

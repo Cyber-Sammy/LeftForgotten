@@ -17,7 +17,7 @@ public class ForgeClient {
     @SubscribeEvent
     public static void init(FMLClientSetupEvent event) {
         /// DEV NOTE: DEPRECATED API USAGE
-        for (Block block : LFResources.getTranslucentBlocks()) {
+        for (Block block : LFResources.getBlocks()) {
             ItemBlockRenderTypes.setRenderLayer(block, RenderType.cutout());
         }
         CommonClient.register();

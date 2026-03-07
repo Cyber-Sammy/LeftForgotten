@@ -15,19 +15,6 @@ public class LFResources {
     public static Block[] getBlocks() {
         return Streams.stream(LFBlocks.REGISTRY).map(Supplier::get).toArray(Block[]::new);
     }
-    public static Block[] getTranslucentBlocks() {
-        return new Block[]{
-            LFBlocks.GLASS.get(),
-            LFBlocks.GLASS_PANE.get(),
-            LFBlocks.LEAVES.get(),
-            LFBlocks.RED_FLOWER.get(),
-            LFBlocks.YELLOW_FLOWER.get(),
-            LFBlocks.SAPLING.get(),
-            LFBlocks.TRAPDOOR.get(),
-            LFBlocks.DOOR.get(),
-            LFBlocks.IRON_DOOR.get()
-        };
-    }
 
     // ResourceKeys - Blocks
     public static final ResourceKey<Block> RED_FLOWER_BLOCK = ResourceKey.create(

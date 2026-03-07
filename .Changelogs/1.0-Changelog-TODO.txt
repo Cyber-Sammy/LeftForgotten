@@ -1,5 +1,4 @@
 TODO:
-- Finish DimChange (exit method) (TD#1)
 - Add bedrock ceiling at y223 (TD#3)
 - Make the structures and POIs for "old player activity" thing
 
@@ -19,6 +18,6 @@ Whole idea/plan:
 - No mobs or monsters in dimension                                                                                                          ✅
 - Rare dirt huts, even more rare lil homes (structures)
 - Often cut down and cut down but unfinished trees (features & structures)
-- 2 EXIT IDEAS
+- 2 EXIT IDEAS                                                                                                                              ✅
   - If player flies up to y208, they'll be teleported to the same x and z coordinates at overworld y-80 (set player to fall-flying and transfer momentum)
   - If lethal damage taken in dimension, reset all stats and tp player to their spawn point (world spawn or bed) (exit method)

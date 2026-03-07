@@ -1,0 +1,15 @@
+{
+  "name": "left_forgotten:bedrock_ceiling_tile",
+  "fallback": "minecraft:empty",
+  "elements": [
+    {
+      "weight": 1,
+      "element": {
+        "element_type": "minecraft:single_pool_element",
+        "location": "left_forgotten:bedrock_ceiling_tile",
+        "processors": "minecraft:empty",
+        "projection": "rigid"
+      }
+    }
+  ]
+}
