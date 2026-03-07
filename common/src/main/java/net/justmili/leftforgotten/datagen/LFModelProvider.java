@@ -20,6 +20,7 @@ public class LFModelProvider extends ImprovedModelProvider {
 
     @Override
     public void generateBlockStateModels(BlockModelGenerators blockGen) {
+        createCubeAll(blockGen, LFBlocks.BRITTLE_BEDROCK.get());
         createPlant(blockGen, LFBlocks.RED_FLOWER.get(), BlockModelGenerators.TintState.NOT_TINTED);
         createPlant(blockGen, LFBlocks.YELLOW_FLOWER.get(), BlockModelGenerators.TintState.NOT_TINTED);
         createPlant(blockGen, LFBlocks.SAPLING.get(), BlockModelGenerators.TintState.NOT_TINTED);

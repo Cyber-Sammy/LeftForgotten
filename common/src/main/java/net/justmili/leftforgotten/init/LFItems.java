@@ -16,6 +16,7 @@ import java.util.function.Function;
 public class LFItems {
     public static final DeferredRegister<Item> REGISTRY = DeferredRegister.create(LeftForgotten.MOD_ID, Registries.ITEM);
 
+    public static final RegistrySupplier<Item> BRITTLE_BEDROCK = block(LFBlocks.BRITTLE_BEDROCK);
     public static final RegistrySupplier<Item> RED_FLOWER = block(LFBlocks.RED_FLOWER);
     public static final RegistrySupplier<Item> YELLOW_FLOWER = block(LFBlocks.YELLOW_FLOWER);
     public static final RegistrySupplier<Item> GRASS_BLOCK = block(LFBlocks.GRASS_BLOCK);

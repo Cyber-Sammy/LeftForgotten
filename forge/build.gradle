@@ -12,7 +12,7 @@ sourceSets {
 
 loom {
     forge {
-        mixinConfig "underthestars.mixins.json"
+        mixinConfig "left_forgotten.mixins.json"
     }
 
     runs {
@@ -46,6 +46,9 @@ configurations {
 
 dependencies {
     forge "net.minecraftforge:forge:$rootProject.forge_version"
+
+    implementation(annotationProcessor("io.github.llamalad7:mixinextras-forge:0.3.5"))
+    include(implementation("io.github.llamalad7:mixinextras-forge:0.3.5"))
 
     modImplementation "dev.architectury:architectury-forge:$rootProject.architectury_api_version"
     modImplementation "me.shedaniel.cloth:cloth-config-forge:11.1.136"

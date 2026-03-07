@@ -1,8 +1,15 @@
 TODO:
-- Add  Cracked/Brittle Bedrock patches to Overworld Bedrock layer (can be blown up, can not be mined, doesn't drop) (TD#7)
 - Finish DimChange (exit method) (TD#1)
 - Add bedrock ceiling at y223 (TD#3)
-- Get rid of fade-out chunk fog in dimension (TD#6)                                                                                                 ✅
+- Make the structures and POIs for "old player activity" thing
+
+ISSUES:
+- Forge doesn't have the version overlay
+- Brittle Bedrock doesn't replace full layers of bedrock for easy access
+
+OTHER ISSUES:
+- Datagen only does its thing on Fabric/Common, doesn't copy over to Forge
+  - I have to keep copying over generated resources from Fabric to Common
 
 Whole idea/plan:
 - Fall into overworld void to get to new dimension                                                                                          ✅

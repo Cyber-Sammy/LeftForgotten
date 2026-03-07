@@ -1,0 +1,6 @@
+{
+  "type": "forge:add_features",
+  "biomes": "#minecraft:is_overworld",
+  "features": "left_forgotten:brittle_bedrock",
+  "step": "underground_ores"
+}
