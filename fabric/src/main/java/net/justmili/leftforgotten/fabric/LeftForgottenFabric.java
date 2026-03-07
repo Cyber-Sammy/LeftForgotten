@@ -1,7 +1,6 @@
 package net.justmili.leftforgotten.fabric;
 
 import net.fabricmc.api.ModInitializer;
-
 import net.justmili.leftforgotten.LeftForgotten;
 
 public final class LeftForgottenFabric implements ModInitializer {

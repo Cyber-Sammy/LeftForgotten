@@ -1,6 +1,9 @@
 package net.justmili.leftforgotten.init;
 
-import dev.architectury.event.events.common.*;
+import dev.architectury.event.events.common.EntityEvent;
+import dev.architectury.event.events.common.InteractionEvent;
+import dev.architectury.event.events.common.PlayerEvent;
+import dev.architectury.event.events.common.TickEvent;
 import net.justmili.leftforgotten.mechanics.advancements.OnARail;
 import net.justmili.leftforgotten.mechanics.advancements.WhenPigsFly;
 import net.justmili.leftforgotten.mechanics.compatibility.NostalgicTweaksCompatibiliy;

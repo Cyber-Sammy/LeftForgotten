@@ -1,3 +1,6 @@
 {
-  "parent": "left_forgotten:block/glass_pane"
+  "parent": "minecraft:item/generated",
+  "textures": {
+    "layer0": "left_forgotten:block/glass"
+  }
 }

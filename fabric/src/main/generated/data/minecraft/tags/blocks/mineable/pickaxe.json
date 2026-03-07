@@ -8,6 +8,8 @@
     "left_forgotten:stone",
     "left_forgotten:stone_slab",
     "left_forgotten:stone_stairs",
+    "left_forgotten:stone_pressure_plate",
+    "left_forgotten:stone_button",
     "left_forgotten:coal_ore",
     "left_forgotten:iron_ore",
     "left_forgotten:gold_ore",
@@ -15,11 +17,16 @@
     "left_forgotten:redstone_ore",
     "left_forgotten:obsidian",
     "left_forgotten:bricks",
+    "left_forgotten:brick_stairs",
+    "left_forgotten:brick_slab",
+    "left_forgotten:brick_wall",
     "left_forgotten:iron_door",
     "left_forgotten:mossy_cobblestone",
     "left_forgotten:mossy_cobblestone_stairs",
     "left_forgotten:mossy_cobblestone_slab",
     "left_forgotten:mossy_cobblestone_wall",
+    "left_forgotten:glass",
+    "left_forgotten:glass_pane",
     "left_forgotten:wooden_slab"
   ]
 }

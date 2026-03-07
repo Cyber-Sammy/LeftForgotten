@@ -20,7 +20,6 @@ import net.justmili.leftforgotten.block.stone.*;
 import net.justmili.leftforgotten.block.wood.Wood;
 import net.justmili.leftforgotten.block.wood.Wood6Sided;
 import net.justmili.leftforgotten.block.wood.WoodenPlanks;
-import net.justmili.leftforgotten.block.wood.*;
 import net.minecraft.core.registries.Registries;
 import net.minecraft.world.level.block.Block;
 

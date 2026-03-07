@@ -1,8 +1,7 @@
 {
-  "parent": "minecraft:block/cube_bottom_top",
+  "parent": "minecraft:block/template_farmland",
   "textures": {
-    "bottom": "left_forgotten:block/dirt",
-    "side": "left_forgotten:block/dirt",
+    "dirt": "left_forgotten:block/dirt",
     "top": "left_forgotten:block/farmland"
   }
 }

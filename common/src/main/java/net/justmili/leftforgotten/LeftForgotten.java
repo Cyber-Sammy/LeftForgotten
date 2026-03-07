@@ -1,7 +1,10 @@
 package net.justmili.leftforgotten;
 
 import dev.architectury.event.events.common.TickEvent;
-import net.justmili.leftforgotten.init.*;
+import net.justmili.leftforgotten.init.Events;
+import net.justmili.leftforgotten.init.LFBlocks;
+import net.justmili.leftforgotten.init.LFItems;
+import net.justmili.leftforgotten.init.LFTab;
 import net.minecraft.resources.ResourceLocation;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
@@ -50,6 +53,12 @@ public final class LeftForgotten {
 
     public static ResourceLocation asResource(String path) {
         return new ResourceLocation(MOD_ID, path);
+    }
+    public static ResourceLocation asFabricResource(String path) {
+        return new ResourceLocation("fabric", path);
+    }
+    public static ResourceLocation asForgeResource(String path) {
+        return new ResourceLocation("forge", path);
     }
     public static ResourceLocation asPath(String path) {
         return new ResourceLocation(path);
