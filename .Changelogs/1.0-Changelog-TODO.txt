@@ -4,6 +4,7 @@ TODO:
 - Make the structures and POIs for "old player activity" thing
 
 ISSUES:
+- No transparency in block textures on Forge
 - Brittle Bedrock doesn't replace full layers of bedrock for easy access
 
 OTHER ISSUES:
