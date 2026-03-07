@@ -4,7 +4,6 @@ TODO:
 - Make the structures and POIs for "old player activity" thing
 
 ISSUES:
-- Forge doesn't have the version overlay
 - Brittle Bedrock doesn't replace full layers of bedrock for easy access
 
 OTHER ISSUES:
