@@ -55,7 +55,7 @@ public class LFModelProvider extends ImprovedModelProvider {
         );
 
         createCube(blockGen, LFBlocks.LEAVES.get(), CubeRotationType.NONE);
-        // TODO: Fix wood family because Wooden Planks don't get a blockstates file at runDatagen
+        // TODO: Fix Issue #5 listen in changelog-todo
         createWoodFamily(blockGen,
             LFBlocks.WOODEN_PLANKS.get(), LFBlocks.WOODEN_STAIRS.get(), LFBlocks.WOODEN_SLAB.get(),
             LFBlocks.FENCE.get(), LFBlocks.FENCE_GATE.get(), LFBlocks.DOOR.get(), LFBlocks.TRAPDOOR.get());
