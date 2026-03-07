@@ -22,26 +22,74 @@ public class LFModelProvider extends ImprovedModelProvider {
 
     @Override
     public void generateBlockStateModels(BlockModelGenerators blockGen) {
-        // Wooden stuff
-        createWoodFamily(blockGen, LFBlocks.WOODEN_PLANKS.get(), LFBlocks.WOODEN_STAIRS.get(), LFBlocks.WOODEN_SLAB.get(),
+        createPlant(blockGen, LFBlocks.RED_FLOWER.get());
+        createPlant(blockGen, LFBlocks.YELLOW_FLOWER.get());
+        createPlant(blockGen, LFBlocks.SAPLING.get());
+        createCube(blockGen, LFBlocks.GRASS_BLOCK.get(), CubeRotationType.NONE,
+            ModelTemplates.CUBE_BOTTOM_TOP,
+            new TextureMapping()
+                .put(TextureSlot.TOP, TextureMapping.getBlockTexture(LFBlocks.GRASS_BLOCK.get(), "_top"))
+                .put(TextureSlot.SIDE, TextureMapping.getBlockTexture(LFBlocks.GRASS_BLOCK.get(), "_side"))
+                .put(TextureSlot.BOTTOM, TextureMapping.getBlockTexture(LFBlocks.DIRT.get()))
+        );
+
+        createCubeAll(blockGen, LFBlocks.DIRT.get());
+        // TODO: Fix farmland model bcuz it's using a generic cube model instead of the lower custom model that is like 15px tall
+        createCube(blockGen, LFBlocks.FARMLAND.get(), CubeRotationType.NONE,
+            ModelTemplates.CUBE_BOTTOM_TOP,
+            new TextureMapping()
+                .put(TextureSlot.TOP, TextureMapping.getBlockTexture(LFBlocks.FARMLAND.get()))
+                .put(TextureSlot.SIDE, TextureMapping.getBlockTexture(LFBlocks.DIRT.get()))
+                .put(TextureSlot.BOTTOM, TextureMapping.getBlockTexture(LFBlocks.DIRT.get()))
+        );
+        createCube(blockGen, LFBlocks.WOOD.get(), CubeRotationType.LOG_XYZ,
+            ModelTemplates.CUBE_COLUMN,
+            new TextureMapping()
+                .put(TextureSlot.SIDE, TextureMapping.getBlockTexture(LFBlocks.WOOD.get(), "_side"))
+                .put(TextureSlot.END, TextureMapping.getBlockTexture(LFBlocks.WOOD.get(), "_top"))
+        );
+        createCube(blockGen, LFBlocks.WOOD_6_SIDED.get(), CubeRotationType.NONE,
+            ModelTemplates.CUBE_ALL,
+            new TextureMapping()
+                .put(TextureSlot.ALL, TextureMapping.getBlockTexture(LFBlocks.WOOD.get(), "_side"))
+        );
+
+        createCube(blockGen, LFBlocks.LEAVES.get(), CubeRotationType.NONE);
+        // TODO: Fix wood family because Wooden Planks don't get a blockstates file at runDatagen
+        createWoodFamily(blockGen,
+            LFBlocks.WOODEN_PLANKS.get(), LFBlocks.WOODEN_STAIRS.get(), LFBlocks.WOODEN_SLAB.get(),
             LFBlocks.FENCE.get(), LFBlocks.FENCE_GATE.get(), LFBlocks.DOOR.get(), LFBlocks.TRAPDOOR.get());
         createRedstoneFamily(blockGen, LFBlocks.WOODEN_PLANKS.get(), LFBlocks.PRESSURE_PLATE.get(), LFBlocks.BUTTON.get());
-
-        // Stone
         createStoneFamily(blockGen, LFBlocks.STONE.get(), LFBlocks.STONE_STAIRS.get(), LFBlocks.STONE_SLAB.get());
         createRedstoneFamily(blockGen, LFBlocks.STONE.get(), LFBlocks.STONE_PRESSURE_PLATE.get(), LFBlocks.STONE_BUTTON.get());
-
+        createCubeAll(blockGen, LFBlocks.COAL_ORE.get());
+        createCubeAll(blockGen, LFBlocks.IRON_ORE.get());
+        createCubeAll(blockGen, LFBlocks.GOLD_ORE.get());
+        createCubeAll(blockGen, LFBlocks.REDSTONE_ORE.get());
+        createCubeAll(blockGen, LFBlocks.DIAMOND_ORE.get());
         createStoneFamily(blockGen, LFBlocks.COBBLESTONE.get(), LFBlocks.COBBLESTONE_STAIRS.get(), LFBlocks.COBBLESTONE_SLAB.get(), LFBlocks.COBBLESTONE_WALL.get());
         createStoneFamily(blockGen, LFBlocks.MOSSY_COBBLESTONE.get(), LFBlocks.MOSSY_COBBLESTONE_STAIRS.get(), LFBlocks.MOSSY_COBBLESTONE_SLAB.get(), LFBlocks.MOSSY_COBBLESTONE_WALL.get());
+        createCubeAll(blockGen, LFBlocks.OBSIDIAN.get());
+        createCubeAll(blockGen, LFBlocks.GRAVEL.get());
+        createCubeAll(blockGen, LFBlocks.CLAY.get());
+        createCubeAll(blockGen, LFBlocks.SAND.get());
+        createCubeAll(blockGen, LFBlocks.GLASS.get());
+        // TODO: GLASS_PANE - I haven't made the method for pane/bars-like models
         createStoneFamily(blockGen, LFBlocks.BRICKS.get(), LFBlocks.BRICK_STAIRS.get(), LFBlocks.BRICK_SLAB.get(), LFBlocks.BRICK_WALL.get());
-
-        // Deco
         createCube(blockGen, LFBlocks.BOOKSHELF.get(), CubeRotationType.NONE,
             ModelTemplates.CUBE_COLUMN,
             new TextureMapping()
                 .put(TextureSlot.END, TextureMapping.getBlockTexture(LFBlocks.WOODEN_PLANKS.get()))
                 .put(TextureSlot.SIDE, TextureMapping.getBlockTexture(LFBlocks.BOOKSHELF.get()))
         );
+        createCube(blockGen, LFBlocks.TNT.get(), CubeRotationType.NONE,
+            ModelTemplates.CUBE_BOTTOM_TOP,
+            new TextureMapping()
+                .put(TextureSlot.TOP, TextureMapping.getBlockTexture(LFBlocks.TNT.get(), "_top"))
+                .put(TextureSlot.SIDE, TextureMapping.getBlockTexture(LFBlocks.TNT.get(), "_side"))
+                .put(TextureSlot.BOTTOM, TextureMapping.getBlockTexture(LFBlocks.TNT.get(), "_bottom"))
+        );
+        blockGen.createDoor(LFBlocks.IRON_DOOR.get());
     }
 
     @Override

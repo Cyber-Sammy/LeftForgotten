@@ -70,12 +70,16 @@ public abstract class ImprovedModelProvider implements DataProvider {
             throw new IllegalStateException("Missing blockstate definitions for: " + list);
         } else {
             BuiltInRegistries.BLOCK.forEach((block) -> {
+                ResourceLocation blockId = BuiltInRegistries.BLOCK.getKey(block);
+                if (!blockId.getNamespace().equals(net.justmili.leftforgotten.LeftForgotten.MOD_ID)) {
+                    return;
+                }
+
                 Item item = Item.BY_BLOCK.get(block);
                 if (item != null) {
                     if (simpleModels.contains(item)) {
                         return;
                     }
-
                     ResourceLocation modelId = ModelLocationUtils.getModelLocation(item);
                     if (!models.containsKey(modelId)) {
                         models.put(modelId, new DelegatedModel(ModelLocationUtils.getModelLocation(block)));

@@ -1,0 +1,6 @@
+{
+  "parent": "minecraft:block/template_wall_post",
+  "textures": {
+    "wall": "left_forgotten:block/mossy_cobblestone"
+  }
+}

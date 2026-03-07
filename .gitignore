@@ -8,6 +8,7 @@ bin/
 fabric/run
 fabric/build
 fabric/.gradle
+fabric/src/main/generated/.cache
 quilt/run
 quilt/build
 quilt/.gradle

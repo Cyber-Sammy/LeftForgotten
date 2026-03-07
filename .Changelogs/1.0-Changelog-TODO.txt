@@ -1,10 +1,12 @@
 TODO:
 - Finish DimChange (exit method) (TD#1)
-- Do datagen (block/item tags, block models, blockstates, item models etc) (TD#2)
 - Add bedrock ceiling at y223 (TD#3)
 - Get rid of fade-out chunk fog in dimension (TD#6)
 
 ISSUES:
+- No method for pane-like blocks (for glass pane) in LFModelProvider
+- Farmland uses full cube model and doesn't seem to be getting moist near water
+- Datagen doesn't create blockstates file for Wooden Planks
 - Caves in Alpha Minecraft dimension seem to just not fuckin' exist (I#2)
 
 
