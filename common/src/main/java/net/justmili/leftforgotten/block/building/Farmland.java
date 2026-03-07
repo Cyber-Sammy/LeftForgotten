@@ -34,7 +34,7 @@ public class Farmland extends Block {
 	public static final int MAX_MOISTURE = 7;
 
 	public Farmland() {
-		super(Properties.of().mapColor(MapColor.COLOR_LIGHT_GREEN).sound(SoundType.GRASS).strength(1.5f, 6f));
+		super(Properties.of().mapColor(MapColor.COLOR_LIGHT_GREEN).sound(SoundType.GRASS).strength(1.5f, 6f).randomTicks());
 		this.registerDefaultState(this.stateDefinition.any().setValue(MOISTURE, 0));
 	}
 

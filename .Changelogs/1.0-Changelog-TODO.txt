@@ -2,10 +2,7 @@ TODO:
 - Add  Cracked/Brittle Bedrock patches to Overworld Bedrock layer (can be blown up, can not be mined, doesn't drop) (TD#7)
 - Finish DimChange (exit method) (TD#1)
 - Add bedrock ceiling at y223 (TD#3)
-- Get rid of fade-out chunk fog in dimension (TD#6)
-
-ISSUES:
-- Farmland doesn't get moist
+- Get rid of fade-out chunk fog in dimension (TD#6)                                                                                                 ✅
 
 Whole idea/plan:
 - Fall into overworld void to get to new dimension                                                                                          ✅
