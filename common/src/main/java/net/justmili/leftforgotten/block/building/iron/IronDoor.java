@@ -11,7 +11,7 @@ import net.minecraft.world.level.block.state.properties.BlockSetType;
 
 public class IronDoor extends DoorBlock {
     public IronDoor() {
-        super(Properties.copy(Blocks.IRON_DOOR).sound(SoundType.WOOD).strength(3f).noOcclusion().isRedstoneConductor(Common::never), BlockSetType.OAK);
+        super(Properties.copy(Blocks.IRON_DOOR).sound(SoundType.WOOD).strength(3f).noOcclusion().isRedstoneConductor(Common::never), BlockSetType.IRON);
     }
 
     @Override
