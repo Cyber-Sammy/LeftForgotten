@@ -87,7 +87,9 @@
         "type": "minecraft:condition",
         "if_true": {
           "type": "minecraft:y_above",
-          "anchor": { "absolute": 223 },
+          "anchor": {
+            "absolute": 220
+          },
           "surface_depth_multiplier": 0,
           "add_stone_depth": false
         },
@@ -97,7 +99,9 @@
             "type": "minecraft:not",
             "invert": {
               "type": "minecraft:y_above",
-              "anchor": { "absolute": 224 },
+              "anchor": {
+                "absolute": 221
+              },
               "surface_depth_multiplier": 0,
               "add_stone_depth": false
             }

@@ -1,10 +1,8 @@
 TODO:
-- Add bedrock ceiling at y224 (TD#3)
 - Make the structures and POIs for "old player activity" thing
 
 ISSUES:
 - Fabric's VersionOverlay doesn't display on highest priority
-- Brittle Bedrock doesn't replace full layers of bedrock for easy access
 
 OTHER ISSUES:
 - Datagen only does its thing on Fabric/Common, doesn't copy over to Forge
@@ -19,5 +17,5 @@ Whole idea/plan:
 - Rare dirt huts, even more rare lil homes (structures)
 - Often cut down and cut down but unfinished trees (features & structures)
 - 2 EXIT IDEAS                                                                                                                              ✅
-  - If player flies up to y208, they'll be teleported to the same x and z coordinates at overworld y-80 (set player to fall-flying and transfer momentum)
+  - If player flies up to y204, they'll be teleported to the same x and z coordinates at overworld y-80 (set player to fall-flying and transfer momentum)
   - If lethal damage taken in dimension, reset all stats and tp player to their spawn point (world spawn or bed) (exit method)

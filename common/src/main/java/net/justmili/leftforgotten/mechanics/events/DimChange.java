@@ -42,8 +42,6 @@ public class DimChange {
         if (overworld == null) return EventResult.pass();
 
         player.setHealth(player.getMaxHealth());
-        player.getFoodData().eat(20, 20.0f);
-        player.removeAllEffects();
 
         BlockPos spawnPos = player.getRespawnPosition();
         ServerLevel spawnLevel = player.getServer().getLevel(player.getRespawnDimension());
@@ -61,7 +59,7 @@ public class DimChange {
         if (!(player instanceof ServerPlayer serverPlayer)) return;
         if (!serverPlayer.level().dimension().equals(LFResources.Levels.ALPHA_MINECRAFT)) return;
         if (!serverPlayer.gameMode.isSurvival()) return; // for testing
-        if (serverPlayer.getY() < 208) return;
+        if (serverPlayer.getY() < 204) return;
 
         ServerLevel overworld = serverPlayer.getServer().getLevel(Level.OVERWORLD);
         if (overworld == null) return;
