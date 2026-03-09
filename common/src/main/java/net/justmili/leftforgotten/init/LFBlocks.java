@@ -15,6 +15,7 @@ import net.justmili.leftforgotten.block.building.stone.StonePressurePlate;
 import net.justmili.leftforgotten.block.building.stone.StoneSlab;
 import net.justmili.leftforgotten.block.building.stone.StoneStairs;
 import net.justmili.leftforgotten.block.building.wood.*;
+import net.justmili.leftforgotten.block.dev.FeatureVoid;
 import net.justmili.leftforgotten.block.nature.*;
 import net.justmili.leftforgotten.block.stone.*;
 import net.justmili.leftforgotten.block.wood.Wood;
@@ -76,6 +77,8 @@ public class LFBlocks {
     public static final RegistrySupplier<Block> BOOKSHELF = REGISTRY.register("bookshelf", Bookshelf::new);
     public static final RegistrySupplier<Block> TNT = REGISTRY.register("tnt", Tnt::new);
     public static final RegistrySupplier<Block> IRON_DOOR = REGISTRY.register("iron_door", IronDoor::new);
+
+    public static final RegistrySupplier<Block> FEATURE_VOID = REGISTRY.register("feature_void", FeatureVoid::new);
 
     public static void register() {
         REGISTRY.register();

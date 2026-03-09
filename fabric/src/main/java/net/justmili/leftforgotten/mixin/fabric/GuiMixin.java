@@ -70,11 +70,10 @@ public abstract class GuiMixin {
     @Shadow
     protected abstract int getVehicleMaxHearts(LivingEntity vehicle);
 
-    @Inject(at = @At("HEAD"), method = "render")
+    @Inject(at = @At("TAIL"), method = "render")
     public void render(GuiGraphics guiGraphics, float partialTick, CallbackInfo ci) {
-
+        if (this.minecraft.player == null) return;
         if (this.minecraft.player.level().dimension() != LFResources.Levels.ALPHA_MINECRAFT) return;
-
         this.minecraft.getProfiler().push("demo");
         Component component = Component.literal(VersionOverlay.currentText);
 
@@ -91,10 +90,13 @@ public abstract class GuiMixin {
         int drawX = Math.round(x / userScale);
         int drawY = Math.round(y / userScale);
 
+        guiGraphics.pose().pushPose();
+        guiGraphics.pose().scale(1f / guiScaleFactor, 1f / guiScaleFactor, 1f);
+        guiGraphics.pose().scale(userScale, userScale, 1f);
 
-        guiGraphics.drawString(minecraft.font, Component.literal(VersionOverlay.currentText), drawX + 1, drawY + 1, textShadowColor, false);
-        guiGraphics.drawString(minecraft.font, Component.literal(VersionOverlay.currentText), drawX, drawY, textColor, false);
-        this.minecraft.getProfiler().pop();
+        guiGraphics.drawString(minecraft.font, component, drawX + 1, drawY + 1, textShadowColor, false);
+        guiGraphics.drawString(minecraft.font, component, drawX, drawY, textColor, false);
+
+        guiGraphics.pose().popPose();
     }
-
 }

@@ -1,8 +1,11 @@
 TODO:
 - Make the structures and POIs for "old player activity" thing
+  - Chopped down trees                                                                                                                     ✅
+  - Huts and shit
 
 ISSUES:
-- Fabric's VersionOverlay doesn't display on highest priority
+- Surface features (trees) stopped spawning on ground, I assume they're trying to spawn above the bedrock roof
+  - Attempt to make y144 and above just "void" biome to prevent that
 
 OTHER ISSUES:
 - Datagen only does its thing on Fabric/Common, doesn't copy over to Forge

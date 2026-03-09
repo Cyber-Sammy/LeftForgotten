@@ -67,6 +67,8 @@ public class LFItems {
     public static final RegistrySupplier<Item> IRON_DOOR = doubleBlock(LFBlocks.IRON_DOOR);
     public static final RegistrySupplier<Item> GLASS_PANE = block(LFBlocks.GLASS_PANE);
 
+    public static final RegistrySupplier<Item> FEATURE_VOID = block(LFBlocks.FEATURE_VOID);
+
     public static final RegistrySupplier<Item> CLAY_BALL = register("clay_ball", ClayBall::new);
     public static final RegistrySupplier<Item> BRICK = register("brick", Brick::new);
 
