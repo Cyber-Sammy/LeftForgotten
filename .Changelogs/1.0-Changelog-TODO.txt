@@ -1,5 +1,5 @@
 TODO:
-- Add bedrock ceiling at y223 (TD#3)
+- Add bedrock ceiling at y224 (TD#3)
 - Make the structures and POIs for "old player activity" thing
 
 ISSUES:

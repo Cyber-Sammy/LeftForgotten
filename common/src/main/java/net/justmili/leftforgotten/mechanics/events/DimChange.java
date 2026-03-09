@@ -60,6 +60,7 @@ public class DimChange {
     public static void onPlayerTick(Player player) {
         if (!(player instanceof ServerPlayer serverPlayer)) return;
         if (!serverPlayer.level().dimension().equals(LFResources.Levels.ALPHA_MINECRAFT)) return;
+        if (!serverPlayer.gameMode.isSurvival()) return; // for testing
         if (serverPlayer.getY() < 208) return;
 
         ServerLevel overworld = serverPlayer.getServer().getLevel(Level.OVERWORLD);
