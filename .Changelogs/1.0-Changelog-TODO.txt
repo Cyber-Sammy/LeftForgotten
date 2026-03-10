@@ -1,6 +1,5 @@
 TODO:
 - Implement the structures that nbsurprise made for you
-- Finish DatagenDataUtil and create recipes
 
 Whole idea/plan:
 - Fall into overworld void to get to new dimension                                                                                          ✅

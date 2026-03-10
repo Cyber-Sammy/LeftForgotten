@@ -42,8 +42,8 @@ public class LFBlocks {
     public static final RegistrySupplier<Block> WOODEN_SLAB = REGISTRY.register("wooden_slab", WoodenSlab::new);
     public static final RegistrySupplier<Block> FENCE = REGISTRY.register("fence", WoodenFence::new);
     public static final RegistrySupplier<Block> FENCE_GATE = REGISTRY.register("fence_gate", WoodenFenceGate::new);
-    public static final RegistrySupplier<Block> TRAPDOOR = REGISTRY.register("trapdoor", WoodenTrapdoor::new);
     public static final RegistrySupplier<Block> DOOR = REGISTRY.register("door", WoodenDoor::new);
+    public static final RegistrySupplier<Block> TRAPDOOR = REGISTRY.register("trapdoor", WoodenTrapdoor::new);
     public static final RegistrySupplier<Block> PRESSURE_PLATE = REGISTRY.register("pressure_plate", WoodenPressurePlate::new);
     public static final RegistrySupplier<Block> BUTTON = REGISTRY.register("button", WoodenButton::new);
     public static final RegistrySupplier<Block> STONE = REGISTRY.register("stone", Stone::new);

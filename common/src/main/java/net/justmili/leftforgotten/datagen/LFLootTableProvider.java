@@ -92,6 +92,8 @@ public class LFLootTableProvider extends LootTableProvider {
             dropSelf(LFBlocks.TNT.get());
             add(LFBlocks.IRON_DOOR.get(), createDoorTable(LFBlocks.IRON_DOOR.get()));
             add(LFBlocks.GLASS_PANE.get(), createSilkTouchOnlyTable(LFBlocks.GLASS_PANE.get()));
+
+
         }
 
         // this exact method exists on Forge, and is implemented via mixin by us on Fabric.

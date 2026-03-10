@@ -28,7 +28,7 @@ public class DimChange {
         ServerLevel newLevel = player.getServer().getLevel(LFResources.Levels.ALPHA_MINECRAFT);
         if (newLevel == null) return EventResult.pass();
 
-        player.teleportTo(newLevel, player.getX(), 150, player.getZ(), player.getYRot(), player.getXRot());
+        player.teleportTo(newLevel, player.getX(), 156, player.getZ(), player.getYRot(), player.getXRot());
         player.addEffect(new MobEffectInstance(MobEffects.SLOW_FALLING, 200, 0, false, false));
 
         return EventResult.interruptFalse();
