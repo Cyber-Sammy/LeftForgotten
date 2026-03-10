@@ -96,5 +96,13 @@ public class LFRecipeProvider extends RecipeProvider {
             .pattern("##")
             .unlockedBy(getHasName(LFItems.WOOD.get()), has(LFItems.WOOD.get()))
             .save(writer);
+
+        // Sticks
+        ShapedRecipeBuilder.shaped(RecipeCategory.BUILDING_BLOCKS, Items.STICK, 4)
+            .define('#', LFItems.WOODEN_PLANKS.get())
+            .pattern("#")
+            .pattern("#")
+            .unlockedBy(getHasName(LFItems.WOODEN_PLANKS.get()), has(LFItems.WOODEN_PLANKS.get()))
+            .save(writer);
     }
 }

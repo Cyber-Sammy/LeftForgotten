@@ -18,8 +18,6 @@ import net.minecraft.world.phys.Vec3;
 
 public class DimChange {
     public static EventResult onEntityHurt(LivingEntity entity, DamageSource source, float v) {
-        LeftForgotten.LOGGER.info(String.format("Logged damage from %d at x%d-y%d-z%d", source.getMsgId(), entity.getX(), entity.getY(), entity.getZ()));
-
         if (!(entity instanceof ServerPlayer player)) return EventResult.pass();
         if (source == null) return EventResult.pass();
         if (!player.level().dimension().equals(Level.OVERWORLD)) return EventResult.pass();
