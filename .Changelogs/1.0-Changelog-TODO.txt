@@ -2,6 +2,7 @@ TODO:
 - Implement the structures that nbsurprise made for you
 - Fix vegetation (flowers) spawning with the same treatment as trees
 - Split DatagenUtil.BlockModels into: BlockFamily, IndividualBlock, BlockstateOnly
+- Extend exit idea 2 to 24b, so fly up to 196 and exit at -88
 
 Whole idea/plan:
 - Fall into overworld void to get to new dimension                                                                                          ✅
