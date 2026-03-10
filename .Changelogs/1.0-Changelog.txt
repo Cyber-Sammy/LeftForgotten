@@ -1,0 +1,95 @@
+# Left Forgotten - 1.0 Beta
+This took about 2 weeks to make, but we're finally here. Somewhat.
+Hello👋 to everyone who's been following the progress of this project on my Twitter and Discord :D
+
+## What's Added?
+***BLOCKS***<br>
+<small>Yes I will list every single one, and yes every single one is custom</small>
+- Brittle Bedrock
+- Grass Block
+- Dirt
+- Red Flower
+- Yellow Flower
+- Farmland
+- Wood
+- Wood (6-Sided)
+- Leaves
+- Sapling
+- Wooden Planks
+- Wooden Stairs
+- Wooden Slab
+- Fence
+- Fence Gate
+- Door
+- Trapdoor
+- Pressure Plate
+- Button
+- Stone
+- Stone Stairs
+- Stone Slab
+- Stone Pressure Plate
+- Stone Button
+- Coal Ore
+- Iron Ore
+- Gold Ore
+- Redstone Ore
+- Diamond Ore
+- Cobblestone
+- Cobblestone Stairs
+- Cobblestone Slab
+- Cobblestone Wall
+- Mossy Cobblestone
+- Mossy Cobblestone Stairs
+- Mossy Cobblestone Slab
+- Mossy Cobblestone Wall
+- Obsidian
+- Gravel
+- Clay
+- Sand
+- Glass
+- Glass Pane
+- Bricks
+- Brick Stairs
+- Brick Slab
+- Brick Wall
+- Bookshelf
+- TNT
+- Iron Door
+
+***ITEMS***
+- Clay Ball (Alpha)
+- Brick (Alpha)
+
+***OTHER***
+- "Alpha Minecraft" dimension
+  - Explode a patch of brittle bedrock in the overworld and jump into the void to get in
+  - Attempt to die or fly up to y196 in-dimension to get back
+- Old HUD
+  - Only in the "Alpha Minecraft" dimension
+- No hunger, no sprint
+  - Only in the "Alpha Minecraft" dimension
+  - Heal by just right-clicking certain food items
+- No hit cooldown
+  - Only in the "Alpha Minecraft" dimension
+  - Doesn't apply (as much) with Better Combat mod
+- Version Overlay
+  - Only in the "Alpha Minecraft" dimension
+- Half-chopped trees
+  - Only in the "Alpha Minecraft" dimension
+
+<hr>
+
+***DEV***
+- Feature Void (Block)
+  - Made literally just for the chopped down trees
+
+<hr>
+
+## Upcoming - 1.1 Release
+- "Old player activity" structures
+  - Mainly huts, houses and stuff
+- Old advancements returned
+- B o a t
+
+## Upcoming - 1.2 Release
+- Switch to use MysticLib once it releases
