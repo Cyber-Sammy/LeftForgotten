@@ -1,31 +1,41 @@
 package net.justmili.leftforgotten.datagen;
 
 import com.google.common.collect.Streams;
+import net.justmili.leftforgotten.LeftForgotten;
 import net.justmili.leftforgotten.datagen.extensions.KnownBlocksLootProvider;
 import net.justmili.leftforgotten.init.LFBlocks;
 import net.justmili.leftforgotten.init.LFItems;
 import net.minecraft.data.PackOutput;
 import net.minecraft.data.loot.BlockLootSubProvider;
 import net.minecraft.data.loot.LootTableProvider;
+import net.minecraft.data.loot.LootTableSubProvider;
+import net.minecraft.resources.ResourceLocation;
 import net.minecraft.world.flag.FeatureFlags;
 import net.minecraft.world.item.Items;
 import net.minecraft.world.item.enchantment.Enchantments;
 import net.minecraft.world.level.block.Block;
+import net.minecraft.world.level.storage.loot.LootPool;
+import net.minecraft.world.level.storage.loot.LootTable;
 import net.minecraft.world.level.storage.loot.entries.LootItem;
 import net.minecraft.world.level.storage.loot.functions.SetItemCountFunction;
+import net.minecraft.world.level.storage.loot.functions.SetItemDamageFunction;
 import net.minecraft.world.level.storage.loot.parameters.LootContextParamSets;
 import net.minecraft.world.level.storage.loot.predicates.BonusLevelTableCondition;
+import net.minecraft.world.level.storage.loot.predicates.LootItemRandomChanceCondition;
 import net.minecraft.world.level.storage.loot.providers.number.ConstantValue;
+import net.minecraft.world.level.storage.loot.providers.number.UniformGenerator;
 
 import java.util.List;
 import java.util.Set;
+import java.util.function.BiConsumer;
 import java.util.function.Supplier;
 import java.util.stream.Stream;
 
 public class LFLootTableProvider extends LootTableProvider {
     public LFLootTableProvider(PackOutput output) {
         super(output, Set.of(), List.of(
-            new SubProviderEntry(LFBlockLootProvider::new, LootContextParamSets.BLOCK)
+            new SubProviderEntry(LFBlockLootProvider::new, LootContextParamSets.BLOCK),
+            new SubProviderEntry(LFChestLootProvider::new, LootContextParamSets.CHEST)
         ));
     }
 
@@ -92,8 +102,6 @@ public class LFLootTableProvider extends LootTableProvider {
             dropSelf(LFBlocks.TNT.get());
             add(LFBlocks.IRON_DOOR.get(), createDoorTable(LFBlocks.IRON_DOOR.get()));
             add(LFBlocks.GLASS_PANE.get(), createSilkTouchOnlyTable(LFBlocks.GLASS_PANE.get()));
-
-
         }
 
         // this exact method exists on Forge, and is implemented via mixin by us on Fabric.
@@ -102,6 +110,73 @@ public class LFLootTableProvider extends LootTableProvider {
         @Override
         public Stream<Block> getKnownBlocks() {
             return Streams.stream(LFBlocks.REGISTRY).map(Supplier::get);
+        }
+    }
+
+    public static class LFChestLootProvider implements LootTableSubProvider {
+        protected LFChestLootProvider() {
+        }
+
+        @Override
+        public void generate(BiConsumer<ResourceLocation, LootTable.Builder> output) {
+            output.accept(LeftForgotten.asResource("chests/house"), LootTable.lootTable()
+                // Broken wooden pickaxe
+                .withPool(LootPool.lootPool()
+                    .setRolls(ConstantValue.exactly(1))
+                    .when(LootItemRandomChanceCondition.randomChance(0.2f))
+                    .add(LootItem.lootTableItem(Items.WOODEN_PICKAXE)
+                        .apply(SetItemDamageFunction.setDamage(UniformGenerator.between(0.5f, 0.95f)))))
+                // Sticks
+                .withPool(LootPool.lootPool()
+                    .setRolls(ConstantValue.exactly(1))
+                    .setBonusRolls(ConstantValue.exactly(1))
+                    .when(LootItemRandomChanceCondition.randomChance(0.3f))
+                    .add(LootItem.lootTableItem(Items.STICK)
+                        .apply(SetItemCountFunction.setCount(UniformGenerator.between(5, 7)))))
+                // Feathers
+                .withPool(LootPool.lootPool()
+                    .setRolls(ConstantValue.exactly(1))
+                    .setBonusRolls(ConstantValue.exactly(1))
+                    .when(LootItemRandomChanceCondition.randomChance(0.25f))
+                    .add(LootItem.lootTableItem(Items.FEATHER)
+                        .apply(SetItemCountFunction.setCount(UniformGenerator.between(1, 3)))))
+                // Bones
+                .withPool(LootPool.lootPool()
+                    .setRolls(ConstantValue.exactly(1))
+                    .when(LootItemRandomChanceCondition.randomChance(0.25f))
+                    .add(LootItem.lootTableItem(Items.BONE)
+                        .apply(SetItemCountFunction.setCount(UniformGenerator.between(1, 2)))))
+                // String
+                .withPool(LootPool.lootPool()
+                    .setRolls(ConstantValue.exactly(1))
+                    .when(LootItemRandomChanceCondition.randomChance(0.3f))
+                    .add(LootItem.lootTableItem(Items.STRING)
+                        .apply(SetItemCountFunction.setCount(UniformGenerator.between(1, 4)))))
+                // Dirt
+                .withPool(LootPool.lootPool()
+                    .setRolls(UniformGenerator.between(0, 3))
+                    .when(LootItemRandomChanceCondition.randomChance(0.3f))
+                    .add(LootItem.lootTableItem(LFItems.DIRT.get())
+                        .apply(SetItemCountFunction.setCount(UniformGenerator.between(0, 7)))))
+                // Cobblestone
+                .withPool(LootPool.lootPool()
+                    .setRolls(UniformGenerator.between(0, 3))
+                    .when(LootItemRandomChanceCondition.randomChance(0.3f))
+                    .add(LootItem.lootTableItem(LFItems.COBBLESTONE.get())
+                        .apply(SetItemCountFunction.setCount(UniformGenerator.between(2, 5)))))
+                // Wood
+                .withPool(LootPool.lootPool()
+                    .setRolls(UniformGenerator.between(0, 3))
+                    .when(LootItemRandomChanceCondition.randomChance(0.4f))
+                    .add(LootItem.lootTableItem(LFItems.WOOD.get())
+                        .apply(SetItemCountFunction.setCount(UniformGenerator.between(1, 4)))))
+                // Wooden Planks
+                .withPool(LootPool.lootPool()
+                    .setRolls(UniformGenerator.between(0, 3))
+                    .when(LootItemRandomChanceCondition.randomChance(0.4f))
+                    .add(LootItem.lootTableItem(LFItems.WOODEN_PLANKS.get())
+                        .apply(SetItemCountFunction.setCount(UniformGenerator.between(2, 6)))))
+            );
         }
     }
 }

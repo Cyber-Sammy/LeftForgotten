@@ -6,6 +6,11 @@ Left to fade away into distant memories
 ## Why?
 I saw a tweet on Twitter and got inspired. The tweet in question: ["Can we get this as a mod pls"](https://x.com/i/status/2026387765605154916)
 
+## Shameless Promotion
+If you like this, go check out [True End](https://modrinth.com/mod/true_end),<br>
+a mod that me and my team spent like 2 years on it already! Still got some updates on the way ;3<br>
+**I don't recommend playing True End and Left Forgotten at the same time though due to conflicting/duplicate code!!** <small>(Large portion of Left Forgotten's code is based on True End's)</small>
+
 ## Description
 Basing the whole mod off of the mentioned tweet, the mod purely just adds Alpha Minecraft hidden deep below the Minecraft bedrock layer.<br>
 Accessible by blowing up Brittle Bedrock to access the Overworld void and jumping into it, you'll be teleported to a dark and abandoned version of Minecraft Alpha (`1.1.2_01` to be exact).<br>

@@ -37,7 +37,7 @@ public final class LeftForgotten {
         }
     }
 
-    public static void queueServerWork(int tickDelay, Runnable action) {
+    public static void wait(int tickDelay, Runnable action) {
         workQueue.add(new WorkItem(action, tickDelay));
     }
 
