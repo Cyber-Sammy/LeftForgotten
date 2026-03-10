@@ -2,10 +2,7 @@ package net.justmili.leftforgotten.datagen.fabric;
 
 import net.fabricmc.fabric.api.datagen.v1.DataGeneratorEntrypoint;
 import net.fabricmc.fabric.api.datagen.v1.FabricDataGenerator;
-import net.justmili.leftforgotten.datagen.LFBlockTagProvider;
-import net.justmili.leftforgotten.datagen.LFItemTagProvider;
-import net.justmili.leftforgotten.datagen.LFLootTableProvider;
-import net.justmili.leftforgotten.datagen.LFModelProvider;
+import net.justmili.leftforgotten.datagen.*;
 
 public class FabricDatagen implements DataGeneratorEntrypoint {
     @Override
@@ -15,5 +12,6 @@ public class FabricDatagen implements DataGeneratorEntrypoint {
         pack.addProvider(LFBlockTagProvider::new);
         pack.addProvider(LFItemTagProvider::new);
         pack.addProvider((output, lookup) -> new LFModelProvider(output));
+        pack.addProvider((output, lookup) -> new LFRecipeProvider(output));
     }
 }
