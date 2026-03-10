@@ -1,3 +1,8 @@
+TODO:
+- Implement the structures that nbsurprise made for you
+- Fix vegetation (flowers) spawning with the same treatment as trees
+- Split DatagenUtil.BlockModels into: BlockFamily, IndividualBlock, BlockstateOnly
+
 Whole idea/plan:
 - Fall into overworld void to get to new dimension                                                                                          ✅
 - New dimension has bedrock roof very high up                                                                                               ✅
