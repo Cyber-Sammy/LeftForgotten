@@ -10,8 +10,9 @@ import net.minecraft.data.models.model.ModelTemplates;
 import net.minecraft.data.models.model.TextureMapping;
 import net.minecraft.data.models.model.TextureSlot;
 
-import static net.justmili.leftforgotten.util.DatagenUtil.BlockModels.*;
-import static net.justmili.leftforgotten.util.DatagenUtil.ItemModels.createFlatItem;
+import static net.justmili.leftforgotten.util.DatagenAssetUtil.BlockModels.Families.*;
+import static net.justmili.leftforgotten.util.DatagenAssetUtil.BlockModels.Individual.*;
+import static net.justmili.leftforgotten.util.DatagenAssetUtil.ItemModels.createFlatItem;
 
 public class LFModelProvider extends ImprovedModelProvider {
     public LFModelProvider(PackOutput output) {

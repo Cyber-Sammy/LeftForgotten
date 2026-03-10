@@ -15,6 +15,6 @@ public class AlphaMinecraft extends DimensionSpecialEffects {
 
     @Override
     public boolean isFoggyAt(int x, int y) {
-        return false;
+        return true;
     }
 }

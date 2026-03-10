@@ -1,6 +1,7 @@
 package net.justmili.leftforgotten.mechanics.events;
 
 import dev.architectury.event.EventResult;
+import net.justmili.leftforgotten.LeftForgotten;
 import net.justmili.leftforgotten.init.LFResources;
 import net.minecraft.core.BlockPos;
 import net.minecraft.network.protocol.game.ClientboundSetEntityMotionPacket;
@@ -17,6 +18,8 @@ import net.minecraft.world.phys.Vec3;
 
 public class DimChange {
     public static EventResult onEntityHurt(LivingEntity entity, DamageSource source, float v) {
+        LeftForgotten.LOGGER.info(String.format("Logged damage from %d at x%d-y%d-z%d", source.getMsgId(), entity.getX(), entity.getY(), entity.getZ()));
+
         if (!(entity instanceof ServerPlayer player)) return EventResult.pass();
         if (source == null) return EventResult.pass();
         if (!player.level().dimension().equals(Level.OVERWORLD)) return EventResult.pass();
@@ -25,7 +28,6 @@ public class DimChange {
         ServerLevel newLevel = player.getServer().getLevel(LFResources.Levels.ALPHA_MINECRAFT);
         if (newLevel == null) return EventResult.pass();
 
-        player.setHealth(player.getMaxHealth());
         player.teleportTo(newLevel, player.getX(), 150, player.getZ(), player.getYRot(), player.getXRot());
         player.addEffect(new MobEffectInstance(MobEffects.SLOW_FALLING, 200, 0, false, false));
 
@@ -59,13 +61,13 @@ public class DimChange {
         if (!(player instanceof ServerPlayer serverPlayer)) return;
         if (!serverPlayer.level().dimension().equals(LFResources.Levels.ALPHA_MINECRAFT)) return;
         if (!serverPlayer.gameMode.isSurvival()) return; // for testing
-        if (serverPlayer.getY() < 204) return;
+        if (serverPlayer.getY() < 196) return;
 
         ServerLevel overworld = serverPlayer.getServer().getLevel(Level.OVERWORLD);
         if (overworld == null) return;
 
         Vec3 momentum = serverPlayer.getDeltaMovement();
-        serverPlayer.teleportTo(overworld, serverPlayer.getX(), -80, serverPlayer.getZ(), serverPlayer.getYRot(), serverPlayer.getXRot());
+        serverPlayer.teleportTo(overworld, serverPlayer.getX(), -88, serverPlayer.getZ(), serverPlayer.getYRot(), serverPlayer.getXRot());
         serverPlayer.setDeltaMovement(momentum);
         serverPlayer.addEffect(new MobEffectInstance(MobEffects.SLOW_FALLING, 1, 0, false, false));
         serverPlayer.startFallFlying();
