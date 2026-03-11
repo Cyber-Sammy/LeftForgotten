@@ -39,7 +39,7 @@ public class HudModifier {
             int fullscreenOffset = 1;
             int horseBar = 7;
             int armorW = 202;
-            int armorH = 6;
+            int armorH = 16;
             int playerHpH = 6;
             int airLvlW = 202;
             int airLvlH = 3;

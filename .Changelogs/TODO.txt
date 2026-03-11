@@ -2,15 +2,13 @@ TODO:
 - Fix HudModifier on Fabric and Forge because things are very not in the right places (mainly heights)
 
 Forge:
-- HP - Fixed
-- Armor - to fix (height)
-- Mount HP, horse bar - to fix
-- Mount HP, no bar - didn't check yet
-- Air lvl - didn't check yet
+All fixed
 
 Fabric:
 - HP - Fixed
 - Armor - to fix (height)
+  - On mount horse (bar)
+  - On mount pig (no bar)
 - Mount HP, horse bar - didn't check yet
 - Mount HP, no bar - didn't check yet
 - Air lvl - To fix (height)
