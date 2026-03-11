@@ -18,6 +18,7 @@ import net.minecraft.world.entity.player.Player;
 import org.spongepowered.asm.mixin.Final;
 import org.spongepowered.asm.mixin.Mixin;
 import org.spongepowered.asm.mixin.Shadow;
+import org.spongepowered.asm.mixin.Unique;
 import org.spongepowered.asm.mixin.injection.At;
 import org.spongepowered.asm.mixin.injection.Inject;
 import org.spongepowered.asm.mixin.injection.ModifyVariable;
@@ -32,10 +33,21 @@ public abstract class HudModifier {
         return this.minecraft.player != null && this.minecraft.player.level().dimension() == LFResources.Levels.ALPHA_MINECRAFT;
     }
 
+    // Defined heights and wights
+    @Unique private static final int horseBar = 7;
+    @Unique private static final int armorW = 101;
+    @Unique private static final int armorH = 7;
+    @Unique private static final int playerHpH = 17;
+    @Unique private static final int playerHpH_nt = 7;
+    @Unique private static final int airLvlW = 1;
+    @Unique private static final int airLvlH = 26;
+    @Unique private static final int mountHpH_na = 7;
+    @Unique private static final int mountHpH = 2;
+    // Account for horse bar, Fabric doesn't need to account for fullscreen
     private int yOffset() {
         Player player = this.minecraft.player;
-        int horseBar = (player.getVehicle() instanceof AbstractHorse horse && horse.isSaddled()) ? 7 : 0;
-        return horseBar;
+        int horseBarOffset = (player.getVehicle() instanceof AbstractHorse horse && horse.isSaddled()) ? horseBar : 0;
+        return horseBarOffset;
     }
 
     @Shadow @Final private Minecraft minecraft;
@@ -43,6 +55,41 @@ public abstract class HudModifier {
     @Shadow private int screenHeight;
     @Shadow protected abstract int getVehicleMaxHearts(LivingEntity vehicle);
 
+    // I don't know what to comment on this
+    private Stack<String> currentProfiler = new Stack<>();
+    @Redirect(method = "renderPlayerHealth(Lnet/minecraft/client/gui/GuiGraphics;)V", at = @At(value = "INVOKE",
+        target = "Lnet/minecraft/util/profiling/ProfilerFiller;push(Ljava/lang/String;)V"))
+    private void logProfilePushes(ProfilerFiller instance, String name) {
+        currentProfiler.push(name);
+        instance.push(name);
+    }
+    @Redirect(method = "renderPlayerHealth(Lnet/minecraft/client/gui/GuiGraphics;)V", at = @At(value = "INVOKE",
+        target = "Lnet/minecraft/util/profiling/ProfilerFiller;popPush(Ljava/lang/String;)V"))
+    private void logProfilePopPushes(ProfilerFiller instance, String name) {
+        currentProfiler.pop();
+        currentProfiler.push(name);
+        instance.pop();
+        instance.push(name);
+    }
+    @Redirect(method = "renderPlayerHealth(Lnet/minecraft/client/gui/GuiGraphics;)V", at = @At(value = "INVOKE",
+        target = "Lnet/minecraft/util/profiling/ProfilerFiller;pop()V"))
+    private void logProfilePops(ProfilerFiller instance) {
+        currentProfiler.pop();
+        instance.pop();
+    }
+
+    // Player HP - move down, move down with NT, account for horse bar
+    @ModifyVariable(method = "renderHearts", at = @At("HEAD"), ordinal = 1, argsOnly = true)
+    private int moveHeartsDown(int y) {
+        if (!inAlpha()) return y;
+        if (Platform.isModLoaded("nostalgic_tweaks")) {
+            return y + playerHpH_nt - yOffset();
+        } else {
+            return y - playerHpH - yOffset();
+        }
+    }
+
+    // Food disable
     @WrapOperation(method = "renderPlayerHealth(Lnet/minecraft/client/gui/GuiGraphics;)V", at = @At(value = "INVOKE",
         target = "Lnet/minecraft/client/gui/Gui;getVehicleMaxHearts(Lnet/minecraft/world/entity/LivingEntity;)I"))
     private int wrapVehicleHearts(Gui instance, LivingEntity vehicle, Operation<Integer> original) {
@@ -52,31 +99,7 @@ public abstract class HudModifier {
         return -1;
     }
 
-    private Stack<String> currentProfiler = new Stack<>();
-
-    @Redirect(method = "renderPlayerHealth(Lnet/minecraft/client/gui/GuiGraphics;)V", at = @At(value = "INVOKE",
-        target = "Lnet/minecraft/util/profiling/ProfilerFiller;push(Ljava/lang/String;)V"))
-    private void logProfilePushes(ProfilerFiller instance, String name) {
-        currentProfiler.push(name);
-        instance.push(name);
-    }
-
-    @Redirect(method = "renderPlayerHealth(Lnet/minecraft/client/gui/GuiGraphics;)V", at = @At(value = "INVOKE",
-        target = "Lnet/minecraft/util/profiling/ProfilerFiller;popPush(Ljava/lang/String;)V"))
-    private void logProfilePopPushes(ProfilerFiller instance, String name) {
-        currentProfiler.pop();
-        currentProfiler.push(name);
-        instance.pop();
-        instance.push(name);
-    }
-
-    @Redirect(method = "renderPlayerHealth(Lnet/minecraft/client/gui/GuiGraphics;)V", at = @At(value = "INVOKE",
-        target = "Lnet/minecraft/util/profiling/ProfilerFiller;pop()V"))
-    private void logProfilePops(ProfilerFiller instance) {
-        currentProfiler.pop();
-        instance.pop();
-    }
-
+    // Armor and Air Level
     @Redirect(method = "renderPlayerHealth(Lnet/minecraft/client/gui/GuiGraphics;)V", at = @At(value = "INVOKE",
         target = "Lnet/minecraft/client/gui/GuiGraphics;blit(Lnet/minecraft/resources/ResourceLocation;IIIIII)V"))
     private void redirectBlit(GuiGraphics instance, ResourceLocation atlasLocation, int x, int y, int uOffset, int vOffset, int uWidth, int vHeight) {
@@ -85,10 +108,10 @@ public abstract class HudModifier {
             return;
         }
 
-        if (this.currentProfiler.peek().equals("armor")) {
-            instance.blit(atlasLocation, x + 101, y - 7 - yOffset(), uOffset, vOffset, uWidth, vHeight);
-        } else if (this.currentProfiler.peek().equals("air")) {
-            instance.blit(atlasLocation, x - 1, y - 26 + yOffset(), uOffset, vOffset, uWidth, vHeight);
+        if (this.currentProfiler.peek().equals("armor")) { // Armor move right and down
+            instance.blit(atlasLocation, x + armorW, y - armorH - yOffset(), uOffset, vOffset, uWidth, vHeight);
+        } else if (this.currentProfiler.peek().equals("air")) { // Air level move left and
+            instance.blit(atlasLocation, x - airLvlW, y - airLvlH + yOffset(), uOffset, vOffset, uWidth, vHeight);
         } else {
             instance.blit(atlasLocation, x, y, uOffset, vOffset, uWidth, vHeight);
         }
@@ -100,25 +123,15 @@ public abstract class HudModifier {
         if (inAlpha()) ci.cancel();
     }
 
-    // Player HP - move down, move down with NT, account for horse bar
-    // Higher value = higher position
-    @ModifyVariable(method = "renderHearts", at = @At("HEAD"), ordinal = 1, argsOnly = true)
-    private int moveHeartsDown(int y) {
-        if (!inAlpha()) return y;
-        if (Platform.isModLoaded("nostalgic_tweaks")) {
-            return y + 7 - yOffset();
-        } else {
-            return y - 17 - yOffset();
-        }
-    }
-
+    /// Wait what does this do now? I know it's supposed to move the bubbles but.. We do that earlier
+    /// Dev Note: Appels pls look into this
+    /// Dev Note: It moves the air bubbles and HP hella high if removed
     @ModifyVariable(method = "renderPlayerHealth", at = @At("STORE"), ordinal = 4)
     private int modifyBubblesX(int original) {
         if (!inAlpha()) return original;
 
         return original - 100;
     }
-
     @ModifyVariable(method = "renderPlayerHealth", at = @At("STORE"), ordinal = 5)
     private int modifyBubblesY(int original) {
         if (!inAlpha()) return original;
@@ -137,9 +150,9 @@ public abstract class HudModifier {
 
         int base = this.screenHeight - 39 - yOffset();
         if (this.minecraft.player.getArmorValue() > 0) {
-            return base - 2;
+            return base - mountHpH;
         } else {
-            return base + 7;
+            return base + mountHpH_na;
         }
     }
 }
