@@ -1,4 +1,6 @@
 # Left Forgotten - 1.0 Beta
+- This version still has some bugs! I released it early just because I've seen other people work on the same mod concept :'3
+
 This took about 2 weeks to make, but we're finally here. Somewhat.
 Hello👋 to everyone who's been following the progress of this project on my Twitter and Discord :D
 
@@ -66,6 +68,7 @@ Hello👋 to everyone who's been following the progress of this project on my Tw
   - Attempt to die or fly up to y196 in-dimension to get back
 - Old HUD
   - Only in the "Alpha Minecraft" dimension
+  - BUG: Currently some elements may be off-set from the positions they should be at!
 - No hunger, no sprint
   - Only in the "Alpha Minecraft" dimension
   - Heal by just right-clicking certain food items

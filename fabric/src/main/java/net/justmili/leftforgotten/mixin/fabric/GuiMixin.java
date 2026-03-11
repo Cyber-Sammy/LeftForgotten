@@ -56,8 +56,7 @@ public abstract class GuiMixin {
         }
     }
 
-    // Player Air - move right
-    /// To fix
+    // Player Air - move left
     @ModifyVariable(method = "renderPlayerHealth", at = @At("STORE"), ordinal = 4)
     private int modifyBubblesX(int original) {
         if (this.minecraft.player.level().dimension() != LFResources.Levels.ALPHA_MINECRAFT) {return original;}
@@ -66,6 +65,7 @@ public abstract class GuiMixin {
 
     // Player Air - move down, move down with NT
     /// To fix
+    /// WHY DOES IT MOVE THE PLAYER HEALTH AND BUBBLES??
     @ModifyVariable(method = "renderPlayerHealth", at = @At("STORE"), ordinal = 5)
     private int modifyBubblesY(int original) {
         if (this.minecraft.player.level().dimension() != LFResources.Levels.ALPHA_MINECRAFT) {return original;}
