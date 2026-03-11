@@ -6,13 +6,13 @@ import net.justmili.leftforgotten.init.LFResources;
 import net.minecraft.client.Minecraft;
 import net.minecraft.client.gui.GuiGraphics;
 import net.minecraft.resources.ResourceLocation;
-import net.minecraft.world.entity.animal.horse.AbstractHorse;
 import net.minecraft.world.entity.player.Player;
+import net.minecraft.world.entity.animal.horse.AbstractHorse;
 import net.minecraftforge.api.distmarker.Dist;
 import net.minecraftforge.client.event.RenderGuiOverlayEvent;
 import net.minecraftforge.client.gui.overlay.ForgeGui;
-import net.minecraftforge.client.gui.overlay.IGuiOverlay;
 import net.minecraftforge.client.gui.overlay.NamedGuiOverlay;
+import net.minecraftforge.client.gui.overlay.IGuiOverlay;
 import net.minecraftforge.client.gui.overlay.VanillaGuiOverlay;
 import net.minecraftforge.eventbus.api.SubscribeEvent;
 import net.minecraftforge.fml.common.Mod;
@@ -31,9 +31,7 @@ public class HudModifier {
         GuiGraphics gui = event.getGuiGraphics();
         float pt = event.getPartialTick();
 
-        boolean inAlpha = player.level().dimension().equals(LFResources.Levels.ALPHA_MINECRAFT);
-
-        if (inAlpha) {
+        if (player.level().dimension().equals(LFResources.Levels.ALPHA_MINECRAFT)) {
             int w = mc.getWindow().getGuiScaledWidth();
             int h = mc.getWindow().getGuiScaledHeight();
 
@@ -41,7 +39,7 @@ public class HudModifier {
             int horseBar = 7;
             int armorW = 202;
             int armorH = 6;
-            int playerHpH = 16;
+            int playerHpH = 6;
             int airLvlW = 202;
             int airLvlH = 3;
             int mountHpH = 3;
@@ -75,7 +73,7 @@ public class HudModifier {
             }
         }
         if (Platform.isModLoaded("nostalgic_tweaks")) {
-            if (inAlpha) {
+            if (player.level().dimension().equals(LFResources.Levels.ALPHA_MINECRAFT)) {
                 String ns = id.getNamespace();
                 String path = id.getPath().toLowerCase();
                 if (!("nostalgic_tweaks".equals(ns))) return;

@@ -44,14 +44,14 @@ public abstract class GuiMixin {
         if (Platform.isModLoaded("nostalgic_tweaks")) {
             return y +7 ;
         } else {
-            return y -12;
+            return y - 11;
         }
     }
 
     @ModifyVariable(method = "renderPlayerHealth", at = @At("STORE"), ordinal = 4)
     private int modifyBubblesX(int original) {
         if (this.minecraft.player.level().dimension() != LFResources.Levels.ALPHA_MINECRAFT) {return original;}
-        return original - 101; // shift it down 20 px, or whatever you want
+        return original - 100; // shift it down 20 px, or whatever you want
     }
 
     @ModifyVariable(method = "renderPlayerHealth", at = @At("STORE"), ordinal = 5)
@@ -60,7 +60,7 @@ public abstract class GuiMixin {
         if (Platform.isModLoaded("nostalgic_tweaks")) {
             return original;
         } else {
-            return original + 20;  // shift it down 20 px, or whatever you want
+            return original + 19;  // shift it down 20 px, or whatever you want
         }
     }
 

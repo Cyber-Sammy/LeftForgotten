@@ -17,10 +17,10 @@ public class LFItems {
     public static final DeferredRegister<Item> REGISTRY = DeferredRegister.create(LeftForgotten.MOD_ID, Registries.ITEM);
 
     public static final RegistrySupplier<Item> BRITTLE_BEDROCK = block(LFBlocks.BRITTLE_BEDROCK);
-    public static final RegistrySupplier<Item> RED_FLOWER = block(LFBlocks.RED_FLOWER);
-    public static final RegistrySupplier<Item> YELLOW_FLOWER = block(LFBlocks.YELLOW_FLOWER);
     public static final RegistrySupplier<Item> GRASS_BLOCK = block(LFBlocks.GRASS_BLOCK);
     public static final RegistrySupplier<Item> DIRT = block(LFBlocks.DIRT);
+    public static final RegistrySupplier<Item> RED_FLOWER = block(LFBlocks.RED_FLOWER);
+    public static final RegistrySupplier<Item> YELLOW_FLOWER = block(LFBlocks.YELLOW_FLOWER);
     public static final RegistrySupplier<Item> FARMLAND = block(LFBlocks.FARMLAND);
     public static final RegistrySupplier<Item> STONE = block(LFBlocks.STONE);
     public static final RegistrySupplier<Item> STONE_STAIRS = block(LFBlocks.STONE_STAIRS);
@@ -67,10 +67,10 @@ public class LFItems {
     public static final RegistrySupplier<Item> IRON_DOOR = doubleBlock(LFBlocks.IRON_DOOR);
     public static final RegistrySupplier<Item> GLASS_PANE = block(LFBlocks.GLASS_PANE);
 
-    public static final RegistrySupplier<Item> FEATURE_VOID = block(LFBlocks.FEATURE_VOID);
-
     public static final RegistrySupplier<Item> CLAY_BALL = register("clay_ball", ClayBall::new);
     public static final RegistrySupplier<Item> BRICK = register("brick", Brick::new);
+
+    public static final RegistrySupplier<Item> FEATURE_VOID = block(LFBlocks.FEATURE_VOID);
 
     private static <T extends Item> RegistrySupplier<T> register(String name, Function<Item.Properties, T> itemBuilder) {
         //var key = ResourceKey.create(Registries.ITEM, LeftForgotten.asResource(name)); // not needed right now

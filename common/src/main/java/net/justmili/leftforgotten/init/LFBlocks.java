@@ -28,10 +28,10 @@ public class LFBlocks {
     public static final DeferredRegister<Block> REGISTRY = DeferredRegister.create(LeftForgotten.MOD_ID, Registries.BLOCK);
 
     public static final RegistrySupplier<Block> BRITTLE_BEDROCK = REGISTRY.register("brittle_bedrock", BrittleBedrock::new);
-    public static final RegistrySupplier<Block> RED_FLOWER = REGISTRY.register("red_flower", RedFlower::new);
-    public static final RegistrySupplier<Block> YELLOW_FLOWER = REGISTRY.register("yellow_flower", YellowFlower::new);
     public static final RegistrySupplier<Block> GRASS_BLOCK = REGISTRY.register("grass_block", GrassBlock::new);
     public static final RegistrySupplier<Block> DIRT = REGISTRY.register("dirt", Dirt::new);
+    public static final RegistrySupplier<Block> RED_FLOWER = REGISTRY.register("red_flower", RedFlower::new);
+    public static final RegistrySupplier<Block> YELLOW_FLOWER = REGISTRY.register("yellow_flower", YellowFlower::new);
     public static final RegistrySupplier<Block> FARMLAND = REGISTRY.register("farmland", Farmland::new);
     public static final RegistrySupplier<Block> WOOD = REGISTRY.register("wood", Wood::new);
     public static final RegistrySupplier<Block> WOOD_6_SIDED = REGISTRY.register("wood_6_sided", Wood6Sided::new);
