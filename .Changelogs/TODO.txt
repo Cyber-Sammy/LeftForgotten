@@ -3,14 +3,14 @@ TODO:
 
 Forge:
 - HP - Fixed
-- Armor - to fix
+- Armor - to fix (height)
 - Mount HP, horse bar - to fix
 - Mount HP, no bar - didn't check yet
 - Air lvl - didn't check yet
 
 Fabric:
 - HP - Fixed
-- Armor - to fix
+- Armor - to fix (height)
 - Mount HP, horse bar - didn't check yet
 - Mount HP, no bar - didn't check yet
-- Air lvl - didn't check yet
+- Air lvl - To fix (height)
