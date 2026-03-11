@@ -38,10 +38,10 @@ public abstract class HudModifier {
     @Unique private static final int armorW = 101;     // Armor X offset
     @Unique private static final int armorH = 17;      // Armor Y offset
     @Unique private static final int playerHpH = 7;    // Player HP Y offset
-    @Unique private static final int playerHpH_nt = 7; /// What's this for again?
+    @Unique private static final int playerHpH_nt = 7; /// why the hell do we need the NT thing? NT Stamina should be hidden so nothing gets moved
     @Unique private static final int airLvlW = 101;    // Air level X offset
     @Unique private static final int airLvlH = 2;      // Air level Y offset
-    @Unique private static final int mountHpH_na = 7;  // Mount HP Y offset with NT, also why the hell do we need the NT thing? NT Stamina should be hidden
+    @Unique private static final int mountHpH_na = 7;  // Mount HP Y offset with Armor
     @Unique private static final int mountHpH = 2;     // Mount HP Y offset
     // Account for horse bar, Fabric doesn't need to account for fullscreen
     private int yOffset() {
