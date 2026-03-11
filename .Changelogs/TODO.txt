@@ -5,10 +5,17 @@ Forge:
 All fixed
 
 Fabric:
-- HP - Fixed
-- Armor - to fix (height)
-  - On mount horse (bar)
-  - On mount pig (no bar)
-- Mount HP, horse bar - didn't check yet
+- On fabric things don't have to account for fullscreen offset!
+- HP - To fix
+  - Doesn't shift with horse bar appearing (saddle on/off)
+  - Besides the bar thing, it's good
+- Armor - To fix
+  - Armor has to be on the right side
+  - Has to be placed higher
+- Mount HP, horse bar - To fix
+  - Doesn't shift with horse bar appearing (saddle on/off)
+  - Doesn't shift up with armor on
 - Mount HP, no bar - didn't check yet
+  - Doesn't shift up with armor on
 - Air lvl - To fix (height)
+  - Needs to be higher
