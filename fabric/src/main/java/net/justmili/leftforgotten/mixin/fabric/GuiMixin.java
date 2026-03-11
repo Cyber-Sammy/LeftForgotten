@@ -5,70 +5,123 @@ import com.llamalad7.mixinextras.injector.wrapoperation.WrapOperation;
 import dev.architectury.platform.Platform;
 import net.justmili.leftforgotten.client.VersionOverlay;
 import net.justmili.leftforgotten.init.LFResources;
+import net.minecraft.resources.ResourceLocation;
+import net.minecraft.util.profiling.ProfilerFiller;
 import net.minecraft.client.Minecraft;
 import net.minecraft.client.gui.Font;
 import net.minecraft.client.gui.Gui;
 import net.minecraft.client.gui.GuiGraphics;
 import net.minecraft.network.chat.Component;
 import net.minecraft.world.entity.LivingEntity;
+import net.minecraft.world.entity.animal.horse.AbstractHorse;
+import net.minecraft.world.entity.player.Player;
 import org.spongepowered.asm.mixin.Final;
 import org.spongepowered.asm.mixin.Mixin;
 import org.spongepowered.asm.mixin.Shadow;
 import org.spongepowered.asm.mixin.injection.At;
 import org.spongepowered.asm.mixin.injection.Inject;
 import org.spongepowered.asm.mixin.injection.ModifyVariable;
+import org.spongepowered.asm.mixin.injection.Redirect;
 import org.spongepowered.asm.mixin.injection.callback.CallbackInfo;
+
+import java.util.Stack;
 
 @Mixin(Gui.class)
 public abstract class GuiMixin {
+    private boolean inAlpha() {
+        return this.minecraft.player != null && this.minecraft.player.level().dimension() == LFResources.Levels.ALPHA_MINECRAFT;
+    }
+
+    private int yOffset() {
+        Player player = this.minecraft.player;
+        int horseBar = (player.getVehicle() instanceof AbstractHorse horse && horse.isSaddled()) ? 7 : 0;
+        return horseBar - 1;
+    }
+
     @Shadow @Final private Minecraft minecraft;
     @Shadow private int screenWidth;
     @Shadow protected abstract int getVehicleMaxHearts(LivingEntity vehicle);
 
-    /*
-    Replication of Minecraft Alpha's HUD
-     */
-    // Mount HP move
     @WrapOperation(method = "renderPlayerHealth(Lnet/minecraft/client/gui/GuiGraphics;)V", at = @At(value = "INVOKE",
         target = "Lnet/minecraft/client/gui/Gui;getVehicleMaxHearts(Lnet/minecraft/world/entity/LivingEntity;)I"))
     private int wrapVehicleHearts(Gui instance, LivingEntity vehicle, Operation<Integer> original) {
-        if (this.minecraft.player.level().dimension() != LFResources.Levels.ALPHA_MINECRAFT) {return this.getVehicleMaxHearts(vehicle);}
+        if (this.minecraft.player.level().dimension() != LFResources.Levels.ALPHA_MINECRAFT) {
+            return this.getVehicleMaxHearts(vehicle);
+        }
         return -1;
     }
 
-    // EXP bar disable
-    @Inject(at = @At("HEAD"), method = "renderExperienceBar", cancellable = true)
-    private void renderExperienceBar(CallbackInfo ci) {
-        if (minecraft.player.level().dimension() == LFResources.Levels.ALPHA_MINECRAFT) {
-            ci.cancel();
+    private Stack<String> currentProfiler = new Stack<>();
+
+    @Redirect(method = "renderPlayerHealth(Lnet/minecraft/client/gui/GuiGraphics;)V", at = @At(value = "INVOKE",
+        target = "Lnet/minecraft/util/profiling/ProfilerFiller;push(Ljava/lang/String;)V"))
+    private void logProfilePushes(ProfilerFiller instance, String name) {
+        currentProfiler.push(name);
+        instance.push(name);
+    }
+
+    @Redirect(method = "renderPlayerHealth(Lnet/minecraft/client/gui/GuiGraphics;)V", at = @At(value = "INVOKE",
+        target = "Lnet/minecraft/util/profiling/ProfilerFiller;popPush(Ljava/lang/String;)V"))
+    private void logProfilePopPushes(ProfilerFiller instance, String name) {
+        currentProfiler.pop();
+        currentProfiler.push(name);
+        instance.pop();
+        instance.push(name);
+    }
+
+    @Redirect(method = "renderPlayerHealth(Lnet/minecraft/client/gui/GuiGraphics;)V", at = @At(value = "INVOKE",
+        target = "Lnet/minecraft/util/profiling/ProfilerFiller;pop()V"))
+    private void logProfilePops(ProfilerFiller instance) {
+        currentProfiler.pop();
+        instance.pop();
+    }
+
+    /**
+     * Redirects every blit call inside renderFood so we can shift x and y.
+     */
+    @Redirect(method = "renderPlayerHealth(Lnet/minecraft/client/gui/GuiGraphics;)V", at = @At(value = "INVOKE",
+        target = "Lnet/minecraft/client/gui/GuiGraphics;blit(Lnet/minecraft/resources/ResourceLocation;IIIIII)V"))
+    private void redirectBlit(GuiGraphics instance, ResourceLocation atlasLocation, int x, int y, int uOffset, int vOffset, int uWidth, int vHeight) {
+        if (!inAlpha()) {
+            instance.blit(atlasLocation, x, y, uOffset, vOffset, uWidth, vHeight);
+            return;
+        }
+
+        if (this.currentProfiler.peek().equals("armor")) {
+            instance.blit(atlasLocation, x + 101, y - 7, uOffset, vOffset, uWidth, vHeight);
+        } else if (this.currentProfiler.peek().equals("air")) {
+            instance.blit(atlasLocation, x - 1, y - 26, uOffset, vOffset, uWidth, vHeight);
+        } else {
+            instance.blit(atlasLocation, x, y, uOffset, vOffset, uWidth, vHeight);
         }
     }
 
-    // Player HP - move down, move down with NT
-    // Higher value = higher position
+    @Inject(at = @At("HEAD"), method = "renderExperienceBar", cancellable = true)
+    private void renderExperienceBar(CallbackInfo ci) {
+        if (!inAlpha()) ci.cancel();
+    }
+
     @ModifyVariable(method = "renderHearts", at = @At("HEAD"), ordinal = 1, argsOnly = true)
     private int moveHeartsDown(int y) {
-        if (this.minecraft.player.level().dimension() != LFResources.Levels.ALPHA_MINECRAFT) {return y;}
+        if (!inAlpha()) return y;
         if (Platform.isModLoaded("nostalgic_tweaks")) {
-            return y +7 ;
+            return y + 7;
         } else {
             return y - 17;
         }
     }
 
-    // Player Air - move left
     @ModifyVariable(method = "renderPlayerHealth", at = @At("STORE"), ordinal = 4)
     private int modifyBubblesX(int original) {
-        if (this.minecraft.player.level().dimension() != LFResources.Levels.ALPHA_MINECRAFT) {return original;}
+        if (!inAlpha()) return original;
+
         return original - 100;
     }
 
-    // Player Air - move down, move down with NT
-    /// To fix
-    /// WHY DOES IT MOVE THE PLAYER HEALTH AND BUBBLES??
     @ModifyVariable(method = "renderPlayerHealth", at = @At("STORE"), ordinal = 5)
     private int modifyBubblesY(int original) {
-        if (this.minecraft.player.level().dimension() != LFResources.Levels.ALPHA_MINECRAFT) {return original;}
+        if (!inAlpha()) return original;
+
         if (Platform.isModLoaded("nostalgic_tweaks")) {
             return original;
         } else {
@@ -82,8 +135,7 @@ public abstract class GuiMixin {
     @Shadow() public abstract Font getFont();
     @Inject(at = @At("TAIL"), method = "render")
     public void render(GuiGraphics guiGraphics, float partialTick, CallbackInfo ci) {
-        if (this.minecraft.player == null) return;
-        if (this.minecraft.player.level().dimension() != LFResources.Levels.ALPHA_MINECRAFT) return;
+        if (!inAlpha()) return;
         this.minecraft.getProfiler().push("demo");
         Component component = Component.literal(VersionOverlay.currentText);
 

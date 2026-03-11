@@ -1,5 +1,5 @@
 TODO:
-- Fix HudModifier on Fabric and Forge because things are very not in the right places (mainly heights)
+- Fix GuiMixin (HudModifier) on Fabric
 
 Forge:
 All fixed
@@ -8,14 +8,12 @@ Fabric:
 - On fabric things don't have to account for fullscreen offset!
 - HP - To fix
   - Doesn't shift with horse bar appearing (saddle on/off)
-  - Besides the bar thing, it's good
 - Armor - To fix
-  - Armor has to be on the right side
-  - Has to be placed higher
+  - Doesn't shift with horse bar appearing (saddle on/off)
 - Mount HP, horse bar - To fix
   - Doesn't shift with horse bar appearing (saddle on/off)
   - Doesn't shift up with armor on
-- Mount HP, no bar - didn't check yet
+- Mount HP, no bar - To fix
   - Doesn't shift up with armor on
 - Air lvl - To fix (height)
-  - Needs to be higher
+  - Doesn't shift with horse bar appearing (saddle on/off)

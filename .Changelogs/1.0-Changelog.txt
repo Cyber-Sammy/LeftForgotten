@@ -88,6 +88,9 @@ Hello👋 to everyone who's been following the progress of this project on my Tw
 
 <hr>
 
+## Upcoming - 1.0.1 Release
+- Fixing all bugs I can find
+
 ## Upcoming - 1.1 Release
 - "Old player activity" structures
   - Mainly huts, houses and stuff
@@ -96,3 +99,13 @@ Hello👋 to everyone who's been following the progress of this project on my Tw
 
 ## Upcoming - 1.2 Release
 - Switch to use MysticLib once it releases
+- Config to enable/disable the fog in the dimension
+- Support for:
+  - 1.20.1 Fabric & Forge
+  - 1.20.4 Fabric & Forge
+  - 1.21.1 Fabric & NeoForge
+  - 1.21.4 Fabric & NeoForge
+  - 1.21.5 Fabric & NeoForge
+  - (1.21.6-)1.21.8 Fabric & NeoForge
+  - (1.21.9-)1.21.10 Fabric & NeoForge
+  - 1.21.11 Fabric & NeoForge
