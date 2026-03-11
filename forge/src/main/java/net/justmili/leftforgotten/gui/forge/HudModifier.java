@@ -36,14 +36,16 @@ public class HudModifier {
             int h = mc.getWindow().getGuiScaledHeight();
 
             // Defined heights and weights
-            int fullscreenOffset = 1;
-            int horseBar = 7;
+            int playerHpH = 6;
             int armorW = 202;
             int armorH = 16;
-            int playerHpH = 6;
             int airLvlW = 202;
             int airLvlH = 3;
+            int horseBar = 7;
             int mountHpH = 3;
+            int mountHpW = 3;
+            int mountHpH_na = 7;
+            int fullscreenOffset = 1;
 
             // Account for horse bar and fullscreen
             int horseBarOffset = player.getVehicle() instanceof AbstractHorse horse && horse.isSaddled() ? horseBar : 0;
@@ -73,10 +75,10 @@ public class HudModifier {
                 event.setCanceled(true);
                 if (player.getArmorValue() > 0) {
                     //Armor on
-                    overlay.render((ForgeGui) mc.gui, gui, pt, w - 2, h - mountHpH - yOffset);
+                    overlay.render((ForgeGui) mc.gui, gui, pt, w - mountHpW, h - mountHpH - yOffset);
                 } else {
                     //Armor off
-                    overlay.render((ForgeGui) mc.gui, gui, pt, w - 2, h - mountHpH - yOffset + 7);
+                    overlay.render((ForgeGui) mc.gui, gui, pt, w - mountHpW, h - mountHpH - yOffset + mountHpH_na);
                 }
             }
         }
