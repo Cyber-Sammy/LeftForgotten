@@ -33,16 +33,16 @@ public abstract class HudModifier {
         return this.minecraft.player != null && this.minecraft.player.level().dimension() == LFResources.Levels.ALPHA_MINECRAFT;
     }
 
-    // Defined heights and wights
-    @Unique private static final int horseBar = 7;
-    @Unique private static final int armorW = 101;
-    @Unique private static final int armorH = 7;
-    @Unique private static final int playerHpH = 17;
-    @Unique private static final int playerHpH_nt = 7;
-    @Unique private static final int airLvlW = 1;
-    @Unique private static final int airLvlH = 26;
-    @Unique private static final int mountHpH_na = 7;
-    @Unique private static final int mountHpH = 2;
+    // Defined heights and weights
+    @Unique private static final int horseBar = 7;     // Horse bar
+    @Unique private static final int armorW = 101;     // Armor X offset
+    @Unique private static final int armorH = 17;      // Armor Y offset
+    @Unique private static final int playerHpH = 7;    // Player HP Y offset
+    @Unique private static final int playerHpH_nt = 7; /// What's this for again?
+    @Unique private static final int airLvlW = 101;    // Air level X offset
+    @Unique private static final int airLvlH = 2;      // Air level Y offset
+    @Unique private static final int mountHpH_na = 7;  // Mount HP Y offset with NT, also why the hell do we need the NT thing? NT Stamina should be hidden
+    @Unique private static final int mountHpH = 2;     // Mount HP Y offset
     // Account for horse bar, Fabric doesn't need to account for fullscreen
     private int yOffset() {
         Player player = this.minecraft.player;
@@ -85,7 +85,7 @@ public abstract class HudModifier {
         if (Platform.isModLoaded("nostalgic_tweaks")) {
             return y + playerHpH_nt - yOffset();
         } else {
-            return y - playerHpH - yOffset();
+            return y + playerHpH - yOffset();
         }
     }
 
@@ -109,7 +109,7 @@ public abstract class HudModifier {
         }
 
         if (this.currentProfiler.peek().equals("armor")) { // Armor move right and down
-            instance.blit(atlasLocation, x + armorW, y - armorH - yOffset(), uOffset, vOffset, uWidth, vHeight);
+            instance.blit(atlasLocation, x + armorW, y + armorH - yOffset(), uOffset, vOffset, uWidth, vHeight);
         } else if (this.currentProfiler.peek().equals("air")) { // Air level move left and
             instance.blit(atlasLocation, x - airLvlW, y - airLvlH + yOffset(), uOffset, vOffset, uWidth, vHeight);
         } else {
@@ -121,26 +121,6 @@ public abstract class HudModifier {
     @Inject(at = @At("HEAD"), method = "renderExperienceBar", cancellable = true)
     private void renderExperienceBar(CallbackInfo ci) {
         if (inAlpha()) ci.cancel();
-    }
-
-    /// Wait what does this do now? I know it's supposed to move the bubbles but.. We do that earlier
-    /// Dev Note: Appels pls look into this
-    /// Dev Note: It moves the air bubbles and HP hella high if removed
-    @ModifyVariable(method = "renderPlayerHealth", at = @At("STORE"), ordinal = 4)
-    private int modifyBubblesX(int original) {
-        if (!inAlpha()) return original;
-
-        return original - 100;
-    }
-    @ModifyVariable(method = "renderPlayerHealth", at = @At("STORE"), ordinal = 5)
-    private int modifyBubblesY(int original) {
-        if (!inAlpha()) return original;
-
-        if (Platform.isModLoaded("nostalgic_tweaks")) {
-            return original;
-        } else {
-            return original + 24;
-        }
     }
 
     // Mount HP move, account for armor and horse bar

@@ -35,7 +35,7 @@ public class HudModifier {
             int w = mc.getWindow().getGuiScaledWidth();
             int h = mc.getWindow().getGuiScaledHeight();
 
-            // Defined heights and wights
+            // Defined heights and weights
             int fullscreenOffset = 1;
             int horseBar = 7;
             int armorW = 202;
