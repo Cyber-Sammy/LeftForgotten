@@ -27,7 +27,7 @@ import org.spongepowered.asm.mixin.injection.callback.CallbackInfo;
 import java.util.Stack;
 
 @Mixin(Gui.class)
-public abstract class GuiMixin {
+public abstract class HudModifier {
     private boolean inAlpha() {
         return this.minecraft.player != null && this.minecraft.player.level().dimension() == LFResources.Levels.ALPHA_MINECRAFT;
     }
@@ -35,11 +35,12 @@ public abstract class GuiMixin {
     private int yOffset() {
         Player player = this.minecraft.player;
         int horseBar = (player.getVehicle() instanceof AbstractHorse horse && horse.isSaddled()) ? 7 : 0;
-        return horseBar - 1;
+        return horseBar;
     }
 
     @Shadow @Final private Minecraft minecraft;
     @Shadow private int screenWidth;
+    @Shadow private int screenHeight;
     @Shadow protected abstract int getVehicleMaxHearts(LivingEntity vehicle);
 
     @WrapOperation(method = "renderPlayerHealth(Lnet/minecraft/client/gui/GuiGraphics;)V", at = @At(value = "INVOKE",
@@ -76,9 +77,6 @@ public abstract class GuiMixin {
         instance.pop();
     }
 
-    /**
-     * Redirects every blit call inside renderFood so we can shift x and y.
-     */
     @Redirect(method = "renderPlayerHealth(Lnet/minecraft/client/gui/GuiGraphics;)V", at = @At(value = "INVOKE",
         target = "Lnet/minecraft/client/gui/GuiGraphics;blit(Lnet/minecraft/resources/ResourceLocation;IIIIII)V"))
     private void redirectBlit(GuiGraphics instance, ResourceLocation atlasLocation, int x, int y, int uOffset, int vOffset, int uWidth, int vHeight) {
@@ -88,26 +86,29 @@ public abstract class GuiMixin {
         }
 
         if (this.currentProfiler.peek().equals("armor")) {
-            instance.blit(atlasLocation, x + 101, y - 7, uOffset, vOffset, uWidth, vHeight);
+            instance.blit(atlasLocation, x + 101, y - 7 - yOffset(), uOffset, vOffset, uWidth, vHeight);
         } else if (this.currentProfiler.peek().equals("air")) {
-            instance.blit(atlasLocation, x - 1, y - 26, uOffset, vOffset, uWidth, vHeight);
+            instance.blit(atlasLocation, x - 1, y - 26 + yOffset(), uOffset, vOffset, uWidth, vHeight);
         } else {
             instance.blit(atlasLocation, x, y, uOffset, vOffset, uWidth, vHeight);
         }
     }
 
+    // EXP bar disable
     @Inject(at = @At("HEAD"), method = "renderExperienceBar", cancellable = true)
     private void renderExperienceBar(CallbackInfo ci) {
-        if (!inAlpha()) ci.cancel();
+        if (inAlpha()) ci.cancel();
     }
 
+    // Player HP - move down, move down with NT, account for horse bar
+    // Higher value = higher position
     @ModifyVariable(method = "renderHearts", at = @At("HEAD"), ordinal = 1, argsOnly = true)
     private int moveHeartsDown(int y) {
         if (!inAlpha()) return y;
         if (Platform.isModLoaded("nostalgic_tweaks")) {
-            return y + 7;
+            return y + 7 - yOffset();
         } else {
-            return y - 17;
+            return y - 17 - yOffset();
         }
     }
 
@@ -129,36 +130,16 @@ public abstract class GuiMixin {
         }
     }
 
-    /*
-    Version Overlay, Fabric renderer
-     */
-    @Shadow() public abstract Font getFont();
-    @Inject(at = @At("TAIL"), method = "render")
-    public void render(GuiGraphics guiGraphics, float partialTick, CallbackInfo ci) {
-        if (!inAlpha()) return;
-        this.minecraft.getProfiler().push("demo");
-        Component component = Component.literal(VersionOverlay.currentText);
+    // Mount HP move, account for armor and horse bar
+    @ModifyVariable(method = "renderVehicleHealth", at = @At("STORE"), ordinal = 2)
+    private int moveMountHealthY(int y) {
+        if (!inAlpha()) return y;
 
-        final int fontSize = 32;
-        float guiScaleFactor = (float) this.minecraft.getWindow().getScreenWidth() / (float) this.minecraft.getWindow().getGuiScaledWidth();
-        float baseFontHeight = (float) this.minecraft.font.lineHeight;
-        float userScale = fontSize / baseFontHeight;
-
-        int i = this.getFont().width(component);
-        int x = 6;
-        int y = 6;
-        int textColor = 0xFFFFFF;
-        int textShadowColor = 0xFF3F3F3F;
-        int drawX = Math.round(x / userScale);
-        int drawY = Math.round(y / userScale);
-
-        guiGraphics.pose().pushPose();
-        guiGraphics.pose().scale(1f / guiScaleFactor, 1f / guiScaleFactor, 1f);
-        guiGraphics.pose().scale(userScale, userScale, 1f);
-
-        guiGraphics.drawString(minecraft.font, component, drawX + 1, drawY + 1, textShadowColor, false);
-        guiGraphics.drawString(minecraft.font, component, drawX, drawY, textColor, false);
-
-        guiGraphics.pose().popPose();
+        int base = this.screenHeight - 39 - yOffset();
+        if (this.minecraft.player.getArmorValue() > 0) {
+            return base - 2;
+        } else {
+            return base + 7;
+        }
     }
 }

@@ -1,19 +1,8 @@
 TODO:
-- Fix GuiMixin (HudModifier) on Fabric
+Nothing
 
 Forge:
 All fixed
 
 Fabric:
-- On fabric things don't have to account for fullscreen offset!
-- HP - To fix
-  - Doesn't shift with horse bar appearing (saddle on/off)
-- Armor - To fix
-  - Doesn't shift with horse bar appearing (saddle on/off)
-- Mount HP, horse bar - To fix
-  - Doesn't shift with horse bar appearing (saddle on/off)
-  - Doesn't shift up with armor on
-- Mount HP, no bar - To fix
-  - Doesn't shift up with armor on
-- Air lvl - To fix (height)
-  - Doesn't shift with horse bar appearing (saddle on/off)
+All Fixed
