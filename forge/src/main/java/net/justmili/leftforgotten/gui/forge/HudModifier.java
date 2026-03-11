@@ -35,6 +35,7 @@ public class HudModifier {
             int w = mc.getWindow().getGuiScaledWidth();
             int h = mc.getWindow().getGuiScaledHeight();
 
+            // Defined heights and wights
             int fullscreenOffset = 1;
             int horseBar = 7;
             int armorW = 202;
@@ -44,23 +45,30 @@ public class HudModifier {
             int airLvlH = 3;
             int mountHpH = 3;
 
+            // Account for horse bar and fullscreen
             int horseBarOffset = player.getVehicle() instanceof AbstractHorse horse && horse.isSaddled() ? horseBar : 0;
             int yOffset = horseBarOffset - fullscreenOffset;
 
+            // Food disable
             if (id.equals(VanillaGuiOverlay.FOOD_LEVEL.id())) event.setCanceled(true);
+            // Experience disable
             if (id.equals(VanillaGuiOverlay.EXPERIENCE_BAR.id())) event.setCanceled(true);
+            // Armor move down
             if (id.equals(VanillaGuiOverlay.ARMOR_LEVEL.id())) {
                 event.setCanceled(true);
                 overlay.render((ForgeGui) mc.gui, gui, pt, w + armorW, h + armorH - yOffset);
             }
+            // Player HP move down
             if (id.equals(VanillaGuiOverlay.PLAYER_HEALTH.id())) {
                 event.setCanceled(true);
                 overlay.render((ForgeGui) mc.gui, gui, pt, w, h + playerHpH - yOffset);
             }
+            // Air lvl move right and down
             if (id.equals(VanillaGuiOverlay.AIR_LEVEL.id())) {
                 event.setCanceled(true);
                 overlay.render((ForgeGui) mc.gui, gui, pt, w - airLvlW, h - airLvlH - yOffset);
             }
+            // Mount HP move down, account for armor
             if (id.equals(VanillaGuiOverlay.MOUNT_HEALTH.id())) {
                 event.setCanceled(true);
                 if (player.getArmorValue() > 0) {
@@ -72,6 +80,7 @@ public class HudModifier {
                 }
             }
         }
+        // Get rid of NT's version overlay when in dimension
         if (Platform.isModLoaded("nostalgic_tweaks")) {
             if (player.level().dimension().equals(LFResources.Levels.ALPHA_MINECRAFT)) {
                 String ns = id.getNamespace();
