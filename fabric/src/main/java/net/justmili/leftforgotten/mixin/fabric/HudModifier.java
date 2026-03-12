@@ -23,7 +23,7 @@ import org.spongepowered.asm.mixin.injection.callback.CallbackInfo;
 
 import java.util.Stack;
 
-@Mixin(Gui.class)
+@Mixin(value = Gui.class, priority = 2500)
 public abstract class HudModifier {
     private boolean inAlpha() {
         return this.minecraft.player != null && this.minecraft.player.level().dimension() == LFResources.Levels.ALPHA_MINECRAFT;
@@ -92,11 +92,11 @@ public abstract class HudModifier {
     }
 
     // Armor and Air Level
-    @Redirect(method = "renderPlayerHealth(Lnet/minecraft/client/gui/GuiGraphics;)V", at = @At(value = "INVOKE",
+    @WrapOperation(method = "renderPlayerHealth(Lnet/minecraft/client/gui/GuiGraphics;)V", at = @At(value = "INVOKE",
         target = "Lnet/minecraft/client/gui/GuiGraphics;blit(Lnet/minecraft/resources/ResourceLocation;IIIIII)V"))
-    private void redirectBlit(GuiGraphics instance, ResourceLocation atlasLocation, int x, int y, int uOffset, int vOffset, int uWidth, int vHeight) {
+    private void redirectBlit(GuiGraphics instance, ResourceLocation atlasLocation, int x, int y, int uOffset, int vOffset, int uWidth, int vHeight, Operation<Void> original) {
         if (!inAlpha()) {
-            instance.blit(atlasLocation, x, y, uOffset, vOffset, uWidth, vHeight);
+            original.call(instance, atlasLocation, x, y, uOffset, vOffset, uWidth, vHeight);
             return;
         }
 
@@ -112,7 +112,7 @@ public abstract class HudModifier {
             int mirroredX = 2 * barEnd - 9 - x;
             instance.blit(atlasLocation, mirroredX - airLvlW, y - airLvlH + yOffset(), uOffset, vOffset, uWidth, vHeight);
         } else {
-            instance.blit(atlasLocation, x, y, uOffset, vOffset, uWidth, vHeight);
+            original.call(instance, atlasLocation, x, y, uOffset, vOffset, uWidth, vHeight);
         }
     }
 

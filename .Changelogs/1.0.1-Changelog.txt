@@ -1,8 +1,10 @@
 # Left Forgotten - 1.0.1 Release
 
-### ***BUG FIXES***
-- Fixed placement of HUD elements when in `left_forgotten:alpha_minecraft` on both Forge and Fabric
-  - + Some tweaks to make it look like actual Alpha Minecraft HUD    (WIP, Appels is working on it)
+### ***VISUAL CHANGES***
+- [Bug Fix] Fixed placement of HUD elements
+- Added `minecraft:white_Ash` particle to appear in the dimension
+
+### ***OTHER***
 - Added NBSurprise to mod credits as she should be there
 
 ### ***DEV STUFF***
