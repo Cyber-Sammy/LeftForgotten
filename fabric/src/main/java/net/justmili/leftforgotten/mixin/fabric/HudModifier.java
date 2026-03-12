@@ -2,7 +2,10 @@ package net.justmili.leftforgotten.mixin.fabric;
 
 import com.llamalad7.mixinextras.injector.wrapoperation.Operation;
 import com.llamalad7.mixinextras.injector.wrapoperation.WrapOperation;
+import com.mojang.blaze3d.systems.RenderSystem;
+import com.mojang.blaze3d.vertex.*;
 import net.justmili.leftforgotten.init.LFResources;
+import net.minecraft.client.renderer.GameRenderer;
 import net.minecraft.resources.ResourceLocation;
 import net.minecraft.util.profiling.ProfilerFiller;
 import net.minecraft.client.Minecraft;
@@ -11,6 +14,7 @@ import net.minecraft.client.gui.GuiGraphics;
 import net.minecraft.world.entity.LivingEntity;
 import net.minecraft.world.entity.animal.horse.AbstractHorse;
 import net.minecraft.world.entity.player.Player;
+import org.joml.Matrix4f;
 import org.spongepowered.asm.mixin.Final;
 import org.spongepowered.asm.mixin.Mixin;
 import org.spongepowered.asm.mixin.Shadow;
@@ -100,8 +104,33 @@ public abstract class HudModifier {
 
         if (this.currentProfiler.peek().equals("armor")) { // Armor move right and down
             // Flip the way it goes
-            // Fuck this, I'm not flipping the sprites
-            instance.blit(atlasLocation, x + armorW, y + armorH - yOffset(), uOffset, vOffset, uWidth, vHeight);
+            // Fuck this, I'm not flipping the sprites edit by eetgeenappels: YEAH WE ARE FLIPPING THE SPRITES!!!!!!
+            //instance.blit(atlasLocation, x + armorW, y + armorH - yOffset() - 20, uOffset, vOffset, uWidth, vHeight); <- old boring code
+
+            int barStart = this.screenWidth / 2 - 91;
+            int mirroredX = 2 * barStart + 72 - x;
+
+            int x1 = mirroredX + armorW;
+            int x2 = x1 + uWidth;
+            int y1 = y + armorH - yOffset();
+            int y2 = y1 + vHeight;
+            int blitOffset = 0;
+            float minU = (uOffset + (float)uWidth) / 256f;
+            float maxU = (uOffset + 0.0F) / 256f;
+            float minV = (vOffset + 0.0F) / 256f;
+            float maxV = (vOffset + (float)vHeight) / 256f;
+
+            RenderSystem.setShaderTexture(0, atlasLocation);
+            RenderSystem.setShader(GameRenderer::getPositionTexShader);
+            Matrix4f matrix4f = instance.pose().last().pose();
+            BufferBuilder bufferBuilder = Tesselator.getInstance().getBuilder();
+            bufferBuilder.begin(VertexFormat.Mode.QUADS, DefaultVertexFormat.POSITION_TEX);
+            bufferBuilder.vertex(matrix4f, (float)x1, (float)y1, (float)blitOffset).uv(minU, minV).endVertex();
+            bufferBuilder.vertex(matrix4f, (float)x1, (float)y2, (float)blitOffset).uv(minU, maxV).endVertex();
+            bufferBuilder.vertex(matrix4f, (float)x2, (float)y2, (float)blitOffset).uv(maxU, maxV).endVertex();
+            bufferBuilder.vertex(matrix4f, (float)x2, (float)y1, (float)blitOffset).uv(maxU, minV).endVertex();
+            BufferUploader.drawWithShader(bufferBuilder.end());
+
         } else if (this.currentProfiler.peek().equals("air")) { // Air level move left and down
             // Flip the way it goes
             int barEnd = this.screenWidth / 2 + 51;
