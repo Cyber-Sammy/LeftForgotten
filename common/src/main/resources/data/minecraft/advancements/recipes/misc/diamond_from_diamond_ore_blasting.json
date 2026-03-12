@@ -1,12 +1,12 @@
 {
   "parent": "minecraft:recipes/root",
   "criteria": {
-    "has_sand": {
+    "has_diamond_ore": {
       "conditions": {
         "items": [
           {
             "items": [
-              "left_forgotten:sand"
+              "left_forgotten:diamond_ore"
             ]
           }
         ]
@@ -15,20 +15,20 @@
     },
     "has_the_recipe": {
       "conditions": {
-        "recipe": "left_forgotten:glass"
+        "recipe": "minecraft:diamond_from_diamond_ore_blasting"
       },
       "trigger": "minecraft:recipe_unlocked"
     }
   },
   "requirements": [
     [
-      "has_sand",
+      "has_diamond_ore",
       "has_the_recipe"
     ]
   ],
   "rewards": {
     "recipes": [
-      "left_forgotten:glass"
+      "minecraft:diamond_from_diamond_ore_blasting"
     ]
   },
   "sends_telemetry_event": false

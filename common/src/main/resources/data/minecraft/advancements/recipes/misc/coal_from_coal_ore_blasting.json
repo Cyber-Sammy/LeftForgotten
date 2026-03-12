@@ -1,12 +1,12 @@
 {
   "parent": "minecraft:recipes/root",
   "criteria": {
-    "has_clay_ball": {
+    "has_coal_ore": {
       "conditions": {
         "items": [
           {
             "items": [
-              "left_forgotten:clay_ball"
+              "left_forgotten:coal_ore"
             ]
           }
         ]
@@ -15,20 +15,20 @@
     },
     "has_the_recipe": {
       "conditions": {
-        "recipe": "left_forgotten:brick"
+        "recipe": "minecraft:coal_from_coal_ore_blasting"
       },
       "trigger": "minecraft:recipe_unlocked"
     }
   },
   "requirements": [
     [
-      "has_clay_ball",
+      "has_coal_ore",
       "has_the_recipe"
     ]
   ],
   "rewards": {
     "recipes": [
-      "left_forgotten:brick"
+      "minecraft:coal_from_coal_ore_blasting"
     ]
   },
   "sends_telemetry_event": false

@@ -15,7 +15,7 @@
     },
     "has_the_recipe": {
       "conditions": {
-        "recipe": "left_forgotten:stone"
+        "recipe": "minecraft:stone_from_cobblestone_smelting"
       },
       "trigger": "minecraft:recipe_unlocked"
     }
@@ -28,7 +28,7 @@
   ],
   "rewards": {
     "recipes": [
-      "left_forgotten:stone"
+      "minecraft:stone_from_cobblestone_smelting"
     ]
   },
   "sends_telemetry_event": false
