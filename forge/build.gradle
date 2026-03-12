@@ -47,7 +47,7 @@ configurations {
 dependencies {
     forge "net.minecraftforge:forge:$rootProject.forge_version"
 
-    implementation(annotationProcessor("io.github.llamalad7:mixinextras-forge:${rootProject.mixinextrasVersion}"))
+    compileOnly(annotationProcessor("io.github.llamalad7:mixinextras-common:${rootProject.mixinextrasVersion}"))
     include(implementation("io.github.llamalad7:mixinextras-forge:${rootProject.mixinextrasVersion}"))
     implementation(annotationProcessor("com.github.bawnorton.mixinsquared:mixinsquared-forge:${rootProject.mixinsquaredVersion}"))
     include(implementation("com.github.bawnorton.mixinsquared:mixinsquared-forge:${rootProject.mixinsquaredVersion}"))

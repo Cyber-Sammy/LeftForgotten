@@ -1,10 +1,2 @@
 TODO:
-- Flip display of air and armor elements on HUD
 - Make the farlands less.. squared up, they don't look too good
-
-Forge:
-- Mirror air bubbles and armor points
-  - Additionally mirror individual armor points sprites so half-points don't look weird
-
-Fabric:
-- Mirror individual armor points sprites so half-points don't look weird

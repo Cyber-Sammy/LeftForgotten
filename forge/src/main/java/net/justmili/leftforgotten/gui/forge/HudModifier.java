@@ -6,6 +6,7 @@ import net.justmili.leftforgotten.init.LFResources;
 import net.minecraft.client.Minecraft;
 import net.minecraft.client.gui.GuiGraphics;
 import net.minecraft.resources.ResourceLocation;
+import net.minecraft.tags.FluidTags;
 import net.minecraft.world.entity.player.Player;
 import net.minecraft.world.entity.animal.horse.AbstractHorse;
 import net.minecraftforge.api.distmarker.Dist;
@@ -19,6 +20,8 @@ import net.minecraftforge.fml.common.Mod;
 
 @Mod.EventBusSubscriber(value = Dist.CLIENT)
 public class HudModifier {
+    private static final ResourceLocation GUI_ICONS_LOCATION = new ResourceLocation("textures/gui/icons.png");
+
     @SubscribeEvent
     public static void onGuiOverlayPre(RenderGuiOverlayEvent.Pre event) {
         Minecraft mc = Minecraft.getInstance();
@@ -43,8 +46,8 @@ public class HudModifier {
             int airLvlH = 3;
             int horseBar = 7;
             int mountHpH = 3;
-            int mountHpW = 3;
-            int mountHpH_na = 7;
+            int mountHpW = 0; // useless, but I say let it stay just in case
+            int mountHpH_na = 9;
             int fullscreenOffset = 1;
 
             // Account for horse bar and fullscreen
@@ -68,7 +71,21 @@ public class HudModifier {
             // Air lvl move right and down
             if (id.equals(VanillaGuiOverlay.AIR_LEVEL.id())) {
                 event.setCanceled(true);
-                overlay.render((ForgeGui) mc.gui, gui, pt, w - airLvlW, h - airLvlH - yOffset);
+                int air = Math.min(player.getAirSupply(), player.getMaxAirSupply());
+                int maxAir = player.getMaxAirSupply();
+                if (!player.isEyeInFluid(FluidTags.WATER) && air >= maxAir) return;
+
+                int full = net.minecraft.util.Mth.ceil((double)(air - 2) * 10.0 / maxAir);
+                int partial = net.minecraft.util.Mth.ceil((double)air * 10.0 / maxAir) - full;
+                int rh = ((ForgeGui) mc.gui).rightHeight;
+                int top = h - rh - airLvlH - yOffset;
+                int barEnd = w / 2 + 51;
+
+                for (int i = 0; i < full + partial; ++i) {
+                    int origX = w / 2 - 9 - i * 8 - 9;
+                    int mirroredX = 2 * barEnd - 9 - origX - airLvlW;
+                    gui.blit(GUI_ICONS_LOCATION, mirroredX, top, (i < full ? 16 : 25), 18, 9, 9);
+                }
             }
             // Mount HP move down, account for armor
             if (id.equals(VanillaGuiOverlay.MOUNT_HEALTH.id())) {

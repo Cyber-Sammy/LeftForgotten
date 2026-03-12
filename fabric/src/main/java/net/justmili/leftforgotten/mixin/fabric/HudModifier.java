@@ -18,7 +18,6 @@ import org.spongepowered.asm.mixin.Unique;
 import org.spongepowered.asm.mixin.injection.At;
 import org.spongepowered.asm.mixin.injection.Inject;
 import org.spongepowered.asm.mixin.injection.ModifyVariable;
-import org.spongepowered.asm.mixin.injection.Redirect;
 import org.spongepowered.asm.mixin.injection.callback.CallbackInfo;
 
 import java.util.Stack;
@@ -101,10 +100,8 @@ public abstract class HudModifier {
 
         if (this.currentProfiler.peek().equals("armor")) { // Armor move right and down
             // Flip the way it goes
-            // TODO: Flip individual sprites so half points don't look weird
-            int barStart = this.screenWidth / 2 - 91;
-            int mirroredX = 2 * barStart + 72 - x;
-            instance.blit(atlasLocation, mirroredX + armorW, y + armorH - yOffset(), uOffset, vOffset, uWidth, vHeight);
+            // Fuck this, I'm not flipping the sprites
+            instance.blit(atlasLocation, x + armorW, y + armorH - yOffset(), uOffset, vOffset, uWidth, vHeight);
         } else if (this.currentProfiler.peek().equals("air")) { // Air level move left and down
             // Flip the way it goes
             int barEnd = this.screenWidth / 2 + 51;
