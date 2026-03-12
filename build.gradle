@@ -45,6 +45,7 @@ subprojects {
             url = "https://maven.terraformersmc.com/"
         }
         maven { url 'https://jitpack.io' }
+        maven { url = "https://maven.bawnorton.com/releases" }
     }
 
     loom {

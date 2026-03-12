@@ -37,6 +37,9 @@ dependencies {
     compileOnly 'com.github.Nostalgica-Reverie.Nostalgic-Tweaks:NostalgicTweaks-fabric:1.20.1-SNAPSHOT'
     modImplementation "com.terraformersmc:modmenu:7.2.2"
 
+    implementation(annotationProcessor("com.github.bawnorton.mixinsquared:mixinsquared-fabric:${rootProject.mixinsquaredVersion}"))
+    include(implementation("com.github.bawnorton.mixinsquared:mixinsquared-fabric:${rootProject.mixinsquaredVersion}"))
+
     common(project(path: ':common', configuration: 'namedElements')) { transitive = false }
     shadowBundle project(path: ':common', configuration: 'transformProductionFabric')
 

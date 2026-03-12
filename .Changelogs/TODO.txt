@@ -1,5 +1,6 @@
 TODO:
 - Flip display of air and armor elements on HUD
+- Make the farlands less.. squared up, they don't look too good
 
 Forge:
 - Mirror air bubbles and armor points

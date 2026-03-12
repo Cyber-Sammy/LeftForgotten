@@ -8,6 +8,7 @@
     "NoStomachGrowlSFX"
   ],
   "mixins": [
+    "Farlands",
     "SheepEatGrass"
   ],
   "injectors": {

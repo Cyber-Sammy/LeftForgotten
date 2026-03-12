@@ -52,25 +52,24 @@ public abstract class HudModifier {
 
     // I don't know what to comment on this
     private Stack<String> currentProfiler = new Stack<>();
-    @Redirect(method = "renderPlayerHealth(Lnet/minecraft/client/gui/GuiGraphics;)V", at = @At(value = "INVOKE",
+    @WrapOperation(method = "renderPlayerHealth(Lnet/minecraft/client/gui/GuiGraphics;)V", at = @At(value = "INVOKE",
         target = "Lnet/minecraft/util/profiling/ProfilerFiller;push(Ljava/lang/String;)V"))
-    private void logProfilePushes(ProfilerFiller instance, String name) {
+    private void logProfilePushes(ProfilerFiller instance, String name, Operation<Void> original) {
         currentProfiler.push(name);
-        instance.push(name);
+        original.call(instance, name);
     }
-    @Redirect(method = "renderPlayerHealth(Lnet/minecraft/client/gui/GuiGraphics;)V", at = @At(value = "INVOKE",
+    @WrapOperation(method = "renderPlayerHealth(Lnet/minecraft/client/gui/GuiGraphics;)V", at = @At(value = "INVOKE",
         target = "Lnet/minecraft/util/profiling/ProfilerFiller;popPush(Ljava/lang/String;)V"))
-    private void logProfilePopPushes(ProfilerFiller instance, String name) {
+    private void logProfilePopPushes(ProfilerFiller instance, String name, Operation<Void> original) {
         currentProfiler.pop();
         currentProfiler.push(name);
-        instance.pop();
-        instance.push(name);
+        original.call(instance, name);
     }
-    @Redirect(method = "renderPlayerHealth(Lnet/minecraft/client/gui/GuiGraphics;)V", at = @At(value = "INVOKE",
+    @WrapOperation(method = "renderPlayerHealth(Lnet/minecraft/client/gui/GuiGraphics;)V", at = @At(value = "INVOKE",
         target = "Lnet/minecraft/util/profiling/ProfilerFiller;pop()V"))
-    private void logProfilePops(ProfilerFiller instance) {
+    private void logProfilePops(ProfilerFiller instance, Operation<Void> original) {
         currentProfiler.pop();
-        instance.pop();
+        original.call(instance);
     }
 
     // Player HP - move down, move down with NT, account for horse bar

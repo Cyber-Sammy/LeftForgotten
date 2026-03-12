@@ -4,12 +4,14 @@ Left to fade away into distant memories
 <hr>
 
 ## Why?
-I saw a tweet on Twitter and got inspired. The tweet in question: ["Can we get this as a mod pls"](https://x.com/i/status/2026387765605154916)
+I was scrolling through twitter and saw a tweet by @SlimerSlimy :<br>
+_"[For some reason this concept comes to my head sometimes: The old Minecraft alpha world right under the current world. <br>
+But the alpha world is dark, because it's buried under the modern world. And there are no mobs, not even hostile mobs. Because everyone left that place ages ago.](https://x.com/SlimerSlimy/status/2026360433544683796)"_<br>
+And so I got a bit inspired and made the mod.
 
 ## Shameless Promotion
-If you like this, go check out [True End](https://modrinth.com/mod/true_end),<br>
-a mod that me and my team spent like 2 years on it already! Still got some updates on the way ;3<br>
-**I don't recommend playing True End and Left Forgotten at the same time though due to conflicting/duplicate code!!** <small>(Large portion of Left Forgotten's code is based on True End's)</small>
+If you like this, go check out [True End](https://modrinth.com/mod/true_end), as it is a mod that me and my team have spent countless hours on for the past 2, almost 3 years! :3<br>
+Fun fact: a lot of Left Forgotten's codebase is based on True End's because of how similar they are
 
 ## Description
 Basing the whole mod off of the mentioned tweet, the mod purely just adds Alpha Minecraft hidden deep below the Minecraft bedrock layer.<br>
@@ -25,8 +27,8 @@ Oh yeah and the HUD is replicated from Alpha, that also means no sprinting, and 
 
 <hr>
 
-### When newer versions?
-I'm working on it!
+### When newer Minecraft versions?
+More version support will come with version 1.1!
 
 ### How long will this be kept updated?
 Probably for very long like my other projects.
