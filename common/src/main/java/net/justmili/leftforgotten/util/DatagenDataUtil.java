@@ -94,13 +94,28 @@ public class DatagenDataUtil {
                     .unlockedBy(RecipeProvider.getHasName(input), RecipeProvider.has(input))
                     .save(writer);
             }
+            public static void smelt(Consumer<FinishedRecipe> writer, Item input, Item output, float exp) {
+                SimpleCookingRecipeBuilder.smelting(Ingredient.of(input), RecipeCategory.MISC, output, exp, 200)
+                    .unlockedBy(RecipeProvider.getHasName(input), RecipeProvider.has(input))
+                    .save(writer);
+            }
             public static void blast(Consumer<FinishedRecipe> writer, Item input, Item output, float exp, int cookingTime) {
                 SimpleCookingRecipeBuilder.blasting(Ingredient.of(input), RecipeCategory.MISC, output, exp, cookingTime)
                     .unlockedBy(RecipeProvider.getHasName(input), RecipeProvider.has(input))
                     .save(writer);
             }
+            public static void blast(Consumer<FinishedRecipe> writer, Item input, Item output, float exp) {
+                SimpleCookingRecipeBuilder.blasting(Ingredient.of(input), RecipeCategory.MISC, output, exp, 100)
+                    .unlockedBy(RecipeProvider.getHasName(input), RecipeProvider.has(input))
+                    .save(writer);
+            }
             public static void smoke(Consumer<FinishedRecipe> writer, Item input, Item output, float exp, int cookingTime) {
                 SimpleCookingRecipeBuilder.smoking(Ingredient.of(input), RecipeCategory.MISC, output, exp, cookingTime)
+                    .unlockedBy(RecipeProvider.getHasName(input), RecipeProvider.has(input))
+                    .save(writer);
+            }
+            public static void smoke(Consumer<FinishedRecipe> writer, Item input, Item output, float exp) {
+                SimpleCookingRecipeBuilder.smoking(Ingredient.of(input), RecipeCategory.MISC, output, exp, 100)
                     .unlockedBy(RecipeProvider.getHasName(input), RecipeProvider.has(input))
                     .save(writer);
             }

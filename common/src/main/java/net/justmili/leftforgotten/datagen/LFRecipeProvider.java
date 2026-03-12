@@ -28,11 +28,23 @@ public class LFRecipeProvider extends RecipeProvider {
         Redstone.button(writer, LFItems.WOODEN_PLANKS.get(), LFItems.BUTTON.get());
 
         // Stone
-        Processing.smelt(writer, LFItems.COBBLESTONE.get(), LFItems.STONE.get(), 0.1f, 200);
+        Processing.smelt(writer, LFItems.COBBLESTONE.get(), LFItems.STONE.get(), 0.1f);
         Building.stairs(writer, LFItems.STONE.get(), LFItems.STONE_STAIRS.get());
         Building.slab(writer, LFItems.STONE.get(), LFItems.STONE_SLAB.get());
         Redstone.pressurePlate(writer, LFItems.STONE.get(), LFItems.STONE_PRESSURE_PLATE.get());
         Redstone.button(writer, LFItems.STONE.get(), LFItems.STONE_BUTTON.get());
+
+        // Ores
+        Processing.smelt(writer, LFItems.COAL_ORE.get(), Items.COAL, 0.1f);
+        Processing.smelt(writer, LFItems.IRON_ORE.get(), Items.IRON_INGOT, 0.7f);
+        Processing.smelt(writer, LFItems.GOLD_ORE.get(), Items.GOLD_INGOT, 1.0f);
+        Processing.smelt(writer, LFItems.REDSTONE_ORE.get(), Items.REDSTONE, 0.7f);
+        Processing.smelt(writer, LFItems.DIAMOND_ORE.get(), Items.DIAMOND, 1.0f);
+        Processing.blast(writer, LFItems.COAL_ORE.get(), Items.COAL, 0.1f);
+        Processing.blast(writer, LFItems.IRON_ORE.get(), Items.IRON_INGOT, 0.7f);
+        Processing.blast(writer, LFItems.GOLD_ORE.get(), Items.GOLD_INGOT, 1.0f);
+        Processing.blast(writer, LFItems.REDSTONE_ORE.get(), Items.REDSTONE, 0.7f);
+        Processing.blast(writer, LFItems.DIAMOND_ORE.get(), Items.DIAMOND, 1.0f);
 
         // Cobblestone
         Building.stairs(writer, LFItems.COBBLESTONE.get(), LFItems.COBBLESTONE_STAIRS.get());
@@ -63,10 +75,10 @@ public class LFRecipeProvider extends RecipeProvider {
 
         // Clay & Brick item
         twoByTwoPacker(writer, RecipeCategory.BUILDING_BLOCKS, LFItems.CLAY.get(), LFItems.CLAY_BALL.get());
-        Processing.smelt(writer, LFItems.CLAY_BALL.get(), LFItems.BRICK.get(), 0.3f, 200);
+        Processing.smelt(writer, LFItems.CLAY_BALL.get(), LFItems.BRICK.get(), 0.3f);
 
         // Glass
-        Processing.smelt(writer, LFItems.SAND.get(), LFItems.GLASS.get(), 0.1f, 200);
+        Processing.smelt(writer, LFItems.SAND.get(), LFItems.GLASS.get(), 0.1f);
         Building.bars(writer, LFItems.GLASS.get(), LFItems.GLASS_PANE.get());
 
         // Bookshelf
