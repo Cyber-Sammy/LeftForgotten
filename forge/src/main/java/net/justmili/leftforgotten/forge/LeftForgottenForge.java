@@ -7,16 +7,24 @@ import net.minecraft.data.DataProvider;
 import net.minecraftforge.data.event.GatherDataEvent;
 import net.minecraftforge.fml.common.Mod;
 import net.minecraftforge.fml.javafmlmod.FMLJavaModLoadingContext;
+import dev.architectury.platform.Platform;
 
 @Mod(LeftForgotten.MOD_ID)
 public final class LeftForgottenForge {
     public LeftForgottenForge() {
-        // Submit our event bus to let Architectury API register our content on the right time.
-        EventBuses.registerModEventBus(LeftForgotten.MOD_ID, FMLJavaModLoadingContext.get().getModEventBus());
+        if (Platform.isModLoaded("true_end")) {
+            throw new RuntimeException("""
+                
+                
+                
+                Left Forgotten and True End are incompatible! This is due duplicate code of each other's codebases
+                caused by both being fully or/and partially made and managed by user JustMili.
+                Please remove one of the mods from your instance.""");
+        }
 
+        EventBuses.registerModEventBus(LeftForgotten.MOD_ID, FMLJavaModLoadingContext.get().getModEventBus());
         FMLJavaModLoadingContext.get().getModEventBus().addListener(LeftForgottenForge::onDatagenSetup);
 
-        // Run our common setup.
         LeftForgotten.init();
     }
 

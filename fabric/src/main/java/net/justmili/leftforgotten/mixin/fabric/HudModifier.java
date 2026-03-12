@@ -2,16 +2,12 @@ package net.justmili.leftforgotten.mixin.fabric;
 
 import com.llamalad7.mixinextras.injector.wrapoperation.Operation;
 import com.llamalad7.mixinextras.injector.wrapoperation.WrapOperation;
-import dev.architectury.platform.Platform;
-import net.justmili.leftforgotten.client.VersionOverlay;
 import net.justmili.leftforgotten.init.LFResources;
 import net.minecraft.resources.ResourceLocation;
 import net.minecraft.util.profiling.ProfilerFiller;
 import net.minecraft.client.Minecraft;
-import net.minecraft.client.gui.Font;
 import net.minecraft.client.gui.Gui;
 import net.minecraft.client.gui.GuiGraphics;
-import net.minecraft.network.chat.Component;
 import net.minecraft.world.entity.LivingEntity;
 import net.minecraft.world.entity.animal.horse.AbstractHorse;
 import net.minecraft.world.entity.player.Player;
@@ -105,9 +101,16 @@ public abstract class HudModifier {
         }
 
         if (this.currentProfiler.peek().equals("armor")) { // Armor move right and down
-            instance.blit(atlasLocation, x + armorW, y + armorH - yOffset(), uOffset, vOffset, uWidth, vHeight);
-        } else if (this.currentProfiler.peek().equals("air")) { // Air level move left and
-            instance.blit(atlasLocation, x - airLvlW, y - airLvlH + yOffset(), uOffset, vOffset, uWidth, vHeight);
+            // Flip the way it goes
+            // TODO: Flip individual sprites so half points don't look weird
+            int barStart = this.screenWidth / 2 - 91;
+            int mirroredX = 2 * barStart + 72 - x;
+            instance.blit(atlasLocation, mirroredX + armorW, y + armorH - yOffset(), uOffset, vOffset, uWidth, vHeight);
+        } else if (this.currentProfiler.peek().equals("air")) { // Air level move left and down
+            // Flip the way it goes
+            int barEnd = this.screenWidth / 2 + 51;
+            int mirroredX = 2 * barEnd - 9 - x;
+            instance.blit(atlasLocation, mirroredX - airLvlW, y - airLvlH + yOffset(), uOffset, vOffset, uWidth, vHeight);
         } else {
             instance.blit(atlasLocation, x, y, uOffset, vOffset, uWidth, vHeight);
         }

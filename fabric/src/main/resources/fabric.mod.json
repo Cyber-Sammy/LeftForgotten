@@ -8,7 +8,8 @@
     "JustMili"
   ],
   "contributors": [
-    "BluSpring"
+    "BluSpring",
+    "NBSurprise"
   ],
   "contact": {
     "homepage": "https://modrinth.com/mod/left-forgotten",
@@ -39,5 +40,8 @@
     "java": ">=17",
     "architectury": ">=${architectury_api_version}",
     "fabric-api": "*"
+  },
+  "breaks": {
+    "true_end": "*"
   }
 }

@@ -82,7 +82,8 @@ public class HudModifier {
                 }
             }
         }
-        // Get rid of NT's version overlay when in dimension
+
+        // Get rid of NT's version overlay and stamina bar when in dimension
         if (Platform.isModLoaded("nostalgic_tweaks")) {
             if (player.level().dimension().equals(LFResources.Levels.ALPHA_MINECRAFT)) {
                 String ns = id.getNamespace();

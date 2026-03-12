@@ -1,8 +1,9 @@
 TODO:
-Nothing
+- Flip display of air and armor elements on HUD
 
 Forge:
-All fixed
+- Mirror air bubbles and armor points
+  - Additionally mirror individual armor points sprites so half-points don't look weird
 
 Fabric:
-All Fixed
+- Mirror individual armor points sprites so half-points don't look weird
