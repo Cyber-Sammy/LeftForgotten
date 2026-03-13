@@ -1,13 +1,15 @@
 # Left Forgotten - 1.0.1 Release
 
 ### ***WORLDGEN***
-- Added the Farlands
+- Added the Farlands (WIP)
 
 ### ***VISUAL CHANGES***
 - Added `minecraft:white_Ash` particle to appear in the dimension
 
 ### ***BUG FIXES/TECHNICAL CHANGES***
-- Fixed placement of HUD elements
+- Alpha-like HUD changes
+  - Fixed HUD element placements
+  - Mirrored Air and Armor HUD elements to look the same as in Alpha
 - Added NBSurprise to mod credits as she should be there
 
 ### ***DEV STUFF***

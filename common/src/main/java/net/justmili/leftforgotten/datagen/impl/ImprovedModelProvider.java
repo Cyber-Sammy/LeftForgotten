@@ -31,10 +31,12 @@ import java.util.function.Supplier;
 public abstract class ImprovedModelProvider implements DataProvider {
     private final PackOutput.PathProvider blockStatePathProvider;
     private final PackOutput.PathProvider modelPathProvider;
+    private final String modId;
 
-    public ImprovedModelProvider(PackOutput output) {
+    public ImprovedModelProvider(PackOutput output, String modId) {
         this.blockStatePathProvider = output.createPathProvider(PackOutput.Target.RESOURCE_PACK, "blockstates");
         this.modelPathProvider = output.createPathProvider(PackOutput.Target.RESOURCE_PACK, "models");
+        this.modId = modId;
     }
 
     public abstract void generateBlockStateModels(BlockModelGenerators generator);
@@ -71,7 +73,7 @@ public abstract class ImprovedModelProvider implements DataProvider {
         } else {
             BuiltInRegistries.BLOCK.forEach((block) -> {
                 ResourceLocation blockId = BuiltInRegistries.BLOCK.getKey(block);
-                if (!blockId.getNamespace().equals(net.justmili.leftforgotten.LeftForgotten.MOD_ID)) {
+                if (!blockId.getNamespace().equals(modId)) {
                     return;
                 }
 

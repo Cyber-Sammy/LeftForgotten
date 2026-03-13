@@ -1,5 +1,6 @@
 package net.justmili.leftforgotten.datagen;
 
+import net.justmili.leftforgotten.LeftForgotten;
 import net.justmili.leftforgotten.datagen.impl.ImprovedModelProvider;
 import net.justmili.leftforgotten.init.LFBlocks;
 import net.justmili.leftforgotten.init.LFItems;
@@ -16,7 +17,7 @@ import static net.justmili.leftforgotten.util.DatagenAssetUtil.ItemModels.create
 
 public class LFModelProvider extends ImprovedModelProvider {
     public LFModelProvider(PackOutput output) {
-        super(output);
+        super(output, LeftForgotten.MOD_ID);
     }
 
     @Override
