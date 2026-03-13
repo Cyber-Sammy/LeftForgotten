@@ -32,15 +32,15 @@ public abstract class HudModifier {
         return this.minecraft.player != null && this.minecraft.player.level().dimension() == LFResources.Levels.ALPHA_MINECRAFT;
     }
 
-    // Defined heights and weights
+    // Defined widths and heights (X-Y pos)
     @Unique private static final int playerHpH = 7;    // Player HP Y offset
     @Unique private static final int armorW = 101;     // Armor X offset
     @Unique private static final int armorH = 17;      // Armor Y offset
     @Unique private static final int airLvlW = 101;    // Air level X offset
     @Unique private static final int airLvlH = 2;      // Air level Y offset
     @Unique private static final int horseBar = 7;     // Horse bar
-    @Unique private static final int mountHpH_na = 7;  // Mount HP Y offset with Armor
     @Unique private static final int mountHpH = 2;     // Mount HP Y offset
+    @Unique private static final int mountHpH_na = 7;  // Mount HP Y offset without Armor
     // Account for horse bar, Fabric doesn't need to account for fullscreen
     private int yOffset() {
         Player player = this.minecraft.player;
@@ -53,7 +53,7 @@ public abstract class HudModifier {
     @Shadow private int screenHeight;
     @Shadow protected abstract int getVehicleMaxHearts(LivingEntity vehicle);
 
-    // I don't know what to comment on this
+    // Draw identifier for renderPlayerHealth's redirectBlit profiler section
     private Stack<String> currentProfiler = new Stack<>();
     @WrapOperation(method = "renderPlayerHealth(Lnet/minecraft/client/gui/GuiGraphics;)V", at = @At(value = "INVOKE",
         target = "Lnet/minecraft/util/profiling/ProfilerFiller;push(Ljava/lang/String;)V"))
@@ -75,7 +75,7 @@ public abstract class HudModifier {
         original.call(instance);
     }
 
-    // Player HP - move down, move down with NT, account for horse bar
+    // Player HP - move down, account for AbstractHorse jump bar when saddled
     @ModifyVariable(method = "renderHearts", at = @At("HEAD"), ordinal = 1, argsOnly = true)
     private int moveHeartsDown(int y) {
         if (!inAlpha()) return y;
@@ -93,7 +93,7 @@ public abstract class HudModifier {
         return -1;
     }
 
-    // Armor and Air Level
+    // Armor and Air Level, flip armor sprites, account for AbstractHorse jump bar when saddled
     @WrapOperation(method = "renderPlayerHealth(Lnet/minecraft/client/gui/GuiGraphics;)V", at = @At(value = "INVOKE",
         target = "Lnet/minecraft/client/gui/GuiGraphics;blit(Lnet/minecraft/resources/ResourceLocation;IIIIII)V"))
     private void redirectBlit(GuiGraphics instance, ResourceLocation atlasLocation, int x, int y, int uOffset, int vOffset, int uWidth, int vHeight, Operation<Void> original) {
@@ -103,13 +103,17 @@ public abstract class HudModifier {
         }
 
         if (this.currentProfiler.peek().equals("armor")) { // Armor move right and down
-            // Flip the way it goes
-            // Fuck this, I'm not flipping the sprites edit by eetgeenappels: YEAH WE ARE FLIPPING THE SPRITES!!!!!!
-            //instance.blit(atlasLocation, x + armorW, y + armorH - yOffset() - 20, uOffset, vOffset, uWidth, vHeight); <- old boring code
+            /*
+            Flip the way it goes
+            Millie: Fuck this, I'm not flipping the sprites
+            Edit by eetgeenappels: YEAH WE ARE FLIPPING THE SPRITES!!!!!!
+            */
 
+            // Mirror the entire HUD element
             int barStart = this.screenWidth / 2 - 91;
             int mirroredX = 2 * barStart + 72 - x;
 
+            // Math before flipping sprites
             int x1 = mirroredX + armorW;
             int x2 = x1 + uWidth;
             int y1 = y + armorH - yOffset();
@@ -120,6 +124,7 @@ public abstract class HudModifier {
             float minV = (vOffset + 0.0F) / 256f;
             float maxV = (vOffset + (float)vHeight) / 256f;
 
+            // Flip the sprites via Blaze3D engine
             RenderSystem.setShaderTexture(0, atlasLocation);
             RenderSystem.setShader(GameRenderer::getPositionTexShader);
             Matrix4f matrix4f = instance.pose().last().pose();
@@ -147,7 +152,7 @@ public abstract class HudModifier {
         if (inAlpha()) ci.cancel();
     }
 
-    // Mount HP move, account for armor and horse bar
+    // Mount HP move, account for AbstractHorse jump bar when saddled and Armor
     @ModifyVariable(method = "renderVehicleHealth", at = @At("STORE"), ordinal = 2)
     private int moveMountHealthY(int y) {
         if (!inAlpha()) return y;

@@ -6,7 +6,8 @@ import org.jetbrains.annotations.NotNull;
 
 public class AlphaMinecraft extends DimensionSpecialEffects {
     public AlphaMinecraft() {
-        super(Float.NaN, true, SkyType.NORMAL, false, false);
+        // 256f instead of Float.NaN because Forge seems to not understand it and places clouds anyway
+        super(256f, true, SkyType.NORMAL, false, false);
     }
     @Override
     public @NotNull Vec3 getBrightnessDependentFogColor(@NotNull Vec3 color, float sunHeight) {
