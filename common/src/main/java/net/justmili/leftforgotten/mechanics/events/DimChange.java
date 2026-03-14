@@ -1,10 +1,8 @@
 package net.justmili.leftforgotten.mechanics.events;
 
 import dev.architectury.event.EventResult;
-import net.justmili.leftforgotten.LeftForgotten;
 import net.justmili.leftforgotten.init.LFResources;
 import net.minecraft.core.BlockPos;
-import net.minecraft.network.protocol.game.ClientboundSetEntityMotionPacket;
 import net.minecraft.server.level.ServerLevel;
 import net.minecraft.server.level.ServerPlayer;
 import net.minecraft.world.damagesource.DamageSource;

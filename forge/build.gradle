@@ -49,8 +49,8 @@ dependencies {
 
     compileOnly(annotationProcessor("io.github.llamalad7:mixinextras-common:${rootProject.mixinextrasVersion}"))
     include(implementation("io.github.llamalad7:mixinextras-forge:${rootProject.mixinextrasVersion}"))
-    implementation(annotationProcessor("com.github.bawnorton.mixinsquared:mixinsquared-forge:${rootProject.mixinsquaredVersion}"))
-    include(implementation("com.github.bawnorton.mixinsquared:mixinsquared-forge:${rootProject.mixinsquaredVersion}"))
+    compileOnly(annotationProcessor("com.github.bawnorton.mixinsquared:mixinsquared-common:${rootProject.mixinsquaredVersion}"))
+    implementation(include("com.github.bawnorton.mixinsquared:mixinsquared-forge:${rootProject.mixinsquaredVersion}"))
 
     modImplementation "dev.architectury:architectury-forge:$rootProject.architectury_api_version"
     modImplementation "me.shedaniel.cloth:cloth-config-forge:11.1.136"
