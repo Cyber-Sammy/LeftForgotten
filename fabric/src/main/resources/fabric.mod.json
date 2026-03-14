@@ -28,6 +28,9 @@
     ],
     "fabric-datagen": [
       "net.justmili.leftforgotten.datagen.fabric.FabricDatagen"
+    ],
+    "mixinsquared": [
+      "net.justmili.leftforgotten.mixinsquared.CancelPerlinNoiseOverwrite"
     ]
   },
   "mixins": [

@@ -1,3 +1,2 @@
 TODO:
-- Fix Farlands on Fabric with C2ME
 - Make the farlands less.. squared up, they don't look too good
