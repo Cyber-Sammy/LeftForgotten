@@ -1,0 +1,16 @@
+# Left Forgotten - 1.1 Release
+
+### ***WORLDGEN***
+- Added "player activity" structures (WIP)
+  - Big House
+  - House
+  - Dirt Hut
+  - Cave Hut
+
+### ***BUG FIXES/TECHNICAL CHANGES***
+- Fixed some recipes that should be in Left Forgotten's data being in Minecraft's data directory (WIP)
+
+### ***DEV STUFF***
+- Removed debug logger from CancelPerlinNoiseOverwrite class
+
+<hr>

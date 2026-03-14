@@ -1,0 +1,15 @@
+{
+  "structures": [
+    {
+      "structure": "left_forgotten:cave_hut",
+      "weight": 1
+    }
+  ],
+  "placement": {
+    "type": "minecraft:random_spread",
+    "spacing": 48,
+    "separation": 28,
+    "salt": 1253544446,
+    "frequency_reduction_method": "default"
+  }
+}

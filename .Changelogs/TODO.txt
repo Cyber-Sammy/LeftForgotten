@@ -1,2 +1,7 @@
 TODO:
+- Fix/finish player activity structures
+- Fix datagen so all recipes land in LF and not in Minecraft's data
+
+
+TODO (Some day):
 - Make the farlands less.. squared up, they don't look too good
