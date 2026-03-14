@@ -1,7 +1,8 @@
 # Left Forgotten - 1.0.1 Release
 
 ### ***WORLDGEN***
-- Added the Farlands (WIP)
+- Added the Farlands
+  - Dev note: The Farlands don't look like usual, they're actually more square-ish which is a side effect of how I did the bedrock ceiling generation
 
 ### ***VISUAL CHANGES***
 - Added `minecraft:white_Ash` particle to appear in the dimension
