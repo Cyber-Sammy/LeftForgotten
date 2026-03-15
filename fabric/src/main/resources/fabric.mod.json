@@ -30,7 +30,7 @@
       "net.justmili.leftforgotten.datagen.fabric.FabricDatagen"
     ],
     "mixinsquared": [
-      "net.justmili.leftforgotten.mixinsquared.CancelPerlinNoiseOverwrite"
+      "net.justmili.leftforgotten.mixinsquared.fabric.CancelPerlinNoiseOverwrite"
     ]
   },
   "mixins": [

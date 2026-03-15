@@ -1,7 +1,14 @@
-TODO:
+TODO (LF 1.1):
 - Fix/finish player activity structures
 - Somehow make Datagen files generate in Common
-- Code more eatable vanilla foods into the Alpha Food System
+- (BONUS) Add cacti and make them spawn in the dimension
+- (BONUS) Add old resource blocks, which will be available to craft with Polymorph mod due to the same crafting recipe
+- (BONUS) Add mushrooms (red and brown) and mushroom patches
+- (BONUS) Code blocky lighting only in the dimension (NO OPTION CHANGING! THAT'S SCUFFED)
+
+DEV NOTES:
+- Try to recreate the old boat
+- If you can't find a solution to the structure problem by the time Modrinth accepts the mod, scrap the structures
 
 PLANNED FOR 1.1:
 - "Old player activity" structures (WIP)

@@ -22,6 +22,11 @@
 
 <hr>
 
+### ***SCRAPPED***
+-
+
+<hr>
+
 ## Upcoming - 1.2 Release
 - Switch to use MysticLib once it releases
   - Config to enable/disable the fog in the dimension
