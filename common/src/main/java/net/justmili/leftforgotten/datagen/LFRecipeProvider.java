@@ -1,5 +1,6 @@
 package net.justmili.leftforgotten.datagen;
 
+import net.justmili.leftforgotten.LeftForgotten;
 import net.justmili.leftforgotten.init.LFItems;
 import net.minecraft.data.PackOutput;
 import net.minecraft.data.recipes.*;
@@ -84,7 +85,7 @@ public class LFRecipeProvider extends RecipeProvider {
         // Bookshelf
         ShapedRecipeBuilder.shaped(RecipeCategory.BUILDING_BLOCKS, LFItems.BOOKSHELF.get())
             .define('#', LFItems.WOODEN_PLANKS.get())
-            .define('B', net.minecraft.world.item.Items.BOOK)
+            .define('B', Items.BOOK)
             .pattern("###")
             .pattern("BBB")
             .pattern("###")
@@ -93,7 +94,7 @@ public class LFRecipeProvider extends RecipeProvider {
 
         // TNT
         ShapedRecipeBuilder.shaped(RecipeCategory.REDSTONE, LFItems.TNT.get())
-            .define('#', net.minecraft.world.item.Items.GUNPOWDER)
+            .define('#', Items.GUNPOWDER)
             .define('X', LFItems.SAND.get())
             .pattern("#X#")
             .pattern("X#X")
@@ -110,11 +111,26 @@ public class LFRecipeProvider extends RecipeProvider {
             .save(writer);
 
         // Sticks
-        ShapedRecipeBuilder.shaped(RecipeCategory.BUILDING_BLOCKS, Items.STICK, 4)
+        ShapedRecipeBuilder.shaped(RecipeCategory.MISC, Items.STICK, 4)
             .define('#', LFItems.WOODEN_PLANKS.get())
             .pattern("#")
             .pattern("#")
             .unlockedBy(getHasName(LFItems.WOODEN_PLANKS.get()), has(LFItems.WOODEN_PLANKS.get()))
-            .save(writer);
+            .save(writer, LeftForgotten.asResource("stick"));
+
+        // Furnace and Crafting Table
+        ShapedRecipeBuilder.shaped(RecipeCategory.BUILDING_BLOCKS, Items.FURNACE, 4)
+            .define('#', LFItems.COBBLESTONE.get())
+            .pattern("###")
+            .pattern("# #")
+            .pattern("###")
+            .unlockedBy(getHasName(LFItems.COBBLESTONE.get()), has(LFItems.COBBLESTONE.get()))
+            .save(writer, LeftForgotten.asResource("furnace"));
+        ShapedRecipeBuilder.shaped(RecipeCategory.BUILDING_BLOCKS, Items.CRAFTING_TABLE, 3)
+            .define('#', LFItems.WOODEN_PLANKS.get())
+            .pattern("##")
+            .pattern("##")
+            .unlockedBy(getHasName(LFItems.WOODEN_PLANKS.get()), has(LFItems.WOODEN_PLANKS.get()))
+            .save(writer, LeftForgotten.asResource("crafting_table"));
     }
 }

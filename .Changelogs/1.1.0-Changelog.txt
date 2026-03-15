@@ -1,16 +1,23 @@
 # Left Forgotten - 1.1 Release
 
 ### ***WORLDGEN***
-- Added "player activity" structures (WIP)
+- Added "player activity" structures
   - Big House
   - House
   - Dirt Hut
   - Cave Hut
 
 ### ***BUG FIXES/TECHNICAL CHANGES***
-- Fixed some recipes that should be in Left Forgotten's data being in Minecraft's data directory (WIP)
+- Fixed some recipes that should be in Left Forgotten's data being in Minecraft's data directory
+- Added missing Furnace and Crafting Table recipes
 
 ### ***DEV STUFF***
 - Removed debug logger from CancelPerlinNoiseOverwrite class
 
 <hr>
+
+## Upcoming - 1.2 Release
+- Switch to use MysticLib once it releases
+  - Config to enable/disable the fog in the dimension
+  - Config to enable/disable farlands generation
+    - Note: If you generate farlands before this update, that generated terrain will stay there unless you use tools like MCA Selector to remove those generated chunks

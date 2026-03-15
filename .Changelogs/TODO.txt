@@ -1,7 +1,19 @@
 TODO:
 - Fix/finish player activity structures
-- Fix datagen so all recipes land in LF and not in Minecraft's data
+- Somehow make Datagen files generate in Common
 
+PLANNED FOR 1.1:
+- "Old player activity" structures (WIP)
+  - Mainly huts, houses and stuff
+- B o a t                          (WIP)
+- Support for:                     (THAT'S GONNA TAKE A LONGER WHILE)
+  - 1.20.4 Fabric & Forge
+  - 1.21.1 Fabric & NeoForge
+  - 1.21.4 Fabric & NeoForge
+  - 1.21.5 Fabric & NeoForge
+  - (1.21.6-)1.21.8 Fabric & NeoForge
+  - (1.21.9-)1.21.10 Fabric & NeoForge
+  - 1.21.11 Fabric & NeoForge
 
 TODO (Some day):
 - Make the farlands less.. squared up, they don't look too good

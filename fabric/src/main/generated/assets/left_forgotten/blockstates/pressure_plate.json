@@ -1,0 +1,10 @@
+{
+  "variants": {
+    "powered=false": {
+      "model": "left_forgotten:block/pressure_plate"
+    },
+    "powered=true": {
+      "model": "left_forgotten:block/pressure_plate_down"
+    }
+  }
+}
