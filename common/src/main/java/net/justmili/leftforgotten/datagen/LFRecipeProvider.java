@@ -119,14 +119,14 @@ public class LFRecipeProvider extends RecipeProvider {
             .save(writer, LeftForgotten.asResource("stick"));
 
         // Furnace and Crafting Table
-        ShapedRecipeBuilder.shaped(RecipeCategory.BUILDING_BLOCKS, Items.FURNACE, 4)
+        ShapedRecipeBuilder.shaped(RecipeCategory.BUILDING_BLOCKS, Items.FURNACE, 1)
             .define('#', LFItems.COBBLESTONE.get())
             .pattern("###")
             .pattern("# #")
             .pattern("###")
             .unlockedBy(getHasName(LFItems.COBBLESTONE.get()), has(LFItems.COBBLESTONE.get()))
             .save(writer, LeftForgotten.asResource("furnace"));
-        ShapedRecipeBuilder.shaped(RecipeCategory.BUILDING_BLOCKS, Items.CRAFTING_TABLE, 3)
+        ShapedRecipeBuilder.shaped(RecipeCategory.BUILDING_BLOCKS, Items.CRAFTING_TABLE, 1)
             .define('#', LFItems.WOODEN_PLANKS.get())
             .pattern("##")
             .pattern("##")
