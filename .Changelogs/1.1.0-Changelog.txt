@@ -13,6 +13,9 @@
   - Now supports basically every Vanilla food item
   - All items keep their properties like applying effects, resulting items after consumption and other
 
+### ***VISUAL CHANGES***
+- Emitted light (from blocks) now appears blocky in `left_forgotten:alpha_minecraft` dimension
+
 ### ***BUG FIXES/TECHNICAL CHANGES***
 - Fixed some recipes that should be in Left Forgotten's data being in Minecraft's data directory
 - Added missing Furnace and Crafting Table recipes

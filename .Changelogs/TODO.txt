@@ -4,7 +4,6 @@ TODO (LF 1.1):
 - (BONUS) Add cacti and make them spawn in the dimension
 - (BONUS) Add old resource blocks, which will be available to craft with Polymorph mod due to the same crafting recipe
 - (BONUS) Add mushrooms (red and brown) and mushroom patches
-- (BONUS) Code blocky lighting only in the dimension (NO OPTION CHANGING! THAT'S SCUFFED)
 
 DEV NOTES:
 - Try to recreate the old boat
