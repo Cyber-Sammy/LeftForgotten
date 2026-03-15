@@ -1,26 +1,22 @@
-TODO (LF 1.1):
-- Fix/finish player activity structures
+TODO (LF 1.1) / For March 16th 2026:
+- Correct red flower generation
+- (BONUS) Add cacti and mushrooms to the world generation
+- (BONUS) Add old resource (Diamonds, iron, gold) blocks - only craftable with Polymorph
+- See if the resource keys for blocks and items in LF Resources are still needed//Make sure LFResources has all needed resource keys
 - Somehow make Datagen files generate in Common
-- (BONUS) Add cacti and make them spawn in the dimension
-- (BONUS) Add old resource blocks, which will be available to craft with Polymorph mod due to the same crafting recipe
-- (BONUS) Add mushrooms (red and brown) and mushroom patches
 
-DEV NOTES:
-- Try to recreate the old boat
-- If you can't find a solution to the structure problem by the time Modrinth accepts the mod, scrap the structures
+TODO (LF 1.1) / For March 17-18th 2026:
+- Recreate the old boat
+
+TODO (LF 1.1) / For March 19th-30th 2026:
+- Update to newer versions
 
 PLANNED FOR 1.1:
-- "Old player activity" structures (WIP)
-  - Mainly huts, houses and stuff
 - B o a t                          (WIP)
 - Support for:                     (THAT'S GONNA TAKE A LONGER WHILE)
-  - 1.20.4 Fabric & Forge
   - 1.21.1 Fabric & NeoForge
   - 1.21.4 Fabric & NeoForge
   - 1.21.5 Fabric & NeoForge
   - (1.21.6-)1.21.8 Fabric & NeoForge
   - (1.21.9-)1.21.10 Fabric & NeoForge
   - 1.21.11 Fabric & NeoForge
-
-TODO (Some day):
-- Make the farlands less.. squared up, they don't look too good

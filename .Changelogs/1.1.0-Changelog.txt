@@ -1,11 +1,6 @@
 # Left Forgotten - 1.1 Release
 
 ### ***WORLDGEN***
-- Added "player activity" structures
-  - Big House
-  - House
-  - Dirt Hut
-  - Cave Hut
 - The Red Flower is now more common, somewhat the same as the Yellow Flower
 
 ### ***GAMEPLAY***
@@ -25,8 +20,10 @@
 
 <hr>
 
-### ***SCRAPPED***
--
+### ***SCRAPPED CONTENT*** <small>(just stuff I couldn't get to work)</small>
+- Scrapped "old player activity" structures (2 houses, a dirt hut and a cave hut)
+  - NBT files are still present in the mod jar
+- Support for 1.20.4 Fabric & Forge
 
 <hr>
 

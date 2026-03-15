@@ -66,6 +66,8 @@ public class HudModifier {
             // Armor move right and down, flip armor sprites
             if (id.equals(VanillaGuiOverlay.ARMOR_LEVEL.id())) {
                 event.setCanceled(true);
+
+                if (!mc.options.hideGui && ((ForgeGui) mc.gui).shouldDrawSurvivalElements()) {
                 int level = player.getArmorValue();
                 for (int i = 1; level > 0 && i < 20; i += 2) {
                     int uOffset = i < level ? 34 : i == level ? 25 : 16;
@@ -93,6 +95,7 @@ public class HudModifier {
                     bufferBuilder.vertex(matrix4f, x2, y2, 0).uv(maxU, maxV).endVertex();
                     bufferBuilder.vertex(matrix4f, x2, y1, 0).uv(maxU, minV).endVertex();
                     BufferUploader.drawWithShader(bufferBuilder.end());
+                }
                 }
             }
             // Player HP move down
