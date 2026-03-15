@@ -6,6 +6,12 @@
   - House
   - Dirt Hut
   - Cave Hut
+- The Red Flower is now more common, somewhat the same as the Yellow Flower
+
+### ***GAMEPLAY***
+- Expanded on supported foods in AlphaFoodSystem
+  - Now supports basically every Vanilla food item
+  - All items keep their properties like applying effects, resulting items after consumption and other
 
 ### ***BUG FIXES/TECHNICAL CHANGES***
 - Fixed some recipes that should be in Left Forgotten's data being in Minecraft's data directory

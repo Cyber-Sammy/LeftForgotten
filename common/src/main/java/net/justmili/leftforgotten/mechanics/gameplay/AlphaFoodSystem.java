@@ -186,20 +186,31 @@ public class AlphaFoodSystem {
     }
     private static void applyChorusTeleport(Player player) {
         Level level = player.level();
-        double x = player.getX() + (level.random.nextDouble() - 0.5D) * 16.0D;
-        double y = player.getY() + (level.random.nextInt(16) - 8);
-        double z = player.getZ() + (level.random.nextDouble() - 0.5D) * 16.0D;
-        y = Math.max(level.getMinBuildHeight(), Math.min(level.getMaxBuildHeight() - 1, y));
-        y = findGroundY(level, x, y, z);
-        player.teleportTo(x, y, z);
+        for (int attempt = 0; attempt < 16; attempt++) {
+            double x = player.getX() + (level.random.nextDouble() - 0.5D) * 16.0D;
+            double y = player.getY() + (level.random.nextInt(16) - 8);
+            double z = player.getZ() + (level.random.nextDouble() - 0.5D) * 16.0D;
+            y = Math.max(level.getMinBuildHeight(), Math.min(level.getMaxBuildHeight() - 1, y));
+            double groundY = findGroundY(level, x, y, z);
+            if (groundY >= 0) {
+                player.teleportTo(x, groundY, z);
+                return;
+            }
+        }
     }
     private static double findGroundY(Level level, double x, double startY, double z) {
         BlockPos.MutableBlockPos pos = new BlockPos.MutableBlockPos((int) x, (int) startY, (int) z);
         while (pos.getY() > level.getMinBuildHeight()) {
-            if (level.getBlockState(pos).isSolid()) return pos.getY() + 1;
+            if (level.getBlockState(pos).isSolid()) {
+                BlockPos landing = pos.above();
+                BlockPos head = landing.above();
+                if (!level.getBlockState(landing).isSolid() && !level.getBlockState(head).isSolid()) {
+                    return landing.getY();
+                }
+            }
             pos.move(0, -1, 0);
         }
-        return startY;
+        return -1;
     }
 
     private static void playConsumptionSound(LevelAccessor world, double x, double y, double z, Item item) {
