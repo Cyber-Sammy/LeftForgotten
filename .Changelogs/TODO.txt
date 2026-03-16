@@ -1,8 +1,8 @@
 TODO (LF 1.1) / For March 16th 2026:
-- Correct red flower generation
 - (BONUS) Add cacti and mushrooms to the world generation
+  - Add mushrooms to worldgen
+  - Make cacti placeable on eachother
 - (BONUS) Add old resource (Diamonds, iron, gold) blocks - only craftable with Polymorph
-- See if the resource keys for blocks and items in LF Resources are still needed//Make sure LFResources has all needed resource keys
 - Somehow make Datagen files generate in Common
 
 TODO (LF 1.1) / For March 17-18th 2026:

@@ -16,7 +16,7 @@ public class Common {
     public static boolean never(BlockState state, BlockGetter getter, BlockPos pos) {
         return false;
     }
-    private static boolean always(BlockState state, BlockGetter blockGetter, BlockPos pos) {
+    public static boolean always(BlockState state, BlockGetter blockGetter, BlockPos pos) {
         return true;
     }
 }

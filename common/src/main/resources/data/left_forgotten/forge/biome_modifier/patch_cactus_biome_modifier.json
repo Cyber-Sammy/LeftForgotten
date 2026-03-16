@@ -1,0 +1,9 @@
+{
+  "type": "forge:add_features",
+  "biomes": [
+    "left_forgotten:plains",
+    "left_forgotten:forest"
+  ],
+  "features": "left_forgotten:cactus",
+  "step": "vegetal_decoration"
+}

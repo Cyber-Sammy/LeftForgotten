@@ -46,41 +46,55 @@ public class LFLootTableProvider extends LootTableProvider {
 
         @Override
         public void generate() {
-            dropSelf(LFBlocks.RED_FLOWER.get());
-            dropSelf(LFBlocks.YELLOW_FLOWER.get());
+
+            // Nature / Ground
             add(LFBlocks.GRASS_BLOCK.get(), createSingleItemTableWithSilkTouch(LFBlocks.GRASS_BLOCK.get(), LFBlocks.DIRT.get()));
             dropSelf(LFBlocks.DIRT.get());
             add(LFBlocks.FARMLAND.get(), createSingleItemTableWithSilkTouch(LFBlocks.FARMLAND.get(), LFBlocks.DIRT.get()));
-            add(LFBlocks.STONE.get(), createSingleItemTableWithSilkTouch(LFBlocks.STONE.get(), LFBlocks.COBBLESTONE.get()));
-            dropSelf(LFBlocks.STONE_STAIRS.get());
-            dropSelf(LFBlocks.STONE_SLAB.get());
-            dropSelf(LFBlocks.STONE_PRESSURE_PLATE.get());
-            dropSelf(LFBlocks.STONE_BUTTON.get());
             add(LFBlocks.GRAVEL.get(), createSilkTouchDispatchTable(LFBlocks.GRAVEL.get(),
                 LootItem.lootTableItem(Items.FLINT)
                     .when(BonusLevelTableCondition.bonusLevelFlatChance(Enchantments.BLOCK_FORTUNE, 0.1F, 0.14285715F, 0.25F, 1.0F))
                     .otherwise(LootItem.lootTableItem(LFBlocks.GRAVEL.get()))));
             dropSelf(LFBlocks.SAND.get());
-            add(LFBlocks.GLASS.get(), createSilkTouchOnlyTable(LFBlocks.GLASS.get()));
-            add(LFBlocks.COAL_ORE.get(), createOreDrop(LFBlocks.COAL_ORE.get(), Items.COAL));
-            dropSelf(LFBlocks.IRON_ORE.get());
-            dropSelf(LFBlocks.GOLD_ORE.get());
-            add(LFBlocks.REDSTONE_ORE.get(), createRedstoneOreDrops(LFBlocks.REDSTONE_ORE.get()));
-            add(LFBlocks.DIAMOND_ORE.get(), createOreDrop(LFBlocks.DIAMOND_ORE.get(), Items.DIAMOND));
-            dropSelf(LFBlocks.OBSIDIAN.get());
-            dropSelf(LFBlocks.WOOD.get());
-            dropSelf(LFBlocks.WOOD_6_SIDED.get());
-            add(LFBlocks.LEAVES.get(), createLeavesDrops(LFBlocks.LEAVES.get(), LFBlocks.SAPLING.get(), NORMAL_LEAVES_SAPLING_CHANCES));
+            add(LFBlocks.CLAY.get(), createSilkTouchDispatchTable(LFBlocks.CLAY.get(),
+                LootItem.lootTableItem(LFItems.CLAY_BALL.get())
+                    .apply(SetItemCountFunction.setCount(ConstantValue.exactly(4)))));
+
+            // Nature / Vegetation
+            dropSelf(LFBlocks.RED_FLOWER.get());
+            dropSelf(LFBlocks.YELLOW_FLOWER.get());
+            dropSelf(LFBlocks.RED_MUSHROOM.get());
+            dropSelf(LFBlocks.BROWN_MUSHROOM.get());
+            dropSelf(LFBlocks.CACTUS.get());
             dropSelf(LFBlocks.SAPLING.get());
+            add(LFBlocks.LEAVES.get(), createLeavesDrops(LFBlocks.LEAVES.get(), LFBlocks.SAPLING.get(), NORMAL_LEAVES_SAPLING_CHANCES));
+            dropSelf(LFBlocks.WOOD.get());
+
+            // Building / Wood
+            dropSelf(LFBlocks.WOOD_6_SIDED.get());
             dropSelf(LFBlocks.WOODEN_PLANKS.get());
             dropSelf(LFBlocks.WOODEN_STAIRS.get());
             dropSelf(LFBlocks.WOODEN_SLAB.get());
             dropSelf(LFBlocks.FENCE.get());
             dropSelf(LFBlocks.FENCE_GATE.get());
-            dropSelf(LFBlocks.TRAPDOOR.get());
             add(LFBlocks.DOOR.get(), createDoorTable(LFBlocks.DOOR.get()));
+            dropSelf(LFBlocks.TRAPDOOR.get());
             dropSelf(LFBlocks.PRESSURE_PLATE.get());
             dropSelf(LFBlocks.BUTTON.get());
+
+            // Nature / Underground
+            add(LFBlocks.COAL_ORE.get(), createOreDrop(LFBlocks.COAL_ORE.get(), Items.COAL));
+            dropSelf(LFBlocks.IRON_ORE.get());
+            dropSelf(LFBlocks.GOLD_ORE.get());
+            add(LFBlocks.REDSTONE_ORE.get(), createRedstoneOreDrops(LFBlocks.REDSTONE_ORE.get()));
+            add(LFBlocks.DIAMOND_ORE.get(), createOreDrop(LFBlocks.DIAMOND_ORE.get(), Items.DIAMOND));
+            add(LFBlocks.STONE.get(), createSingleItemTableWithSilkTouch(LFBlocks.STONE.get(), LFBlocks.COBBLESTONE.get()));
+
+            // Building / Stone
+            dropSelf(LFBlocks.STONE_STAIRS.get());
+            dropSelf(LFBlocks.STONE_SLAB.get());
+            dropSelf(LFBlocks.STONE_PRESSURE_PLATE.get());
+            dropSelf(LFBlocks.STONE_BUTTON.get());
             dropSelf(LFBlocks.COBBLESTONE.get());
             dropSelf(LFBlocks.COBBLESTONE_STAIRS.get());
             dropSelf(LFBlocks.COBBLESTONE_SLAB.get());
@@ -89,19 +103,22 @@ public class LFLootTableProvider extends LootTableProvider {
             dropSelf(LFBlocks.MOSSY_COBBLESTONE_STAIRS.get());
             dropSelf(LFBlocks.MOSSY_COBBLESTONE_SLAB.get());
             dropSelf(LFBlocks.MOSSY_COBBLESTONE_WALL.get());
-            add(LFBlocks.CLAY.get(), createSilkTouchDispatchTable(LFBlocks.CLAY.get(),
-                LootItem.lootTableItem(LFItems.CLAY_BALL.get())
-                    .apply(SetItemCountFunction.setCount(ConstantValue.exactly(4)))));
             dropSelf(LFBlocks.BRICKS.get());
             dropSelf(LFBlocks.BRICK_STAIRS.get());
             dropSelf(LFBlocks.BRICK_SLAB.get());
             dropSelf(LFBlocks.BRICK_WALL.get());
+
+            // Building / Deco
+            dropSelf(LFBlocks.OBSIDIAN.get());
+            add(LFBlocks.GLASS.get(), createSilkTouchOnlyTable(LFBlocks.GLASS.get()));
+            add(LFBlocks.GLASS_PANE.get(), createSilkTouchOnlyTable(LFBlocks.GLASS_PANE.get()));
             add(LFBlocks.BOOKSHELF.get(), createSilkTouchDispatchTable(LFBlocks.BOOKSHELF.get(),
                 LootItem.lootTableItem(Items.BOOK)
                     .apply(SetItemCountFunction.setCount(ConstantValue.exactly(3)))));
             dropSelf(LFBlocks.TNT.get());
+
+            // Alone Redstone
             add(LFBlocks.IRON_DOOR.get(), createDoorTable(LFBlocks.IRON_DOOR.get()));
-            add(LFBlocks.GLASS_PANE.get(), createSilkTouchOnlyTable(LFBlocks.GLASS_PANE.get()));
         }
 
         // this exact method exists on Forge, and is implemented via mixin by us on Fabric.

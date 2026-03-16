@@ -44,6 +44,7 @@ public final class LeftForgotten {
     public static void processQueue() {
         for (Iterator<WorkItem> iterator = workQueue.iterator(); iterator.hasNext(); ) {
             WorkItem item = iterator.next();
+            item.ticksRemaining--;
             if (item.ticksRemaining <= 0) {
                 item.task.run();
                 iterator.remove(); // safe to remove in ConcurrentLinkedQueue

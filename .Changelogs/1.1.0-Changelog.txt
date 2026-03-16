@@ -2,6 +2,8 @@
 
 ### ***WORLDGEN***
 - The Red Flower is now more common, somewhat the same as the Yellow Flower
+- Added mushrooms (Red & Brown) and mushroom patches     (WIP)
+- Added Cactus and cactus patches
 
 ### ***GAMEPLAY***
 - Expanded on supported foods in AlphaFoodSystem
@@ -14,6 +16,8 @@
 ### ***BUG FIXES/TECHNICAL CHANGES***
 - Fixed some recipes that should be in Left Forgotten's data being in Minecraft's data directory
 - Added missing Furnace and Crafting Table recipes
+- Reordered the items in the creative tab
+- Feature Void now disappears after spawning  (WIP)
 
 ### ***DEV STUFF***
 - Removed debug logger from CancelPerlinNoiseOverwrite class
