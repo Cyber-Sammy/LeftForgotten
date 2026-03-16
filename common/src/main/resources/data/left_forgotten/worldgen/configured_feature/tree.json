@@ -22,7 +22,7 @@
         "Name": "left_forgotten:wood"
       }
     },
-    "force_dirt": false,
+    "force_dirt": true,
     "ignore_vines": true,
     "foliage_placer": {
       "type": "minecraft:blob_foliage_placer",

@@ -1,11 +1,13 @@
 package net.justmili.leftforgotten.block.dev;
 
+import net.justmili.leftforgotten.LeftForgotten;
 import net.justmili.leftforgotten.init.LFBlocks;
 import net.minecraft.core.BlockPos;
 import net.minecraft.server.level.ServerLevel;
 import net.minecraft.util.RandomSource;
 import net.minecraft.world.level.Level;
 import net.minecraft.world.level.block.Block;
+import net.minecraft.world.level.block.Blocks;
 import net.minecraft.world.level.block.state.BlockState;
 import net.minecraft.world.level.material.PushReaction;
 
@@ -21,18 +23,25 @@ public class FeatureVoid extends Block {
         }
     }
 
+    /** DEV NOTES
+     * tick is server but is fucked and just doesn't wanna work
+     * animateTick is client and somehow makes this whole thing work
+     * make it make sense
+     */
     @Override
     public void tick(BlockState state, ServerLevel level, BlockPos pos, RandomSource random) {
+        if (!level.isClientSide()) { LeftForgotten.LOGGER.info("Level is Server"); } else { LeftForgotten.LOGGER.info("Level is Client"); }
         BlockState above = level.getBlockState(pos.above());
         boolean hasLeavesAbove = above.is(LFBlocks.LEAVES.get());
 
         if (!hasLeavesAbove) {
-            level.removeBlock(pos, false);
+            clearAtAndBelow(level, pos);
             return;
         }
 
-        int roll = random.nextInt(100);
+        clearAtAndBelow(level, pos);
 
+        int roll = random.nextInt(100);
         if (roll < 1) {
             level.setBlock(pos, LFBlocks.WOOD.get().defaultBlockState(), 3);
             level.setBlock(pos.below(), LFBlocks.WOOD.get().defaultBlockState(), 3);
@@ -41,8 +50,19 @@ public class FeatureVoid extends Block {
             level.setBlock(pos.below(), LFBlocks.WOOD.get().defaultBlockState(), 3);
         } else if (roll < 38) {
             level.setBlock(pos, LFBlocks.WOOD.get().defaultBlockState(), 3);
-        } else {
-            level.removeBlock(pos, false);
+        }
+    }
+
+    private void clearAtAndBelow(Level level, BlockPos pos) {
+        BlockPos current = pos;
+        while (true) {
+            BlockState state = level.getBlockState(current);
+            if (state.is(LFBlocks.DIRT.get()) || state.is(LFBlocks.GRASS_BLOCK.get())) break;
+            if (state.isAir()) break;
+            if (state.is(this)) {
+                level.setBlock(current, Blocks.AIR.defaultBlockState(), 3);
+            }
+            current = current.below();
         }
     }
 }
