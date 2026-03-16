@@ -15,6 +15,7 @@ quilt/.gradle
 forge/run
 forge/build
 forge/.gradle
+forge/src/generated/.cache
 neoforge/run
 neoforge/.gradle
 neoforge/build

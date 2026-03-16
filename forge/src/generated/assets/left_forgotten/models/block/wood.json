@@ -1,0 +1,7 @@
+{
+  "parent": "minecraft:block/cube_column",
+  "textures": {
+    "end": "left_forgotten:block/wood_top",
+    "side": "left_forgotten:block/wood_side"
+  }
+}

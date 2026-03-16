@@ -29,7 +29,6 @@ import java.util.List;
 import java.util.Set;
 import java.util.function.BiConsumer;
 import java.util.function.Supplier;
-import java.util.stream.Stream;
 
 public class LFLootTableProvider extends LootTableProvider {
     public LFLootTableProvider(PackOutput output) {
@@ -128,8 +127,8 @@ public class LFLootTableProvider extends LootTableProvider {
         // this makes it so any blocks in the environment that we don't datagen (e.g. Vanilla blocks) doesn't stop us from generating.
         // a similar thing needs to exist for any additional sub-providers later on.
         @Override
-        public Stream<Block> getKnownBlocks() {
-            return Streams.stream(LFBlocks.REGISTRY).map(Supplier::get);
+        public Iterable<Block> getKnownBlocks() {
+            return Streams.stream(LFBlocks.REGISTRY).map(Supplier::get).toList();
         }
     }
 
