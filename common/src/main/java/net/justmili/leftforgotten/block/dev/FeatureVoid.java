@@ -3,11 +3,12 @@ package net.justmili.leftforgotten.block.dev;
 import net.justmili.leftforgotten.LeftForgotten;
 import net.justmili.leftforgotten.init.LFBlocks;
 import net.minecraft.core.BlockPos;
-import net.minecraft.server.level.ServerLevel;
 import net.minecraft.util.RandomSource;
+import net.minecraft.world.level.BlockGetter;
 import net.minecraft.world.level.Level;
 import net.minecraft.world.level.block.Block;
 import net.minecraft.world.level.block.Blocks;
+import net.minecraft.world.level.block.RenderShape;
 import net.minecraft.world.level.block.state.BlockState;
 import net.minecraft.world.level.material.PushReaction;
 
@@ -17,19 +18,35 @@ public class FeatureVoid extends Block {
     }
 
     @Override
+    public boolean propagatesSkylightDown(BlockState state, BlockGetter level, BlockPos pos) {
+        return true;
+    }
+    @Override
+    public RenderShape getRenderShape(BlockState state) {
+        return RenderShape.INVISIBLE;
+    }
+    @Override
+    public float getShadeBrightness(BlockState state, BlockGetter level, BlockPos pos) {
+        return 1.0F;
+    }
+
+    @Override
     public void onPlace(BlockState state, Level level, BlockPos pos, BlockState oldState, boolean movedByPiston) {
         if (!level.isClientSide()) {
             level.scheduleTick(pos, this, 1);
         }
     }
 
-    /** DEV NOTES
+    /** DEV NOTES (Singleplayer)
      * tick is server but is fucked and just doesn't wanna work
      * animateTick is client and somehow makes this whole thing work
      * make it make sense
+     *
+     * DEV NOTES (Multiplayer)
+     * Nevermind, animateTick works fine when running on a server
      */
     @Override
-    public void tick(BlockState state, ServerLevel level, BlockPos pos, RandomSource random) {
+    public void animateTick(BlockState state, Level level, BlockPos pos, RandomSource random) {
         if (!level.isClientSide()) { LeftForgotten.LOGGER.info("Level is Server"); } else { LeftForgotten.LOGGER.info("Level is Client"); }
         BlockState above = level.getBlockState(pos.above());
         boolean hasLeavesAbove = above.is(LFBlocks.LEAVES.get());

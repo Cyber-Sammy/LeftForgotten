@@ -1,17 +1,19 @@
 {
   "type": "minecraft:crafting_shaped",
-  "category": "building",
+  "category": "redstone",
   "key": {
     "#": {
-      "item": "left_forgotten:clay_ball"
+      "item": "left_forgotten:iron_ore"
     }
   },
   "pattern": [
     "##",
+    "##",
     "##"
   ],
   "result": {
-    "item": "left_forgotten:clay"
+    "count": 3,
+    "item": "left_forgotten:iron_door"
   },
   "show_notification": true
 }

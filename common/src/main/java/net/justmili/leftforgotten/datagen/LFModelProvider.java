@@ -95,6 +95,27 @@ public class LFModelProvider extends ImprovedModelProvider {
                 .put(TextureSlot.SIDE, TextureMapping.getBlockTexture(LFBlocks.TNT.get(), "_side"))
                 .put(TextureSlot.BOTTOM, TextureMapping.getBlockTexture(LFBlocks.TNT.get(), "_bottom"))
         );
+        createCube(blockGen, LFBlocks.IRON_BLOCK.get(), RotationType.NONE,
+            ModelTemplates.CUBE_BOTTOM_TOP,
+            new TextureMapping()
+                .put(TextureSlot.TOP, TextureMapping.getBlockTexture(LFBlocks.IRON_BLOCK.get(), "_top"))
+                .put(TextureSlot.SIDE, TextureMapping.getBlockTexture(LFBlocks.IRON_BLOCK.get(), "_side"))
+                .put(TextureSlot.BOTTOM, TextureMapping.getBlockTexture(LFBlocks.IRON_BLOCK.get(), "_bottom"))
+        );
+        createCube(blockGen, LFBlocks.GOLD_BLOCK.get(), RotationType.NONE,
+            ModelTemplates.CUBE_BOTTOM_TOP,
+            new TextureMapping()
+                .put(TextureSlot.TOP, TextureMapping.getBlockTexture(LFBlocks.GOLD_BLOCK.get(), "_top"))
+                .put(TextureSlot.SIDE, TextureMapping.getBlockTexture(LFBlocks.GOLD_BLOCK.get(), "_side"))
+                .put(TextureSlot.BOTTOM, TextureMapping.getBlockTexture(LFBlocks.GOLD_BLOCK.get(), "_bottom"))
+        );
+        createCube(blockGen, LFBlocks.DIAMOND_BLOCK.get(), RotationType.NONE,
+            ModelTemplates.CUBE_BOTTOM_TOP,
+            new TextureMapping()
+                .put(TextureSlot.TOP, TextureMapping.getBlockTexture(LFBlocks.DIAMOND_BLOCK.get(), "_top"))
+                .put(TextureSlot.SIDE, TextureMapping.getBlockTexture(LFBlocks.DIAMOND_BLOCK.get(), "_side"))
+                .put(TextureSlot.BOTTOM, TextureMapping.getBlockTexture(LFBlocks.DIAMOND_BLOCK.get(), "_bottom"))
+        );
 
         // Alone Redstone
         blockGen.createDoor(LFBlocks.IRON_DOOR.get());

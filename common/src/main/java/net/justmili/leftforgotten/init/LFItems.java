@@ -82,6 +82,9 @@ public class LFItems {
     public static final RegistrySupplier<Item> GLASS_PANE = block(LFBlocks.GLASS_PANE);
     public static final RegistrySupplier<Item> BOOKSHELF = block(LFBlocks.BOOKSHELF);
     public static final RegistrySupplier<Item> TNT = block(LFBlocks.TNT);
+    public static final RegistrySupplier<Item> IRON_BLOCK = block(LFBlocks.IRON_BLOCK);
+    public static final RegistrySupplier<Item> GOLD_BLOCK = block(LFBlocks.GOLD_BLOCK);
+    public static final RegistrySupplier<Item> DIAMOND_BLOCK = block(LFBlocks.DIAMOND_BLOCK);
 
     // Alone Redstone
     public static final RegistrySupplier<Item> IRON_DOOR = doubleBlock(LFBlocks.IRON_DOOR);

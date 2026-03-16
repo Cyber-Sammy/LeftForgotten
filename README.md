@@ -9,6 +9,8 @@ _"[For some reason this concept comes to my head sometimes: The old Minecraft al
 But the alpha world is dark, because it's buried under the modern world. And there are no mobs, not even hostile mobs. Because everyone left that place ages ago.](https://x.com/SlimerSlimy/status/2026360433544683796)"_<br>
 And so I got a bit inspired and made the mod.
 
+***Yes I know there is Alpha Below but I genuinely don't care, I think my work is good and either way this project was so I can test my abilities as well as give something to the community.***
+
 ## Shameless Promotion
 If you like this, go check out [True End](https://modrinth.com/mod/true_end), as it is a mod that me and my team have spent countless hours on for the past 2, almost 3 years! :3<br>
 Fun fact: a lot of Left Forgotten's codebase is based on True End's because of how similar they are

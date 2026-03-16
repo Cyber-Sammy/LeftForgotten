@@ -1,12 +1,12 @@
 {
   "parent": "minecraft:recipes/root",
   "criteria": {
-    "has_brick": {
+    "has_gold_block": {
       "conditions": {
         "items": [
           {
             "items": [
-              "left_forgotten:brick"
+              "left_forgotten:gold_block"
             ]
           }
         ]
@@ -15,20 +15,20 @@
     },
     "has_the_recipe": {
       "conditions": {
-        "recipe": "left_forgotten:bricks"
+        "recipe": "left_forgotten:gold_ingot_from_gold_block"
       },
       "trigger": "minecraft:recipe_unlocked"
     }
   },
   "requirements": [
     [
-      "has_brick",
+      "has_gold_block",
       "has_the_recipe"
     ]
   ],
   "rewards": {
     "recipes": [
-      "left_forgotten:bricks"
+      "left_forgotten:gold_ingot_from_gold_block"
     ]
   },
   "sends_telemetry_event": false

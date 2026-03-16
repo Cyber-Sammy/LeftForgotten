@@ -11,8 +11,8 @@ import java.util.function.Consumer;
 public class DatagenDataUtil {
     public static class Recipes {
         public static class Crafting {
-            public static void shapeless(Consumer<FinishedRecipe> writer, RecipeCategory category, Item output, int count, Item... inputs) {
-                ShapelessRecipeBuilder builder = ShapelessRecipeBuilder.shapeless(category, output, count);
+            public static void shapeless(Consumer<FinishedRecipe> writer, RecipeCategory category, Item output, int outCount, Item... inputs) {
+                ShapelessRecipeBuilder builder = ShapelessRecipeBuilder.shapeless(category, output, outCount);
                 for (Item input : inputs) builder.requires(input);
                 String inputNames = Arrays.stream(inputs)
                     .map(i -> RecipeProvider.getItemName(i))
@@ -22,6 +22,23 @@ public class DatagenDataUtil {
             }
             public static void shapeless(Consumer<FinishedRecipe> writer, RecipeCategory category, Item output, Item... inputs) {
                 shapeless(writer, category, output, 1, inputs);
+            }
+            public static void shaped2x2(Consumer<FinishedRecipe> writer, RecipeCategory category, Item material, Item output, int outCount) {
+                ShapedRecipeBuilder.shaped(category, output, outCount)
+                    .define('#', material)
+                    .pattern("##")
+                    .pattern("##")
+                    .unlockedBy(RecipeProvider.getHasName(material), RecipeProvider.has(material))
+                    .save(writer, LeftForgotten.asResource(RecipeProvider.getItemName(output)));
+            }
+            public static void shaped3x3(Consumer<FinishedRecipe> writer, RecipeCategory category, Item material, Item output, int outCount) {
+                ShapedRecipeBuilder.shaped(category, output, outCount)
+                    .define('#', material)
+                    .pattern("###")
+                    .pattern("###")
+                    .pattern("###")
+                    .unlockedBy(RecipeProvider.getHasName(material), RecipeProvider.has(material))
+                    .save(writer, LeftForgotten.asResource(RecipeProvider.getItemName(output)));
             }
         }
         public static class Building {

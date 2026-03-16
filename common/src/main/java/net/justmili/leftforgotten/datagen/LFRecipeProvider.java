@@ -66,7 +66,7 @@ public class LFRecipeProvider extends RecipeProvider {
         Processing.cut(writer, LFItems.MOSSY_COBBLESTONE.get(), LFItems.MOSSY_COBBLESTONE_WALL.get());
 
         // Bricks
-        twoByTwoPacker(writer, RecipeCategory.BUILDING_BLOCKS, LFItems.BRICKS.get(), LFItems.BRICK.get());
+        Crafting.shaped2x2(writer, RecipeCategory.BUILDING_BLOCKS, LFItems.BRICKS.get(), LFItems.BRICK.get(), 1);
         Building.stairs(writer, LFItems.BRICKS.get(), LFItems.BRICK_STAIRS.get());
         Building.slab(writer, LFItems.BRICKS.get(), LFItems.BRICK_SLAB.get());
         Building.wall(writer, LFItems.BRICKS.get(), LFItems.BRICK_WALL.get());
@@ -75,7 +75,7 @@ public class LFRecipeProvider extends RecipeProvider {
         Processing.cut(writer, LFItems.BRICKS.get(), LFItems.BRICK_WALL.get());
 
         // Clay & Brick item
-        twoByTwoPacker(writer, RecipeCategory.BUILDING_BLOCKS, LFItems.CLAY.get(), LFItems.CLAY_BALL.get());
+        Crafting.shaped2x2(writer, RecipeCategory.BUILDING_BLOCKS, LFItems.CLAY.get(), LFItems.CLAY_BALL.get(), 1);
         Processing.smelt(writer, LFItems.CLAY_BALL.get(), LFItems.BRICK.get(), 0.3f);
 
         // Glass
@@ -103,12 +103,7 @@ public class LFRecipeProvider extends RecipeProvider {
             .save(writer);
 
         // Wood 6-sided
-        ShapedRecipeBuilder.shaped(RecipeCategory.BUILDING_BLOCKS, LFItems.WOOD_6_SIDED.get(), 3)
-            .define('#', LFItems.WOOD.get())
-            .pattern("##")
-            .pattern("##")
-            .unlockedBy(getHasName(LFItems.WOOD.get()), has(LFItems.WOOD.get()))
-            .save(writer);
+        Crafting.shaped2x2(writer, RecipeCategory.BUILDING_BLOCKS, LFItems.WOOD.get(), LFItems.WOOD_6_SIDED.get(), 3);
 
         // Sticks
         ShapedRecipeBuilder.shaped(RecipeCategory.MISC, Items.STICK, 4)
@@ -126,11 +121,17 @@ public class LFRecipeProvider extends RecipeProvider {
             .pattern("###")
             .unlockedBy(getHasName(LFItems.COBBLESTONE.get()), has(LFItems.COBBLESTONE.get()))
             .save(writer, LeftForgotten.asResource("furnace"));
-        ShapedRecipeBuilder.shaped(RecipeCategory.BUILDING_BLOCKS, Items.CRAFTING_TABLE, 1)
-            .define('#', LFItems.WOODEN_PLANKS.get())
-            .pattern("##")
-            .pattern("##")
-            .unlockedBy(getHasName(LFItems.WOODEN_PLANKS.get()), has(LFItems.WOODEN_PLANKS.get()))
-            .save(writer, LeftForgotten.asResource("crafting_table"));
+        Crafting.shaped2x2(writer, RecipeCategory.BUILDING_BLOCKS, LFItems.WOODEN_PLANKS.get(), Items.CRAFTING_TABLE, 1);
+
+        // Resource Blocks
+        Crafting.shaped3x3(writer, RecipeCategory.BUILDING_BLOCKS, LFItems.IRON_BLOCK.get(), Items.IRON_INGOT, 1);
+        Crafting.shaped3x3(writer, RecipeCategory.BUILDING_BLOCKS, LFItems.GOLD_BLOCK.get(), Items.GOLD_INGOT, 1);
+        Crafting.shaped3x3(writer, RecipeCategory.BUILDING_BLOCKS, LFItems.DIAMOND_BLOCK.get(), Items.DIAMOND, 1);
+        Crafting.shapeless(writer, RecipeCategory.MISC, Items.IRON_INGOT, 9, LFItems.IRON_BLOCK.get());
+        Crafting.shapeless(writer, RecipeCategory.MISC, Items.GOLD_INGOT, 9, LFItems.GOLD_BLOCK.get());
+        Crafting.shapeless(writer, RecipeCategory.MISC, Items.DIAMOND, 9, LFItems.DIAMOND_BLOCK.get());
+
+        // Alone Redstone
+        Building.door(writer, LFItems.IRON_ORE.get(), LFItems.IRON_DOOR.get());
     }
 }

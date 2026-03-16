@@ -9,10 +9,18 @@ import net.minecraft.world.level.levelgen.GenerationStep;
 import net.minecraft.world.level.levelgen.placement.PlacedFeature;
 
 public class LFBiomeModifiers {
-    private static final ResourceKey<PlacedFeature> BRITTLE_BEDROCK = ResourceKey.create(Registries.PLACED_FEATURE, LeftForgotten.asResource("brittle_bedrock"));
-    private static final ResourceKey<PlacedFeature> RED_FLOWER = ResourceKey.create(Registries.PLACED_FEATURE, LeftForgotten.asResource("red_flower"));
-    private static final ResourceKey<PlacedFeature> YELLOW_FLOWER = ResourceKey.create(Registries.PLACED_FEATURE, LeftForgotten.asResource("yellow_flower"));
-    private static final ResourceKey<PlacedFeature> PATCH_CACTUS = ResourceKey.create(Registries.PLACED_FEATURE, LeftForgotten.asResource("patch_cactus"));
+    private static final ResourceKey<PlacedFeature> BRITTLE_BEDROCK =
+        ResourceKey.create(Registries.PLACED_FEATURE, LeftForgotten.asResource("brittle_bedrock"));
+    private static final ResourceKey<PlacedFeature> RED_FLOWER =
+        ResourceKey.create(Registries.PLACED_FEATURE, LeftForgotten.asResource("red_flower"));
+    private static final ResourceKey<PlacedFeature> YELLOW_FLOWER =
+        ResourceKey.create(Registries.PLACED_FEATURE, LeftForgotten.asResource("yellow_flower"));
+    private static final ResourceKey<PlacedFeature> PATCH_CACTUS =
+        ResourceKey.create(Registries.PLACED_FEATURE, LeftForgotten.asResource("patch_cactus"));
+    private static final ResourceKey<PlacedFeature> PATCH_RED_MUSHROOM =
+        ResourceKey.create(Registries.PLACED_FEATURE, LeftForgotten.asResource("patch_red_mushroom"));
+    private static final ResourceKey<PlacedFeature> PATCH_BROWN_MUSHROOM =
+        ResourceKey.create(Registries.PLACED_FEATURE, LeftForgotten.asResource("patch_brown_mushroom"));
 
     public static void register() {
         BiomeModifications.addFeature(
@@ -43,6 +51,22 @@ public class LFBiomeModifiers {
             ),
             GenerationStep.Decoration.VEGETAL_DECORATION,
             PATCH_CACTUS
+        );
+        BiomeModifications.addFeature(
+            BiomeSelectors.includeByKey(
+                ResourceKey.create(Registries.BIOME, LeftForgotten.asResource("plains")),
+                ResourceKey.create(Registries.BIOME, LeftForgotten.asResource("forest"))
+            ),
+            GenerationStep.Decoration.VEGETAL_DECORATION,
+            PATCH_RED_MUSHROOM
+        );
+        BiomeModifications.addFeature(
+            BiomeSelectors.includeByKey(
+                ResourceKey.create(Registries.BIOME, LeftForgotten.asResource("plains")),
+                ResourceKey.create(Registries.BIOME, LeftForgotten.asResource("forest"))
+            ),
+            GenerationStep.Decoration.VEGETAL_DECORATION,
+            PATCH_RED_MUSHROOM
         );
     }
 }

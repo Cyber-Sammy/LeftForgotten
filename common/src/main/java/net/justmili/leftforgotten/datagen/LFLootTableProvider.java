@@ -116,6 +116,9 @@ public class LFLootTableProvider extends LootTableProvider {
                 LootItem.lootTableItem(Items.BOOK)
                     .apply(SetItemCountFunction.setCount(ConstantValue.exactly(3)))));
             dropSelf(LFBlocks.TNT.get());
+            dropSelf(LFBlocks.IRON_BLOCK.get());
+            dropSelf(LFBlocks.GOLD_BLOCK.get());
+            dropSelf(LFBlocks.DIAMOND_BLOCK.get());
 
             // Alone Redstone
             add(LFBlocks.IRON_DOOR.get(), createDoorTable(LFBlocks.IRON_DOOR.get()));

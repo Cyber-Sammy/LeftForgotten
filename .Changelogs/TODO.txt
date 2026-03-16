@@ -1,11 +1,6 @@
-TODO (LF 1.1) / For March 16th 2026:
-- (BONUS) Add cacti and mushrooms to the world generation
-  - Add mushrooms to worldgen
-- (BONUS) Add old resource (Diamonds, iron, gold) blocks - only craftable with Polymorph
-- Somehow make Datagen files generate in Common
-
 TODO (LF 1.1) / For March 17-18th 2026:
 - Recreate the old boat
+- Somehow make Datagen files generate in Common
 
 TODO (LF 1.1) / For March 19th-30th 2026:
 - Update to newer versions

@@ -92,6 +92,9 @@ public class LFBlocks {
     public static final RegistrySupplier<Block> GLASS_PANE = REGISTRY.register("glass_pane", GlassPane::new);
     public static final RegistrySupplier<Block> BOOKSHELF = REGISTRY.register("bookshelf", Bookshelf::new);
     public static final RegistrySupplier<Block> TNT = REGISTRY.register("tnt", Tnt::new);
+    public static final RegistrySupplier<Block> IRON_BLOCK = REGISTRY.register("iron_block", IronBlock::new);
+    public static final RegistrySupplier<Block> GOLD_BLOCK = REGISTRY.register("gold_block", GoldBlock::new);
+    public static final RegistrySupplier<Block> DIAMOND_BLOCK = REGISTRY.register("diamond_block", DiamondBlock::new);
 
     // Alone Redstone
     public static final RegistrySupplier<Block> IRON_DOOR = REGISTRY.register("iron_door", IronDoor::new);
