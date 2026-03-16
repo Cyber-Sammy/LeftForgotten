@@ -12,8 +12,8 @@ sourceSets {
 
 loom {
     forge {
-        mixinConfig "left_forgotten.mixins.json"
-        mixinConfig "left_forgotten_forge.mixins.json"
+        mixinConfig "left_forgotten.mixins.json",
+                "left_forgotten_forge.mixins.json"
     }
 
     runs {
