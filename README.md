@@ -17,7 +17,7 @@ It is dark and abandoned, untouched in years and shadowed by the overworld above
 This is not a horror mod, but rather a adventure and decoration mod. Just plain old **Minecraft Alpha 1.1.2_01** with a few remnants of player activity from many years ago.<br>
 
 ## Features
-- Is multi-loader and multi-version
+- Is (supposed to be) multi-loader and multi-version
   - Checkmate, Alpha Below kekw (Alpha Below is pretty cool despite being just on Fabric 1.20.1)
 - A dimension based on Minecraft Alpha 1.1.2_01
   - Accessible by going into the Overworld void

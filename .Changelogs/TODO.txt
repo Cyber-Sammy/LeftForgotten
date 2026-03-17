@@ -1,5 +1,5 @@
 TODO (LF 1.1) / For March 18-19th 2026:
-- (Awaiting Bonus Content Poll results) Add texture and model swapping for Crafting Table, Furnace and Chest
+- Add texture and model swapping for Crafting Table, Furnace and Chest
 
 TODO (LF 1.1) / For March 20-30th 2026:
 - Update to newer versions
