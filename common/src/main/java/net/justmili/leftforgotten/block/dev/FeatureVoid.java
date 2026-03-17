@@ -47,7 +47,6 @@ public class FeatureVoid extends Block {
      */
     @Override
     public void animateTick(BlockState state, Level level, BlockPos pos, RandomSource random) {
-        if (!level.isClientSide()) { LeftForgotten.LOGGER.info("Level is Server"); } else { LeftForgotten.LOGGER.info("Level is Client"); }
         BlockState above = level.getBlockState(pos.above());
         boolean hasLeavesAbove = above.is(LFBlocks.LEAVES.get());
 

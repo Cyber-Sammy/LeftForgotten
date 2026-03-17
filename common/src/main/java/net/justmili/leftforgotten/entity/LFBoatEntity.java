@@ -1,5 +1,6 @@
 package net.justmili.leftforgotten.entity;
 
+import net.justmili.leftforgotten.LeftForgotten;
 import net.justmili.leftforgotten.init.LFEntities;
 import net.justmili.leftforgotten.init.LFItems;
 import net.minecraft.core.particles.ParticleTypes;
@@ -22,7 +23,6 @@ public class LFBoatEntity extends Boat {
     public LFBoatEntity(EntityType<? extends Boat> type, Level level) {
         super(type, level);
     }
-
     public LFBoatEntity(Level level, double x, double y, double z) {
         this(LFEntities.BOAT.get(), level);
         setPos(x, y, z);
@@ -34,19 +34,21 @@ public class LFBoatEntity extends Boat {
         return new ItemStack(LFItems.BOAT.get());
     }
 
-    private void breakBoat() {
-        if (!level().isClientSide) {
-            spawnAtLocation(new ItemStack(LFItems.WOODEN_PLANKS.get(), 3));
-            spawnAtLocation(new ItemStack(Items.STICK, 2));
-        }
-        discard();
-    }
-
     @Override
     public boolean getPaddleState(int side) {
         return false;
     }
 
+    private void breakBoat() {
+        if (level().isClientSide) {
+            discard();
+        } else {
+            if (isRemoved()) return;
+            spawnAtLocation(new ItemStack(LFItems.WOODEN_PLANKS.get(), 3));
+            spawnAtLocation(new ItemStack(Items.STICK, 2));
+            discard();
+        }
+    }
     @Override
     public void tick() {
         Vec3 vel = getDeltaMovement();
@@ -56,19 +58,10 @@ public class LFBoatEntity extends Boat {
 
         Vec3 newVel = getDeltaMovement();
         double speedAfter = Math.sqrt(newVel.x * newVel.x + newVel.z * newVel.z);
-
-        boolean hardImpact = speedBefore > BREAK_SPEED_THRESHOLD
-            && speedAfter < speedBefore * 0.4;
-
-        if (hardImpact) {
-            if (level() instanceof ServerLevel serverLevel) {
-                serverLevel.sendParticles(ParticleTypes.EXPLOSION,
-                    getX(), getY() + 0.5, getZ(), 3, 0.3, 0.1, 0.3, 0.0);
-            }
+        if (speedBefore > BREAK_SPEED_THRESHOLD && speedAfter < speedBefore * 0.4) {
             breakBoat();
         }
     }
-
     @Override
     public boolean hurt(DamageSource source, float amount) {
         if (isInvulnerableTo(source)) return false;
@@ -86,7 +79,6 @@ public class LFBoatEntity extends Boat {
         super.addAdditionalSaveData(tag);
         tag.putFloat("Health", health);
     }
-
     @Override
     public void readAdditionalSaveData(CompoundTag tag) {
         super.readAdditionalSaveData(tag);
