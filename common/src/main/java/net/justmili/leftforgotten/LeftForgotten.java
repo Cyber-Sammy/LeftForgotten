@@ -1,10 +1,7 @@
 package net.justmili.leftforgotten;
 
 import dev.architectury.event.events.common.TickEvent;
-import net.justmili.leftforgotten.init.Events;
-import net.justmili.leftforgotten.init.LFBlocks;
-import net.justmili.leftforgotten.init.LFItems;
-import net.justmili.leftforgotten.init.LFTab;
+import net.justmili.leftforgotten.init.*;
 import net.minecraft.resources.ResourceLocation;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
@@ -21,6 +18,7 @@ public final class LeftForgotten {
         LFBlocks.register();
         LFItems.register();
         LFTab.register();
+        LFEntities.register();
 
         Events.register();
     }

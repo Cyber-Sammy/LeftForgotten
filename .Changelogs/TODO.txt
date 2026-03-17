@@ -1,6 +1,11 @@
 TODO (LF 1.1) / For March 17-18th 2026:
 - Recreate the old boat
 
+ISSUES:
+- Spawns oak looking boat instead of my textures
+- Drops items when hit in creative
+- In creative, middle-clicking the boat gives wooden planks
+
 TODO (LF 1.1) / For March 19th-30th 2026:
 - Update to newer versions
 

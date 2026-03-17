@@ -58,5 +58,6 @@
   "block.left_forgotten.iron_door": "Iron Door",
   "block.left_forgotten.feature_void": "Feature Void",
   "item.left_forgotten.clay_ball": "Clay Ball",
-  "item.left_forgotten.brick": "Brick"
+  "item.left_forgotten.brick": "Brick",
+  "item.left_forgotten.boat": "Boat"
 }

@@ -128,5 +128,6 @@ public class LFModelProvider extends ImprovedModelProvider {
     public void generateItemModels(ItemModelGenerators itemGen) {
         createFlatItem(itemGen, LFItems.CLAY_BALL.get());
         createFlatItem(itemGen, LFItems.BRICK.get());
+        createFlatItem(itemGen, LFItems.BOAT.get());
     }
 }

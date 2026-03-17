@@ -133,5 +133,13 @@ public class LFRecipeProvider extends RecipeProvider {
 
         // Alone Redstone
         Building.door(writer, LFItems.IRON_ORE.get(), LFItems.IRON_DOOR.get());
+
+        // Boat
+        ShapedRecipeBuilder.shaped(RecipeCategory.TRANSPORTATION, LFItems.BOAT.get())
+            .define('#', LFItems.WOODEN_PLANKS.get())
+            .pattern("# #")
+            .pattern("###")
+            .unlockedBy(getHasName(LFItems.WOODEN_PLANKS.get()), has(LFItems.WOODEN_PLANKS.get()))
+            .save(writer, LeftForgotten.asResource("boat"));
     }
 }

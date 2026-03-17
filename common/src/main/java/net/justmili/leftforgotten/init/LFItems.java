@@ -3,6 +3,7 @@ package net.justmili.leftforgotten.init;
 import dev.architectury.registry.registries.DeferredRegister;
 import dev.architectury.registry.registries.RegistrySupplier;
 import net.justmili.leftforgotten.LeftForgotten;
+import net.justmili.leftforgotten.item.Boat;
 import net.justmili.leftforgotten.item.Brick;
 import net.justmili.leftforgotten.item.ClayBall;
 import net.minecraft.core.registries.Registries;
@@ -96,6 +97,7 @@ public class LFItems {
     // Misc
     public static final RegistrySupplier<Item> CLAY_BALL = register("clay_ball", ClayBall::new);
     public static final RegistrySupplier<Item> BRICK = register("brick", Brick::new);
+    public static final RegistrySupplier<Item> BOAT = register("boat", properties -> new Boat());
 
     private static <T extends Item> RegistrySupplier<T> register(String name, Function<Item.Properties, T> itemBuilder) {
         //var key = ResourceKey.create(Registries.ITEM, LeftForgotten.asResource(name)); // not needed right now
