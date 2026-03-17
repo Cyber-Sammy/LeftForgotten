@@ -1,11 +1,10 @@
 package net.justmili.leftforgotten.entity;
 
+import dev.architectury.platform.Platform;
 import net.justmili.leftforgotten.LeftForgotten;
 import net.justmili.leftforgotten.init.LFEntities;
 import net.justmili.leftforgotten.init.LFItems;
-import net.minecraft.core.particles.ParticleTypes;
 import net.minecraft.nbt.CompoundTag;
-import net.minecraft.server.level.ServerLevel;
 import net.minecraft.world.damagesource.DamageSource;
 import net.minecraft.world.entity.EntityType;
 import net.minecraft.world.entity.player.Player;
@@ -39,11 +38,8 @@ public class LFBoatEntity extends Boat {
         return false;
     }
 
-    private void breakBoat() {
-        if (level().isClientSide) {
-            discard();
-        } else {
-            if (isRemoved()) return;
+    public void breakOnImpactOnServer() {
+        if (!level().isClientSide && !isRemoved()) {
             spawnAtLocation(new ItemStack(LFItems.WOODEN_PLANKS.get(), 3));
             spawnAtLocation(new ItemStack(Items.STICK, 2));
             discard();
@@ -59,7 +55,10 @@ public class LFBoatEntity extends Boat {
         Vec3 newVel = getDeltaMovement();
         double speedAfter = Math.sqrt(newVel.x * newVel.x + newVel.z * newVel.z);
         if (speedBefore > BREAK_SPEED_THRESHOLD && speedAfter < speedBefore * 0.4) {
-            breakBoat();
+            if (level().isClientSide) {
+                BoatImpactPacket.send(getId());
+                discard();
+            }
         }
     }
     @Override
@@ -69,9 +68,29 @@ public class LFBoatEntity extends Boat {
             boolean isCreative = source.getEntity() instanceof Player player && player.getAbilities().instabuild;
             if (isCreative) { discard(); return true; }
             health -= amount;
-            if (health <= 0.0F) breakBoat();
+            if (health <= 0.0F && !isRemoved()) {
+                spawnAtLocation(new ItemStack(LFItems.WOODEN_PLANKS.get(), 3));
+                spawnAtLocation(new ItemStack(Items.STICK, 2));
+                discard();
+            }
         }
         return true;
+    }
+    @Override
+    public boolean isControlledByLocalInstance() {
+        if (Platform.isModLoaded("wurst") ||
+            Platform.isModLoaded("wurstclient") ||
+            Platform.isModLoaded("meteor-client") ||
+            Platform.isModLoaded("meteor") ||
+            Platform.isModLoaded("liquidbounce") ||
+            Platform.isModLoaded("future") ||
+            Platform.isModLoaded("impact") ||
+            Platform.isModLoaded("ares") ||
+            Platform.isModLoaded("sigma") ||
+            Platform.isModLoaded("inertia")) {
+            return false;
+        }
+        return super.isControlledByLocalInstance();
     }
 
     @Override
