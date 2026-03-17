@@ -1,4 +1,4 @@
-package net.justmili.leftforgotten.mixin;
+package net.justmili.leftforgotten.mixin.client;
 
 import net.justmili.leftforgotten.init.LFResources;
 import net.minecraft.client.Minecraft;

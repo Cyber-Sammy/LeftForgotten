@@ -20,13 +20,13 @@ public final class LeftForgotten {
         LFItems.register();
         LFTab.register();
         LFEntities.register();
-        BoatImpactPacket.register();
+        LFSounds.register();
 
+        BoatImpactPacket.register();
         Events.register();
     }
 
     private static final ConcurrentLinkedQueue<WorkItem> workQueue = new ConcurrentLinkedQueue<>();
-
     private static class WorkItem {
         final Runnable task;
         int ticksRemaining;
@@ -36,21 +36,20 @@ public final class LeftForgotten {
             this.ticksRemaining = delay;
         }
     }
-
-    public static void wait(int tickDelay, Runnable action) {
-        workQueue.add(new WorkItem(action, tickDelay));
-    }
-
     public static void processQueue() {
         for (Iterator<WorkItem> iterator = workQueue.iterator(); iterator.hasNext(); ) {
             WorkItem item = iterator.next();
             item.ticksRemaining--;
             if (item.ticksRemaining <= 0) {
                 item.task.run();
-                iterator.remove(); // safe to remove in ConcurrentLinkedQueue
+                iterator.remove();
             }
         }
     }
+    public static void wait(int tickDelay, Runnable action) {
+        workQueue.add(new WorkItem(action, tickDelay));
+    }
+
 
     public static ResourceLocation asResource(String path) {
         return new ResourceLocation(MOD_ID, path);

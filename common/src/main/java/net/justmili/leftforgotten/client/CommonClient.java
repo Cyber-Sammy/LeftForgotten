@@ -7,7 +7,7 @@ import net.fabricmc.api.Environment;
 import net.justmili.leftforgotten.LeftForgotten;
 import net.justmili.leftforgotten.entity.renderer.LFBoatRenderer;
 import net.justmili.leftforgotten.init.LFEntities;
-import net.justmili.leftforgotten.mixin.DimSpecialEffectsAccessor;
+import net.justmili.leftforgotten.mixin.accessors.DimSpecialEffectsAccessor;
 import net.justmili.leftforgotten.world.dimension.AlphaMinecraft;
 
 @Environment(EnvType.CLIENT)

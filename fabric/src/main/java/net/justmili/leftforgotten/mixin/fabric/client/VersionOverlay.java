@@ -1,4 +1,4 @@
-package net.justmili.leftforgotten.mixin.fabric;
+package net.justmili.leftforgotten.mixin.fabric.client;
 
 import net.justmili.leftforgotten.init.LFResources;
 import net.minecraft.client.Minecraft;

@@ -4,8 +4,8 @@
   "compatibilityLevel": "JAVA_17",
   "minVersion": "0.8",
   "client": [
-    "HudModifier",
-    "VersionOverlay"
+    "client.HudModifier",
+    "client.VersionOverlay"
   ],
   "mixins": [
     "BlockLootSubProviderMixin"

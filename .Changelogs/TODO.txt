@@ -1,4 +1,6 @@
 TODO (LF 1.1) / For March 18-19th 2026:
+- Fix played music because I don't hear nothin'
+  - Add language translations for the music
 - Add texture and model swapping for Crafting Table, Furnace and Chest
 
 TODO (LF 1.1) / For March 20-30th 2026:

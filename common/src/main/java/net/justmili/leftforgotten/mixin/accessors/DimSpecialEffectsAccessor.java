@@ -1,4 +1,4 @@
-package net.justmili.leftforgotten.mixin;
+package net.justmili.leftforgotten.mixin.accessors;
 
 import it.unimi.dsi.fastutil.objects.Object2ObjectMap;
 import net.minecraft.client.renderer.DimensionSpecialEffects;

@@ -37,8 +37,12 @@ This is not a horror mod, but rather a adventure and decoration mod. Just plain 
   - Alpha Food-Health System
   - Wool drops from sheep when damaged
   - Blocky lighting
+  - Old hurt sound
 - B o a t .
   - Aka crappy pre-1.9 boat that everyone knows and loves
+- Only music from Minecraft Volume Alpha in the dimension
+  - With a chance to get an unused track "Droopy Likes Your Face"
+  - With a chance to get screwed by music disc 13
 
 ## Dependencies and Mod Compatibility
 - Left Forgotten requires Architectury API (and Fabric API on Fabric)

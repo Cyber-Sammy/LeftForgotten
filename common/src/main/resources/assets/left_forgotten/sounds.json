@@ -1,0 +1,28 @@
+{
+  "entity.player.hurt": {
+    "sounds": [
+      {
+        "name": "left_forgotten:entity/player/hurt"
+      }
+    ]
+  },
+  "music.alpha": {
+    "sounds": [
+      { "name": "left_forgotten:music/game/13", "stream": true },
+      { "name": "left_forgotten:music/game/boo", "stream": true },
+      { "name": "left_forgotten:music/game/calm1", "stream": true },
+      { "name": "left_forgotten:music/game/calm2", "stream": true },
+      { "name": "left_forgotten:music/game/calm3", "stream": true },
+      { "name": "left_forgotten:music/game/hal1", "stream": true },
+      { "name": "left_forgotten:music/game/hal2", "stream": true },
+      { "name": "left_forgotten:music/game/hal3", "stream": true },
+      { "name": "left_forgotten:music/game/hal4", "stream": true },
+      { "name": "left_forgotten:music/game/nuance1", "stream": true },
+      { "name": "left_forgotten:music/game/nuance2", "stream": true },
+      { "name": "left_forgotten:music/game/piano1", "stream": true },
+      { "name": "left_forgotten:music/game/piano2", "stream": true },
+      { "name": "left_forgotten:music/game/piano3", "stream": true },
+      { "name": "left_forgotten:music/unused/droopy_likes_your_face", "stream": true }
+    ]
+  }
+}
