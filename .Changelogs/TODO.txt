@@ -1,10 +1,7 @@
-TODO (LF 1.1) / For March 17-18th 2026:
-- Recreate the old boat
+TODO (LF 1.1) / For March 18-19th 2026:
+- (Awaiting Bonus Content Poll results) Add texture and model swapping for Crafting Table, Furnace and Chest
 
-ISSUES:
-- Boat crashes the game due to using private fields
-
-TODO (LF 1.1) / For March 19th-30th 2026:
+TODO (LF 1.1) / For March 20-30th 2026:
 - Update to newer versions
 
 PLANNED FOR 1.1:

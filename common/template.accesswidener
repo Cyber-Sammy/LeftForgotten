@@ -57,5 +57,3 @@ transitive-accessible field net/minecraft/data/loot/BlockLootSubProvider WITH_SI
 transitive-accessible field net/minecraft/data/loot/BlockLootSubProvider WITHOUT_SILK_TOUCH_NOR_SHEARS Lnet/minecraft/loot/condition/LootCondition$Builder;
 transitive-accessible field net/minecraft/data/loot/BlockLootSubProvider SAPLING_DROP_CHANCE [F
 transitive-accessible field net/minecraft/data/loot/BlockLootSubProvider LEAVES_STICK_DROP_CHANCE [F
-
-accessible field net/minecraft/client/renderer/entity/BoatRenderer boatResources Ljava/util/Map;

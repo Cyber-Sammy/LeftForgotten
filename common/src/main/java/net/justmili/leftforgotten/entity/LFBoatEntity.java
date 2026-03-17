@@ -16,6 +16,8 @@ import net.minecraft.world.phys.Vec3;
 
 public class LFBoatEntity extends Boat {
     private static final double BREAK_SPEED_THRESHOLD = 0.2;
+    private static final float MAX_HEALTH = 4.0F;
+    private float health = MAX_HEALTH;
 
     public LFBoatEntity(EntityType<? extends Boat> type, Level level) {
         super(type, level);
@@ -55,12 +57,10 @@ public class LFBoatEntity extends Boat {
         Vec3 newVel = getDeltaMovement();
         double speedAfter = Math.sqrt(newVel.x * newVel.x + newVel.z * newVel.z);
 
-        // getStatus() is private — isOnGround() + speed loss is our best proxy for land impact
-        boolean hardLandImpact = speedBefore > BREAK_SPEED_THRESHOLD
-            && speedAfter < speedBefore * 0.4
-            && onGround();
+        boolean hardImpact = speedBefore > BREAK_SPEED_THRESHOLD
+            && speedAfter < speedBefore * 0.4;
 
-        if (hardLandImpact) {
+        if (hardImpact) {
             if (level() instanceof ServerLevel serverLevel) {
                 serverLevel.sendParticles(ParticleTypes.EXPLOSION,
                     getX(), getY() + 0.5, getZ(), 3, 0.3, 0.1, 0.3, 0.0);
@@ -74,15 +74,22 @@ public class LFBoatEntity extends Boat {
         if (isInvulnerableTo(source)) return false;
         if (!level().isClientSide) {
             boolean isCreative = source.getEntity() instanceof Player player && player.getAbilities().instabuild;
-            if (!isCreative) breakBoat();
-            else discard();
+            if (isCreative) { discard(); return true; }
+            health -= amount;
+            if (health <= 0.0F) breakBoat();
         }
         return true;
     }
 
     @Override
-    public void addAdditionalSaveData(CompoundTag tag) { super.addAdditionalSaveData(tag); }
+    public void addAdditionalSaveData(CompoundTag tag) {
+        super.addAdditionalSaveData(tag);
+        tag.putFloat("Health", health);
+    }
 
     @Override
-    public void readAdditionalSaveData(CompoundTag tag) { super.readAdditionalSaveData(tag); }
+    public void readAdditionalSaveData(CompoundTag tag) {
+        super.readAdditionalSaveData(tag);
+        health = tag.contains("Health") ? tag.getFloat("Health") : MAX_HEALTH;
+    }
 }
