@@ -18,6 +18,7 @@ public class LFTab {
             .icon(() -> new ItemStack(LFBlocks.GRASS_BLOCK.get())).displayItems((parameters, tabData) -> {
 
                 for (RegistrySupplier<Item> item : LFItems.REGISTRY) {
+                    if (item == LFItems.FEATURE_VOID) continue;
                     tabData.accept(item.get());
                 }
 
