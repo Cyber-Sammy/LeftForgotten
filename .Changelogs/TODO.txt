@@ -1,6 +1,4 @@
 TODO (LF 1.1) / For March 18-19th 2026:
-- Make the boat drop planks and sticks on breaking at high speed impact
-  - Might need to send a packet from client to server that a impact happened
 - (Awaiting Bonus Content Poll results) Add texture and model swapping for Crafting Table, Furnace and Chest
 
 TODO (LF 1.1) / For March 20-30th 2026:

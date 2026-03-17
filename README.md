@@ -1,18 +1,49 @@
 # Left Forgotten
-Left to fade away into distant memories<br>
-<br><br>
-*Competitor to Alpha Below*<br>
-*Based on a [tweet by @SlimerSlimy]() and Minecraft Alpha 1.1.2_01 <small>(the actual version, not the fangame)</small>*
+Left to fade away into distant memories
+<br>
+
+*Competitor to Alpha Below/The World Below*<br>
+*Based on a [tweet by @SlimerSlimy](https://x.com/SlimerSlimy/status/2026360433544683796) and Minecraft Alpha 1.1.2_01 <small>(the actual version, not the fangame)</small>*
 
 <hr>
 
 ## Why?
-Mainly just to play around with parts of [True End's]() code for soon coming Fabric+Forge port (and because I was bored)
+Mainly just to play around with parts of [True End's](https://modrinth.com/mod/true_end) code for soon coming Fabric+Forge port (and because I was bored)
 
 ## Description
-Deep below the Overworld bedrock layer lies a world of Minecraft golden days, left to be forgotten ages ago.<br>
+Left Forgotten adds a Alpha-like dimension accessible by blowing a hole in Overworld's bedrock layer wherever there is Brittle Bedrock.<br>
+It is dark and abandoned, untouched in years and shadowed by the overworld above with no mobs or anything alive other than some vegetation.<br>
+<br>
+This is not a horror mod, but rather a adventure and decoration mod. Just plain old **Minecraft Alpha 1.1.2_01** with a few remnants of player activity from many years ago.<br>
 
-... DESC. TO BE REWRITTEN
+## Features
+- Is multi-loader and multi-version
+  - Checkmate, Alpha Below kekw (Alpha Below is pretty cool despite being just on Fabric 1.20.1)
+- A dimension based on Minecraft Alpha 1.1.2_01
+  - Accessible by going into the Overworld void
+  - Escapable by either attempted death or flying up to the bedrock ceiling
+    - Leaving via death will cancel the damage and just teleport you to your spawnpoint
+  - World generation straight from 1.1.2_01
+    - Yes, there are Farlands
+- *"Old player activity"* features
+  - Chopped down trees (fully, one block left, not fully chopped down)
+- Nearly all blocks present in Minecraft Alpha 1.1.2_01
+  - With modern variants of them, mainly made for decoration
+- Minecraft Alpha's gameplay features
+  - Version Overlay
+  - Version-Accurate HUD
+  - No sprint
+  - No attack cooldown
+  - Alpha Food-Health System
+  - Wool drops from sheep when damaged
+  - Blocky lighting
+- B o a t .
+  - Aka crappy pre-1.9 boat that everyone knows and loves
+
+## Dependencies and Mod Compatibility
+- Left Forgotten requires Architectury API (and Fabric API on Fabric)
+- Left Forgotten recommends you install Polymorph
+- Left Forgotten is not compatible with True End due to very similar/duplicate codebases.
 
 <hr>
 
