@@ -1,6 +1,5 @@
 package net.justmili.leftforgotten.entity;
 
-import net.justmili.leftforgotten.init.LFBlocks;
 import net.justmili.leftforgotten.init.LFEntities;
 import net.justmili.leftforgotten.init.LFItems;
 import net.minecraft.core.particles.ParticleTypes;
@@ -8,8 +7,9 @@ import net.minecraft.nbt.CompoundTag;
 import net.minecraft.server.level.ServerLevel;
 import net.minecraft.world.damagesource.DamageSource;
 import net.minecraft.world.entity.EntityType;
+import net.minecraft.world.entity.player.Player;
 import net.minecraft.world.entity.vehicle.Boat;
-import net.minecraft.world.item.Item;
+import net.minecraft.world.item.ItemStack;
 import net.minecraft.world.item.Items;
 import net.minecraft.world.level.Level;
 import net.minecraft.world.phys.Vec3;
@@ -28,14 +28,14 @@ public class LFBoatEntity extends Boat {
     }
 
     @Override
-    public Item getDropItem() {
-        return LFItems.WOODEN_PLANKS.get();
+    public ItemStack getPickResult() {
+        return new ItemStack(LFItems.BOAT.get());
     }
 
     private void breakBoat() {
         if (!level().isClientSide) {
-            spawnAtLocation(LFItems.WOODEN_PLANKS.get(), 3);
-            spawnAtLocation(Items.STICK, 2);
+            spawnAtLocation(new ItemStack(LFItems.WOODEN_PLANKS.get(), 3));
+            spawnAtLocation(new ItemStack(Items.STICK, 2));
         }
         discard();
     }
@@ -72,11 +72,13 @@ public class LFBoatEntity extends Boat {
     @Override
     public boolean hurt(DamageSource source, float amount) {
         if (isInvulnerableTo(source)) return false;
-        if (!level().isClientSide) breakBoat();
+        if (!level().isClientSide) {
+            boolean isCreative = source.getEntity() instanceof Player player && player.getAbilities().instabuild;
+            if (!isCreative) breakBoat();
+            else discard();
+        }
         return true;
     }
-
-    // getVariant() returns OAK by default from defineSynchedData, no override needed
 
     @Override
     public void addAdditionalSaveData(CompoundTag tag) { super.addAdditionalSaveData(tag); }
