@@ -7,7 +7,6 @@
     "accessors.DimSpecialEffectsAccessor",
     "accessors.TrackAccessor",
     "client.BlockyLighting",
-    "client.MusicPlayerMixin",
     "client.SoundEngineMixin"
   ],
   "mixins": [

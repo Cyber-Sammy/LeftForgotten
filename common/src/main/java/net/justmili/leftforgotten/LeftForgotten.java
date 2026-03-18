@@ -1,7 +1,6 @@
 package net.justmili.leftforgotten;
 
 import dev.architectury.event.events.common.TickEvent;
-import net.justmili.leftforgotten.debug.LFDebug;
 import net.justmili.leftforgotten.entity.BoatImpactPacket;
 import net.justmili.leftforgotten.init.*;
 import net.minecraft.resources.ResourceLocation;
@@ -25,8 +24,6 @@ public final class LeftForgotten {
 
         BoatImpactPacket.register();
         Events.register();
-
-        LFDebug.hook();
     }
 
     private static final ConcurrentLinkedQueue<WorkItem> workQueue = new ConcurrentLinkedQueue<>();

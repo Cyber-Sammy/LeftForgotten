@@ -16,7 +16,7 @@
       "offset": 2
     },
     "music": {
-      "sound": "left_forgotten:music.game.hal1",
+      "sound": "minecraft:music.game",
       "min_delay": 12000,
       "max_delay": 24000,
       "replace_current_music": false
@@ -61,9 +61,16 @@
       "left_forgotten:redstone_ore",
       "left_forgotten:gold_ore",
       "left_forgotten:diamond_ore",
-      "left_forgotten:gravel_patch"
+      "left_forgotten:gravel_patch",
+      "left_forgotten:clay_ore"
     ],
-    [],
+    [
+      "left_forgotten:yellow_flower",
+      "left_forgotten:red_flower",
+      "left_forgotten:patch_brown_mushroom",
+      "left_forgotten:patch_red_mushroom",
+      "left_forgotten:patch_cactus"
+    ],
     []
   ]
 }
