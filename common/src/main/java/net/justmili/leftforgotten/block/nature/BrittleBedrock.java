@@ -1,6 +1,6 @@
 package net.justmili.leftforgotten.block.nature;
 
-import net.justmili.leftforgotten.block.Common;
+import net.justmili.leftforgotten.block.CommonBlock;
 import net.minecraft.core.BlockPos;
 import net.minecraft.world.level.BlockGetter;
 import net.minecraft.world.level.block.Block;
@@ -14,7 +14,7 @@ public class BrittleBedrock extends Block {
             .mapColor(MapColor.STONE)
             .instrument(NoteBlockInstrument.BASEDRUM)
             .strength(-1.0F, 7.0F)
-            .noLootTable().isValidSpawn(Common::never));
+            .noLootTable().isValidSpawn(CommonBlock::never));
     }
 
     @Override

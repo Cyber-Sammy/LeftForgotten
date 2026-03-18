@@ -15,7 +15,7 @@ import net.justmili.leftforgotten.block.building.stone.StonePressurePlate;
 import net.justmili.leftforgotten.block.building.stone.StoneSlab;
 import net.justmili.leftforgotten.block.building.stone.StoneStairs;
 import net.justmili.leftforgotten.block.building.wood.*;
-import net.justmili.leftforgotten.block.dev.FeatureVoid;
+import net.justmili.leftforgotten.block.dev.*;
 import net.justmili.leftforgotten.block.nature.*;
 import net.justmili.leftforgotten.block.stone.*;
 import net.justmili.leftforgotten.block.wood.Wood;
@@ -23,6 +23,8 @@ import net.justmili.leftforgotten.block.wood.Wood6Sided;
 import net.justmili.leftforgotten.block.wood.WoodenPlanks;
 import net.minecraft.core.registries.Registries;
 import net.minecraft.world.level.block.Block;
+
+import javax.naming.CompoundName;
 
 public class LFBlocks {
     public static final DeferredRegister<Block> REGISTRY = DeferredRegister.create(LeftForgotten.MOD_ID, Registries.BLOCK);
@@ -101,6 +103,9 @@ public class LFBlocks {
 
     // Dev
     public static final RegistrySupplier<Block> FEATURE_VOID = REGISTRY.register("feature_void", FeatureVoid::new);
+    public static final RegistrySupplier<Block> REMODEL_FURNACE = REGISTRY.register("remodel_furnace", RemodelFurnace::new);
+    public static final RegistrySupplier<Block> REMODEL_CRAFTING_TABLE = REGISTRY.register("remodel_crafting_table", RemodelCraftingTable::new);
+    public static final RegistrySupplier<Block> REMODEL_CHEST = REGISTRY.register("remodel_chest", RemodelChest::new);
 
     public static void register() {
         REGISTRY.register();

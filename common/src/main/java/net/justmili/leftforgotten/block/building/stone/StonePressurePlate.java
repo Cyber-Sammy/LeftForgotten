@@ -1,7 +1,7 @@
 
 package net.justmili.leftforgotten.block.building.stone;
 
-import net.justmili.leftforgotten.block.Common;
+import net.justmili.leftforgotten.block.CommonBlock;
 import net.minecraft.core.BlockPos;
 import net.minecraft.world.level.BlockGetter;
 import net.minecraft.world.level.block.PressurePlateBlock;
@@ -12,7 +12,7 @@ import net.minecraft.world.level.material.MapColor;
 
 public class StonePressurePlate extends PressurePlateBlock {
 	public StonePressurePlate() {
-		super(Sensitivity.MOBS, Properties.of().mapColor(MapColor.STONE).sound(SoundType.STONE).strength(1.5f, 6f).noOcclusion().isRedstoneConductor(Common::never).forceSolidOn(), BlockSetType.OAK);
+		super(Sensitivity.MOBS, Properties.of().mapColor(MapColor.STONE).sound(SoundType.STONE).strength(1.5f, 6f).noOcclusion().isRedstoneConductor(CommonBlock::never).forceSolidOn(), BlockSetType.OAK);
 	}
 
 	@Override

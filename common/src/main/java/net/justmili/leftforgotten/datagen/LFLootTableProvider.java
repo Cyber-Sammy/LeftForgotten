@@ -121,6 +121,9 @@ public class LFLootTableProvider extends LootTableProvider {
 
             // Alone Redstone
             add(LFBlocks.IRON_DOOR.get(), createDoorTable(LFBlocks.IRON_DOOR.get()));
+            dropSelf(LFBlocks.REMODEL_CRAFTING_TABLE.get());
+            dropSelf(LFBlocks.REMODEL_FURNACE.get());
+            dropSelf(LFBlocks.REMODEL_CHEST.get());
         }
 
         // this exact method exists on Forge, and is implemented via mixin by us on Fabric.

@@ -7,6 +7,8 @@
     "accessors.DimSpecialEffectsAccessor",
     "accessors.TrackAccessor",
     "client.BlockyLighting",
+    "client.RemodelBlocks",
+    "client.RemodelChests",
     "client.SoundEngineMixin"
   ],
   "mixins": [

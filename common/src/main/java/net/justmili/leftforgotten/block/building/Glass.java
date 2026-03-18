@@ -1,7 +1,7 @@
 
 package net.justmili.leftforgotten.block.building;
 
-import net.justmili.leftforgotten.block.Common;
+import net.justmili.leftforgotten.block.CommonBlock;
 import net.minecraft.core.BlockPos;
 import net.minecraft.core.Direction;
 import net.minecraft.world.level.BlockGetter;
@@ -20,9 +20,9 @@ public class Glass extends Block {
                 .sound(SoundType.GLASS)
                 .strength(0.3f)
                 .noOcclusion()
-                .isRedstoneConductor(Common::never)
-                .isSuffocating(Common::never)
-                .isViewBlocking(Common::never));
+                .isRedstoneConductor(CommonBlock::never)
+                .isSuffocating(CommonBlock::never)
+                .isViewBlocking(CommonBlock::never));
     }
 
 	@Override

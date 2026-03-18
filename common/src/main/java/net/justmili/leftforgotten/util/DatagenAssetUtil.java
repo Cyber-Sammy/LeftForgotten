@@ -158,6 +158,75 @@ public class DatagenAssetUtil {
             }
 
             /**
+             * Functional block templates
+             */
+            public static void createCraftingTable(BlockModelGenerators blockGen, Block table, Block bottomTexture) {
+                TextureMapping mapping = new TextureMapping()
+                    .put(TextureSlot.PARTICLE, TextureMapping.getBlockTexture(table, "_front"))
+                    .put(TextureSlot.DOWN, TextureMapping.getBlockTexture(bottomTexture))
+                    .put(TextureSlot.UP, TextureMapping.getBlockTexture(table, "_top"))
+                    .put(TextureSlot.NORTH, TextureMapping.getBlockTexture(table, "_front"))
+                    .put(TextureSlot.EAST, TextureMapping.getBlockTexture(table, "_side"))
+                    .put(TextureSlot.SOUTH, TextureMapping.getBlockTexture(table, "_front"))
+                    .put(TextureSlot.WEST, TextureMapping.getBlockTexture(table, "_side"));
+
+                ResourceLocation model = ModelTemplates.CUBE.create(table, mapping, blockGen.modelOutput);
+                blockGen.blockStateOutput.accept(BlockModelGenerators.createSimpleBlock(table, model));
+                blockGen.delegateItemModel(table, model);
+            }
+
+            // Specifically to recreate the model of the furnace with stone texture above and below
+            public static void createFurnaceCUSTOM(BlockModelGenerators blockGen, Block furnace, Block topBottomTexture) {
+                TextureMapping unlitMapping = new TextureMapping()
+                    .put(TextureSlot.SIDE, TextureMapping.getBlockTexture(furnace, "_side"))
+                    .put(TextureSlot.FRONT, TextureMapping.getBlockTexture(furnace, "_front"))
+                    .put(TextureSlot.TOP, TextureMapping.getBlockTexture(topBottomTexture));
+                TextureMapping litMapping = new TextureMapping()
+                    .put(TextureSlot.SIDE, TextureMapping.getBlockTexture(furnace, "_side"))
+                    .put(TextureSlot.FRONT, TextureMapping.getBlockTexture(furnace, "_front_on"))
+                    .put(TextureSlot.TOP, TextureMapping.getBlockTexture(topBottomTexture));
+
+                ResourceLocation unlitModel = ModelTemplates.CUBE_ORIENTABLE.create(furnace, unlitMapping, blockGen.modelOutput);
+                ResourceLocation litModel = ModelTemplates.CUBE_ORIENTABLE.create(
+                    TextureMapping.getBlockTexture(furnace, "_on"), litMapping, blockGen.modelOutput);
+
+                blockGen.blockStateOutput.accept(
+                    MultiVariantGenerator.multiVariant(furnace)
+                        .with(BlockModelGenerators.createHorizontalFacingDispatch())
+                        .with(PropertyDispatch.property(BlockStateProperties.LIT)
+                            .select(false, Variant.variant().with(VariantProperties.MODEL, unlitModel))
+                            .select(true, Variant.variant().with(VariantProperties.MODEL, litModel)))
+                );
+
+                blockGen.delegateItemModel(furnace, unlitModel);
+            }
+
+            public static void createFurnace(BlockModelGenerators blockGen, Block block) {
+                TextureMapping unlitMapping = new TextureMapping()
+                    .put(TextureSlot.SIDE, TextureMapping.getBlockTexture(block, "_side"))
+                    .put(TextureSlot.FRONT, TextureMapping.getBlockTexture(block, "_front"))
+                    .put(TextureSlot.TOP, TextureMapping.getBlockTexture(block, "_top"));
+                TextureMapping litMapping = new TextureMapping()
+                    .put(TextureSlot.SIDE, TextureMapping.getBlockTexture(block, "_side"))
+                    .put(TextureSlot.FRONT, TextureMapping.getBlockTexture(block, "_front_on"))
+                    .put(TextureSlot.TOP, TextureMapping.getBlockTexture(block, "_top"));
+
+                ResourceLocation unlitModel = ModelTemplates.CUBE_ORIENTABLE.create(block, unlitMapping, blockGen.modelOutput);
+                ResourceLocation litModel = ModelTemplates.CUBE_ORIENTABLE.create(
+                    TextureMapping.getBlockTexture(block, "_on"), litMapping, blockGen.modelOutput);
+
+                blockGen.blockStateOutput.accept(
+                    MultiVariantGenerator.multiVariant(block)
+                        .with(BlockModelGenerators.createHorizontalFacingDispatch())
+                        .with(PropertyDispatch.property(BlockStateProperties.LIT)
+                            .select(false, Variant.variant().with(VariantProperties.MODEL, unlitModel))
+                            .select(true, Variant.variant().with(VariantProperties.MODEL, litModel)))
+                );
+
+                blockGen.delegateItemModel(block, unlitModel);
+            }
+
+            /**
              * Individual
              * Magic or whatever
              * Portals

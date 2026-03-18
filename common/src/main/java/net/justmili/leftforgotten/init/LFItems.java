@@ -92,6 +92,9 @@ public class LFItems {
 
     // Dev
     public static final RegistrySupplier<Item> FEATURE_VOID = block(LFBlocks.FEATURE_VOID);
+    public static final RegistrySupplier<Item> REMODEL_CRAFTING_TABLE = block(LFBlocks.REMODEL_CRAFTING_TABLE);
+    public static final RegistrySupplier<Item> REMODEL_FURNACE = block(LFBlocks.REMODEL_FURNACE);
+    public static final RegistrySupplier<Item> REMODEL_CHEST = block(LFBlocks.REMODEL_CHEST);
 
     /// Items
     // Misc

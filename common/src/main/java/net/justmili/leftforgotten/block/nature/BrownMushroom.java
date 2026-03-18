@@ -1,6 +1,6 @@
 package net.justmili.leftforgotten.block.nature;
 
-import net.justmili.leftforgotten.block.Common;
+import net.justmili.leftforgotten.block.CommonBlock;
 import net.minecraft.data.worldgen.features.TreeFeatures;
 import net.minecraft.world.level.block.MushroomBlock;
 import net.minecraft.world.level.block.SoundType;
@@ -15,7 +15,7 @@ public class BrownMushroom extends MushroomBlock {
                 .randomTicks()
                 .instabreak()
                 .sound(SoundType.GRASS)
-                .hasPostProcess(Common::always)
+                .hasPostProcess(CommonBlock::always)
                 .pushReaction(PushReaction.DESTROY),
             TreeFeatures.HUGE_BROWN_MUSHROOM
         );

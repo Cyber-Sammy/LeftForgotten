@@ -1,0 +1,48 @@
+package net.justmili.leftforgotten.mixin.client;
+
+import com.mojang.blaze3d.vertex.PoseStack;
+import net.justmili.leftforgotten.init.LFBlocks;
+import net.justmili.leftforgotten.init.LFResources;
+import net.minecraft.client.Minecraft;
+import net.minecraft.client.renderer.MultiBufferSource;
+import net.minecraft.client.renderer.RenderType;
+import net.minecraft.client.renderer.block.BlockRenderDispatcher;
+import net.minecraft.client.renderer.blockentity.ChestRenderer;
+import net.minecraft.world.level.Level;
+import net.minecraft.world.level.block.entity.BlockEntity;
+import net.minecraft.world.level.block.entity.LidBlockEntity;
+import org.spongepowered.asm.mixin.Mixin;
+import org.spongepowered.asm.mixin.injection.At;
+import org.spongepowered.asm.mixin.injection.Inject;
+import org.spongepowered.asm.mixin.injection.callback.CallbackInfo;
+
+@Mixin(ChestRenderer.class)
+public class RemodelChests {
+
+    @Inject(method = "render", at = @At("HEAD"), cancellable = true)
+    private <T extends BlockEntity & LidBlockEntity> void lf$renderAlphaChest(T blockEntity, float partialTick, PoseStack poseStack,
+                                                                              MultiBufferSource buffer, int packedLight, int packedOverlay,
+                                                                              CallbackInfo ci) {
+        Level level = blockEntity.getLevel();
+        if (level == null) return;
+        if (!level.dimension().equals(LFResources.Levels.ALPHA_MINECRAFT)) return;
+
+        ci.cancel();
+
+        BlockRenderDispatcher dispatcher = Minecraft.getInstance().getBlockRenderer();
+        var state = LFBlocks.REMODEL_CHEST.get().defaultBlockState();
+        var model = dispatcher.getBlockModel(state);
+
+        poseStack.pushPose();
+        dispatcher.getModelRenderer().renderModel(
+            poseStack.last(),
+            buffer.getBuffer(RenderType.solid()),
+            state,
+            model,
+            1f, 1f, 1f,
+            packedLight,
+            packedOverlay
+        );
+        poseStack.popPose();
+    }
+}
