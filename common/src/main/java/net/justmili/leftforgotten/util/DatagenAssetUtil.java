@@ -1,9 +1,12 @@
 package net.justmili.leftforgotten.util;
 
+import java.util.Optional;
+
 import com.google.gson.JsonArray;
 import com.google.gson.JsonObject;
-import net.justmili.leftforgotten.LeftForgotten;
 import net.justmili.leftforgotten.init.LFBlocks;
+import org.jetbrains.annotations.Nullable;
+
 import net.minecraft.core.Direction;
 import net.minecraft.data.models.BlockModelGenerators;
 import net.minecraft.data.models.ItemModelGenerators;
@@ -11,16 +14,18 @@ import net.minecraft.data.models.blockstates.MultiVariantGenerator;
 import net.minecraft.data.models.blockstates.PropertyDispatch;
 import net.minecraft.data.models.blockstates.Variant;
 import net.minecraft.data.models.blockstates.VariantProperties;
-import net.minecraft.data.models.model.*;
+import net.minecraft.data.models.model.ModelLocationUtils;
+import net.minecraft.data.models.model.ModelTemplate;
+import net.minecraft.data.models.model.ModelTemplates;
+import net.minecraft.data.models.model.TextureMapping;
+import net.minecraft.data.models.model.TextureSlot;
+import net.minecraft.data.models.model.TexturedModel;
 import net.minecraft.resources.ResourceLocation;
 import net.minecraft.world.item.Item;
 import net.minecraft.world.level.block.Block;
-import net.minecraft.world.level.block.CactusBlock;
 import net.minecraft.world.level.block.state.properties.BlockStateProperties;
+import net.minecraft.world.level.block.state.properties.ChestType;
 import net.minecraft.world.level.block.state.properties.Property;
-import org.jetbrains.annotations.Nullable;
-
-import java.util.Optional;
 
 public class DatagenAssetUtil {
     public static class BlockModels {
@@ -224,6 +229,47 @@ public class DatagenAssetUtil {
                 );
 
                 blockGen.delegateItemModel(block, unlitModel);
+            }
+
+            public static void createChest(BlockModelGenerators blockGen, Block block) {
+                TextureMapping singleMapping = new TextureMapping()
+                    .put(TextureSlot.SIDE, TextureMapping.getBlockTexture(block, "_side"))
+                    .put(TextureSlot.TOP, TextureMapping.getBlockTexture(block, "_top"))
+                    .put(TextureSlot.FRONT, TextureMapping.getBlockTexture(block, "_front"));
+
+                TextureMapping leftMapping = new TextureMapping()
+                    .put(TextureSlot.SIDE, TextureMapping.getBlockTexture(block, "_side"))
+                    .put(TextureSlot.TOP, TextureMapping.getBlockTexture(block, "_top"))
+                    .put(TextureSlot.FRONT, TextureMapping.getBlockTexture(block, "_front_right")) // no this is not an error, this is correct
+                    .put(TextureSlot.SOUTH, TextureMapping.getBlockTexture(block, "_back_right"));
+
+                TextureMapping rightMapping = new TextureMapping()
+                    .put(TextureSlot.SIDE, TextureMapping.getBlockTexture(block, "_side"))
+                    .put(TextureSlot.TOP, TextureMapping.getBlockTexture(block, "_top"))
+                    .put(TextureSlot.FRONT, TextureMapping.getBlockTexture(block, "_front_left"))
+                    .put(TextureSlot.SOUTH, TextureMapping.getBlockTexture(block, "_back_left"));
+
+                ModelTemplate customBackOrientable = new ModelTemplate(Optional.of(new ResourceLocation("minecraft", "block/orientable")), Optional.empty(), TextureSlot.TOP, TextureSlot.FRONT, TextureSlot.SIDE, TextureSlot.SOUTH);
+
+                ResourceLocation singleModel = ModelTemplates.CUBE_ORIENTABLE.create(block, singleMapping, blockGen.modelOutput);
+                ResourceLocation leftModel = customBackOrientable.create(TextureMapping.getBlockTexture(block, "_left"), leftMapping, blockGen.modelOutput);
+                ResourceLocation rightModel = customBackOrientable.create(TextureMapping.getBlockTexture(block, "_right"), rightMapping, blockGen.modelOutput);
+
+                blockGen.blockStateOutput.accept(
+                    MultiVariantGenerator.multiVariant(block)
+                        .with(BlockModelGenerators.createHorizontalFacingDispatch())
+                        .with(PropertyDispatch.property(BlockStateProperties.WATERLOGGED)
+                            .select(false, Variant.variant())
+                            .select(true, Variant.variant())
+                        )
+                        .with(PropertyDispatch.property(BlockStateProperties.CHEST_TYPE)
+                            .select(ChestType.SINGLE, Variant.variant().with(VariantProperties.MODEL, singleModel))
+                            .select(ChestType.LEFT, Variant.variant().with(VariantProperties.MODEL, leftModel))
+                            .select(ChestType.RIGHT, Variant.variant().with(VariantProperties.MODEL, rightModel))
+                        )
+                );
+
+                blockGen.delegateItemModel(block, singleModel);
             }
 
             /**

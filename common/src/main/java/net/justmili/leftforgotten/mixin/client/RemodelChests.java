@@ -31,7 +31,7 @@ public class RemodelChests {
         ci.cancel();
 
         BlockRenderDispatcher dispatcher = Minecraft.getInstance().getBlockRenderer();
-        var state = LFBlocks.REMODEL_CHEST.get().defaultBlockState();
+        var state = LFBlocks.REMODEL_CHEST.get().withPropertiesOf(blockEntity.getBlockState());
         var model = dispatcher.getBlockModel(state);
 
         poseStack.pushPose();

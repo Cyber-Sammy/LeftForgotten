@@ -1,20 +1,31 @@
 package net.justmili.leftforgotten.datagen;
 
+import static net.justmili.leftforgotten.util.DatagenAssetUtil.BlockModels.Families.createGlassFamily;
+import static net.justmili.leftforgotten.util.DatagenAssetUtil.BlockModels.Families.createRedstoneFamily;
+import static net.justmili.leftforgotten.util.DatagenAssetUtil.BlockModels.Families.createStoneFamily;
+import static net.justmili.leftforgotten.util.DatagenAssetUtil.BlockModels.Families.createWoodFamily;
+import static net.justmili.leftforgotten.util.DatagenAssetUtil.BlockModels.Individual.RotationType;
+import static net.justmili.leftforgotten.util.DatagenAssetUtil.BlockModels.Individual.createCactus;
+import static net.justmili.leftforgotten.util.DatagenAssetUtil.BlockModels.Individual.createChest;
+import static net.justmili.leftforgotten.util.DatagenAssetUtil.BlockModels.Individual.createCraftingTable;
+import static net.justmili.leftforgotten.util.DatagenAssetUtil.BlockModels.Individual.createCube;
+import static net.justmili.leftforgotten.util.DatagenAssetUtil.BlockModels.Individual.createCubeAll;
+import static net.justmili.leftforgotten.util.DatagenAssetUtil.BlockModels.Individual.createFarmland;
+import static net.justmili.leftforgotten.util.DatagenAssetUtil.BlockModels.Individual.createFurnaceCUSTOM;
+import static net.justmili.leftforgotten.util.DatagenAssetUtil.BlockModels.Individual.createPlant;
+import static net.justmili.leftforgotten.util.DatagenAssetUtil.ItemModels.createFlatItem;
+
 import net.justmili.leftforgotten.LeftForgotten;
 import net.justmili.leftforgotten.datagen.impl.ImprovedModelProvider;
 import net.justmili.leftforgotten.init.LFBlocks;
 import net.justmili.leftforgotten.init.LFItems;
-import net.justmili.leftforgotten.util.DatagenAssetUtil;
+
 import net.minecraft.data.PackOutput;
 import net.minecraft.data.models.BlockModelGenerators;
 import net.minecraft.data.models.ItemModelGenerators;
 import net.minecraft.data.models.model.ModelTemplates;
 import net.minecraft.data.models.model.TextureMapping;
 import net.minecraft.data.models.model.TextureSlot;
-
-import static net.justmili.leftforgotten.util.DatagenAssetUtil.BlockModels.Families.*;
-import static net.justmili.leftforgotten.util.DatagenAssetUtil.BlockModels.Individual.*;
-import static net.justmili.leftforgotten.util.DatagenAssetUtil.ItemModels.createFlatItem;
 
 public class LFModelProvider extends ImprovedModelProvider {
     public LFModelProvider(PackOutput output) {
@@ -125,6 +136,7 @@ public class LFModelProvider extends ImprovedModelProvider {
         createCubeAll(blockGen, LFBlocks.FEATURE_VOID.get());
         createCraftingTable(blockGen, LFBlocks.REMODEL_CRAFTING_TABLE.get(), LFBlocks.WOODEN_PLANKS.get());
         createFurnaceCUSTOM(blockGen, LFBlocks.REMODEL_FURNACE.get(), LFBlocks.STONE.get());
+        createChest(blockGen, LFBlocks.REMODEL_CHEST.get());
     }
 
     @Override
