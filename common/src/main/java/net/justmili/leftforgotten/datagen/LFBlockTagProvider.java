@@ -14,7 +14,6 @@ import net.minecraft.world.level.block.Block;
 import java.util.concurrent.CompletableFuture;
 
 public class LFBlockTagProvider extends IntrinsicHolderTagsProvider<Block> {
-    public static final TagKey<Block> OREGEN_REPLACEABLE = TagKey.create(Registries.BLOCK, LeftForgotten.asResource("oregen_replaceable"));
     public static final TagKey<Block> FORGE_COBBLE = TagKey.create(Registries.BLOCK, LeftForgotten.asForgeResource("cobblestone"));
     public static final TagKey<Block> FORGE_STONE = TagKey.create(Registries.BLOCK, LeftForgotten.asForgeResource("stone"));
 
@@ -24,12 +23,6 @@ public class LFBlockTagProvider extends IntrinsicHolderTagsProvider<Block> {
 
     @Override
     protected void addTags(HolderLookup.Provider provider) {
-        /**
-         * CUSTOM TAGS
-         */
-        this.tag(OREGEN_REPLACEABLE)
-            .add(LFBlocks.STONE.get());
-
         /**
          * Forge and Fabric tags
          */
@@ -46,6 +39,9 @@ public class LFBlockTagProvider extends IntrinsicHolderTagsProvider<Block> {
          */
         this.tag(BlockTags.SMALL_FLOWERS)
             .add(LFBlocks.RED_FLOWER.get(), LFBlocks.YELLOW_FLOWER.get());
+
+        this.tag(BlockTags.STONE_ORE_REPLACEABLES)
+            .add(LFBlocks.STONE.get());
 
         this.tag(BlockTags.MINEABLE_WITH_PICKAXE)
             .add(LFBlocks.COBBLESTONE.get(), LFBlocks.COBBLESTONE_WALL.get(), LFBlocks.COBBLESTONE_STAIRS.get(),

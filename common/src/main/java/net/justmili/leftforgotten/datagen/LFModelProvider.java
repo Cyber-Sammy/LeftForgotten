@@ -1,31 +1,19 @@
 package net.justmili.leftforgotten.datagen;
 
-import static net.justmili.leftforgotten.util.DatagenAssetUtil.BlockModels.Families.createGlassFamily;
-import static net.justmili.leftforgotten.util.DatagenAssetUtil.BlockModels.Families.createRedstoneFamily;
-import static net.justmili.leftforgotten.util.DatagenAssetUtil.BlockModels.Families.createStoneFamily;
-import static net.justmili.leftforgotten.util.DatagenAssetUtil.BlockModels.Families.createWoodFamily;
-import static net.justmili.leftforgotten.util.DatagenAssetUtil.BlockModels.Individual.RotationType;
-import static net.justmili.leftforgotten.util.DatagenAssetUtil.BlockModels.Individual.createCactus;
-import static net.justmili.leftforgotten.util.DatagenAssetUtil.BlockModels.Individual.createChest;
-import static net.justmili.leftforgotten.util.DatagenAssetUtil.BlockModels.Individual.createCraftingTable;
-import static net.justmili.leftforgotten.util.DatagenAssetUtil.BlockModels.Individual.createCube;
-import static net.justmili.leftforgotten.util.DatagenAssetUtil.BlockModels.Individual.createCubeAll;
-import static net.justmili.leftforgotten.util.DatagenAssetUtil.BlockModels.Individual.createFarmland;
-import static net.justmili.leftforgotten.util.DatagenAssetUtil.BlockModels.Individual.createFurnaceCUSTOM;
-import static net.justmili.leftforgotten.util.DatagenAssetUtil.BlockModels.Individual.createPlant;
-import static net.justmili.leftforgotten.util.DatagenAssetUtil.ItemModels.createFlatItem;
-
 import net.justmili.leftforgotten.LeftForgotten;
 import net.justmili.leftforgotten.datagen.impl.ImprovedModelProvider;
 import net.justmili.leftforgotten.init.LFBlocks;
 import net.justmili.leftforgotten.init.LFItems;
-
 import net.minecraft.data.PackOutput;
 import net.minecraft.data.models.BlockModelGenerators;
 import net.minecraft.data.models.ItemModelGenerators;
 import net.minecraft.data.models.model.ModelTemplates;
 import net.minecraft.data.models.model.TextureMapping;
 import net.minecraft.data.models.model.TextureSlot;
+
+import static net.justmili.leftforgotten.util.DatagenAssetUtil.BlockModels.Families.*;
+import static net.justmili.leftforgotten.util.DatagenAssetUtil.BlockModels.Individual.*;
+import static net.justmili.leftforgotten.util.DatagenAssetUtil.ItemModels.createFlatItem;
 
 public class LFModelProvider extends ImprovedModelProvider {
     public LFModelProvider(PackOutput output) {
@@ -59,15 +47,15 @@ public class LFModelProvider extends ImprovedModelProvider {
         createCactus(blockGen, LFBlocks.CACTUS.get());
         createPlant(blockGen, LFBlocks.SAPLING.get(), BlockModelGenerators.TintState.NOT_TINTED);
         createCubeAll(blockGen, LFBlocks.LEAVES.get());
+
+        // Building / Wood
         createCube(blockGen, LFBlocks.WOOD.get(), RotationType.LOG_XYZ,
             ModelTemplates.CUBE_COLUMN,
             new TextureMapping()
                 .put(TextureSlot.SIDE, TextureMapping.getBlockTexture(LFBlocks.WOOD.get(), "_side"))
                 .put(TextureSlot.END, TextureMapping.getBlockTexture(LFBlocks.WOOD.get(), "_top"))
         );
-
-        // Building / Wood
-        createCube(blockGen, LFBlocks.WOOD_6_SIDED.get(), RotationType.NONE,
+        createCube(blockGen, LFBlocks.WOOD_6_SIDED.get(), RotationType.LOG_XYZ,
             ModelTemplates.CUBE_ALL,
             new TextureMapping()
                 .put(TextureSlot.ALL, TextureMapping.getBlockTexture(LFBlocks.WOOD.get(), "_side"))
@@ -129,7 +117,7 @@ public class LFModelProvider extends ImprovedModelProvider {
                 .put(TextureSlot.BOTTOM, TextureMapping.getBlockTexture(LFBlocks.DIAMOND_BLOCK.get(), "_bottom"))
         );
 
-        // Alone Redstone
+        // Building / Iron
         blockGen.createDoor(LFBlocks.IRON_DOOR.get());
 
         // Dev

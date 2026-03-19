@@ -1,5 +1,6 @@
 package net.justmili.leftforgotten.forge;
 
+import dev.architectury.platform.Platform;
 import dev.architectury.platform.forge.EventBuses;
 import net.justmili.leftforgotten.LeftForgotten;
 import net.justmili.leftforgotten.datagen.*;
@@ -7,7 +8,6 @@ import net.minecraft.data.DataProvider;
 import net.minecraftforge.data.event.GatherDataEvent;
 import net.minecraftforge.fml.common.Mod;
 import net.minecraftforge.fml.javafmlmod.FMLJavaModLoadingContext;
-import dev.architectury.platform.Platform;
 
 @Mod(LeftForgotten.MOD_ID)
 public final class LeftForgottenForge {

@@ -3,7 +3,10 @@ package net.justmili.leftforgotten.datagen;
 import net.justmili.leftforgotten.LeftForgotten;
 import net.justmili.leftforgotten.init.LFItems;
 import net.minecraft.data.PackOutput;
-import net.minecraft.data.recipes.*;
+import net.minecraft.data.recipes.FinishedRecipe;
+import net.minecraft.data.recipes.RecipeCategory;
+import net.minecraft.data.recipes.RecipeProvider;
+import net.minecraft.data.recipes.ShapedRecipeBuilder;
 import net.minecraft.world.item.Items;
 
 import java.util.function.Consumer;
@@ -131,7 +134,7 @@ public class LFRecipeProvider extends RecipeProvider {
         Crafting.shapeless(writer, RecipeCategory.MISC, Items.GOLD_INGOT, 9, LFItems.GOLD_BLOCK.get());
         Crafting.shapeless(writer, RecipeCategory.MISC, Items.DIAMOND, 9, LFItems.DIAMOND_BLOCK.get());
 
-        // Alone Redstone
+        // Building / Iron
         Building.door(writer, LFItems.IRON_ORE.get(), LFItems.IRON_DOOR.get());
 
         // Boat

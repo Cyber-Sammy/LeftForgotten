@@ -3,28 +3,20 @@ package net.justmili.leftforgotten.init;
 import dev.architectury.registry.registries.DeferredRegister;
 import dev.architectury.registry.registries.RegistrySupplier;
 import net.justmili.leftforgotten.LeftForgotten;
-import net.justmili.leftforgotten.block.building.*;
-import net.justmili.leftforgotten.block.building.bricks.BrickSlab;
-import net.justmili.leftforgotten.block.building.bricks.BrickStairs;
-import net.justmili.leftforgotten.block.building.bricks.BrickWall;
-import net.justmili.leftforgotten.block.building.bricks.Bricks;
-import net.justmili.leftforgotten.block.building.cobble.*;
-import net.justmili.leftforgotten.block.building.iron.IronDoor;
-import net.justmili.leftforgotten.block.building.stone.StoneButton;
-import net.justmili.leftforgotten.block.building.stone.StonePressurePlate;
-import net.justmili.leftforgotten.block.building.stone.StoneSlab;
-import net.justmili.leftforgotten.block.building.stone.StoneStairs;
+import net.justmili.leftforgotten.block.building.IronDoor;
+import net.justmili.leftforgotten.block.building.deco.*;
+import net.justmili.leftforgotten.block.building.stone.*;
 import net.justmili.leftforgotten.block.building.wood.*;
-import net.justmili.leftforgotten.block.dev.*;
-import net.justmili.leftforgotten.block.nature.*;
-import net.justmili.leftforgotten.block.stone.*;
-import net.justmili.leftforgotten.block.wood.Wood;
-import net.justmili.leftforgotten.block.wood.Wood6Sided;
-import net.justmili.leftforgotten.block.wood.WoodenPlanks;
+import net.justmili.leftforgotten.block.dev.FeatureVoid;
+import net.justmili.leftforgotten.block.dev.RemodelChest;
+import net.justmili.leftforgotten.block.dev.RemodelCraftingTable;
+import net.justmili.leftforgotten.block.dev.RemodelFurnace;
+import net.justmili.leftforgotten.block.nature.ground.*;
+import net.justmili.leftforgotten.block.nature.underground.*;
+import net.justmili.leftforgotten.block.nature.vegetation.*;
+import net.justmili.leftforgotten.block.overworld.BrittleBedrock;
 import net.minecraft.core.registries.Registries;
 import net.minecraft.world.level.block.Block;
-
-import javax.naming.CompoundName;
 
 public class LFBlocks {
     public static final DeferredRegister<Block> REGISTRY = DeferredRegister.create(LeftForgotten.MOD_ID, Registries.BLOCK);
@@ -48,9 +40,9 @@ public class LFBlocks {
     public static final RegistrySupplier<Block> CACTUS = REGISTRY.register("cactus", Cactus::new);
     public static final RegistrySupplier<Block> SAPLING = REGISTRY.register("sapling", Sapling::new);
     public static final RegistrySupplier<Block> LEAVES = REGISTRY.register("leaves", Leaves::new);
-    public static final RegistrySupplier<Block> WOOD = REGISTRY.register("wood", Wood::new);
 
     // Building / Wood
+    public static final RegistrySupplier<Block> WOOD = REGISTRY.register("wood", Wood::new);
     public static final RegistrySupplier<Block> WOOD_6_SIDED = REGISTRY.register("wood_6_sided", Wood6Sided::new);
     public static final RegistrySupplier<Block> WOODEN_PLANKS = REGISTRY.register("wooden_planks", WoodenPlanks::new);
     public static final RegistrySupplier<Block> WOODEN_STAIRS = REGISTRY.register("wooden_stairs", WoodenStairs::new);
@@ -98,7 +90,7 @@ public class LFBlocks {
     public static final RegistrySupplier<Block> GLASS_PANE = REGISTRY.register("glass_pane", GlassPane::new);
     public static final RegistrySupplier<Block> TNT = REGISTRY.register("tnt", Tnt::new);
 
-    // Alone Redstone
+    // Building / Iron
     public static final RegistrySupplier<Block> IRON_DOOR = REGISTRY.register("iron_door", IronDoor::new);
 
     // Dev

@@ -1,6 +1,5 @@
 package net.justmili.leftforgotten.block.dev;
 
-import net.justmili.leftforgotten.LeftForgotten;
 import net.justmili.leftforgotten.init.LFBlocks;
 import net.minecraft.core.BlockPos;
 import net.minecraft.util.RandomSource;

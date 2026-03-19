@@ -67,9 +67,9 @@ public class LFLootTableProvider extends LootTableProvider {
             dropSelf(LFBlocks.CACTUS.get());
             dropSelf(LFBlocks.SAPLING.get());
             add(LFBlocks.LEAVES.get(), createLeavesDrops(LFBlocks.LEAVES.get(), LFBlocks.SAPLING.get(), NORMAL_LEAVES_SAPLING_CHANCES));
-            dropSelf(LFBlocks.WOOD.get());
 
             // Building / Wood
+            dropSelf(LFBlocks.WOOD.get());
             dropSelf(LFBlocks.WOOD_6_SIDED.get());
             dropSelf(LFBlocks.WOODEN_PLANKS.get());
             dropSelf(LFBlocks.WOODEN_STAIRS.get());
@@ -119,8 +119,10 @@ public class LFLootTableProvider extends LootTableProvider {
             dropSelf(LFBlocks.GOLD_BLOCK.get());
             dropSelf(LFBlocks.DIAMOND_BLOCK.get());
 
-            // Alone Redstone
+            // Building / Iron
             add(LFBlocks.IRON_DOOR.get(), createDoorTable(LFBlocks.IRON_DOOR.get()));
+
+            // Deb
             dropSelf(LFBlocks.REMODEL_CRAFTING_TABLE.get());
             dropSelf(LFBlocks.REMODEL_FURNACE.get());
             dropSelf(LFBlocks.REMODEL_CHEST.get());

@@ -37,9 +37,9 @@ public class LFItems {
     public static final RegistrySupplier<Item> CACTUS = block(LFBlocks.CACTUS);
     public static final RegistrySupplier<Item> SAPLING = block(LFBlocks.SAPLING);
     public static final RegistrySupplier<Item> LEAVES = block(LFBlocks.LEAVES);
-    public static final RegistrySupplier<Item> WOOD = block(LFBlocks.WOOD);
 
     // Building / Wood
+    public static final RegistrySupplier<Item> WOOD = block(LFBlocks.WOOD);
     public static final RegistrySupplier<Item> WOOD_6_SIDED = block(LFBlocks.WOOD_6_SIDED);
     public static final RegistrySupplier<Item> WOODEN_PLANKS = block(LFBlocks.WOODEN_PLANKS);
     public static final RegistrySupplier<Item> WOODEN_STAIRS = block(LFBlocks.WOODEN_STAIRS);
@@ -87,7 +87,7 @@ public class LFItems {
     public static final RegistrySupplier<Item> GLASS_PANE = block(LFBlocks.GLASS_PANE);
     public static final RegistrySupplier<Item> TNT = block(LFBlocks.TNT);
 
-    // Alone Redstone
+    // Building / Iron
     public static final RegistrySupplier<Item> IRON_DOOR = doubleBlock(LFBlocks.IRON_DOOR);
 
     // Dev

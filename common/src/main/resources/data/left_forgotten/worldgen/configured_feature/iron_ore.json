@@ -7,7 +7,7 @@
         {
           "target": {
             "predicate_type": "tag_match",
-            "tag": "left_forgotten:oregen_replaceable"
+            "tag": "minecraft:stone_ore_replaceables"
           },
           "state": {
             "Name": "left_forgotten:iron_ore"

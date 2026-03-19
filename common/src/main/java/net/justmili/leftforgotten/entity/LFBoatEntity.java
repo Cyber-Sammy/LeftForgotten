@@ -1,7 +1,6 @@
 package net.justmili.leftforgotten.entity;
 
 import dev.architectury.platform.Platform;
-import net.justmili.leftforgotten.LeftForgotten;
 import net.justmili.leftforgotten.init.LFEntities;
 import net.justmili.leftforgotten.init.LFItems;
 import net.minecraft.nbt.CompoundTag;
