@@ -16,9 +16,7 @@ import org.spongepowered.asm.mixin.injection.At;
 @Mixin(BlockRenderDispatcher.class)
 public class RemodelBlocks {
     @WrapOperation(method = "renderBatched", at = @At(value = "INVOKE",
-        target = "Lnet/minecraft/client/renderer/block/BlockRenderDispatcher;" +
-            "getBlockModel(Lnet/minecraft/world/level/block/state/BlockState;)" +
-            "Lnet/minecraft/client/resources/model/BakedModel;"))
+        target = "Lnet/minecraft/client/renderer/block/BlockRenderDispatcher;getBlockModel(Lnet/minecraft/world/level/block/state/BlockState;)Lnet/minecraft/client/resources/model/BakedModel;"))
     private BakedModel lf$swapBatchedModel(BlockRenderDispatcher dispatcher, BlockState state, Operation<BakedModel> original) {
         Level worldLevel = Minecraft.getInstance().level; // blockView is not necessarily Level
         if (worldLevel != null && worldLevel.dimension().equals(LFResources.Levels.ALPHA_MINECRAFT)) {

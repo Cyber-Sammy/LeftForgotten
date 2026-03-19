@@ -19,5 +19,5 @@
   "injectors": {
     "defaultRequire": 1
   },
-  "refmap": "left_forgotten_common.refmap.json"
+  "refmap": "LeftForgotten-common-refmap.json"
 }

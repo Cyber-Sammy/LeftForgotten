@@ -13,5 +13,5 @@
   "injectors": {
     "defaultRequire": 1
   },
-  "refmap": "left_forgotten_fabric.refmap.json"
+  "refmap": "LeftForgotten-fabric-refmap.json"
 }

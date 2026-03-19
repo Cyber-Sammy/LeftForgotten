@@ -12,12 +12,11 @@ sourceSets {
 
 loom {
     forge {
-        mixinConfig "left_forgotten_common.mixins.json",
-                "left_forgotten_forge.mixins.json"
+        mixinConfig "left_forgotten_common.mixins.json"
     }
 
     mixin {
-        defaultRefmapName = "left_forgotten_forge.refmap.json"
+        useLegacyMixinAp = true
     }
 
     runs {

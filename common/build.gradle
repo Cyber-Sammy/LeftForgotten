@@ -12,6 +12,10 @@ architectury {
 
 loom {
     accessWidenerPath = file("src/main/resources/left_forgotten.accesswidener")
+
+    mixin {
+        useLegacyMixinAp = true
+    }
 }
 
 dependencies {

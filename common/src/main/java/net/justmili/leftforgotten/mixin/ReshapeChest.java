@@ -32,9 +32,9 @@ public class ReshapeChest {
         switch (ChestBlock.getConnectedDirection(state)) {
             case NORTH -> cir.setReturnValue(FULL_BLOCK);
             case SOUTH -> cir.setReturnValue(FULL_BLOCK);
-            case WEST  -> cir.setReturnValue(FULL_BLOCK);
-            case EAST  -> cir.setReturnValue(FULL_BLOCK);
-            default    -> cir.setReturnValue(FULL_BLOCK);
+            case WEST -> cir.setReturnValue(FULL_BLOCK);
+            case EAST -> cir.setReturnValue(FULL_BLOCK);
+            default -> cir.setReturnValue(FULL_BLOCK);
         }
     }
 }

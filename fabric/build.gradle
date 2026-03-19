@@ -9,7 +9,7 @@ architectury {
 
 loom {
     mixin {
-        defaultRefmapName = "left_forgotten_fabric.refmap.json"
+        useLegacyMixinAp = true
     }
 }
 
