@@ -7,7 +7,6 @@
     "accessors.DimSpecialEffectsAccessor",
     "client.BlockyLighting",
     "client.MusicPlayerMixin",
-    "client.RemodelBlocks",
     "client.RemodelChests",
     "client.SoundEngineMixin",
     "compat.ebe.BlockEntityRenderDispatcherMixin"

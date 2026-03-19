@@ -25,13 +25,4 @@ public class ForgeClient {
         }
         CommonClient.register();
     }
-
-    @SubscribeEvent
-    public static void wrapModelsForRemodelBlocks(ModelEvent.ModifyBakingResult event) {
-        for (ResourceLocation id : event.getModels().keySet()) {
-            if (id.getNamespace().equals("minecraft") && (id.getPath().startsWith("crafting_table#") || id.getPath().startsWith("furnace#"))) {
-                event.getModels().put(id, new ClassicBlocksModelForge(event.getModels().get(id)));
-            }
-        }
-    }
 }
