@@ -13,6 +13,7 @@
   ],
   "mixins": [
     "Farlands",
+    "ReshapeChest",
     "SheepEatGrass"
   ],
   "injectors": {
