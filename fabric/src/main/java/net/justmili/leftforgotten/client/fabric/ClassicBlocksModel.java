@@ -1,9 +1,10 @@
 package net.justmili.leftforgotten.client.fabric;
 
-import net.fabricmc.fabric.api.renderer.v1.model.ForwardingBakedModel;
-import net.fabricmc.fabric.api.renderer.v1.render.RenderContext;
+import java.util.function.Supplier;
+
 import net.justmili.leftforgotten.init.LFBlocks;
 import net.justmili.leftforgotten.init.LFResources;
+
 import net.minecraft.client.Minecraft;
 import net.minecraft.client.resources.model.BakedModel;
 import net.minecraft.core.BlockPos;
@@ -13,7 +14,8 @@ import net.minecraft.world.level.Level;
 import net.minecraft.world.level.block.Blocks;
 import net.minecraft.world.level.block.state.BlockState;
 
-import java.util.function.Supplier;
+import net.fabricmc.fabric.api.renderer.v1.model.ForwardingBakedModel;
+import net.fabricmc.fabric.api.renderer.v1.render.RenderContext;
 
 public class ClassicBlocksModel extends ForwardingBakedModel {
     public ClassicBlocksModel(BakedModel original) {
@@ -40,5 +42,10 @@ public class ClassicBlocksModel extends ForwardingBakedModel {
         }
 
         super.emitBlockQuads(blockView, state, pos, randomSupplier, context);
+    }
+
+    @Override
+    public boolean isVanillaAdapter() {
+        return false;
     }
 }
