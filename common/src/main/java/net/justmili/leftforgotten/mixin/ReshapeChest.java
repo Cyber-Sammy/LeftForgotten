@@ -16,11 +16,7 @@ import org.spongepowered.asm.mixin.injection.callback.CallbackInfoReturnable;
 
 @Mixin(ChestBlock.class)
 public class ReshapeChest {
-    private static final VoxelShape ALPHA_SINGLE = Block.box(0, 0, 0, 16, 16, 16);
-    private static final VoxelShape ALPHA_NORTH  = Block.box(0, 0, 0, 16, 16, 16);
-    private static final VoxelShape ALPHA_SOUTH  = Block.box(0, 0, 0, 16, 16, 16);
-    private static final VoxelShape ALPHA_WEST   = Block.box(0, 0, 0, 16, 16, 16);
-    private static final VoxelShape ALPHA_EAST   = Block.box(0, 0, 0, 16, 16, 16);
+    private static final VoxelShape FULL_BLOCK = Block.box(0, 0, 0, 16, 16, 16);
 
     @Inject(method = "getShape", at = @At("HEAD"), cancellable = true)
     private void lf$alphaChestShape(BlockState state, BlockGetter level, BlockPos pos, CollisionContext context,
@@ -29,16 +25,16 @@ public class ReshapeChest {
         if (!world.dimension().equals(LFResources.Levels.ALPHA_MINECRAFT)) return;
 
         if (state.getValue(ChestBlock.TYPE) == ChestType.SINGLE) {
-            cir.setReturnValue(ALPHA_SINGLE);
+            cir.setReturnValue(FULL_BLOCK);
             return;
         }
 
         switch (ChestBlock.getConnectedDirection(state)) {
-            case NORTH -> cir.setReturnValue(ALPHA_NORTH);
-            case SOUTH -> cir.setReturnValue(ALPHA_SOUTH);
-            case WEST  -> cir.setReturnValue(ALPHA_WEST);
-            case EAST  -> cir.setReturnValue(ALPHA_EAST);
-            default    -> cir.setReturnValue(ALPHA_SINGLE);
+            case NORTH -> cir.setReturnValue(FULL_BLOCK);
+            case SOUTH -> cir.setReturnValue(FULL_BLOCK);
+            case WEST  -> cir.setReturnValue(FULL_BLOCK);
+            case EAST  -> cir.setReturnValue(FULL_BLOCK);
+            default    -> cir.setReturnValue(FULL_BLOCK);
         }
     }
 }
