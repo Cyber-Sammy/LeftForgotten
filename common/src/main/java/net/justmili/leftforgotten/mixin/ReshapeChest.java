@@ -17,9 +17,9 @@ import org.spongepowered.asm.mixin.injection.callback.CallbackInfoReturnable;
 @Mixin(ChestBlock.class)
 public class ReshapeChest {
     private static final VoxelShape ALPHA_SINGLE = Block.box(0, 0, 0, 16, 16, 16);
-    private static final VoxelShape ALPHA_NORTH  = Block.box(0, 0, 0, 16, 16, 15);
+    private static final VoxelShape ALPHA_NORTH  = Block.box(0, 0, 0, 16, 16, 16);
     private static final VoxelShape ALPHA_SOUTH  = Block.box(0, 0, 0, 16, 16, 16);
-    private static final VoxelShape ALPHA_WEST   = Block.box(0, 0, 0, 15, 16, 16);
+    private static final VoxelShape ALPHA_WEST   = Block.box(0, 0, 0, 16, 16, 16);
     private static final VoxelShape ALPHA_EAST   = Block.box(0, 0, 0, 16, 16, 16);
 
     @Inject(method = "getShape", at = @At("HEAD"), cancellable = true)
