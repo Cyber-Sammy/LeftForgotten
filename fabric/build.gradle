@@ -7,6 +7,12 @@ architectury {
     fabric()
 }
 
+loom {
+    mixin {
+        defaultRefmapName = "left_forgotten_fabric.refmap.json"
+    }
+}
+
 fabricApi {
     configureDataGeneration {
         client = true

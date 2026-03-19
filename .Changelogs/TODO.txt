@@ -1,7 +1,13 @@
 TODO (LF 1.1) / For March 19th 2026:
-- Regenerate datagen
+- Post an update showing off everything on Twitter and Discord
 - Add refmaps to Forge and Fabric
 - Test if music and block remodels work on Forge and Fabric outside dev env
+- (OPTIONAL) Try re-adding the old player activity structures since nbsurprise found a way to make them work
+  - Mainly adjust heights
+
+TODO (LF 1.1) / For March 20th 2026:
+- Try re-adding the old player activity structures since nbsurprise found a way to make them work
+  - Mainly adjust heights
 
 TODO (LF 1.1) / For March 24-30th 2026:
 - Update to newer versions
@@ -14,4 +20,4 @@ PLANNED FOR 1.1:
   - (1.21.6-)1.21.8 Fabric & NeoForge
   - (1.21.9-)1.21.10 Fabric & NeoForge
   - 1.21.11 Fabric & NeoForge
-  - 26.1 Fabric. Yeah no more forge crap
+  - 26.1 Fabric-Only (Community still voting on it)

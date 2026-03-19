@@ -34,7 +34,7 @@
     ]
   },
   "mixins": [
-    "left_forgotten.mixins.json",
+    "left_forgotten_common.mixins.json",
     "left_forgotten_fabric.mixins.json"
   ],
   "depends": {
