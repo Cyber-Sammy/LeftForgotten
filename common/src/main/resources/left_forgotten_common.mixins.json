@@ -7,13 +7,12 @@
     "accessors.DimSpecialEffectsAccessor",
     "client.BlockyLighting",
     "client.MusicPlayerMixin",
-    "client.RemodelBlocks",
     "client.RemodelChests",
     "client.SoundEngineMixin"
   ],
   "mixins": [
     "Farlands",
-    "ReshapeChest",
+    "ReshapeChests",
     "SheepEatGrass"
   ],
   "injectors": {

@@ -1,0 +1,15 @@
+{
+  "required": true,
+  "package": "net.justmili.leftforgotten.mixin.forge",
+  "compatibilityLevel": "JAVA_17",
+  "minVersion": "0.8",
+  "client": [
+    "client.RemodelBlocks"
+  ],
+  "mixins": [
+  ],
+  "injectors": {
+    "defaultRequire": 1
+  },
+  "refmap": "LeftForgotten-forge-refmap.json"
+}

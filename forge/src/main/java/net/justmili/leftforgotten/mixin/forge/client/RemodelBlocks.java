@@ -1,4 +1,4 @@
-package net.justmili.leftforgotten.mixin.client;
+package net.justmili.leftforgotten.mixin.forge.client;
 
 import com.llamalad7.mixinextras.injector.wrapoperation.Operation;
 import com.llamalad7.mixinextras.injector.wrapoperation.WrapOperation;
@@ -15,10 +15,13 @@ import org.spongepowered.asm.mixin.injection.At;
 
 @Mixin(BlockRenderDispatcher.class)
 public class RemodelBlocks {
-    @WrapOperation(method = "renderBatched", at = @At(value = "INVOKE",
-        target = "Lnet/minecraft/client/renderer/block/BlockRenderDispatcher;getBlockModel(Lnet/minecraft/world/level/block/state/BlockState;)Lnet/minecraft/client/resources/model/BakedModel;"))
+    @WrapOperation(
+        method = "renderBatched(Lnet/minecraft/world/level/block/state/BlockState;Lnet/minecraft/core/BlockPos;Lnet/minecraft/world/level/BlockAndTintGetter;Lcom/mojang/blaze3d/vertex/PoseStack;Lcom/mojang/blaze3d/vertex/VertexConsumer;ZLnet/minecraft/util/RandomSource;Lnet/minecraftforge/client/model/data/ModelData;Lnet/minecraft/client/renderer/RenderType;)V",
+        at = @At(value = "INVOKE",
+            target = "Lnet/minecraft/client/renderer/block/BlockRenderDispatcher;getBlockModel(Lnet/minecraft/world/level/block/state/BlockState;)Lnet/minecraft/client/resources/model/BakedModel;")
+    )
     private BakedModel lf$swapBatchedModel(BlockRenderDispatcher dispatcher, BlockState state, Operation<BakedModel> original) {
-        Level worldLevel = Minecraft.getInstance().level; // blockView is not necessarily Level
+        Level worldLevel = Minecraft.getInstance().level;
         if (worldLevel != null && worldLevel.dimension().equals(LFResources.Levels.ALPHA_MINECRAFT)) {
             if (state.is(Blocks.CRAFTING_TABLE)) {
                 return original.call(dispatcher, LFBlocks.REMODEL_CRAFTING_TABLE.get().defaultBlockState());

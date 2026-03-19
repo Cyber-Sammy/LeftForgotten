@@ -15,7 +15,7 @@ import org.spongepowered.asm.mixin.injection.Inject;
 import org.spongepowered.asm.mixin.injection.callback.CallbackInfoReturnable;
 
 @Mixin(ChestBlock.class)
-public class ReshapeChest {
+public class ReshapeChests {
     private static final VoxelShape FULL_BLOCK = Block.box(0, 0, 0, 16, 16, 16);
 
     @Inject(method = "getShape", at = @At("HEAD"), cancellable = true)
