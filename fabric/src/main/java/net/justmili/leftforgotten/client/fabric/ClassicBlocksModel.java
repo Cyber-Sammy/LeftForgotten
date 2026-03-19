@@ -25,6 +25,7 @@ public class ClassicBlocksModel extends ForwardingBakedModel {
     @Override
     public void emitBlockQuads(BlockAndTintGetter blockView, BlockState state, BlockPos pos, Supplier<RandomSource> randomSupplier, RenderContext context) {
         Level level = Minecraft.getInstance().level; // blockView is not necessarily Level
+        if (state == null) return;
         if (level != null && level.dimension().equals(LFResources.Levels.ALPHA_MINECRAFT)) {
             if (state.is(Blocks.CRAFTING_TABLE)) {
                 state = LFBlocks.REMODEL_CRAFTING_TABLE.get().defaultBlockState();
