@@ -18,6 +18,8 @@ import org.spongepowered.asm.mixin.injection.callback.CallbackInfo;
 @Mixin(SoundEngine.class)
 public class SoundEngineMixin {
     @Unique private static final ResourceLocation STOMACH_GROWL = LeftForgotten.asPath("subtle_effects:entity.player.stomach_growl");
+    @Unique private static final ResourceLocation CHEST_OPEN = LeftForgotten.asPath("minecraft:block.chest.open");
+    @Unique private static final ResourceLocation CHEST_CLOSE = LeftForgotten.asPath("minecraft:block.chest.close");
     @Unique private static final ResourceLocation HURT_VANILLA = SoundEvents.PLAYER_HURT.getLocation();
     @Unique private static final ResourceLocation HURT_FREEZE_VANILLA = SoundEvents.PLAYER_HURT_FREEZE.getLocation();
     @Unique private static final ResourceLocation HURT_FIRE_VANILLA = SoundEvents.PLAYER_HURT_ON_FIRE.getLocation();
@@ -32,8 +34,8 @@ public class SoundEngineMixin {
 
         ResourceLocation loc = sound.getLocation();
 
-        // Cancel stomach growl
-        if (STOMACH_GROWL.equals(loc)) {
+        // Cancel stomach growl and chest opening/closing sounds as they didn't exist
+        if (STOMACH_GROWL.equals(loc) || CHEST_OPEN.equals(loc) || CHEST_CLOSE.equals(loc)) {
             ci.cancel();
             return;
         }
