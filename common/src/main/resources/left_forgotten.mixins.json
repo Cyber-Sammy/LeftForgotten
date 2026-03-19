@@ -5,8 +5,8 @@
   "minVersion": "0.8",
   "client": [
     "accessors.DimSpecialEffectsAccessor",
-    "accessors.TrackAccessor",
     "client.BlockyLighting",
+    "client.MusicPlayerMixin",
     "client.RemodelBlocks",
     "client.RemodelChests",
     "client.SoundEngineMixin"
