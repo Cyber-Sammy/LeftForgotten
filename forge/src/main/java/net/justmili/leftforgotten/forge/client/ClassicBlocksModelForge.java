@@ -27,7 +27,7 @@ public class ClassicBlocksModelForge implements BakedModel {
     @Override
     public List<BakedQuad> getQuads(@Nullable BlockState state, @Nullable Direction direction, RandomSource random) {
         Level level = Minecraft.getInstance().level;
-        if (level != null && level.dimension().equals(LFResources.Levels.ALPHA_MINECRAFT)) {
+        if (state != null && level != null && level.dimension().equals(LFResources.Levels.ALPHA_MINECRAFT)) {
             if (state.is(Blocks.CRAFTING_TABLE)) {
                 state = LFBlocks.REMODEL_CRAFTING_TABLE.get().defaultBlockState();
 
