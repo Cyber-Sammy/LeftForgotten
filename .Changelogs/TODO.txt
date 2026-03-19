@@ -1,7 +1,6 @@
 TODO (LF 1.1) / For March 19th 2026:
-- Make Sodium and Embeddium versions of the remodel mixins
+- Fix z-fighting on Fabric with EBE
 - Post an update showing off everything on Twitter and Discord
-- Test if music and block remodels work on Forge and Fabric outside dev env
 - (OPTIONAL) Try re-adding the old player activity structures since nbsurprise found a way to make them work
   - Mainly adjust heights
 
