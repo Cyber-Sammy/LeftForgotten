@@ -8,7 +8,8 @@
     "client.BlockyLighting",
     "client.MusicPlayerMixin",
     "client.RemodelChests",
-    "client.SoundEngineMixin"
+    "client.SoundEngineMixin",
+    "compat.ebe.BlockEntityRenderDispatcherMixin"
   ],
   "mixins": [
     "Farlands",
