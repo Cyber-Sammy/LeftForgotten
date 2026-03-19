@@ -11,6 +11,7 @@ import net.minecraftforge.fml.event.lifecycle.FMLClientSetupEvent;
 
 import net.minecraft.client.renderer.ItemBlockRenderTypes;
 import net.minecraft.client.renderer.RenderType;
+import net.minecraft.client.resources.model.ModelResourceLocation;
 import net.minecraft.resources.ResourceLocation;
 import net.minecraft.world.level.block.Block;
 
@@ -29,7 +30,7 @@ public class ForgeClient {
     @SubscribeEvent
     public static void wrapModelsForRemodelBlocks(ModelEvent.ModifyBakingResult event) {
         for (ResourceLocation id : event.getModels().keySet()) {
-            if (id.getNamespace().equals("minecraft") && (id.getPath().startsWith("crafting_table") || id.getPath().startsWith("furnace"))) {
+            if (id instanceof ModelResourceLocation modelResource && id.getNamespace().equals("minecraft") && !modelResource.getVariant().equals("inventory") && (id.getPath().equals("crafting_table") || id.getPath().equals("furnace"))) {
                 event.getModels().put(id, new ClassicBlocksModelForge(event.getModels().get(id)));
             }
         }
