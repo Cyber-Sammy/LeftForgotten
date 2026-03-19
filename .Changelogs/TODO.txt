@@ -1,8 +1,6 @@
 TODO (LF 1.1) / For March 19th 2026:
 - Fix z-fighting on Fabric with EBE
 - Post an update showing off everything on Twitter and Discord
-- (OPTIONAL) Try re-adding the old player activity structures since nbsurprise found a way to make them work
-  - Mainly adjust heights
 
 TODO (LF 1.1) / For March 20th 2026:
 - Try re-adding the old player activity structures since nbsurprise found a way to make them work
