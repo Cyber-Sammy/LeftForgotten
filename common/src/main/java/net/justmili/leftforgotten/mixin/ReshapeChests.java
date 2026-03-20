@@ -3,7 +3,9 @@ package net.justmili.leftforgotten.mixin;
 import net.justmili.leftforgotten.init.LFResources;
 import net.minecraft.core.BlockPos;
 import net.minecraft.world.level.BlockGetter;
+import net.minecraft.world.level.Level;
 import net.minecraft.world.level.block.Block;
+import net.minecraft.world.level.block.Blocks;
 import net.minecraft.world.level.block.ChestBlock;
 import net.minecraft.world.level.block.state.BlockState;
 import net.minecraft.world.level.block.state.properties.ChestType;
@@ -19,22 +21,17 @@ public class ReshapeChests {
     private static final VoxelShape FULL_BLOCK = Block.box(0, 0, 0, 16, 16, 16);
 
     @Inject(method = "getShape", at = @At("HEAD"), cancellable = true)
-    private void lf$alphaChestShape(BlockState state, BlockGetter level, BlockPos pos, CollisionContext context,
+    private void lf$alphaChestShape(BlockState state, BlockGetter getter, BlockPos pos, CollisionContext context,
                                     CallbackInfoReturnable<VoxelShape> cir) {
-        if (!(level instanceof net.minecraft.world.level.Level world)) return;
+        if (!(getter instanceof Level world)) return;
         if (!world.dimension().equals(LFResources.Levels.ALPHA_MINECRAFT)) return;
+        if ((Object) this != Blocks.CHEST) return;
 
         if (state.getValue(ChestBlock.TYPE) == ChestType.SINGLE) {
             cir.setReturnValue(FULL_BLOCK);
             return;
         }
 
-        switch (ChestBlock.getConnectedDirection(state)) {
-            case NORTH -> cir.setReturnValue(FULL_BLOCK);
-            case SOUTH -> cir.setReturnValue(FULL_BLOCK);
-            case WEST -> cir.setReturnValue(FULL_BLOCK);
-            case EAST -> cir.setReturnValue(FULL_BLOCK);
-            default -> cir.setReturnValue(FULL_BLOCK);
-        }
+        cir.setReturnValue(FULL_BLOCK);
     }
 }
