@@ -8,7 +8,9 @@ import net.minecraft.client.renderer.MultiBufferSource;
 import net.minecraft.client.renderer.RenderType;
 import net.minecraft.client.renderer.block.BlockRenderDispatcher;
 import net.minecraft.client.renderer.blockentity.ChestRenderer;
+import net.minecraft.core.BlockPos;
 import net.minecraft.world.level.Level;
+import net.minecraft.world.level.block.Blocks;
 import net.minecraft.world.level.block.entity.BlockEntity;
 import net.minecraft.world.level.block.entity.LidBlockEntity;
 import org.spongepowered.asm.mixin.Mixin;
@@ -27,6 +29,8 @@ public class RemodelChests {
         Level level = blockEntity.getLevel();
         if (level == null) return;
         if (!level.dimension().equals(LFResources.Levels.ALPHA_MINECRAFT)) return;
+        if (!blockEntity.getBlockState().is(Blocks.CHEST)) return;
+        // TODO: Fix item models
 
         ci.cancel();
 
