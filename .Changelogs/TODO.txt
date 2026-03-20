@@ -1,5 +1,6 @@
 TODO (LF 1.1) / For March 20th 2026:
-- Fix boat crash  (HAVEN'T TESTED YET, POSSIBLY FIXED)
+- Fix slow falling not always applying (shows it's there, doesn't apply effect's effect)
+- Fix boat crash
 - Fix Chest(s) inv models on Fabric
   - Dev note: EBE somehow fixes inventory models of chests
 - Fix z-fighting on Fabric with EBE

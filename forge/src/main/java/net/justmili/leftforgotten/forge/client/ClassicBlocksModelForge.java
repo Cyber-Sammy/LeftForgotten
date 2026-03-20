@@ -55,7 +55,7 @@ public class ClassicBlocksModelForge implements BakedModel {
 
     @Override
     public boolean usesBlockLight() {
-        return this.wrapped.isGui3d();
+        return this.wrapped.usesBlockLight();
     }
 
     @Override
