@@ -1,10 +1,11 @@
 package net.justmili.leftforgotten.gui.forge;
 
-import java.util.Random;
-
 import com.mojang.blaze3d.vertex.PoseStack;
 import net.justmili.leftforgotten.LeftForgotten;
 import net.justmili.leftforgotten.init.LFResources;
+import net.minecraft.client.Minecraft;
+import net.minecraft.client.gui.GuiGraphics;
+import net.minecraft.network.chat.Component;
 import net.minecraftforge.api.distmarker.Dist;
 import net.minecraftforge.client.event.RenderGuiEvent;
 import net.minecraftforge.event.TickEvent;
@@ -12,9 +13,7 @@ import net.minecraftforge.eventbus.api.EventPriority;
 import net.minecraftforge.eventbus.api.SubscribeEvent;
 import net.minecraftforge.fml.common.Mod;
 
-import net.minecraft.client.Minecraft;
-import net.minecraft.client.gui.GuiGraphics;
-import net.minecraft.network.chat.Component;
+import java.util.Random;
 
 @Mod.EventBusSubscriber(modid = LeftForgotten.MOD_ID, value = Dist.CLIENT)
 public class VersionOverlay {

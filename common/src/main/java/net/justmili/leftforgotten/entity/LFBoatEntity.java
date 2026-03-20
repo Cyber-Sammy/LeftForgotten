@@ -56,7 +56,6 @@ public class LFBoatEntity extends Boat {
         if (speedBefore > BREAK_SPEED_THRESHOLD && speedAfter < speedBefore * 0.4) {
             if (level().isClientSide) {
                 BoatImpactPacket.send(getId());
-                discard();
             }
         }
     }

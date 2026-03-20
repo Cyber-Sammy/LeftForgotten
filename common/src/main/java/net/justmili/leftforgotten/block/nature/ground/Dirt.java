@@ -22,7 +22,7 @@ import net.minecraft.world.phys.BlockHitResult;
 
 public class Dirt extends Block {
     public Dirt() {
-        super(Properties.of().mapColor(MapColor.DIRT).sound(SoundType.GRAVEL).strength(0.5f).randomTicks());
+        super(Properties.of().mapColor(MapColor.DIRT).strength(0.5F).sound(SoundType.GRAVEL).randomTicks());
     }
 
     @Override

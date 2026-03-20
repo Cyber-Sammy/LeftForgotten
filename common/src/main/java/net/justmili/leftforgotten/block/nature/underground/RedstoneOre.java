@@ -21,6 +21,7 @@ import net.minecraft.world.level.block.state.BlockState;
 import net.minecraft.world.level.block.state.StateDefinition;
 import net.minecraft.world.level.block.state.properties.BlockStateProperties;
 import net.minecraft.world.level.block.state.properties.BooleanProperty;
+import net.minecraft.world.level.block.state.properties.NoteBlockInstrument;
 import net.minecraft.world.level.material.MapColor;
 import net.minecraft.world.phys.BlockHitResult;
 import org.joml.Vector3f;
@@ -29,15 +30,17 @@ public class RedstoneOre extends Block {
 	public static final BooleanProperty LIT = BlockStateProperties.LIT;
 
 	public RedstoneOre() {
-		super(Properties.of()
-				.mapColor(MapColor.STONE)
-				.sound(SoundType.STONE)
-				.strength(3f)
-				.lightLevel(state -> state.getValue(LIT) ? 9 : 0)
-				.randomTicks()
-		);
-		this.registerDefaultState(this.stateDefinition.any().setValue(LIT, false));
-	}
+        super(Properties.of()
+            .mapColor(MapColor.STONE)
+            .sound(SoundType.STONE)
+            .strength(3f)
+            .lightLevel(state -> state.getValue(LIT) ? 9 : 0)
+            .instrument(NoteBlockInstrument.BASEDRUM)
+            .requiresCorrectToolForDrops()
+            .randomTicks()
+        );
+        this.registerDefaultState(this.stateDefinition.any().setValue(LIT, false));
+    }
 
 	@Override
 	protected void createBlockStateDefinition(StateDefinition.Builder<Block, BlockState> builder) {

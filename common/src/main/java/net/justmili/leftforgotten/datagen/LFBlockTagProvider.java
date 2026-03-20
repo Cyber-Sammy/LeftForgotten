@@ -53,14 +53,24 @@ public class LFBlockTagProvider extends IntrinsicHolderTagsProvider<Block> {
                 LFBlocks.IRON_DOOR.get(),
                 LFBlocks.MOSSY_COBBLESTONE.get(), LFBlocks.MOSSY_COBBLESTONE_STAIRS.get(), LFBlocks.MOSSY_COBBLESTONE_SLAB.get(), LFBlocks.MOSSY_COBBLESTONE_WALL.get(),
                 LFBlocks.GLASS.get(), LFBlocks.GLASS_PANE.get(),
-                LFBlocks.WOODEN_SLAB.get() // intentional, see: old slabs
+                LFBlocks.WOODEN_SLAB.get(), // intentional, see: old slabs
+                LFBlocks.IRON_BLOCK.get(),
+                LFBlocks.GOLD_BLOCK.get(),
+                LFBlocks.DIAMOND_BLOCK.get()
             );
 
         this.tag(BlockTags.NEEDS_STONE_TOOL)
-            .add(LFBlocks.IRON_ORE.get());
+            .add(LFBlocks.IRON_ORE.get(),
+                LFBlocks.IRON_BLOCK.get()
+            );
 
         this.tag(BlockTags.NEEDS_IRON_TOOL)
-            .add(LFBlocks.GOLD_ORE.get(), LFBlocks.DIAMOND_ORE.get(), LFBlocks.REDSTONE_ORE.get());
+            .add(LFBlocks.GOLD_ORE.get(),
+                LFBlocks.DIAMOND_ORE.get(),
+                LFBlocks.REDSTONE_ORE.get(),
+                LFBlocks.GOLD_BLOCK.get(),
+                LFBlocks.DIAMOND_BLOCK.get()
+            );
 
         this.tag(BlockTags.NEEDS_DIAMOND_TOOL)
             .add(LFBlocks.OBSIDIAN.get());

@@ -1,17 +1,21 @@
 package net.justmili.leftforgotten.block.building;
 
-import net.justmili.leftforgotten.block.CommonBlock;
 import net.minecraft.core.BlockPos;
 import net.minecraft.world.level.BlockGetter;
-import net.minecraft.world.level.block.Blocks;
 import net.minecraft.world.level.block.DoorBlock;
-import net.minecraft.world.level.block.SoundType;
 import net.minecraft.world.level.block.state.BlockState;
 import net.minecraft.world.level.block.state.properties.BlockSetType;
+import net.minecraft.world.level.material.MapColor;
+import net.minecraft.world.level.material.PushReaction;
 
 public class IronDoor extends DoorBlock {
     public IronDoor() {
-        super(Properties.copy(Blocks.IRON_DOOR).sound(SoundType.WOOD).strength(3f).noOcclusion().isRedstoneConductor(CommonBlock::never), BlockSetType.IRON);
+        super(Properties.of()
+            .mapColor(MapColor.METAL)
+            .requiresCorrectToolForDrops()
+            .strength(5.0f)
+            .noOcclusion()
+            .pushReaction(PushReaction.DESTROY), BlockSetType.IRON);
     }
 
     @Override

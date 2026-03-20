@@ -12,7 +12,6 @@ import net.minecraft.world.item.context.BlockPlaceContext;
 import net.minecraft.world.level.LevelAccessor;
 import net.minecraft.world.level.block.Block;
 import net.minecraft.world.level.block.SimpleWaterloggedBlock;
-import net.minecraft.world.level.block.SoundType;
 import net.minecraft.world.level.block.state.BlockState;
 import net.minecraft.world.level.block.state.StateDefinition;
 import net.minecraft.world.level.block.state.properties.BlockStateProperties;
@@ -30,10 +29,10 @@ public class Leaves extends Block implements SimpleWaterloggedBlock {
 	public static final TagKey<Block> woodTag = TagKey.create(Registries.BLOCK, LeftForgotten.asResource("wood"));
 
 
-	public Leaves() {
-		super(Properties.of().mapColor(MapColor.COLOR_LIGHT_GREEN).sound(SoundType.GRASS).strength(0.2f).noOcclusion().isRedstoneConductor(CommonBlock::never).randomTicks());
-		this.registerDefaultState(this.stateDefinition.any().setValue(WATERLOGGED, false).setValue(DISTANCE, 7));
-	}
+    public Leaves() {
+        super(CommonBlock.leaves().mapColor(MapColor.COLOR_LIGHT_GREEN));
+        this.registerDefaultState(this.stateDefinition.any().setValue(WATERLOGGED, false).setValue(DISTANCE, 7));
+    }
 
 	@Override
 	protected void createBlockStateDefinition(StateDefinition.Builder<Block, BlockState> builder) {

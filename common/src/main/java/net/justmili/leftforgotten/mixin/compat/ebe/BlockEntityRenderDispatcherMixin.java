@@ -3,16 +3,15 @@ package net.justmili.leftforgotten.mixin.compat.ebe;
 import com.bawnorton.mixinsquared.TargetHandler;
 import com.llamalad7.mixinextras.sugar.Local;
 import net.justmili.leftforgotten.init.LFResources;
+import net.minecraft.client.renderer.blockentity.BlockEntityRenderDispatcher;
+import net.minecraft.world.level.block.entity.BlockEntity;
+import net.minecraft.world.level.block.entity.BlockEntityType;
 import org.spongepowered.asm.mixin.Dynamic;
 import org.spongepowered.asm.mixin.Mixin;
 import org.spongepowered.asm.mixin.Pseudo;
 import org.spongepowered.asm.mixin.injection.At;
 import org.spongepowered.asm.mixin.injection.Inject;
 import org.spongepowered.asm.mixin.injection.callback.CallbackInfo;
-
-import net.minecraft.client.renderer.blockentity.BlockEntityRenderDispatcher;
-import net.minecraft.world.level.block.entity.BlockEntity;
-import net.minecraft.world.level.block.entity.BlockEntityType;
 
 @Pseudo
 @Mixin(value = BlockEntityRenderDispatcher.class, priority = 1500)

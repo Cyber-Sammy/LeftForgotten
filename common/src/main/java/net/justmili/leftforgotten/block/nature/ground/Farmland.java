@@ -1,5 +1,6 @@
 package net.justmili.leftforgotten.block.nature.ground;
 
+import net.justmili.leftforgotten.block.CommonBlock;
 import net.justmili.leftforgotten.init.LFBlocks;
 import net.minecraft.core.BlockPos;
 import net.minecraft.core.Direction;
@@ -34,7 +35,7 @@ public class Farmland extends Block {
 	public static final int MAX_MOISTURE = 7;
 
 	public Farmland() {
-		super(Properties.of().mapColor(MapColor.COLOR_LIGHT_GREEN).sound(SoundType.GRASS).strength(1.5f, 6f).randomTicks());
+		super(Properties.of().mapColor(MapColor.DIRT).sound(SoundType.GRAVEL).strength(1.5f, 6f).isViewBlocking(CommonBlock::always).isSuffocating(CommonBlock::always).randomTicks());
 		this.registerDefaultState(this.stateDefinition.any().setValue(MOISTURE, 0));
 	}
 
@@ -78,8 +79,8 @@ public class Farmland extends Block {
 			} else if (!shouldMaintainFarmland(serverLevel, blockPos)) {
 				turnToDirt(null, blockState, serverLevel, blockPos);
 			}
-		} else if (i < 7) {
-			serverLevel.setBlock(blockPos, blockState.setValue(MOISTURE, 7), 2);
+		} else if (i < MAX_MOISTURE) {
+			serverLevel.setBlock(blockPos, blockState.setValue(MOISTURE, MAX_MOISTURE), 2);
 		}
 
 	}

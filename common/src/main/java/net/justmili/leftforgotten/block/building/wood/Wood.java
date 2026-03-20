@@ -1,13 +1,13 @@
 
 package net.justmili.leftforgotten.block.building.wood;
 
+import net.justmili.leftforgotten.block.CommonBlock;
 import net.minecraft.core.BlockPos;
 import net.minecraft.core.Direction;
 import net.minecraft.world.item.context.BlockPlaceContext;
 import net.minecraft.world.level.BlockGetter;
 import net.minecraft.world.level.block.Block;
 import net.minecraft.world.level.block.Rotation;
-import net.minecraft.world.level.block.SoundType;
 import net.minecraft.world.level.block.state.BlockState;
 import net.minecraft.world.level.block.state.StateDefinition;
 import net.minecraft.world.level.block.state.properties.BlockStateProperties;
@@ -17,10 +17,10 @@ import net.minecraft.world.level.material.MapColor;
 public class Wood extends Block {
 	public static final EnumProperty<Direction.Axis> AXIS = BlockStateProperties.AXIS;
 
-	public Wood() {
-		super(Properties.of().mapColor(MapColor.WOOD).sound(SoundType.WOOD).strength(2f));
-		this.registerDefaultState(this.stateDefinition.any().setValue(AXIS, Direction.Axis.Y));
-	}
+    public Wood() {
+        super(CommonBlock.log(MapColor.WOOD, MapColor.WOOD));
+        this.registerDefaultState(this.stateDefinition.any().setValue(AXIS, Direction.Axis.Y));
+    }
 
 	@Override
 	public int getLightBlock(BlockState state, BlockGetter worldIn, BlockPos pos) {

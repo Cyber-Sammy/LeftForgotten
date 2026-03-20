@@ -38,7 +38,7 @@ public class HudModifier {
         GuiGraphics gui = event.getGuiGraphics();
         float pt = event.getPartialTick();
 
-        if (player.level().dimension().equals(LFResources.Levels.ALPHA_MINECRAFT)) {
+        if (player.level().dimension().equals(LFResources.Levels.ALPHA_MINECRAFT) && !mc.options.hideGui && ((ForgeGui) mc.gui).shouldDrawSurvivalElements()) {
             int w = mc.getWindow().getGuiScaledWidth();
             int h = mc.getWindow().getGuiScaledHeight();
 
@@ -67,7 +67,6 @@ public class HudModifier {
             if (id.equals(VanillaGuiOverlay.ARMOR_LEVEL.id())) {
                 event.setCanceled(true);
 
-                if (!mc.options.hideGui && ((ForgeGui) mc.gui).shouldDrawSurvivalElements()) {
                 int level = player.getArmorValue();
                 for (int i = 1; level > 0 && i < 20; i += 2) {
                     int uOffset = i < level ? 34 : i == level ? 25 : 16;
@@ -95,7 +94,6 @@ public class HudModifier {
                     bufferBuilder.vertex(matrix4f, x2, y2, 0).uv(maxU, maxV).endVertex();
                     bufferBuilder.vertex(matrix4f, x2, y1, 0).uv(maxU, minV).endVertex();
                     BufferUploader.drawWithShader(bufferBuilder.end());
-                }
                 }
             }
             // Player HP move down

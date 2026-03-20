@@ -3,10 +3,11 @@ package net.justmili.leftforgotten.block.building.wood;
 
 import net.minecraft.world.level.block.SlabBlock;
 import net.minecraft.world.level.block.SoundType;
+import net.minecraft.world.level.block.state.properties.NoteBlockInstrument;
 import net.minecraft.world.level.material.MapColor;
 
 public class WoodenSlab extends SlabBlock {
 	public WoodenSlab() {
-		super(Properties.of().mapColor(MapColor.WOOD).sound(SoundType.WOOD).strength(2f, 3f));
+		super(Properties.of().mapColor(MapColor.WOOD).sound(SoundType.WOOD).strength(2f, 3f).instrument(NoteBlockInstrument.BASS).ignitedByLava());
 	}
 }
