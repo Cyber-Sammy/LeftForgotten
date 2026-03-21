@@ -25,7 +25,10 @@ public class DimChange {
         if (newLevel == null) return EventResult.pass();
 
         player.teleportTo(newLevel, player.getX(), 156, player.getZ(), player.getYRot(), player.getXRot());
-        player.addEffect(new MobEffectInstance(MobEffects.SLOW_FALLING, 200, 0, false, false));
+        // Schedule effect for next tick
+        player.getServer().execute(() -> {
+            player.addEffect(new MobEffectInstance(MobEffects.SLOW_FALLING, 200, 0, false, false));
+        });
 
         return EventResult.interruptFalse();
     }
@@ -56,7 +59,6 @@ public class DimChange {
     public static void onPlayerTick(Player player) {
         if (!(player instanceof ServerPlayer serverPlayer)) return;
         if (!serverPlayer.level().dimension().equals(LFResources.Levels.ALPHA_MINECRAFT)) return;
-        if (!serverPlayer.gameMode.isSurvival()) return; // for testing
         if (serverPlayer.getY() < 196) return;
 
         ServerLevel overworld = serverPlayer.getServer().getLevel(Level.OVERWORLD);
@@ -65,7 +67,11 @@ public class DimChange {
         Vec3 momentum = serverPlayer.getDeltaMovement();
         serverPlayer.teleportTo(overworld, serverPlayer.getX(), -88, serverPlayer.getZ(), serverPlayer.getYRot(), serverPlayer.getXRot());
         serverPlayer.setDeltaMovement(momentum);
-        serverPlayer.addEffect(new MobEffectInstance(MobEffects.SLOW_FALLING, 1, 0, false, false));
         serverPlayer.startFallFlying();
+
+        // Schedule effect for next tick
+        overworld.getServer().execute(() -> {
+            serverPlayer.addEffect(new MobEffectInstance(MobEffects.SLOW_FALLING, 1, 0, false, false));
+        });
     }
 }
