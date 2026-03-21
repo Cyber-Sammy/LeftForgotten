@@ -18,10 +18,10 @@ import java.util.Random;
 @Mod.EventBusSubscriber(modid = LeftForgotten.MOD_ID, value = Dist.CLIENT)
 public class VersionOverlay {
 
-    private static final String BASE_TEXT = "Minecraft Alpha v1.1.2_10";
-    private static final String[] VERSIONS = {
-        "Minecraft Alpha v1.1.2_01",
+    private static final String BASE_TEXT = "Minecraft Alpha v1.1.2_01";
+    private static final String[] VERSIONS = { // List of texts to glitch between
         "Minecraft v1.20.1",
+        "Minecraft v1.21.1"
     };
 
     private static String currentText = BASE_TEXT;
