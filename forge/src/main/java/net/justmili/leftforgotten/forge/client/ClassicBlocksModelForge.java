@@ -1,75 +1,74 @@
 package net.justmili.leftforgotten.forge.client;
 
-import net.justmili.leftforgotten.init.LFBlocks;
-import net.justmili.leftforgotten.init.LFResources;
-import net.minecraft.client.Minecraft;
-import net.minecraft.client.renderer.block.model.BakedQuad;
-import net.minecraft.client.renderer.block.model.ItemOverrides;
-import net.minecraft.client.renderer.texture.TextureAtlasSprite;
-import net.minecraft.client.resources.model.BakedModel;
-import net.minecraft.core.Direction;
-import net.minecraft.util.RandomSource;
-import net.minecraft.world.level.Level;
-import net.minecraft.world.level.block.Blocks;
-import net.minecraft.world.level.block.state.BlockState;
-import org.jetbrains.annotations.Nullable;
-
 import java.util.List;
 
-public class ClassicBlocksModelForge implements BakedModel {
-    private final BakedModel wrapped;
+import com.mojang.blaze3d.vertex.PoseStack;
+import net.justmili.leftforgotten.client.ClassicBlocksModel;
+import net.minecraftforge.client.ChunkRenderTypeSet;
+import net.minecraftforge.client.extensions.IForgeBakedModel;
+import net.minecraftforge.client.model.data.ModelData;
+import org.jetbrains.annotations.NotNull;
+import org.jetbrains.annotations.Nullable;
 
+import net.minecraft.client.renderer.RenderType;
+import net.minecraft.client.renderer.block.model.BakedQuad;
+import net.minecraft.client.renderer.texture.TextureAtlasSprite;
+import net.minecraft.client.resources.model.BakedModel;
+import net.minecraft.core.BlockPos;
+import net.minecraft.core.Direction;
+import net.minecraft.util.RandomSource;
+import net.minecraft.world.item.ItemDisplayContext;
+import net.minecraft.world.item.ItemStack;
+import net.minecraft.world.level.BlockAndTintGetter;
+import net.minecraft.world.level.block.state.BlockState;
+
+public class ClassicBlocksModelForge extends ClassicBlocksModel implements IForgeBakedModel {
     public ClassicBlocksModelForge(BakedModel wrapped) {
-        this.wrapped = wrapped;
+        super(wrapped);
     }
 
     @Override
-    public List<BakedQuad> getQuads(@Nullable BlockState state, @Nullable Direction direction, RandomSource random) {
-        Level level = Minecraft.getInstance().level;
-        if (state != null && level != null && level.dimension().equals(LFResources.Levels.ALPHA_MINECRAFT)) {
-            if (state.is(Blocks.CRAFTING_TABLE)) {
-                state = LFBlocks.REMODEL_CRAFTING_TABLE.get().defaultBlockState();
-
-                return Minecraft.getInstance().getBlockRenderer().getBlockModel(state)
-                    .getQuads(state, direction, random);
-            } else if (state.is(Blocks.FURNACE)) {
-                state = LFBlocks.REMODEL_FURNACE.get().withPropertiesOf(state);
-
-                return Minecraft.getInstance().getBlockRenderer().getBlockModel(state)
-                    .getQuads(state, direction, random);
-            }
-        }
-
-        return this.wrapped.getQuads(state, direction, random);
+    public @NotNull List<BakedQuad> getQuads(@Nullable BlockState state, @Nullable Direction side, @NotNull RandomSource rand, @NotNull ModelData data, @Nullable RenderType renderType) {
+        return this.wrapped.getQuads(state, side, rand, data, renderType);
     }
 
     @Override
-    public boolean useAmbientOcclusion() {
-        return this.wrapped.useAmbientOcclusion();
+    public boolean useAmbientOcclusion(BlockState state) {
+        return this.wrapped.useAmbientOcclusion(state);
     }
 
     @Override
-    public boolean isGui3d() {
-        return this.wrapped.isGui3d();
+    public boolean useAmbientOcclusion(BlockState state, RenderType renderType) {
+        return this.wrapped.useAmbientOcclusion(state, renderType);
     }
 
     @Override
-    public boolean usesBlockLight() {
-        return this.wrapped.usesBlockLight();
+    public BakedModel applyTransform(ItemDisplayContext transformType, PoseStack poseStack, boolean applyLeftHandTransform) {
+        return this.wrapped.applyTransform(transformType, poseStack, applyLeftHandTransform);
     }
 
     @Override
-    public boolean isCustomRenderer() {
-        return this.wrapped.isCustomRenderer();
+    public @NotNull ModelData getModelData(@NotNull BlockAndTintGetter level, @NotNull BlockPos pos, @NotNull BlockState state, @NotNull ModelData modelData) {
+        return this.wrapped.getModelData(level, pos, state, modelData);
     }
 
     @Override
-    public TextureAtlasSprite getParticleIcon() {
-        return this.wrapped.getParticleIcon();
+    public TextureAtlasSprite getParticleIcon(@NotNull ModelData data) {
+        return this.wrapped.getParticleIcon(data);
     }
 
     @Override
-    public ItemOverrides getOverrides() {
-        return this.wrapped.getOverrides();
+    public ChunkRenderTypeSet getRenderTypes(@NotNull BlockState state, @NotNull RandomSource rand, @NotNull ModelData data) {
+        return this.wrapped.getRenderTypes(state, rand, data);
+    }
+
+    @Override
+    public List<RenderType> getRenderTypes(ItemStack itemStack, boolean fabulous) {
+        return this.wrapped.getRenderTypes(itemStack, fabulous);
+    }
+
+    @Override
+    public List<BakedModel> getRenderPasses(ItemStack itemStack, boolean fabulous) {
+        return this.wrapped.getRenderPasses(itemStack, fabulous);
     }
 }

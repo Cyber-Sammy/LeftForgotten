@@ -7,7 +7,6 @@ import net.justmili.leftforgotten.init.LFEntities;
 import net.justmili.leftforgotten.init.LFResources;
 
 import net.minecraft.client.renderer.RenderType;
-import net.minecraft.client.resources.model.ModelResourceLocation;
 import net.minecraft.world.level.block.Block;
 
 import net.fabricmc.api.ClientModInitializer;
@@ -27,8 +26,8 @@ public final class FabricClient implements ClientModInitializer {
 
         ModelLoadingPlugin.register(context -> {
             context.modifyModelAfterBake().register((model, ctx) -> {
-                if (ctx.id() instanceof ModelResourceLocation resourceLocation && ctx.id().getNamespace().equals("minecraft") && !resourceLocation.getVariant().equals("inventory") && (ctx.id().getPath().equals("furnace") || ctx.id().getPath().equals("crafting_table"))) {
-                    return new ClassicBlocksModel(model);
+                if (CommonClient.shouldReplaceBakedModel(ctx.id())) {
+                    return new ClassicBlocksModelFabric(model);
                 }
 
                 return model;
