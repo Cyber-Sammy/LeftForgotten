@@ -1,4 +1,5 @@
 {
+  "replace": false,
   "values": [
     "left_forgotten:cobblestone",
     "left_forgotten:cobblestone_wall",
@@ -26,6 +27,9 @@
     "left_forgotten:mossy_cobblestone_wall",
     "left_forgotten:glass",
     "left_forgotten:glass_pane",
-    "left_forgotten:wooden_slab"
+    "left_forgotten:wooden_slab",
+    "left_forgotten:iron_block",
+    "left_forgotten:gold_block",
+    "left_forgotten:diamond_block"
   ]
 }

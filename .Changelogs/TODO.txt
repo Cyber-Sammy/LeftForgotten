@@ -1,4 +1,4 @@
-TODO (LF 1.1) / For March 20th 2026:
+TODO (LF 1.1) / For March 22nd-23rd 2026:
 - Fix Chest(s) inv models on Fabric
   - Dev note: EBE somehow fixes inventory models of chests
 - Fix z-fighting on Fabric with EBE

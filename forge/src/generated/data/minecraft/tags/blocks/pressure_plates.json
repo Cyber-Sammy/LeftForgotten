@@ -1,4 +1,5 @@
 {
+  "replace": false,
   "values": [
     "left_forgotten:pressure_plate",
     "left_forgotten:stone_pressure_plate"
