@@ -61,6 +61,8 @@ With version 1.1 Left Forgotten will update from Fabric+Forge 1.20.1 to:
  - 1.21.11 Fabric & NeoForge
  - 26.1+ Fabric-Only
 
+***REMEMBER! MOD DEVELOPMENT TAKES TIME! :D***
+
 ### How long will this be kept updated?
 Probably for very long like my other projects.
 
