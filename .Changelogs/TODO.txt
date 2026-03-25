@@ -1,8 +1,5 @@
-TODO (LF 1.1) / For March 22nd-23rd 2026:
-- Post an update showing off everything on Twitter and Discord
-
-TODO (LF 1.1) / For March 24-30th 2026:
-- Update to newer versions
+TODO:
+- Switch out Forge to NeoForge and 1.20.1 to 1.21.1
 
 PLANNED FOR 1.1:
 - Support for:                     (THAT'S GONNA TAKE A LONGER WHILE)
