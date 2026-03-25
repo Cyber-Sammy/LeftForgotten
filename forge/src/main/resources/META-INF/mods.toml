@@ -1,7 +1,7 @@
 modLoader = "javafml"
 loaderVersion = "[1,)"
 issueTrackerURL = "https://github.com/JustMili0/LeftForgotten/issues"
-license = "MIT"
+license = "All Rights Reserved"
 
 [[mods]]
 modId = "left_forgotten"
