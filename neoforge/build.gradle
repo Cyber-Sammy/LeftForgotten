@@ -11,11 +11,6 @@ sourceSets {
 }
 
 loom {
-    forge {
-        mixinConfig "left_forgotten_common.mixins.json",
-                "left_forgotten_forge.mixins.json"
-    }
-
     mixin {
         useLegacyMixinAp = true
     }
@@ -31,7 +26,7 @@ loom {
 
 architectury {
     platformSetupLoomIde()
-    forge()
+    neoForge()
 }
 
 configurations {
@@ -41,7 +36,7 @@ configurations {
     }
     compileClasspath.extendsFrom common
     runtimeClasspath.extendsFrom common
-    developmentForge.extendsFrom common
+    developmentNeoForge.extendsFrom common
 
     shadowBundle {
         canBeResolved = true
@@ -49,18 +44,25 @@ configurations {
     }
 }
 
+repositories {
+    maven {
+        name = 'NeoForged'
+        url = 'https://maven.neoforged.net/releases'
+    }
+}
+
 dependencies {
-    forge "net.minecraftforge:forge:$rootProject.forge_version"
+    neoForge "net.neoforged:neoforge:$rootProject.neoforge_version"
 
     compileOnly(annotationProcessor("io.github.llamalad7:mixinextras-common:${rootProject.mixinextrasVersion}"))
-    include(implementation("io.github.llamalad7:mixinextras-forge:${rootProject.mixinextrasVersion}"))
+    include(implementation("io.github.llamalad7:mixinextras-neoforge:${rootProject.mixinextrasVersion}"))
     compileOnly(annotationProcessor("com.github.bawnorton.mixinsquared:mixinsquared-common:${rootProject.mixinsquaredVersion}"))
-    implementation(include("com.github.bawnorton.mixinsquared:mixinsquared-forge:${rootProject.mixinsquaredVersion}"))
+    implementation(include("com.github.bawnorton.mixinsquared:mixinsquared-neoforge:${rootProject.mixinsquaredVersion}"))
 
-    modImplementation "dev.architectury:architectury-forge:$rootProject.architectury_api_version"
-    modImplementation "me.shedaniel.cloth:cloth-config-forge:11.1.136"
+    modImplementation "dev.architectury:architectury-neoforge:$rootProject.architectury_api_version"
 
-    modCompileOnly 'com.github.Nostalgica-Reverie.Nostalgic-Tweaks:NostalgicTweaks-forge:1.20.1-SNAPSHOT'
+    modImplementation "me.shedaniel.cloth:cloth-config-neoforge:15.0.140"
+    modCompileOnly "maven.modrinth:nostalgic-tweaks:POrRfSqe"
 
     common(project(path: ':common', configuration: 'namedElements')) { transitive = false }
     shadowBundle project(path: ':common', configuration: 'transformProductionForge')
@@ -69,12 +71,12 @@ dependencies {
 processResources {
     inputs.property 'mod_version', project.mod_version
     inputs.property 'minecraft_version', project.minecraft_version
-    inputs.property 'forge_version_range', project.forge_version_range
+    inputs.property 'neoforge_version_range', project.neoforge_version_range
     inputs.property 'architectury_api_version', project.architectury_api_version
 
-    filesMatching('META-INF/mods.toml') {
+    filesMatching('META-INF/neoforge.mods.toml') {
         expand mod_version: inputs.properties.mod_version,
-                forge_version_range: inputs.properties.forge_version_range,
+                neoforge_version_range: inputs.properties.neoforge_version_range,
                 minecraft_version: inputs.properties.minecraft_version,
                 architectury_api_version: inputs.properties.architectury_api_version
     }
