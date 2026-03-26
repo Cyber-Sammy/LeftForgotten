@@ -1,4 +1,4 @@
-package net.justmili.leftforgotten.mechanics.compatibility.forge;
+package net.justmili.leftforgotten.mechanics.compatibility.neoforge;
 
 import mod.adrenix.nostalgic.tweak.config.CandyTweak;
 import net.justmili.leftforgotten.mechanics.compatibility.NTVars;

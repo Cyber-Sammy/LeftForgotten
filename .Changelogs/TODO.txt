@@ -1,5 +1,7 @@
 TODO:
-- Switch out Forge to NeoForge and 1.20.1 to 1.21.1 (Update gradle, java code and mods.toml->neoforge.mods.toml)
+- Switch out Forge to NeoForge and 1.20.1 to 1.21.1
+  - Fix Java code
+- Fix Java code in general
 
 PLANNED FOR 1.1:
 - Support for:                     (THAT'S GONNA TAKE A LONGER WHILE)

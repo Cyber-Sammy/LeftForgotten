@@ -52,15 +52,15 @@ public final class LeftForgotten {
 
 
     public static ResourceLocation asResource(String path) {
-        return new ResourceLocation(MOD_ID, path);
+        return ResourceLocation.fromNamespaceAndPath(MOD_ID, path);
     }
     public static ResourceLocation asFabricResource(String path) {
-        return new ResourceLocation("fabric", path);
+        return ResourceLocation.fromNamespaceAndPath("fabric", path);
     }
     public static ResourceLocation asForgeResource(String path) {
-        return new ResourceLocation("forge", path);
+        return ResourceLocation.fromNamespaceAndPath("forge", path);
     }
     public static ResourceLocation asPath(String path) {
-        return new ResourceLocation(path);
+        return ResourceLocation.parse(path);
     }
 }

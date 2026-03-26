@@ -1,4 +1,4 @@
-package net.justmili.leftforgotten.mixinsquared.forge;
+package net.justmili.leftforgotten.mixinsquared.neoforge;
 
 import com.bawnorton.mixinsquared.api.MixinCanceller;
 

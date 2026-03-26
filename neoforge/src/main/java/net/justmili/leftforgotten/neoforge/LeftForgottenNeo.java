@@ -1,17 +1,16 @@
-package net.justmili.leftforgotten.forge;
+package net.justmili.leftforgotten.neoforge;
 
 import dev.architectury.platform.Platform;
-import dev.architectury.platform.forge.EventBuses;
 import net.justmili.leftforgotten.LeftForgotten;
 import net.justmili.leftforgotten.datagen.*;
 import net.minecraft.data.DataProvider;
-import net.minecraftforge.data.event.GatherDataEvent;
-import net.minecraftforge.fml.common.Mod;
-import net.minecraftforge.fml.javafmlmod.FMLJavaModLoadingContext;
+import net.neoforged.bus.api.IEventBus;
+import net.neoforged.fml.common.Mod;
+import net.neoforged.neoforge.data.event.GatherDataEvent;
 
 @Mod(LeftForgotten.MOD_ID)
-public final class LeftForgottenForge {
-    public LeftForgottenForge() {
+public final class LeftForgottenNeo {
+    public LeftForgottenNeo(IEventBus modEventBus) {
         if (Platform.isModLoaded("true_end")) {
             throw new RuntimeException("""
                 
@@ -22,8 +21,7 @@ public final class LeftForgottenForge {
                 Please remove one of the mods from your instance.""");
         }
 
-        EventBuses.registerModEventBus(LeftForgotten.MOD_ID, FMLJavaModLoadingContext.get().getModEventBus());
-        FMLJavaModLoadingContext.get().getModEventBus().addListener(LeftForgottenForge::onDatagenSetup);
+        modEventBus.addListener(LeftForgottenNeo::onDatagenSetup);
 
         LeftForgotten.init();
     }

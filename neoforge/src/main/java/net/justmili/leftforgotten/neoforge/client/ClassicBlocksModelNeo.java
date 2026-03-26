@@ -1,12 +1,11 @@
-package net.justmili.leftforgotten.forge.client;
+package net.justmili.leftforgotten.neoforge.client;
 
 import java.util.List;
 
 import com.mojang.blaze3d.vertex.PoseStack;
 import net.justmili.leftforgotten.client.ClassicBlocksModel;
-import net.minecraftforge.client.ChunkRenderTypeSet;
-import net.minecraftforge.client.extensions.IForgeBakedModel;
-import net.minecraftforge.client.model.data.ModelData;
+import net.neoforged.neoforge.client.ChunkRenderTypeSet;
+import net.neoforged.neoforge.client.model.data.ModelData;
 import org.jetbrains.annotations.NotNull;
 import org.jetbrains.annotations.Nullable;
 
@@ -22,8 +21,8 @@ import net.minecraft.world.item.ItemStack;
 import net.minecraft.world.level.BlockAndTintGetter;
 import net.minecraft.world.level.block.state.BlockState;
 
-public class ClassicBlocksModelForge extends ClassicBlocksModel implements IForgeBakedModel {
-    public ClassicBlocksModelForge(BakedModel wrapped) {
+public class ClassicBlocksModelNeo extends ClassicBlocksModel {
+    public ClassicBlocksModelNeo(BakedModel wrapped) {
         super(wrapped);
     }
 
@@ -39,7 +38,7 @@ public class ClassicBlocksModelForge extends ClassicBlocksModel implements IForg
 
     @Override
     public boolean useAmbientOcclusion(BlockState state, RenderType renderType) {
-        return this.wrapped.useAmbientOcclusion(state, renderType);
+        return this.wrapped.useAmbientOcclusion();
     }
 
     @Override

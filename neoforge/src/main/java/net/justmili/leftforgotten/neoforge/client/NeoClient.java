@@ -1,28 +1,30 @@
-package net.justmili.leftforgotten.forge.client;
+package net.justmili.leftforgotten.neoforge.client;
 
 import net.justmili.leftforgotten.client.CommonClient;
 import net.justmili.leftforgotten.entity.renderer.LFBoatRenderer;
 import net.justmili.leftforgotten.init.LFEntities;
 import net.justmili.leftforgotten.init.LFResources;
-import net.minecraftforge.api.distmarker.Dist;
-import net.minecraftforge.api.distmarker.OnlyIn;
-import net.minecraftforge.client.event.EntityRenderersEvent;
-import net.minecraftforge.client.event.ModelEvent;
-import net.minecraftforge.eventbus.api.SubscribeEvent;
-import net.minecraftforge.fml.common.Mod;
-import net.minecraftforge.fml.event.lifecycle.FMLClientSetupEvent;
+import net.minecraft.client.resources.model.ModelResourceLocation;
+import net.neoforged.api.distmarker.Dist;
+import net.neoforged.api.distmarker.OnlyIn;
+import net.neoforged.neoforge.client.event.EntityRenderersEvent;
+import net.neoforged.neoforge.client.event.ModelEvent;
+import net.neoforged.bus.api.SubscribeEvent;
+import net.neoforged.fml.common.EventBusSubscriber;
+import net.neoforged.fml.event.lifecycle.FMLClientSetupEvent;
 
 import net.minecraft.client.renderer.ItemBlockRenderTypes;
 import net.minecraft.client.renderer.RenderType;
-import net.minecraft.resources.ResourceLocation;
 import net.minecraft.world.level.block.Block;
 
+import net.justmili.leftforgotten.LeftForgotten;
+
 @OnlyIn(Dist.CLIENT)
-@Mod.EventBusSubscriber(bus = Mod.EventBusSubscriber.Bus.MOD, value = Dist.CLIENT)
-public class ForgeClient {
+@EventBusSubscriber(modid = LeftForgotten.MOD_ID, value = Dist.CLIENT)
+public class NeoClient {
     @SubscribeEvent
     public static void init(FMLClientSetupEvent event) {
-        /// DEV NOTE: DEPRECATED API USAGE
+        // DEV NOTE: DEPRECATED API USAGE
         for (Block block : LFResources.getBlocks()) {
             ItemBlockRenderTypes.setRenderLayer(block, RenderType.cutout());
         }
@@ -31,9 +33,9 @@ public class ForgeClient {
 
     @SubscribeEvent
     public static void wrapModelsForRemodelBlocks(ModelEvent.ModifyBakingResult event) {
-        for (ResourceLocation id : event.getModels().keySet()) {
-            if (CommonClient.shouldReplaceBakedModel(id)) {
-                event.getModels().put(id, new ClassicBlocksModelForge(event.getModels().get(id)));
+        for (ModelResourceLocation modelLocation : event.getModels().keySet()) {
+            if (CommonClient.shouldReplaceBakedModel(modelLocation.id())) {
+                event.getModels().put(modelLocation, new ClassicBlocksModelNeo(event.getModels().get(modelLocation)));
             }
         }
     }

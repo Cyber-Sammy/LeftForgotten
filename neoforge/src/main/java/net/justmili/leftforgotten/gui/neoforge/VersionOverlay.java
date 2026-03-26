@@ -1,17 +1,18 @@
-package net.justmili.leftforgotten.gui.forge;
+package net.justmili.leftforgotten.gui.neoforge;
 
 import com.mojang.blaze3d.vertex.PoseStack;
+import dev.architectury.event.events.common.TickEvent;
 import net.justmili.leftforgotten.LeftForgotten;
 import net.justmili.leftforgotten.init.LFResources;
 import net.minecraft.client.Minecraft;
 import net.minecraft.client.gui.GuiGraphics;
 import net.minecraft.network.chat.Component;
-import net.minecraftforge.api.distmarker.Dist;
-import net.minecraftforge.client.event.RenderGuiEvent;
-import net.minecraftforge.event.TickEvent;
-import net.minecraftforge.eventbus.api.EventPriority;
-import net.minecraftforge.eventbus.api.SubscribeEvent;
-import net.minecraftforge.fml.common.Mod;
+import net.neoforged.api.distmarker.Dist;
+import net.neoforged.bus.api.EventPriority;
+import net.neoforged.bus.api.SubscribeEvent;
+import net.neoforged.fml.common.Mod;
+import net.neoforged.neoforge.client.event.ClientTickEvent;
+import net.neoforged.neoforge.client.event.RenderGuiEvent;
 
 import java.util.Random;
 
@@ -29,7 +30,7 @@ public class VersionOverlay {
     private static final Random random = new Random();
 
     @SubscribeEvent(priority = EventPriority.HIGHEST)
-    public static void onClientTick(TickEvent.ClientTickEvent event) {
+    public static void onClientTick(ClientTickEvent event) {
         if (event.phase != TickEvent.Phase.END) return;
 
         Minecraft mc = Minecraft.getInstance();
@@ -57,7 +58,6 @@ public class VersionOverlay {
     public static void onRenderGui(RenderGuiEvent.Post event) {
         Minecraft mc = Minecraft.getInstance();
         if (mc.level == null || mc.level.dimension() != LFResources.Levels.ALPHA_MINECRAFT) return;
-        if (mc.options.renderDebug) return;
 
         GuiGraphics gui = event.getGuiGraphics();
         PoseStack pose = gui.pose();
