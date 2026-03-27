@@ -54,12 +54,16 @@ public final class LeftForgotten {
     public static ResourceLocation asResource(String path) {
         return ResourceLocation.fromNamespaceAndPath(MOD_ID, path);
     }
+    public static ResourceLocation asMcResource(String path) {
+        return ResourceLocation.fromNamespaceAndPath("minecraft", path);
+    }
     public static ResourceLocation asFabricResource(String path) {
         return ResourceLocation.fromNamespaceAndPath("fabric", path);
     }
     public static ResourceLocation asForgeResource(String path) {
         return ResourceLocation.fromNamespaceAndPath("neoforge", path);
     }
+
     public static ResourceLocation asPath(String path) {
         return ResourceLocation.parse(path);
     }

@@ -5,7 +5,7 @@ import net.minecraft.network.chat.Component;
 import net.minecraft.world.item.Item;
 import net.minecraft.world.item.ItemStack;
 import net.minecraft.world.item.TooltipFlag;
-import net.minecraft.world.level.block.Block;
+import net.minecraft.world.level.block.ChestBlock;
 import net.minecraft.world.level.block.SoundType;
 import net.minecraft.world.level.block.entity.BlockEntityType;
 import net.minecraft.world.level.block.state.properties.NoteBlockInstrument;
@@ -13,7 +13,7 @@ import net.minecraft.world.level.material.MapColor;
 
 import java.util.List;
 
-public class RemodelChest extends Block {
+public class RemodelChest extends ChestBlock {
     public RemodelChest() {
         super(Properties.of().mapColor(MapColor.WOOD).instrument(NoteBlockInstrument.BASS).strength(2.5F).sound(SoundType.WOOD).ignitedByLava(), () -> BlockEntityType.CHEST);
     }

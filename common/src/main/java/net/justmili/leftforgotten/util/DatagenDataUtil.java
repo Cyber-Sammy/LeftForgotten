@@ -8,6 +8,12 @@ import net.minecraft.world.item.crafting.Ingredient;
 import java.util.Arrays;
 
 public class DatagenDataUtil {
+    private static String modId;
+
+    public static void registerFor(String modId) {
+        DatagenDataUtil.modId = modId;
+    }
+
     public static class Recipes {
         public static class Crafting {
             public static void shapeless(RecipeOutput writer, RecipeCategory category, Item output, int outCount, Item... inputs) {
