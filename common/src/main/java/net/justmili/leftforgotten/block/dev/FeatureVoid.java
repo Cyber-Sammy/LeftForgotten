@@ -13,7 +13,7 @@ import net.minecraft.world.level.material.PushReaction;
 
 public class FeatureVoid extends Block {
     public FeatureVoid() {
-        super(Properties.of().replaceable().noCollission().noLootTable().noParticlesOnBreak().pushReaction(PushReaction.DESTROY));
+        super(Properties.of().replaceable().noCollission().noLootTable().noTerrainParticles().pushReaction(PushReaction.DESTROY));
     }
 
     @Override

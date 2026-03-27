@@ -58,7 +58,7 @@ public final class LeftForgotten {
         return ResourceLocation.fromNamespaceAndPath("fabric", path);
     }
     public static ResourceLocation asForgeResource(String path) {
-        return ResourceLocation.fromNamespaceAndPath("forge", path);
+        return ResourceLocation.fromNamespaceAndPath("neoforge", path);
     }
     public static ResourceLocation asPath(String path) {
         return ResourceLocation.parse(path);

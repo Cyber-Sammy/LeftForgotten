@@ -5,11 +5,13 @@ import net.justmili.leftforgotten.LeftForgotten;
 import net.justmili.leftforgotten.datagen.extensions.KnownBlocksLootProvider;
 import net.justmili.leftforgotten.init.LFBlocks;
 import net.justmili.leftforgotten.init.LFItems;
+import net.minecraft.core.HolderLookup;
+import net.minecraft.core.registries.Registries;
 import net.minecraft.data.PackOutput;
 import net.minecraft.data.loot.BlockLootSubProvider;
 import net.minecraft.data.loot.LootTableProvider;
 import net.minecraft.data.loot.LootTableSubProvider;
-import net.minecraft.resources.ResourceLocation;
+import net.minecraft.resources.ResourceKey;
 import net.minecraft.world.flag.FeatureFlags;
 import net.minecraft.world.item.Items;
 import net.minecraft.world.item.enchantment.Enchantments;
@@ -39,8 +41,8 @@ public class LFLootTableProvider extends LootTableProvider {
     }
 
     public static class LFBlockLootProvider extends BlockLootSubProvider implements KnownBlocksLootProvider {
-        protected LFBlockLootProvider() {
-            super(Set.of(), FeatureFlags.DEFAULT_FLAGS);
+        protected LFBlockLootProvider(HolderLookup.Provider provider) {
+            super(Set.of(), FeatureFlags.DEFAULT_FLAGS, provider);
         }
 
         @Override
@@ -52,7 +54,7 @@ public class LFLootTableProvider extends LootTableProvider {
             add(LFBlocks.FARMLAND.get(), createSingleItemTableWithSilkTouch(LFBlocks.FARMLAND.get(), LFBlocks.DIRT.get()));
             add(LFBlocks.GRAVEL.get(), createSilkTouchDispatchTable(LFBlocks.GRAVEL.get(),
                 LootItem.lootTableItem(Items.FLINT)
-                    .when(BonusLevelTableCondition.bonusLevelFlatChance(Enchantments.BLOCK_FORTUNE, 0.1F, 0.14285715F, 0.25F, 1.0F))
+                    .when(BonusLevelTableCondition.bonusLevelFlatChance(Enchantments.FORTUNE, 0.1F, 0.14285715F, 0.25F, 1.0F))
                     .otherwise(LootItem.lootTableItem(LFBlocks.GRAVEL.get()))));
             dropSelf(LFBlocks.SAND.get());
             add(LFBlocks.CLAY.get(), createSilkTouchDispatchTable(LFBlocks.CLAY.get(),
@@ -138,12 +140,13 @@ public class LFLootTableProvider extends LootTableProvider {
     }
 
     public static class LFChestLootProvider implements LootTableSubProvider {
-        protected LFChestLootProvider() {
+        public static final ResourceKey<LootTable> HOUSES_LOOT_KEY = ResourceKey.create(Registries.LOOT_TABLE, LeftForgotten.asResource("chests/house"));
+        public LFChestLootProvider(HolderLookup.Provider provider) {
         }
 
         @Override
-        public void generate(BiConsumer<ResourceLocation, LootTable.Builder> output) {
-            output.accept(LeftForgotten.asResource("chests/house"), LootTable.lootTable()
+        public void generate(BiConsumer<ResourceKey<LootTable>, LootTable.Builder> output) {
+            output.accept(HOUSES_LOOT_KEY, LootTable.lootTable()
                 // Broken wooden pickaxe
                 .withPool(LootPool.lootPool()
                     .setRolls(ConstantValue.exactly(1))

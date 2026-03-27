@@ -2,6 +2,7 @@
 package net.justmili.leftforgotten.mechanics.gameplay;
 
 import dev.architectury.platform.Platform;
+import net.justmili.leftforgotten.LeftForgotten;
 import net.justmili.leftforgotten.init.LFResources;
 import net.minecraft.resources.ResourceKey;
 import net.minecraft.server.level.ServerPlayer;
@@ -17,15 +18,15 @@ import java.util.UUID;
 
 public class NoCooldown {
     private static final UUID MODIFIER_UUID = UUID.fromString("9b91a426-cc5c-4a08-a0e5-7d00627cb3ef");
-    private static final AttributeModifier baseModifier = new AttributeModifier(MODIFIER_UUID, "left_forgotten.noCooldown",200.0, AttributeModifier.Operation.ADDITION);
-    private static final AttributeModifier bcModifier = new AttributeModifier(MODIFIER_UUID, "left_forgotten.noCooldown",2.0, AttributeModifier.Operation.ADDITION);
+    private static final AttributeModifier baseModifier = new AttributeModifier(LeftForgotten.asResource("noCooldown"),200.0, AttributeModifier.Operation.ADD_VALUE);
+    private static final AttributeModifier bcModifier = new AttributeModifier(LeftForgotten.asResource("noCooldown"),2.0, AttributeModifier.Operation.ADD_VALUE);
 
     public static void onChangedDimension(ServerPlayer player, ResourceKey<Level> fromDimension, ResourceKey<Level> toDimension) {
         applyCooldown(player, toDimension);
     }
 
     public static void onPlayerRespawn(ServerPlayer player, boolean bl) {
-        ResourceKey<Level> toDim = ((ServerPlayer) player).getRespawnDimension();
+        ResourceKey<Level> toDim = player.getRespawnDimension();
 
         applyCooldown(player, toDim);
     }
@@ -45,7 +46,7 @@ public class NoCooldown {
         // remove old bugged attributes
         Set<AttributeModifier> buggedAttributes = new HashSet<>();
         for (AttributeModifier modifier : attackSpeedAttr.getModifiers()) {
-            if (modifier.getName().equals(MODIFIER_UUID.toString())) {
+            if (modifier.toString().equals(MODIFIER_UUID.toString())) {
                 buggedAttributes.add(modifier);
             }
         }

@@ -3,13 +3,11 @@ package net.justmili.leftforgotten.datagen;
 import net.justmili.leftforgotten.LeftForgotten;
 import net.justmili.leftforgotten.init.LFItems;
 import net.minecraft.data.PackOutput;
-import net.minecraft.data.recipes.FinishedRecipe;
 import net.minecraft.data.recipes.RecipeCategory;
+import net.minecraft.data.recipes.RecipeOutput;
 import net.minecraft.data.recipes.RecipeProvider;
 import net.minecraft.data.recipes.ShapedRecipeBuilder;
 import net.minecraft.world.item.Items;
-
-import java.util.function.Consumer;
 
 import static net.justmili.leftforgotten.util.DatagenDataUtil.Recipes.*;
 
@@ -19,7 +17,7 @@ public class LFRecipeProvider extends RecipeProvider {
     }
 
     @Override
-    public void buildRecipes(Consumer<FinishedRecipe> writer) {
+    protected void buildRecipes(RecipeOutput writer) {
         // Wood & Planks
         Building.planks(writer, LFItems.WOOD.get(), LFItems.WOODEN_PLANKS.get());
         Building.stairs(writer, LFItems.WOODEN_PLANKS.get(), LFItems.WOODEN_STAIRS.get());

@@ -1,23 +1,21 @@
 package net.justmili.leftforgotten.neoforge.client;
 
+import net.justmili.leftforgotten.LeftForgotten;
 import net.justmili.leftforgotten.client.CommonClient;
 import net.justmili.leftforgotten.entity.renderer.LFBoatRenderer;
 import net.justmili.leftforgotten.init.LFEntities;
 import net.justmili.leftforgotten.init.LFResources;
+import net.minecraft.client.renderer.ItemBlockRenderTypes;
+import net.minecraft.client.renderer.RenderType;
 import net.minecraft.client.resources.model.ModelResourceLocation;
+import net.minecraft.world.level.block.Block;
 import net.neoforged.api.distmarker.Dist;
 import net.neoforged.api.distmarker.OnlyIn;
-import net.neoforged.neoforge.client.event.EntityRenderersEvent;
-import net.neoforged.neoforge.client.event.ModelEvent;
 import net.neoforged.bus.api.SubscribeEvent;
 import net.neoforged.fml.common.EventBusSubscriber;
 import net.neoforged.fml.event.lifecycle.FMLClientSetupEvent;
-
-import net.minecraft.client.renderer.ItemBlockRenderTypes;
-import net.minecraft.client.renderer.RenderType;
-import net.minecraft.world.level.block.Block;
-
-import net.justmili.leftforgotten.LeftForgotten;
+import net.neoforged.neoforge.client.event.EntityRenderersEvent;
+import net.neoforged.neoforge.client.event.ModelEvent;
 
 @OnlyIn(Dist.CLIENT)
 @EventBusSubscriber(modid = LeftForgotten.MOD_ID, value = Dist.CLIENT)

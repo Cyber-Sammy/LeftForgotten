@@ -1,6 +1,7 @@
 package net.justmili.leftforgotten.mixin.fabric.client;
 
 import net.justmili.leftforgotten.init.LFResources;
+import net.minecraft.client.DeltaTracker;
 import net.minecraft.client.Minecraft;
 import net.minecraft.client.gui.Font;
 import net.minecraft.client.gui.Gui;
@@ -23,7 +24,7 @@ public abstract class VersionOverlay {
 
     @Shadow() public abstract Font getFont();
     @Inject(at = @At("TAIL"), method = "render")
-    public void render(GuiGraphics guiGraphics, float partialTick, CallbackInfo ci) {
+    public void render(GuiGraphics guiGraphics, DeltaTracker deltaTracker, CallbackInfo ci) {
         if (!inAlpha()) return;
         this.minecraft.getProfiler().push("demo");
         Component component = Component.literal(net.justmili.leftforgotten.client.VersionOverlay.currentText);

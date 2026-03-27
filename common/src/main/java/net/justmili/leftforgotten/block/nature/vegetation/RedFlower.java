@@ -2,11 +2,9 @@
 package net.justmili.leftforgotten.block.nature.vegetation;
 
 import net.minecraft.core.BlockPos;
-import net.minecraft.network.chat.Component;
 import net.minecraft.tags.BlockTags;
 import net.minecraft.world.effect.MobEffects;
 import net.minecraft.world.item.ItemStack;
-import net.minecraft.world.item.TooltipFlag;
 import net.minecraft.world.level.BlockGetter;
 import net.minecraft.world.level.LevelReader;
 import net.minecraft.world.level.block.FlowerBlock;
@@ -33,11 +31,6 @@ public class RedFlower extends FlowerBlock {
     //public int getFlammability(BlockState state, BlockGetter world, BlockPos pos, Direction face) {
     //    return 100;
     //}
-
-    @Override
-    public void appendHoverText(ItemStack itemstack, BlockGetter world, List<Component> list, TooltipFlag flag) {
-        super.appendHoverText(itemstack, world, list, flag);
-    }
 
     //@Override
     //public int getFireSpreadSpeed(BlockState state, BlockGetter world, BlockPos pos, Direction face) {

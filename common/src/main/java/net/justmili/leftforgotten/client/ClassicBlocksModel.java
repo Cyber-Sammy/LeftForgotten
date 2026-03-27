@@ -1,11 +1,7 @@
 package net.justmili.leftforgotten.client;
 
-import java.util.List;
-
 import net.justmili.leftforgotten.init.LFBlocks;
 import net.justmili.leftforgotten.init.LFResources;
-import org.jetbrains.annotations.Nullable;
-
 import net.minecraft.client.Minecraft;
 import net.minecraft.client.renderer.block.model.BakedQuad;
 import net.minecraft.client.renderer.block.model.ItemOverrides;
@@ -17,6 +13,9 @@ import net.minecraft.util.RandomSource;
 import net.minecraft.world.level.Level;
 import net.minecraft.world.level.block.Blocks;
 import net.minecraft.world.level.block.state.BlockState;
+import org.jetbrains.annotations.Nullable;
+
+import java.util.List;
 
 public abstract class ClassicBlocksModel implements BakedModel {
     protected final BakedModel wrapped;
