@@ -9,13 +9,19 @@ import java.util.Arrays;
 import java.util.function.Consumer;
 
 public class DatagenDataUtil {
+    private static String modId;
+
+    public static void registerFor(String modId) {
+        DatagenDataUtil.modId = modId;
+    }
+
     public static class Recipes {
         public static class Crafting {
             public static void shapeless(Consumer<FinishedRecipe> writer, RecipeCategory category, Item output, int outCount, Item... inputs) {
                 ShapelessRecipeBuilder builder = ShapelessRecipeBuilder.shapeless(category, output, outCount);
                 for (Item input : inputs) builder.requires(input);
                 String inputNames = Arrays.stream(inputs)
-                    .map(i -> RecipeProvider.getItemName(i))
+                    .map(RecipeProvider::getItemName)
                     .collect(java.util.stream.Collectors.joining("_and_"));
                 builder.unlockedBy(RecipeProvider.getHasName(inputs[0]), RecipeProvider.has(inputs[0]))
                     .save(writer, LeftForgotten.asResource(RecipeProvider.getItemName(output) + "_from_" + inputNames));
