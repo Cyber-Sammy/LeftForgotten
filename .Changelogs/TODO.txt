@@ -1,7 +1,5 @@
-TODO (LF 1.1) / For March 22nd-23rd 2026:
-- Post an update showing off everything on Twitter and Discord
-
-TODO (LF 1.1) / For March 24-30th 2026:
+TODO:
+- Fix Furnace and Crafting Table remodeling
 - Update to newer versions
 
 PLANNED FOR 1.1:

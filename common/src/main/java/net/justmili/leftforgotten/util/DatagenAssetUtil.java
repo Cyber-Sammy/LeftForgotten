@@ -2,6 +2,7 @@ package net.justmili.leftforgotten.util;
 
 import com.google.gson.JsonArray;
 import com.google.gson.JsonObject;
+import net.justmili.leftforgotten.LeftForgotten;
 import net.justmili.leftforgotten.init.LFBlocks;
 import net.minecraft.core.Direction;
 import net.minecraft.data.models.BlockModelGenerators;
@@ -243,7 +244,7 @@ public class DatagenAssetUtil {
                     .put(TextureSlot.FRONT, TextureMapping.getBlockTexture(block, "_front_left"))
                     .put(TextureSlot.SOUTH, TextureMapping.getBlockTexture(block, "_back_left"));
 
-                ModelTemplate customBackOrientable = new ModelTemplate(Optional.of(new ResourceLocation("minecraft", "block/orientable")), Optional.empty(), TextureSlot.TOP, TextureSlot.FRONT, TextureSlot.SIDE, TextureSlot.SOUTH);
+                ModelTemplate customBackOrientable = new ModelTemplate(Optional.of(LeftForgotten.asMcResource("block/orientable")), Optional.empty(), TextureSlot.TOP, TextureSlot.FRONT, TextureSlot.SIDE, TextureSlot.SOUTH);
 
                 ResourceLocation singleModel = ModelTemplates.CUBE_ORIENTABLE.create(block, singleMapping, blockGen.modelOutput);
                 ResourceLocation leftModel = customBackOrientable.create(TextureMapping.getBlockTexture(block, "_left"), leftMapping, blockGen.modelOutput);

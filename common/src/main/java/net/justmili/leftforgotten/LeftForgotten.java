@@ -54,6 +54,9 @@ public final class LeftForgotten {
     public static ResourceLocation asResource(String path) {
         return new ResourceLocation(MOD_ID, path);
     }
+    public static ResourceLocation asMcResource(String path) {
+        return new ResourceLocation("minecraft", path);
+    }
     public static ResourceLocation asFabricResource(String path) {
         return new ResourceLocation("fabric", path);
     }
