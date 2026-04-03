@@ -21,7 +21,17 @@ public class VersionOverlay {
     private static final String BASE_TEXT = "Minecraft Alpha v1.1.2_01";
     private static final String[] VERSIONS = { // List of texts to glitch between
         "Minecraft v1.20.1",
-        "Minecraft v1.21.1"
+        "Minecraft v1.21.1",
+        "Minecraft v1.21.4",
+        "Minecraft v1.21.5",
+        "Minecraft v1.21.6",
+        "Minecraft v1.21.7",
+        "Minecraft v1.21.8",
+        "Minecraft v1.21.9",
+        "Minecraft v1.21.10",
+        "Minecraft v1.21.11",
+        "Minecraft v26.1",
+        "Minecraft v26.1.1"
     };
 
     private static String currentText = BASE_TEXT;
