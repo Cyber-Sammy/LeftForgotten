@@ -17,8 +17,8 @@ It is dark and abandoned, untouched in years and shadowed by the overworld above
 This is not a horror mod, but rather a adventure and decoration mod. Just plain old **Minecraft Alpha 1.1.2_01** with a few remnants of player activity from many years ago.<br>
 
 ## Features
-- Is (supposed to be) multi-loader and multi-version
-  - Checkmate, Alpha Below kekw (Alpha Below is pretty cool despite being just on Fabric 1.20.1)
+- Is (supposed to be) multi-loader and multi-version (I'm working on it)
+  - See what Minecraft versions I'll update this to lower on this mod page
 - A dimension based on Minecraft Alpha 1.1.2_01
   - Accessible by going into the Overworld void
   - Escapable by either attempted death or flying up to the bedrock ceiling
@@ -41,8 +41,8 @@ This is not a horror mod, but rather a adventure and decoration mod. Just plain 
 - B o a t .
   - Aka crappy pre-1.9 boat that everyone knows and loves
 - Only music from Minecraft Volume Alpha in the dimension
-  - With a chance to get an unused track "Droopy Likes Your Face"
-  - With a chance to get screwed by music disc 13
+  - +A chance to get an unused track "Droopy Likes Your Face"
+  - +A chance to get screwed by music disc 13
 
 ## Dependencies and Mod Compatibility
 - Left Forgotten requires Architectury API (and Fabric API on Fabric)

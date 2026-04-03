@@ -1,4 +1,4 @@
-package net.justmili.leftforgotten.world.dimension;
+package net.justmili.leftforgotten.client.dimension;
 
 import net.minecraft.client.renderer.DimensionSpecialEffects;
 import net.minecraft.world.phys.Vec3;

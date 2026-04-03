@@ -4,6 +4,7 @@ import com.mojang.blaze3d.systems.RenderSystem;
 import com.mojang.blaze3d.vertex.*;
 import dev.architectury.platform.Platform;
 import mod.adrenix.nostalgic.tweak.config.CandyTweak;
+import net.justmili.leftforgotten.LeftForgotten;
 import net.justmili.leftforgotten.init.LFResources;
 import net.minecraft.client.Minecraft;
 import net.minecraft.client.gui.GuiGraphics;
@@ -13,12 +14,13 @@ import net.minecraft.tags.FluidTags;
 import net.minecraft.world.entity.animal.horse.AbstractHorse;
 import net.minecraft.world.entity.player.Player;
 import net.neoforged.api.distmarker.Dist;
+import net.neoforged.bus.api.SubscribeEvent;
 import net.neoforged.fml.common.Mod;
 import org.joml.Matrix4f;
 
 @Mod.EventBusSubscriber(value = Dist.CLIENT)
 public class HudModifier {
-    private static final ResourceLocation GUI_ICONS_LOCATION = new ResourceLocation("textures/gui/icons.png");
+    private static final ResourceLocation GUI_ICONS_LOCATION = LeftForgotten.asPath("textures/gui/icons.png");
 
     @SubscribeEvent
     public static void onGuiOverlayPre(RenderGuiOverlayEvent.Pre event) {

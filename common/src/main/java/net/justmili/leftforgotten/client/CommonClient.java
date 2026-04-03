@@ -5,7 +5,7 @@ import net.fabricmc.api.EnvType;
 import net.fabricmc.api.Environment;
 import net.justmili.leftforgotten.LeftForgotten;
 import net.justmili.leftforgotten.mixin.accessors.DimSpecialEffectsAccessor;
-import net.justmili.leftforgotten.world.dimension.AlphaMinecraft;
+import net.justmili.leftforgotten.client.dimension.AlphaMinecraft;
 import net.minecraft.client.resources.model.ModelResourceLocation;
 
 @Environment(EnvType.CLIENT)

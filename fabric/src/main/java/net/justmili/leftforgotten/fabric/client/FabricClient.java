@@ -1,10 +1,9 @@
-package net.justmili.leftforgotten.client.fabric;
+package net.justmili.leftforgotten.fabric.client;
 
 import dev.architectury.registry.client.level.entity.EntityRendererRegistry;
 import net.fabricmc.api.ClientModInitializer;
 import net.fabricmc.fabric.api.blockrenderlayer.v1.BlockRenderLayerMap;
 import net.fabricmc.fabric.api.client.model.loading.v1.ModelLoadingPlugin;
-import net.justmili.leftforgotten.client.CommonClient;
 import net.justmili.leftforgotten.entity.renderer.LFBoatRenderer;
 import net.justmili.leftforgotten.init.LFEntities;
 import net.justmili.leftforgotten.init.LFResources;
