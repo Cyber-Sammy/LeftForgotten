@@ -1,4 +1,4 @@
-package net.justmili.leftforgotten.client.fabric;
+package net.justmili.leftforgotten.fabric.client;
 
 import dev.architectury.registry.client.level.entity.EntityRendererRegistry;
 import net.fabricmc.api.ClientModInitializer;

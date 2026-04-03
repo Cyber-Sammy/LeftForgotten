@@ -1,4 +1,4 @@
-package net.justmili.leftforgotten.client.fabric;
+package net.justmili.leftforgotten.fabric.client;
 
 import net.fabricmc.fabric.api.renderer.v1.model.FabricBakedModel;
 import net.fabricmc.fabric.api.renderer.v1.render.RenderContext;

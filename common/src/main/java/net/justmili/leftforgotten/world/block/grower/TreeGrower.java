@@ -1,4 +1,4 @@
-package net.justmili.leftforgotten.world.tree;
+package net.justmili.leftforgotten.world.block.grower;
 
 import net.justmili.leftforgotten.world.ConfiguredFeatures;
 import net.minecraft.resources.ResourceKey;

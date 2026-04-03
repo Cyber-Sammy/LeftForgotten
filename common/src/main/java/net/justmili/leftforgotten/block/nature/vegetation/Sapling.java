@@ -1,6 +1,6 @@
 package net.justmili.leftforgotten.block.nature.vegetation;
 
-import net.justmili.leftforgotten.world.tree.TreeGrower;
+import net.justmili.leftforgotten.world.block.grower.TreeGrower;
 import net.minecraft.core.BlockPos;
 import net.minecraft.tags.BlockTags;
 import net.minecraft.world.level.BlockGetter;
