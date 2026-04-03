@@ -7,10 +7,6 @@ Left to fade away into distant memories
 
 <hr>
 
-***GitHub Notice: This is a `Repository Information` branch. If you wish to see the code, please change to a different branch.***
-
-<hr>
-
 ## Why?
 Mainly just to play around with parts of [True End's](https://modrinth.com/mod/true_end) code for soon coming Fabric+Forge port (and because I was bored)
 
