@@ -1,6 +1,6 @@
 package net.justmili.leftforgotten.mechanics.gameplay;
 
-import net.justmili.leftforgotten.init.LFResources;
+import net.justmili.leftforgotten.registries.LFResources;
 import net.minecraft.world.entity.player.Player;
 
 public class NoSprint {

@@ -2,6 +2,7 @@ package net.justmili.leftforgotten.neoforge;
 
 import dev.architectury.platform.Platform;
 import net.justmili.leftforgotten.LeftForgotten;
+import net.justmili.leftforgotten.core.datagen.*;
 import net.justmili.leftforgotten.datagen.*;
 import net.minecraft.data.DataProvider;
 import net.neoforged.bus.api.IEventBus;

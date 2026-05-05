@@ -1,7 +1,7 @@
 package net.justmili.leftforgotten.mechanics.events;
 
 import dev.architectury.event.EventResult;
-import net.justmili.leftforgotten.init.LFResources;
+import net.justmili.leftforgotten.registries.LFResources;
 import net.minecraft.core.BlockPos;
 import net.minecraft.server.level.ServerLevel;
 import net.minecraft.server.level.ServerPlayer;

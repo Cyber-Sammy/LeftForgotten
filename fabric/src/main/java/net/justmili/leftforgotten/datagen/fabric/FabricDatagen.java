@@ -2,7 +2,7 @@ package net.justmili.leftforgotten.datagen.fabric;
 
 import net.fabricmc.fabric.api.datagen.v1.DataGeneratorEntrypoint;
 import net.fabricmc.fabric.api.datagen.v1.FabricDataGenerator;
-import net.justmili.leftforgotten.datagen.*;
+import net.justmili.leftforgotten.core.datagen.*;
 
 public class FabricDatagen implements DataGeneratorEntrypoint {
     @Override

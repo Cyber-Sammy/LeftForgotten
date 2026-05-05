@@ -2,9 +2,9 @@ package net.justmili.leftforgotten.neoforge.client;
 
 import net.justmili.leftforgotten.LeftForgotten;
 import net.justmili.leftforgotten.client.CommonClient;
-import net.justmili.leftforgotten.entity.renderer.LFBoatRenderer;
-import net.justmili.leftforgotten.init.LFEntities;
-import net.justmili.leftforgotten.init.LFResources;
+import net.justmili.leftforgotten.content.entity.renderer.LFBoatRenderer;
+import net.justmili.leftforgotten.registries.LFEntities;
+import net.justmili.leftforgotten.registries.LFResources;
 import net.minecraft.client.renderer.ItemBlockRenderTypes;
 import net.minecraft.client.renderer.RenderType;
 import net.minecraft.client.resources.model.ModelResourceLocation;

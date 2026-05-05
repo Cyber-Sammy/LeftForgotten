@@ -2,7 +2,7 @@ package net.justmili.leftforgotten.mechanics.gameplay;
 
 import dev.architectury.event.CompoundEventResult;
 import dev.architectury.event.EventResult;
-import net.justmili.leftforgotten.init.LFResources;
+import net.justmili.leftforgotten.registries.LFResources;
 import net.minecraft.core.BlockPos;
 import net.minecraft.core.Direction;
 import net.minecraft.nbt.CompoundTag;

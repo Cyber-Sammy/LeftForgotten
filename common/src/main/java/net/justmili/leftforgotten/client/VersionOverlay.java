@@ -1,6 +1,6 @@
 package net.justmili.leftforgotten.client;
 
-import net.justmili.leftforgotten.init.LFResources;
+import net.justmili.leftforgotten.registries.LFResources;
 import net.minecraft.client.Minecraft;
 
 import java.util.Random;

@@ -1,7 +1,7 @@
 package net.justmili.leftforgotten.client;
 
-import net.justmili.leftforgotten.init.LFBlocks;
-import net.justmili.leftforgotten.init.LFResources;
+import net.justmili.leftforgotten.registries.LFBlocks;
+import net.justmili.leftforgotten.registries.LFResources;
 import net.minecraft.client.Minecraft;
 import net.minecraft.client.renderer.block.model.BakedQuad;
 import net.minecraft.client.renderer.block.model.ItemOverrides;
