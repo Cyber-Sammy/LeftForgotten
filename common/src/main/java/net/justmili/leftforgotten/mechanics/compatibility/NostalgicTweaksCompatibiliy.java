@@ -2,7 +2,7 @@ package net.justmili.leftforgotten.mechanics.compatibility;
 
 import dev.architectury.injectables.annotations.ExpectPlatform;
 import dev.architectury.platform.Platform;
-import net.justmili.leftforgotten.init.LFResources;
+import net.justmili.leftforgotten.registries.LFResources;
 import net.minecraft.world.entity.player.Player;
 
 public class NostalgicTweaksCompatibiliy {

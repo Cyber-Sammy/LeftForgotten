@@ -6,8 +6,8 @@ import net.fabricmc.fabric.api.blockrenderlayer.v1.BlockRenderLayerMap;
 import net.fabricmc.fabric.api.client.model.loading.v1.ModelLoadingPlugin;
 import net.justmili.leftforgotten.client.CommonClient;
 import net.justmili.leftforgotten.entity.renderer.LFBoatRenderer;
-import net.justmili.leftforgotten.init.LFEntities;
-import net.justmili.leftforgotten.init.LFResources;
+import net.justmili.leftforgotten.registries.LFEntities;
+import net.justmili.leftforgotten.registries.LFResources;
 import net.minecraft.client.renderer.RenderType;
 import net.minecraft.world.level.block.Block;
 

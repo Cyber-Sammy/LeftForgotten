@@ -1,8 +1,8 @@
 package net.justmili.leftforgotten;
 
 import dev.architectury.event.events.common.TickEvent;
-import net.justmili.leftforgotten.entity.BoatImpactPacket;
-import net.justmili.leftforgotten.init.*;
+import net.justmili.leftforgotten.content.entity.BoatImpactPacket;
+import net.justmili.leftforgotten.registries.*;
 import net.minecraft.resources.ResourceLocation;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;

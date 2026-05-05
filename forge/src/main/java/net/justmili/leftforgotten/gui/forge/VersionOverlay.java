@@ -2,7 +2,7 @@ package net.justmili.leftforgotten.gui.forge;
 
 import com.mojang.blaze3d.vertex.PoseStack;
 import net.justmili.leftforgotten.LeftForgotten;
-import net.justmili.leftforgotten.init.LFResources;
+import net.justmili.leftforgotten.registries.LFResources;
 import net.minecraft.client.Minecraft;
 import net.minecraft.client.gui.GuiGraphics;
 import net.minecraft.network.chat.Component;
