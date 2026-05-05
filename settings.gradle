@@ -7,7 +7,7 @@ pluginManagement {
     }
 }
 
-rootProject.name = 'left_forgotten'
+rootProject.name = 'Left Forgotten'
 
 include 'common'
 include 'fabric'
