@@ -39,19 +39,7 @@ public class DimChange {
         if (!player.level().dimension().equals(LFResources.Levels.ALPHA_MINECRAFT)) return EventResult.pass();
         if (player.getHealth() - v > 0) return EventResult.pass();
 
-        ServerLevel overworld = player.getServer().getLevel(Level.OVERWORLD);
-        if (overworld == null) return EventResult.pass();
-
-        player.setHealth(player.getMaxHealth());
-
-        BlockPos spawnPos = player.getRespawnPosition();
-        ServerLevel spawnLevel = player.getServer().getLevel(player.getRespawnDimension());
-        if (spawnPos == null || spawnLevel == null) {
-            BlockPos worldSpawn = overworld.getSharedSpawnPos();
-            player.teleportTo(overworld, worldSpawn.getX() + 0.5, worldSpawn.getY(), worldSpawn.getZ() + 0.5, player.getYRot(), player.getXRot());
-        } else {
-            player.teleportTo(spawnLevel, spawnPos.getX() + 0.5, spawnPos.getY(), spawnPos.getZ() + 0.5, player.getYRot(), player.getXRot());
-        }
+        player.setHealth(1);
 
         return EventResult.interruptFalse();
     }
