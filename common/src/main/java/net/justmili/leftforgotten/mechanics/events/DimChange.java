@@ -37,9 +37,11 @@ public class DimChange {
         if (!(entity instanceof ServerPlayer player)) return EventResult.pass();
         if (source == null) return EventResult.pass();
         if (!player.level().dimension().equals(LFResources.Levels.ALPHA_MINECRAFT)) return EventResult.pass();
+        if (v > 512f) return EventResult.pass(); // Let through if damage is high enough, otherwise /kill doesn't work - this will also allow a mace hit to kill you
         if (player.getHealth() - v > 0) return EventResult.pass();
 
-        player.setHealth(1);
+        player.setHealth(2);
+        player.hurt(player.damageSources().fall(), 1f);
 
         return EventResult.interruptFalse();
     }
