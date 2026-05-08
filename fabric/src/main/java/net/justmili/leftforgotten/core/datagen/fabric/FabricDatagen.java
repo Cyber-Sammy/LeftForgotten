@@ -1,4 +1,4 @@
-package net.justmili.leftforgotten.datagen.fabric;
+package net.justmili.leftforgotten.core.datagen.fabric;
 
 import net.fabricmc.fabric.api.datagen.v1.DataGeneratorEntrypoint;
 import net.fabricmc.fabric.api.datagen.v1.FabricDataGenerator;
