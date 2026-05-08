@@ -1,7 +1,7 @@
 package net.justmili.leftforgotten.forge.client;
 
 import net.justmili.leftforgotten.client.CommonClient;
-import net.justmili.leftforgotten.entity.renderer.LFBoatRenderer;
+import net.justmili.leftforgotten.content.entity.renderer.LFBoatRenderer;
 import net.justmili.leftforgotten.registries.LFEntities;
 import net.justmili.leftforgotten.registries.LFResources;
 import net.minecraft.client.renderer.ItemBlockRenderTypes;
