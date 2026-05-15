@@ -1,7 +1,11 @@
 package net.justmili.leftforgotten.client;
 
+import java.util.List;
+
 import net.justmili.leftforgotten.registries.LFBlocks;
 import net.justmili.leftforgotten.registries.LFResources;
+import org.jetbrains.annotations.Nullable;
+
 import net.minecraft.client.Minecraft;
 import net.minecraft.client.renderer.block.model.BakedQuad;
 import net.minecraft.client.renderer.block.model.ItemOverrides;
@@ -13,9 +17,6 @@ import net.minecraft.util.RandomSource;
 import net.minecraft.world.level.Level;
 import net.minecraft.world.level.block.Blocks;
 import net.minecraft.world.level.block.state.BlockState;
-import org.jetbrains.annotations.Nullable;
-
-import java.util.List;
 
 public abstract class ClassicBlocksModel implements BakedModel {
     protected final BakedModel wrapped;
@@ -24,26 +25,34 @@ public abstract class ClassicBlocksModel implements BakedModel {
         this.wrapped = wrapped;
     }
 
-    @Override
-    public List<BakedQuad> getQuads(@Nullable BlockState state, @Nullable Direction direction, RandomSource random) {
+    protected @Nullable BakedModel getBakedModel(BlockState state) {
         Level level = Minecraft.getInstance().level;
         if (state != null && level != null && level.dimension().equals(LFResources.Levels.ALPHA_MINECRAFT)) {
             if (state.is(Blocks.CRAFTING_TABLE)) {
                 state = LFBlocks.REMODEL_CRAFTING_TABLE.get().defaultBlockState();
 
-                return Minecraft.getInstance().getBlockRenderer().getBlockModel(state)
-                    .getQuads(state, direction, random);
+                return Minecraft.getInstance().getBlockRenderer().getBlockModel(state);
             } else if (state.is(Blocks.FURNACE)) {
                 state = LFBlocks.REMODEL_FURNACE.get().withPropertiesOf(state);
 
-                return Minecraft.getInstance().getBlockRenderer().getBlockModel(state)
-                    .getQuads(state, direction, random);
+                return Minecraft.getInstance().getBlockRenderer().getBlockModel(state);
             } else if (state.is(Blocks.CHEST)) {
-                return List.of(); // only exists purely for EBE purposes really
+                return null; // only exists purely for EBE purposes really
             }
         }
 
-        return this.wrapped.getQuads(state, direction, random);
+        return this.wrapped;
+    }
+
+    @Override
+    public List<BakedQuad> getQuads(@Nullable BlockState state, @Nullable Direction direction, RandomSource random) {
+        BakedModel replacedModel = this.getBakedModel(state);
+
+        if (replacedModel != null) {
+            return replacedModel.getQuads(state, direction, random);
+        }
+
+        return List.of();
     }
 
     @Override

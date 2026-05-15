@@ -1,20 +1,18 @@
 package net.justmili.leftforgotten.fabric.client;
 
-import net.fabricmc.fabric.api.renderer.v1.model.FabricBakedModel;
-import net.fabricmc.fabric.api.renderer.v1.render.RenderContext;
+import java.util.function.Supplier;
+
 import net.justmili.leftforgotten.client.ClassicBlocksModel;
-import net.justmili.leftforgotten.registries.LFResources;
-import net.minecraft.client.Minecraft;
+
 import net.minecraft.client.resources.model.BakedModel;
 import net.minecraft.core.BlockPos;
 import net.minecraft.util.RandomSource;
 import net.minecraft.world.item.ItemStack;
 import net.minecraft.world.level.BlockAndTintGetter;
-import net.minecraft.world.level.Level;
-import net.minecraft.world.level.block.Blocks;
 import net.minecraft.world.level.block.state.BlockState;
 
-import java.util.function.Supplier;
+import net.fabricmc.fabric.api.renderer.v1.model.FabricBakedModel;
+import net.fabricmc.fabric.api.renderer.v1.render.RenderContext;
 
 public class ClassicBlocksModelFabric extends ClassicBlocksModel implements FabricBakedModel {
     public ClassicBlocksModelFabric(BakedModel wrapped) {
@@ -28,12 +26,12 @@ public class ClassicBlocksModelFabric extends ClassicBlocksModel implements Fabr
 
     @Override
     public void emitBlockQuads(BlockAndTintGetter blockView, BlockState state, BlockPos pos, Supplier<RandomSource> randomSupplier, RenderContext context) {
-        Level level = Minecraft.getInstance().level;
-        if (state != null && level != null && level.dimension().equals(LFResources.Levels.ALPHA_MINECRAFT) && state.is(Blocks.CHEST)) {
+        BakedModel replacedModel = this.getBakedModel(state);
+        if (replacedModel == null) {
             return; // EBE please don't
         }
 
-        this.wrapped.emitBlockQuads(blockView, state, pos, randomSupplier, context);
+        replacedModel.emitBlockQuads(blockView, state, pos, randomSupplier, context);
     }
 
     @Override

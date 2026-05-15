@@ -1,7 +1,15 @@
 package net.justmili.leftforgotten.forge.client;
 
+import java.util.List;
+
 import com.mojang.blaze3d.vertex.PoseStack;
 import net.justmili.leftforgotten.client.ClassicBlocksModel;
+import net.minecraftforge.client.ChunkRenderTypeSet;
+import net.minecraftforge.client.extensions.IForgeBakedModel;
+import net.minecraftforge.client.model.data.ModelData;
+import org.jetbrains.annotations.NotNull;
+import org.jetbrains.annotations.Nullable;
+
 import net.minecraft.client.renderer.RenderType;
 import net.minecraft.client.renderer.block.model.BakedQuad;
 import net.minecraft.client.renderer.texture.TextureAtlasSprite;
@@ -13,13 +21,6 @@ import net.minecraft.world.item.ItemDisplayContext;
 import net.minecraft.world.item.ItemStack;
 import net.minecraft.world.level.BlockAndTintGetter;
 import net.minecraft.world.level.block.state.BlockState;
-import net.minecraftforge.client.ChunkRenderTypeSet;
-import net.minecraftforge.client.extensions.IForgeBakedModel;
-import net.minecraftforge.client.model.data.ModelData;
-import org.jetbrains.annotations.NotNull;
-import org.jetbrains.annotations.Nullable;
-
-import java.util.List;
 
 public class ClassicBlocksModelForge extends ClassicBlocksModel implements IForgeBakedModel {
     public ClassicBlocksModelForge(BakedModel wrapped) {
@@ -28,7 +29,12 @@ public class ClassicBlocksModelForge extends ClassicBlocksModel implements IForg
 
     @Override
     public @NotNull List<BakedQuad> getQuads(@Nullable BlockState state, @Nullable Direction side, @NotNull RandomSource rand, @NotNull ModelData data, @Nullable RenderType renderType) {
-        return this.wrapped.getQuads(state, side, rand, data, renderType);
+        BakedModel replacedModel = this.getBakedModel(state);
+        if (replacedModel != null) {
+            return replacedModel.getQuads(state, side, rand, data, renderType);
+        }
+
+        return List.of();
     }
 
     @Override
