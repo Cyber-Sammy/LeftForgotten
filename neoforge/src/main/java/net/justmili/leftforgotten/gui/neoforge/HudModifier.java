@@ -8,6 +8,7 @@ import net.justmili.leftforgotten.LeftForgotten;
 import net.justmili.leftforgotten.registries.LFResources;
 import net.minecraft.client.Minecraft;
 import net.minecraft.client.gui.GuiGraphics;
+import net.minecraft.client.gui.LayeredDraw;
 import net.minecraft.client.renderer.GameRenderer;
 import net.minecraft.resources.ResourceLocation;
 import net.minecraft.tags.FluidTags;
@@ -30,13 +31,12 @@ public class HudModifier {
         Player player = mc.player;
         if (player == null) return;
 
-        NamedGuiOverlay getOverlay = event.getOverlay();
-        IGuiOverlay overlay = getOverlay.overlay();
-        ResourceLocation id = getOverlay.id();
+        LayeredDraw.Layer overlay = event.getLayer();
+        ResourceLocation id = event.getName();
         GuiGraphics gui = event.getGuiGraphics();
-        float pt = event.getPartialTick();
+        float pt = event.getPartialTick().getGameTimeDeltaPartialTick(true);
 
-        if (player.level().dimension().equals(LFResources.Levels.ALPHA_MINECRAFT) && !mc.options.hideGui && ((ForgeGui) mc.gui).shouldDrawSurvivalElements()) {
+        if (player.level().dimension().equals(LFResources.Levels.ALPHA_MINECRAFT) && !mc.options.hideGui) {
             int w = mc.getWindow().getGuiScaledWidth();
             int h = mc.getWindow().getGuiScaledHeight();
 
@@ -97,7 +97,7 @@ public class HudModifier {
             // Player HP move down
             if (id.equals(VanillaGuiLayers.PLAYER_HEALTH)) {
                 event.setCanceled(true);
-                overlay.render((ForgeGui) mc.gui, gui, pt, w, h + playerHpH - yOffset);
+                overlay.render(mc.gui, gui, pt, w, h + playerHpH - yOffset);
             }
             // Air level move left and down, account for AbstractHorse jump bar when saddled
             if (id.equals(VanillaGuiLayers.AIR_LEVEL)) {
@@ -108,7 +108,7 @@ public class HudModifier {
 
                 int full = net.minecraft.util.Mth.ceil((double)(air - 2) * 10.0 / maxAir);
                 int partial = net.minecraft.util.Mth.ceil((double)air * 10.0 / maxAir) - full;
-                int rh = ((ForgeGui) mc.gui).rightHeight;
+                int rh = mc.gui.rightHeight;
                 int top = h - rh - airLvlH - yOffset;
                 int barEnd = w / 2 + 51;
 
@@ -123,10 +123,10 @@ public class HudModifier {
                 event.setCanceled(true);
                 if (player.getArmorValue() > 0) {
                     //Armor on
-                    overlay.render((ForgeGui) mc.gui, gui, pt, w - mountHpW, h - mountHpH - yOffset);
+                    overlay.render(mc.gui, gui, pt, w - mountHpW, h - mountHpH - yOffset);
                 } else {
                     //Armor off
-                    overlay.render((ForgeGui) mc.gui, gui, pt, w - mountHpW, h - mountHpH - yOffset + mountHpH_na);
+                    overlay.render(mc.gui, gui, pt, w - mountHpW, h - mountHpH - yOffset + mountHpH_na);
                 }
             }
         }
