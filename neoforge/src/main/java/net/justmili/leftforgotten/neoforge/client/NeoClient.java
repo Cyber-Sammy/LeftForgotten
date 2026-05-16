@@ -32,7 +32,7 @@ public class NeoClient {
     @SubscribeEvent
     public static void wrapModelsForRemodelBlocks(ModelEvent.ModifyBakingResult event) {
         for (ModelResourceLocation modelLocation : event.getModels().keySet()) {
-            if (CommonClient.shouldReplaceBakedModel(modelLocation.id())) {
+            if (CommonClient.shouldReplaceBakedModel(modelLocation)) {
                 event.getModels().put(modelLocation, new ClassicBlocksModelNeo(event.getModels().get(modelLocation)));
             }
         }

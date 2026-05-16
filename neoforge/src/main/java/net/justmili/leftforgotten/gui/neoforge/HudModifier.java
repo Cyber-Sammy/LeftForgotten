@@ -15,15 +15,17 @@ import net.minecraft.world.entity.animal.horse.AbstractHorse;
 import net.minecraft.world.entity.player.Player;
 import net.neoforged.api.distmarker.Dist;
 import net.neoforged.bus.api.SubscribeEvent;
-import net.neoforged.fml.common.Mod;
+import net.neoforged.fml.common.EventBusSubscriber;
+import net.neoforged.neoforge.client.event.RenderGuiLayerEvent;
+import net.neoforged.neoforge.client.gui.VanillaGuiLayers;
 import org.joml.Matrix4f;
 
-@Mod.EventBusSubscriber(value = Dist.CLIENT)
+@EventBusSubscriber(value = Dist.CLIENT)
 public class HudModifier {
     private static final ResourceLocation GUI_ICONS_LOCATION = LeftForgotten.asPath("textures/gui/icons.png");
 
     @SubscribeEvent
-    public static void onGuiOverlayPre(RenderGuiOverlayEvent.Pre event) {
+    public static void onGuiOverlayPre(RenderGuiLayerEvent.Pre event) {
         Minecraft mc = Minecraft.getInstance();
         Player player = mc.player;
         if (player == null) return;
@@ -55,12 +57,12 @@ public class HudModifier {
             int yOffset = horseBarOffset - fullscreenOffset;
 
             // Food disable
-            if (id.equals(VanillaGuiOverlay.FOOD_LEVEL.id())) event.setCanceled(true);
+            if (id.equals(VanillaGuiLayers.FOOD_LEVEL)) event.setCanceled(true);
             // Experience disable
-            if (id.equals(VanillaGuiOverlay.EXPERIENCE_BAR.id())) event.setCanceled(true);
+            if (id.equals(VanillaGuiLayers.EXPERIENCE_BAR)) event.setCanceled(true);
 
             // Armor move right and down, flip armor sprites
-            if (id.equals(VanillaGuiOverlay.ARMOR_LEVEL.id())) {
+            if (id.equals(VanillaGuiLayers.ARMOR_LEVEL)) {
                 event.setCanceled(true);
 
                 int level = player.getArmorValue();
@@ -93,12 +95,12 @@ public class HudModifier {
                 }
             }
             // Player HP move down
-            if (id.equals(VanillaGuiOverlay.PLAYER_HEALTH.id())) {
+            if (id.equals(VanillaGuiLayers.PLAYER_HEALTH)) {
                 event.setCanceled(true);
                 overlay.render((ForgeGui) mc.gui, gui, pt, w, h + playerHpH - yOffset);
             }
             // Air level move left and down, account for AbstractHorse jump bar when saddled
-            if (id.equals(VanillaGuiOverlay.AIR_LEVEL.id())) {
+            if (id.equals(VanillaGuiLayers.AIR_LEVEL)) {
                 event.setCanceled(true);
                 int air = Math.min(player.getAirSupply(), player.getMaxAirSupply());
                 int maxAir = player.getMaxAirSupply();
@@ -117,7 +119,7 @@ public class HudModifier {
                 }
             }
             // Mount HP move down, account for AbstractHorse jump bar when saddled and Armor
-            if (id.equals(VanillaGuiOverlay.MOUNT_HEALTH.id())) {
+            if (id.equals(VanillaGuiLayers.VEHICLE_HEALTH)) {
                 event.setCanceled(true);
                 if (player.getArmorValue() > 0) {
                     //Armor on

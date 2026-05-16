@@ -10,13 +10,13 @@ import net.minecraft.network.chat.Component;
 import net.neoforged.api.distmarker.Dist;
 import net.neoforged.bus.api.EventPriority;
 import net.neoforged.bus.api.SubscribeEvent;
-import net.neoforged.fml.common.Mod;
+import net.neoforged.fml.common.EventBusSubscriber;
 import net.neoforged.neoforge.client.event.ClientTickEvent;
 import net.neoforged.neoforge.client.event.RenderGuiEvent;
 
 import java.util.Random;
 
-@Mod.EventBusSubscriber(modid = LeftForgotten.MOD_ID, value = Dist.CLIENT)
+@EventBusSubscriber(modid = LeftForgotten.MOD_ID, value = Dist.CLIENT)
 public class VersionOverlay {
 
     private static final String BASE_TEXT = "Minecraft Alpha v1.1.2_01";
