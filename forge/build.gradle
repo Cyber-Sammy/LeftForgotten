@@ -12,7 +12,8 @@ sourceSets {
 
 loom {
     forge {
-        mixinConfig "${rootProject.property("mod_id")}-forge.mixins.json"
+        mixinConfig "${rootProject.property("mod_id")}.mixins.json",
+                "${rootProject.property("mod_id")}-forge.mixins.json"
     }
 
     mixin {

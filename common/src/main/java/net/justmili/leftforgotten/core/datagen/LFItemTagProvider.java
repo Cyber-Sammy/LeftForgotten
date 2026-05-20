@@ -29,6 +29,10 @@ public class LFItemTagProvider extends IntrinsicHolderTagsProvider<Item> {
          * Vanilla tags
          */
         this.tag(ItemTags.BOATS).add(LFItems.BOAT.get());
+        this.tag(ItemTags.LOGS).add(LFItems.WOOD.get());
+        this.tag(ItemTags.LOGS_THAT_BURN).add(LFItems.WOOD.get());
+        this.tag(ItemTags.LOGS).add(LFItems.WOOD_6_SIDED.get());
+        this.tag(ItemTags.LOGS_THAT_BURN).add(LFItems.WOOD_6_SIDED.get());
         this.tag(ItemTags.PLANKS).add(LFItems.WOODEN_PLANKS.get());
         this.tag(ItemTags.WOODEN_BUTTONS).add(LFItems.BUTTON.get());
         this.tag(ItemTags.WOODEN_DOORS).add(LFItems.DOOR.get());
