@@ -16,6 +16,8 @@ It is dark and abandoned, untouched in years and shadowed by the overworld above
 <br>
 This is not a horror mod, but rather a adventure and decoration mod. Just plain old **Minecraft Alpha 1.1.2_01** with a few remnants of player activity from many years ago.<br>
 
+<hr>
+
 ## Features
 - Is (supposed to be) multi-loader and multi-version (I'm working on it)
   - See what Minecraft versions I'll update this to lower on this mod page
@@ -52,12 +54,9 @@ This is not a horror mod, but rather a adventure and decoration mod. Just plain 
 <hr>
 
 ### When newer Minecraft versions?
-With version 1.1 Left Forgotten will update from Fabric+Forge 1.20.1 to:
+With version 1.1 Left Forgotten will update from Fabric & Forge 1.20.1 to:
  - 1.21.1 Fabric & NeoForge
- - 1.21.4 Fabric & NeoForge
- - 1.21.5 Fabric & NeoForge
  - (1.21.6-)1.21.8 Fabric & NeoForge
- - (1.21.9-)1.21.10 Fabric & NeoForge
  - 1.21.11 Fabric & NeoForge
  - 26.1+ Fabric-Only
 
