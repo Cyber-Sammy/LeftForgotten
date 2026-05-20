@@ -25,20 +25,16 @@ public class NoCooldown {
     }
 
     public static void onPlayerRespawn(ServerPlayer player, boolean bl) {
-        ResourceKey<Level> toDim = ((ServerPlayer) player).getRespawnDimension();
-
+        ResourceKey<Level> toDim = player.getRespawnDimension();
         applyCooldown(player, toDim);
     }
 
     public static void onPlayerJoin(ServerPlayer player) {
-
         ResourceKey<Level> toDim = player.level().dimension();
         applyCooldown(player, toDim);
     }
 
     private static void applyCooldown(Player player, ResourceKey<Level> toDim) {
-
-
         AttributeInstance attackSpeedAttr = player.getAttribute(Attributes.ATTACK_SPEED);
         if (attackSpeedAttr == null) return;
 

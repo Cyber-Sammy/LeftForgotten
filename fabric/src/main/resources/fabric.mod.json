@@ -1,22 +1,23 @@
 {
   "schemaVersion": 1,
-  "id": "left_forgotten",
+  "id": "${mod_id}",
   "version": "${mod_version}",
-  "name": "Left Forgotten",
-  "description": "Once glory days of Minecraft, now buried beneath the void. Minecraft Alpha is still there, but left and abandoned ages ago.",
+  "name": "${mod_name}",
+  "description": "${mod_description}",
   "authors": [
-    "JustMili"
+    "JustMili",
+    "BluSpring"
   ],
   "contributors": [
-    "BluSpring",
-    "NBSurprise"
+    "NBSurprise",
+    "Eetgeenappels"
   ],
   "contact": {
     "homepage": "https://modrinth.com/mod/left-forgotten",
     "sources": "https://github.com/JustMili0/LeftForgotten/",
     "issues": "https://github.com/JustMili0/LeftForgotten/issues"
   },
-  "license": "All Rights Reserved",
+  "license": "${mod_license}",
   "icon": "icon.png",
   "environment": "*",
   "entrypoints": {
@@ -34,15 +35,14 @@
     ]
   },
   "mixins": [
-    "left_forgotten_common.mixins.json",
-    "left_forgotten_fabric.mixins.json"
+    "${mod_id}.mixins.json",
+    "${mod_id}-fabric.mixins.json"
   ],
   "depends": {
     "fabricloader": ">=${fabric_loader_version}",
-    "minecraft": "${minecraft_version}",
-    "java": ">=17",
-    "architectury": ">=${architectury_api_version}",
-    "fabric-api": "*"
+    "fabric-api": ">=${fabric_api_version}",
+    "minecraft": "${minecraft_version_constraint}",
+    "architectury": ">=${architectury_api}"
   },
   "breaks": {
     "true_end": "*"

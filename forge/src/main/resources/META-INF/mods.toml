@@ -1,34 +1,33 @@
 modLoader = "javafml"
-loaderVersion = "[1,)"
+loaderVersion = "[0,)"
 issueTrackerURL = "https://github.com/JustMili0/LeftForgotten/issues"
-license = "All Rights Reserved"
+license = "${mod_license}"
 
 [[mods]]
-modId = "left_forgotten"
+modId = "${mod_id}"
 version = "${mod_version}"
-displayName = "Left Forgotten"
-description = "Once glory days of Minecraft, now buried beneath the void. Minecraft Alpha is still there, but left and abandoned ages ago."
-authors = "JustMili"
-credits = "BluSpring, NBSurprise"
+displayName = "${mod_name}"
+description = "${mod_description}"
+authors = "${mod_authors}"
 logoFile = "icon.png"
 
-[[dependencies.left_forgotten]]
-modId = "forge"
-mandatory = true
-versionRange = "[${forge_version_range},)"
-ordering = "NONE"
-side = "BOTH"
-
-[[dependencies.left_forgotten]]
+[[dependencies.${mod_id}]]
 modId = "minecraft"
 mandatory = true
-versionRange = "[${minecraft_version}]"
+versionRange = "${minecraft_version_constraint}"
 ordering = "NONE"
 side = "BOTH"
 
-[[dependencies.left_forgotten]]
+[[dependencies.${mod_id}]]
+modId = "forge"
+mandatory = true
+versionRange = "[${forge_version},)"
+ordering = "NONE"
+side = "BOTH"
+
+[[dependencies.${mod_id}]]
 modId = "architectury"
 mandatory = true
-versionRange = "[${architectury_api_version},)"
-ordering = "AFTER"
+versionRange = "[${architectury_api},)"
+ordering = "NONE"
 side = "BOTH"

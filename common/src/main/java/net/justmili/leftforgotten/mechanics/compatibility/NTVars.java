@@ -1,7 +1,6 @@
 package net.justmili.leftforgotten.mechanics.compatibility;
 
 public class NTVars {
-
     public boolean HIDE_STAMINA_BAR;
     public boolean OLD_VERSION_OVERLAY;
 

@@ -2,7 +2,6 @@ package net.justmili.leftforgotten.mechanics.events;
 
 import dev.architectury.event.EventResult;
 import net.justmili.leftforgotten.registries.LFResources;
-import net.minecraft.core.BlockPos;
 import net.minecraft.server.level.ServerLevel;
 import net.minecraft.server.level.ServerPlayer;
 import net.minecraft.world.damagesource.DamageSource;
@@ -42,22 +41,22 @@ public class DimChange {
         return EventResult.interruptFalse();
     }
 
-    public static void onPlayerTick(Player player) {
-        if (!(player instanceof ServerPlayer serverPlayer)) return;
-        if (!serverPlayer.level().dimension().equals(LFResources.Levels.ALPHA_MINECRAFT)) return;
-        if (serverPlayer.getY() < 196) return;
+    public static void onPlayerTick(Player ticking) {
+        if (!(ticking instanceof ServerPlayer player)) return;
+        if (!player.level().dimension().equals(LFResources.Levels.ALPHA_MINECRAFT)) return;
+        if (player.getY() < 196) return;
 
-        ServerLevel overworld = serverPlayer.getServer().getLevel(Level.OVERWORLD);
+        ServerLevel overworld = player.getServer().getLevel(Level.OVERWORLD);
         if (overworld == null) return;
 
-        Vec3 momentum = serverPlayer.getDeltaMovement();
-        serverPlayer.teleportTo(overworld, serverPlayer.getX(), -88, serverPlayer.getZ(), serverPlayer.getYRot(), serverPlayer.getXRot());
-        serverPlayer.setDeltaMovement(momentum);
-        serverPlayer.startFallFlying();
+        Vec3 momentum = player.getDeltaMovement();
+        player.teleportTo(overworld, player.getX(), -88, player.getZ(), player.getYRot(), player.getXRot());
+        player.setDeltaMovement(momentum);
+        player.startFallFlying();
 
         // Schedule effect for next tick
         overworld.getServer().execute(() -> {
-            serverPlayer.addEffect(new MobEffectInstance(MobEffects.SLOW_FALLING, 1, 0, false, false));
+            player.addEffect(new MobEffectInstance(MobEffects.SLOW_FALLING, 1, 0, false, false));
         });
     }
 }

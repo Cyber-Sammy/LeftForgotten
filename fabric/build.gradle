@@ -1,5 +1,5 @@
 plugins {
-    id 'com.gradleup.shadow'
+    id('com.gradleup.shadow')
 }
 
 architectury {
@@ -7,16 +7,12 @@ architectury {
     fabric()
 }
 
-loom {
-    mixin {
-        useLegacyMixinAp = true
-    }
-}
-
 fabricApi {
+    /* Uncomment if you want datagen
     configureDataGeneration {
         client = true
     }
+     */
 }
 
 configurations {
@@ -35,35 +31,36 @@ configurations {
 }
 
 dependencies {
-    modImplementation "net.fabricmc:fabric-loader:$rootProject.fabric_loader_version"
+    modImplementation("${libs.fabric.loader.get()}")
+    modImplementation("${libs.fabric.api.get()}")
 
-    modImplementation "net.fabricmc.fabric-api:fabric-api:$rootProject.fabric_api_version"
-    modImplementation "dev.architectury:architectury-fabric:$rootProject.architectury_api_version"
+    // Fabric dependencies go here
+    modImplementation("dev.architectury:architectury-fabric:${libs.versions.arch.api.get()}")
 
-    compileOnly 'com.github.Nostalgica-Reverie.Nostalgic-Tweaks:NostalgicTweaks-fabric:1.20.1-SNAPSHOT'
-    modImplementation "com.terraformersmc:modmenu:7.2.2"
+    modImplementation("maven.modrinth:nostalgic-tweaks:${rootProject.property("nt_fabric")}")
+    modApi("me.shedaniel.cloth:cloth-config-fabric:${rootProject.property("cloth_config")}") {
+        exclude(group: "net.fabricmc.fabric-api")
+    }
 
-    include(implementation(annotationProcessor("com.github.bawnorton.mixinsquared:mixinsquared-fabric:${rootProject.mixinsquaredVersion}")))
+    modImplementation("com.terraformersmc:modmenu:${rootProject.property("mod_menu")}")
+    include(implementation(annotationProcessor("com.github.bawnorton.mixinsquared:mixinsquared-fabric:${libs.versions.mixinsquared.get()}")))
 
     common(project(path: ':common', configuration: 'namedElements')) { transitive = false }
     shadowBundle project(path: ':common', configuration: 'transformProductionFabric')
-
-    modApi("me.shedaniel.cloth:cloth-config-fabric:11.1.136") {
-        exclude(group: "net.fabricmc.fabric-api")
-    }
 }
 
 processResources {
-    inputs.property 'mod_version', project.mod_version
-    inputs.property 'minecraft_version', project.minecraft_version
-    inputs.property 'fabric_loader_version', project.fabric_loader_version
-    inputs.property 'architectury_api_version', project.architectury_api_version
-
     filesMatching('fabric.mod.json') {
-        expand mod_version: inputs.properties.mod_version,
-                minecraft_version: inputs.properties.minecraft_version,
-                architectury_api_version: inputs.properties.architectury_api_version,
-                fabric_loader_version: inputs.properties.fabric_loader_version
+        expand "mod_id": rootProject.property("mod_id"),
+                "mod_name": rootProject.property("mod_name"),
+                "mod_version": rootProject.property("mod_version"),
+                "mod_description": rootProject.property("mod_description"),
+                "mod_authors": rootProject.property("mod_authors"),
+                "mod_license": rootProject.property("mod_license"),
+                "fabric_loader_version": libs.versions.fabric.loader.get(),
+                "fabric_api_version": libs.versions.fabric.api.get(),
+                "minecraft_version_constraint": rootProject.property("minecraft_version_constraint_fabric"),
+                "architectury_api": libs.versions.arch.api.get()
     }
 }
 

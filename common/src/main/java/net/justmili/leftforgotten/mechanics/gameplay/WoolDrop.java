@@ -46,11 +46,8 @@ public class WoolDrop {
 
         int count = world.getRandom().nextInt(3) + 1;
         ItemStack stack = new ItemStack(woolItem, count);
-        ItemEntity drop = new ItemEntity(
-                world,
-                sheep.getX(), sheep.getY() + 0.4, sheep.getZ(),
-                stack
-        );
+        ItemEntity drop = new ItemEntity(world, sheep.getX(), sheep.getY() + 0.4, sheep.getZ(), stack);
+
         world.addFreshEntity(drop);
         sheep.setSheared(true);
 

@@ -59,7 +59,7 @@ public class VersionOverlay {
             // "//2-6 ticks" - "glitch" string show time
         } else if (random.nextInt(6000) == 0) {
             currentText = VERSIONS[random.nextInt(VERSIONS.length)];
-            flashTicks = 2 + random.nextInt(5); // 2–4 ticks
+            flashTicks = 2+random.nextInt(5); // 2–4 ticks
         }
     }
 
@@ -73,22 +73,22 @@ public class VersionOverlay {
         PoseStack pose = gui.pose();
 
         final int fontSize = 32;
-        float guiScaleFactor = (float) mc.getWindow().getScreenWidth() / (float) mc.getWindow().getGuiScaledWidth();
-        float baseFontHeight = (float) mc.font.lineHeight;
-        float userScale = fontSize / baseFontHeight;
+        float guiScaleFactor = (float) mc.getWindow().getScreenWidth() / (float) mc.getWindow().getGuiScaledWidth(),
+            baseFontHeight = (float) mc.font.lineHeight,
+            userScale = fontSize / baseFontHeight;
 
         pose.pushPose();
         pose.scale(1f / guiScaleFactor, 1f / guiScaleFactor, 1f);
         pose.scale((int) userScale, (int) userScale, 1f);
 
-        int x = 6;
-        int y = 6;
-        int textColor = 0xFFFFFF;
-        int textShadowColor = 0xFF3F3F3F;
-        int drawX = Math.round(x / userScale);
-        int drawY = Math.round(y / userScale);
+        int x = 6,
+            y = 6,
+            textColor = 0xFFFFFF,
+            textShadowColor = 0xFF3F3F3F,
+            drawX = Math.round(x / userScale),
+            drawY = Math.round(y / userScale);
 
-        gui.drawString(mc.font, Component.literal(currentText), drawX + 1, drawY + 1, textShadowColor, false);
+        gui.drawString(mc.font, Component.literal(currentText), drawX+1, drawY+1, textShadowColor, false);
         gui.drawString(mc.font, Component.literal(currentText), drawX, drawY, textColor, false);
 
         pose.popPose();
