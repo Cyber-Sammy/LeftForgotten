@@ -5,8 +5,7 @@ Left to fade away into distant memories
 *Competitor to Alpha Below/The World Below*<br>
 *Based on a [tweet by @SlimerSlimy](https://x.com/SlimerSlimy/status/2026360433544683796) and Minecraft Alpha 1.1.2_01 (the actual version, not the fangame)*
 
-***This mod was not made by Mystic Creations Team***<br>
-***This mod was made by JustMili on Modrinth but has been uploaded to CurseForge on her team's account. (By Mili herself)***
+**This mod is a personal upload by original creator *JustMili* from Modrinth, but managed from her team's account.**
 
 <hr>
 
