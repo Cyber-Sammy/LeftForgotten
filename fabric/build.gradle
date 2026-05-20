@@ -8,11 +8,9 @@ architectury {
 }
 
 fabricApi {
-    /* Uncomment if you want datagen
     configureDataGeneration {
         client = true
     }
-     */
 }
 
 configurations {

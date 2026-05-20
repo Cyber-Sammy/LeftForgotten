@@ -84,16 +84,6 @@ public class LFRecipeProvider extends RecipeProvider {
         Processing.smelt(writer, LFItems.SAND.get(), LFItems.GLASS.get(), 0.1f);
         Building.bars(writer, LFItems.GLASS.get(), LFItems.GLASS_PANE.get());
 
-        // Bookshelf
-        ShapedRecipeBuilder.shaped(RecipeCategory.BUILDING_BLOCKS, LFItems.BOOKSHELF.get())
-            .define('#', LFItems.WOODEN_PLANKS.get())
-            .define('B', Items.BOOK)
-            .pattern("###")
-            .pattern("BBB")
-            .pattern("###")
-            .unlockedBy(getHasName(LFItems.WOODEN_PLANKS.get()), has(LFItems.WOODEN_PLANKS.get()))
-            .save(writer);
-
         // TNT
         ShapedRecipeBuilder.shaped(RecipeCategory.REDSTONE, LFItems.TNT.get())
             .define('#', Items.GUNPOWDER)
@@ -107,14 +97,6 @@ public class LFRecipeProvider extends RecipeProvider {
         // Wood 6-sided
         Crafting.shaped2x2(writer, RecipeCategory.BUILDING_BLOCKS, LFItems.WOOD.get(), LFItems.WOOD_6_SIDED.get(), 3);
 
-        // Sticks
-        ShapedRecipeBuilder.shaped(RecipeCategory.MISC, Items.STICK, 4)
-            .define('#', LFItems.WOODEN_PLANKS.get())
-            .pattern("#")
-            .pattern("#")
-            .unlockedBy(getHasName(LFItems.WOODEN_PLANKS.get()), has(LFItems.WOODEN_PLANKS.get()))
-            .save(writer, LeftForgotten.asResource("stick"));
-
         // Furnace and Crafting Table
         ShapedRecipeBuilder.shaped(RecipeCategory.BUILDING_BLOCKS, Items.FURNACE, 1)
             .define('#', LFItems.COBBLESTONE.get())
@@ -123,7 +105,6 @@ public class LFRecipeProvider extends RecipeProvider {
             .pattern("###")
             .unlockedBy(getHasName(LFItems.COBBLESTONE.get()), has(LFItems.COBBLESTONE.get()))
             .save(writer, LeftForgotten.asResource("furnace"));
-        Crafting.shaped2x2(writer, RecipeCategory.BUILDING_BLOCKS, LFItems.WOODEN_PLANKS.get(), Items.CRAFTING_TABLE, 1);
 
         // Resource Blocks
         Crafting.shaped3x3(writer, RecipeCategory.BUILDING_BLOCKS, LFItems.IRON_BLOCK.get(), Items.IRON_INGOT, 1);

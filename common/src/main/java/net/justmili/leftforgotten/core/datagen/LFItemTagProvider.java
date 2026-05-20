@@ -1,6 +1,7 @@
 package net.justmili.leftforgotten.core.datagen;
 
 import net.justmili.leftforgotten.LeftForgotten;
+import net.justmili.leftforgotten.registries.LFBlocks;
 import net.justmili.leftforgotten.registries.LFItems;
 import net.minecraft.core.HolderLookup;
 import net.minecraft.core.registries.BuiltInRegistries;
@@ -27,17 +28,26 @@ public class LFItemTagProvider extends IntrinsicHolderTagsProvider<Item> {
         /**
          * Vanilla tags
          */
-        this.tag(ItemTags.BOATS)
-            .add(LFItems.BOAT.get());
+        this.tag(ItemTags.BOATS).add(LFItems.BOAT.get());
+        this.tag(ItemTags.PLANKS).add(LFItems.WOODEN_PLANKS.get());
+        this.tag(ItemTags.WOODEN_BUTTONS).add(LFItems.BUTTON.get());
+        this.tag(ItemTags.WOODEN_DOORS).add(LFItems.DOOR.get());
+        this.tag(ItemTags.WOODEN_TRAPDOORS).add(LFItems.TRAPDOOR.get());
+        this.tag(ItemTags.WOODEN_FENCES).add(LFItems.FENCE.get());
+        this.tag(ItemTags.WOODEN_SLABS).add(LFItems.WOODEN_SLAB.get());
+        this.tag(ItemTags.WOODEN_STAIRS).add(LFItems.WOODEN_STAIRS.get());
+        this.tag(ItemTags.WOODEN_PRESSURE_PLATES).add(LFItems.PRESSURE_PLATE.get());
+        this.tag(ItemTags.STONE_TOOL_MATERIALS).add(LFItems.COBBLESTONE.get());
+        this.tag(ItemTags.STONE_CRAFTING_MATERIALS).add(LFItems.COBBLESTONE.get());
+        this.tag(ItemTags.STONE_BUTTONS).add(LFItems.STONE_BUTTON.get());
+        this.tag(ItemTags.LEAVES).add(LFItems.LEAVES.get());
 
         /**
          * Forge and Fabric tags
          */
         // FORGE
-        this.tag(FORGE_COBBLE)
-            .add(LFItems.COBBLESTONE.get());
-        this.tag(FORGE_STONE)
-            .add(LFItems.STONE.get());
+        this.tag(FORGE_COBBLE).add(LFItems.COBBLESTONE.get());
+        this.tag(FORGE_STONE).add(LFItems.STONE.get());
         // FABRIC
         // idk does Fabric have additional tags like forge
     }

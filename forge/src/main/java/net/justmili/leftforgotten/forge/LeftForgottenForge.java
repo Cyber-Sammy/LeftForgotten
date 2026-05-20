@@ -6,12 +6,15 @@ import net.justmili.leftforgotten.LeftForgotten;
 import net.justmili.leftforgotten.core.datagen.*;
 import net.minecraft.data.DataProvider;
 import net.minecraftforge.data.event.GatherDataEvent;
+import net.minecraftforge.eventbus.api.IEventBus;
 import net.minecraftforge.fml.common.Mod;
 import net.minecraftforge.fml.javafmlmod.FMLJavaModLoadingContext;
 
 @Mod(LeftForgotten.MOD_ID)
 public final class LeftForgottenForge {
-    public LeftForgottenForge() {
+    public static IEventBus EVENT_BUS;
+
+    public LeftForgottenForge(FMLJavaModLoadingContext modContext) {
         if (Platform.isModLoaded("true_end")) {
             throw new RuntimeException("""
                 
@@ -22,8 +25,9 @@ public final class LeftForgottenForge {
                 Please remove one of the mods from your instance.""");
         }
 
-        EventBuses.registerModEventBus(LeftForgotten.MOD_ID, FMLJavaModLoadingContext.get().getModEventBus());
-        FMLJavaModLoadingContext.get().getModEventBus().addListener(LeftForgottenForge::onDatagenSetup);
+        EVENT_BUS = modContext.getModEventBus();
+        EventBuses.registerModEventBus(LeftForgotten.MOD_ID, EVENT_BUS);
+        EVENT_BUS.addListener(LeftForgottenForge::onDatagenSetup);
 
         LeftForgotten.init();
     }

@@ -12,8 +12,7 @@ sourceSets {
 
 loom {
     forge {
-        mixinConfig "${rootProject.property("mod_id")}.mixins.json",
-                "${rootProject.property("mod_id")}-forge.mixins.json"
+        mixinConfig "${rootProject.property("mod_id")}-forge.mixins.json"
     }
 
     mixin {
@@ -50,11 +49,11 @@ configurations {
 }
 
 dependencies {
-    forge("${libs.forge.get()}")
-    modImplementation("${libs.forge.get()}")
+    forge("${libs.forge.loader.get()}")
+    modImplementation("${libs.forge.loader.get()}")
 
     // Forge dependencies go here
-    modImplementation("dev.architectury:architectury:${libs.versions.arch.api.get()}")
+    modImplementation("dev.architectury:architectury-forge:${libs.versions.arch.api.get()}")
 
     modImplementation("maven.modrinth:nostalgic-tweaks:${rootProject.property("nt_fabric")}")
     modImplementation("me.shedaniel.cloth:cloth-config-forge:${rootProject.property("cloth_config")}")
