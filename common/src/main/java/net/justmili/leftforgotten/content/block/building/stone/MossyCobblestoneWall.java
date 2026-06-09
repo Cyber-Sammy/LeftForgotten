@@ -9,7 +9,7 @@ import net.minecraft.world.level.block.state.BlockState;
 
 public class MossyCobblestoneWall extends WallBlock {
 	public MossyCobblestoneWall() {
-		super(Properties.copy(LFBlocks.MOSSY_COBBLESTONE.get()).forceSolidOn());
+		super(Properties.ofFullCopy(LFBlocks.MOSSY_COBBLESTONE.get()).forceSolidOn());
 	}
 
 	@Override

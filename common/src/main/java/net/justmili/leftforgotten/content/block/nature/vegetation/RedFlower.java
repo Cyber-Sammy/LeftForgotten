@@ -22,7 +22,6 @@ public class RedFlower extends FlowerBlock {
         super(MobEffects.NIGHT_VISION, 100, Properties.of().mapColor(MapColor.COLOR_RED).sound(SoundType.GRASS).instabreak().noCollission().offsetType(OffsetType.XZ).pushReaction(PushReaction.DESTROY));
     }
 
-    @Override
     public int getEffectDuration() {
         return 100;
     }
@@ -46,12 +45,12 @@ public class RedFlower extends FlowerBlock {
     }
 
     @Override
-    public boolean mayPlaceOn(BlockState groundState, BlockGetter worldIn, BlockPos pos) {
+    protected boolean mayPlaceOn(BlockState groundState, BlockGetter worldIn, BlockPos pos) {
         return groundState.is(BlockTags.DIRT);
     }
 
     @Override
-    public boolean canSurvive(BlockState blockstate, LevelReader worldIn, BlockPos pos) {
+    protected boolean canSurvive(BlockState blockstate, LevelReader worldIn, BlockPos pos) {
         BlockPos blockpos = pos.below();
         BlockState groundState = worldIn.getBlockState(blockpos);
         return this.mayPlaceOn(groundState, worldIn, blockpos);

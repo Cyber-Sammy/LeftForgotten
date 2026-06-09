@@ -17,7 +17,7 @@ public class CommonClient {
     }
 
     public static boolean shouldReplaceBakedModel(ModelResourceLocation id) {
-        return id instanceof ModelResourceLocation resourceLocation && id.getNamespace().equals("minecraft") && !resourceLocation.getVariant().equals("inventory") &&
-            (id.getPath().equals("furnace") || id.getPath().equals("crafting_table"));
+        return id.id().getNamespace().equals("minecraft") && !id.getVariant().equals("inventory") &&
+            (id.id().getPath().equals("furnace") || id.id().getPath().equals("crafting_table"));
     }
 }

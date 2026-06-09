@@ -26,7 +26,7 @@ public class SoundEngineMixin {
     @Unique private static final ResourceLocation HURT_DROWN_VANILLA = SoundEvents.PLAYER_HURT_DROWN.getLocation();
     @Unique private static final ResourceLocation HURT_BERRY_VANILLA = SoundEvents.PLAYER_HURT_SWEET_BERRY_BUSH.getLocation();
 
-    @Inject(method = "play", at = @At("HEAD"), cancellable = true)
+    @Inject(method = "play(Lnet/minecraft/client/resources/sounds/SoundInstance;)V", at = @At("HEAD"), cancellable = true, remap = false)
     private void onPlay(SoundInstance sound, CallbackInfo ci) {
         Minecraft mc = Minecraft.getInstance();
         if (sound == null || mc.level == null) return;

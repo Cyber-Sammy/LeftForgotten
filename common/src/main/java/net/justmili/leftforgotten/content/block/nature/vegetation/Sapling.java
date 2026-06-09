@@ -14,8 +14,8 @@ public class Sapling extends SaplingBlock {
 
     public Sapling() {
         super(
-                new TreeGrower(),
-                Properties.copy(Blocks.OAK_SAPLING)
+                TreeGrower.INSTANCE,
+                Properties.ofFullCopy(Blocks.OAK_SAPLING)
                         .mapColor(MapColor.COLOR_LIGHT_GREEN)
         );
     }

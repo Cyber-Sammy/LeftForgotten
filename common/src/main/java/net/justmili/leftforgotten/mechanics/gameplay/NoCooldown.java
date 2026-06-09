@@ -6,6 +6,7 @@ import net.justmili.leftforgotten.LeftForgotten;
 import net.justmili.leftforgotten.registries.LFResources;
 import net.minecraft.resources.ResourceKey;
 import net.minecraft.server.level.ServerPlayer;
+import net.minecraft.world.entity.Entity;
 import net.minecraft.world.entity.ai.attributes.AttributeInstance;
 import net.minecraft.world.entity.ai.attributes.AttributeModifier;
 import net.minecraft.world.entity.ai.attributes.Attributes;
@@ -18,8 +19,8 @@ import java.util.UUID;
 
 public class NoCooldown {
     private static final UUID MODIFIER_UUID = UUID.fromString("9b91a426-cc5c-4a08-a0e5-7d00627cb3ef");
-    private static final AttributeModifier baseModifier = new AttributeModifier(LeftForgotten.asResource("noCooldown"),200.0, AttributeModifier.Operation.ADD_VALUE);
-    private static final AttributeModifier bcModifier = new AttributeModifier(LeftForgotten.asResource("noCooldown"),2.0, AttributeModifier.Operation.ADD_VALUE);
+    private static final AttributeModifier baseModifier = new AttributeModifier(LeftForgotten.asResource("no_cooldown"),200.0, AttributeModifier.Operation.ADD_VALUE);
+    private static final AttributeModifier bcModifier = new AttributeModifier(LeftForgotten.asResource("no_cooldown"),2.0, AttributeModifier.Operation.ADD_VALUE);
 
     public static void onChangedDimension(ServerPlayer player, ResourceKey<Level> fromDimension, ResourceKey<Level> toDimension) {
         applyCooldown(player, toDimension);
@@ -29,6 +30,10 @@ public class NoCooldown {
         ResourceKey<Level> toDim = player.getRespawnDimension();
 
         applyCooldown(player, toDim);
+    }
+
+    public static void onPlayerRespawn(ServerPlayer player, boolean bl, Entity.RemovalReason reason) {
+        onPlayerRespawn(player, bl);
     }
 
     public static void onPlayerJoin(ServerPlayer player) {

@@ -9,7 +9,8 @@ import net.minecraft.sounds.SoundSource;
 import net.minecraft.tags.ItemTags;
 import net.minecraft.util.RandomSource;
 import net.minecraft.world.InteractionHand;
-import net.minecraft.world.InteractionResult;
+import net.minecraft.world.ItemInteractionResult;
+import net.minecraft.world.entity.EquipmentSlot;
 import net.minecraft.world.entity.player.Player;
 import net.minecraft.world.level.BlockGetter;
 import net.minecraft.world.level.Level;
@@ -42,7 +43,7 @@ public class Dirt extends Block {
     }
 
     @Override
-    public InteractionResult use(BlockState blockstate, Level world, BlockPos pos, Player player, InteractionHand hand, BlockHitResult hit) {
+    protected ItemInteractionResult useItemOn(net.minecraft.world.item.ItemStack stack, BlockState blockstate, Level world, BlockPos pos, Player player, InteractionHand hand, BlockHitResult hit) {
         int x = pos.getX();
         int y = pos.getY();
         int z = pos.getZ();
@@ -51,11 +52,11 @@ public class Dirt extends Block {
         if (player.getMainHandItem().is(ItemTags.HOES)) {
             world.setBlock(BlockPos.containing(x, y, z), LFBlocks.FARMLAND.get().defaultBlockState(), 3);
             world.playSound(null, x, y, z, SoundEvents.HOE_TILL, SoundSource.BLOCKS, 1.0f, pitch);
-            player.getMainHandItem().hurtAndBreak(1, player, p -> p.broadcastBreakEvent(hand));
+            player.getMainHandItem().hurtAndBreak(1, player, EquipmentSlot.MAINHAND);
 
-            return InteractionResult.SUCCESS;
+            return ItemInteractionResult.SUCCESS;
         }
-        return InteractionResult.FAIL;
+        return ItemInteractionResult.PASS_TO_DEFAULT_BLOCK_INTERACTION;
     }
 
     private static boolean canBeGrass(BlockState state, LevelReader world, BlockPos pos) {

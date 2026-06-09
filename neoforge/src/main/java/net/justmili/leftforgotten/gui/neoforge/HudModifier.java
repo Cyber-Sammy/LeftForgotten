@@ -1,7 +1,5 @@
 package net.justmili.leftforgotten.gui.neoforge;
 
-import com.mojang.blaze3d.systems.RenderSystem;
-import com.mojang.blaze3d.vertex.*;
 import dev.architectury.platform.Platform;
 import mod.adrenix.nostalgic.tweak.config.CandyTweak;
 import net.justmili.leftforgotten.LeftForgotten;
@@ -9,7 +7,6 @@ import net.justmili.leftforgotten.registries.LFResources;
 import net.minecraft.client.Minecraft;
 import net.minecraft.client.gui.GuiGraphics;
 import net.minecraft.client.gui.LayeredDraw;
-import net.minecraft.client.renderer.GameRenderer;
 import net.minecraft.resources.ResourceLocation;
 import net.minecraft.tags.FluidTags;
 import net.minecraft.world.entity.animal.horse.AbstractHorse;
@@ -19,7 +16,6 @@ import net.neoforged.bus.api.SubscribeEvent;
 import net.neoforged.fml.common.EventBusSubscriber;
 import net.neoforged.neoforge.client.event.RenderGuiLayerEvent;
 import net.neoforged.neoforge.client.gui.VanillaGuiLayers;
-import org.joml.Matrix4f;
 
 @EventBusSubscriber(value = Dist.CLIENT)
 public class HudModifier {
@@ -81,23 +77,20 @@ public class HudModifier {
                     float minV = 9f / 256f;
                     float maxV = 18f / 256f;
 
-                    // Flip the sprites via Blaze3D engine
-                    RenderSystem.setShaderTexture(0, GUI_ICONS_LOCATION);
-                    RenderSystem.setShader(GameRenderer::getPositionTexShader);
-                    Matrix4f matrix4f = gui.pose().last().pose();
-                    BufferBuilder bufferBuilder = Tesselator.getInstance().getBuilder();
-                    bufferBuilder.begin(VertexFormat.Mode.QUADS, DefaultVertexFormat.POSITION_TEX);
-                    bufferBuilder.vertex(matrix4f, x1, y1, 0).uv(minU, minV).endVertex();
-                    bufferBuilder.vertex(matrix4f, x1, y2, 0).uv(minU, maxV).endVertex();
-                    bufferBuilder.vertex(matrix4f, x2, y2, 0).uv(maxU, maxV).endVertex();
-                    bufferBuilder.vertex(matrix4f, x2, y1, 0).uv(maxU, minV).endVertex();
-                    BufferUploader.drawWithShader(bufferBuilder.end());
+                    gui.pose().pushPose();
+                    gui.pose().translate(x1 + 9, y1, 0);
+                    gui.pose().scale(-1.0F, 1.0F, 1.0F);
+                    gui.blit(GUI_ICONS_LOCATION, 0, 0, uOffset, 9, 9, 9);
+                    gui.pose().popPose();
                 }
             }
             // Player HP move down
             if (id.equals(VanillaGuiLayers.PLAYER_HEALTH)) {
                 event.setCanceled(true);
-                overlay.render(mc.gui, gui, pt, w, h + playerHpH - yOffset);
+                gui.pose().pushPose();
+                gui.pose().translate(0, playerHpH - yOffset, 0);
+                overlay.render(gui, event.getPartialTick());
+                gui.pose().popPose();
             }
             // Air level move left and down, account for AbstractHorse jump bar when saddled
             if (id.equals(VanillaGuiLayers.AIR_LEVEL)) {
@@ -123,10 +116,16 @@ public class HudModifier {
                 event.setCanceled(true);
                 if (player.getArmorValue() > 0) {
                     //Armor on
-                    overlay.render(mc.gui, gui, pt, w - mountHpW, h - mountHpH - yOffset);
+                    gui.pose().pushPose();
+                    gui.pose().translate(-mountHpW, -mountHpH - yOffset, 0);
+                    overlay.render(gui, event.getPartialTick());
+                    gui.pose().popPose();
                 } else {
                     //Armor off
-                    overlay.render(mc.gui, gui, pt, w - mountHpW, h - mountHpH - yOffset + mountHpH_na);
+                    gui.pose().pushPose();
+                    gui.pose().translate(-mountHpW, -mountHpH - yOffset + mountHpH_na, 0);
+                    overlay.render(gui, event.getPartialTick());
+                    gui.pose().popPose();
                 }
             }
         }

@@ -20,7 +20,7 @@ import org.spongepowered.asm.mixin.injection.callback.CallbackInfoReturnable;
 public class ReshapeChests {
     @Unique private static final VoxelShape FULL_BLOCK = Block.box(0, 0, 0, 16, 16, 16);
 
-    @Inject(method = "getShape", at = @At("HEAD"), cancellable = true)
+    @Inject(method = "getShape(Lnet/minecraft/world/level/block/state/BlockState;Lnet/minecraft/world/level/BlockGetter;Lnet/minecraft/core/BlockPos;Lnet/minecraft/world/phys/shapes/CollisionContext;)Lnet/minecraft/world/phys/shapes/VoxelShape;", at = @At("HEAD"), cancellable = true, remap = false)
     private void lf$alphaChestShape(BlockState state, BlockGetter getter, BlockPos pos, CollisionContext context,
                                     CallbackInfoReturnable<VoxelShape> cir) {
         if (!(getter instanceof Level world)) return;

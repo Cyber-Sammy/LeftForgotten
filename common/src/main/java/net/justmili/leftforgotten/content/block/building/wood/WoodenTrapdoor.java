@@ -13,7 +13,7 @@ import net.minecraft.world.level.material.MapColor;
 
 public class WoodenTrapdoor extends TrapDoorBlock {
 	public WoodenTrapdoor() {
-		super(Properties.of().mapColor(MapColor.WOOD).sound(SoundType.WOOD).strength(3f).noOcclusion().isRedstoneConductor(CommonBlock::never).instrument(NoteBlockInstrument.BASS).ignitedByLava(), BlockSetType.OAK);
+		super(BlockSetType.OAK, Properties.of().mapColor(MapColor.WOOD).sound(SoundType.WOOD).strength(3f).noOcclusion().isRedstoneConductor(CommonBlock::never).instrument(NoteBlockInstrument.BASS).ignitedByLava());
 	}
 
 	@Override

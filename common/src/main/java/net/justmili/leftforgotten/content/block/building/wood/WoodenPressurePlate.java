@@ -13,7 +13,7 @@ import net.minecraft.world.level.material.MapColor;
 
 public class WoodenPressurePlate extends PressurePlateBlock {
 	public WoodenPressurePlate() {
-		super(Sensitivity.EVERYTHING, Properties.of().mapColor(MapColor.WOOD).sound(SoundType.WOOD).strength(0.5f).noOcclusion().isRedstoneConductor(CommonBlock::never).forceSolidOn().instrument(NoteBlockInstrument.BASS).ignitedByLava(), BlockSetType.OAK);
+		super(BlockSetType.OAK, Properties.of().mapColor(MapColor.WOOD).sound(SoundType.WOOD).strength(0.5f).noOcclusion().isRedstoneConductor(CommonBlock::never).forceSolidOn().instrument(NoteBlockInstrument.BASS).ignitedByLava());
 	}
 
 	@Override

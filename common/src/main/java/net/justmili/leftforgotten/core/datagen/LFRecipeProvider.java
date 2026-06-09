@@ -2,6 +2,7 @@ package net.justmili.leftforgotten.core.datagen;
 
 import net.justmili.leftforgotten.LeftForgotten;
 import net.justmili.leftforgotten.registries.LFItems;
+import net.minecraft.core.HolderLookup;
 import net.minecraft.data.PackOutput;
 import net.minecraft.data.recipes.RecipeCategory;
 import net.minecraft.data.recipes.RecipeOutput;
@@ -9,11 +10,13 @@ import net.minecraft.data.recipes.RecipeProvider;
 import net.minecraft.data.recipes.ShapedRecipeBuilder;
 import net.minecraft.world.item.Items;
 
+import java.util.concurrent.CompletableFuture;
+
 import static net.justmili.leftforgotten.core.util.DatagenDataUtil.Recipes.*;
 
 public class LFRecipeProvider extends RecipeProvider {
-    public LFRecipeProvider(PackOutput output) {
-        super(output);
+    public LFRecipeProvider(PackOutput output, CompletableFuture<HolderLookup.Provider> registries) {
+        super(output, registries);
     }
 
     @Override

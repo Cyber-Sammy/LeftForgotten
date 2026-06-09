@@ -71,8 +71,7 @@ public class LFBoatRenderer extends EntityRenderer<LFBoatEntity> {
         poseStack.mulPose(Axis.YP.rotationDegrees(90.0F));
         model.setupAnim(entity, partialTick, 0.0F, -0.1F, 0.0F, 0.0F);
         VertexConsumer consumer = buffer.getBuffer(model.renderType(texture));
-        model.renderToBuffer(poseStack, consumer, packedLight, OverlayTexture.NO_OVERLAY,
-            1.0F, 1.0F, 1.0F, 1.0F);
+        model.renderToBuffer(poseStack, consumer, packedLight, OverlayTexture.NO_OVERLAY);
 
         if (!entity.isUnderWater()) {
             VertexConsumer waterMask = buffer.getBuffer(RenderType.waterMask());

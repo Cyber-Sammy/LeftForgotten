@@ -21,7 +21,7 @@ import org.spongepowered.asm.mixin.injection.callback.CallbackInfo;
 public class RemodelChests {
     @Inject(method = "render(Lnet/minecraft/world/level/block/entity/BlockEntity;" +
         "FLcom/mojang/blaze3d/vertex/PoseStack;Lnet/minecraft/client/renderer/MultiBufferSource;II)V",
-        at = @At("HEAD"), cancellable = true)
+        at = @At("HEAD"), cancellable = true, remap = false)
     private <T extends BlockEntity & LidBlockEntity> void lf$renderAlphaChest(T blockEntity, float partialTick, PoseStack poseStack,
                                                                               MultiBufferSource buffer, int packedLight, int packedOverlay,
                                                                               CallbackInfo ci) {

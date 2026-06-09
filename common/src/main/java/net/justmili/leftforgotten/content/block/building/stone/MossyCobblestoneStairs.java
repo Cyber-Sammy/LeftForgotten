@@ -7,7 +7,7 @@ import net.minecraft.world.level.block.state.BlockState;
 
 public class MossyCobblestoneStairs extends StairBlock {
 	public MossyCobblestoneStairs() {
-		super(LFBlocks.MOSSY_COBBLESTONE.get().defaultBlockState(), Properties.copy(LFBlocks.MOSSY_COBBLESTONE.get()));
+		super(LFBlocks.MOSSY_COBBLESTONE.get().defaultBlockState(), Properties.ofFullCopy(LFBlocks.MOSSY_COBBLESTONE.get()));
 	}
 
 	@Override

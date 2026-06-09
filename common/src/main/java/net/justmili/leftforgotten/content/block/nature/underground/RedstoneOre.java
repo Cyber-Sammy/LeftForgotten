@@ -5,7 +5,7 @@ import net.minecraft.core.BlockPos;
 import net.minecraft.core.particles.DustParticleOptions;
 import net.minecraft.util.RandomSource;
 import net.minecraft.world.InteractionHand;
-import net.minecraft.world.InteractionResult;
+import net.minecraft.world.ItemInteractionResult;
 import net.minecraft.world.entity.Entity;
 import net.minecraft.world.entity.player.Player;
 import net.minecraft.world.entity.projectile.Projectile;
@@ -81,7 +81,7 @@ public class RedstoneOre extends Block {
 
 
 	@Override
-	public void attack(BlockState blockstate, Level world, BlockPos pos, Player entity) {
+	protected void attack(BlockState blockstate, Level world, BlockPos pos, Player entity) {
 		super.attack(blockstate, world, pos, entity);
 		interaction(world, pos.getX(), pos.getY(), pos.getZ());
 	}
@@ -93,15 +93,14 @@ public class RedstoneOre extends Block {
 	}
 
 	@Override
-	public void onProjectileHit(Level world, BlockState blockstate, BlockHitResult hit, Projectile projectile) {
+	protected void onProjectileHit(Level world, BlockState blockstate, BlockHitResult hit, Projectile projectile) {
 		interaction(world, hit.getBlockPos().getX(), hit.getBlockPos().getY(), hit.getBlockPos().getZ());
 	}
 
 	@Override
-	public InteractionResult use(BlockState blockstate, Level world, BlockPos pos, Player entity, InteractionHand hand, BlockHitResult hit) {
+	protected ItemInteractionResult useItemOn(ItemStack itemstack, BlockState blockstate, Level world, BlockPos pos, Player entity, InteractionHand hand, BlockHitResult hit) {
 		interaction(world, pos.getX(), pos.getY(), pos.getZ());
-		ItemStack itemstack = entity.getItemInHand(hand);
-		return itemstack.getItem() instanceof BlockItem && (new BlockPlaceContext(entity, hand, itemstack, hit)).canPlace() ? InteractionResult.PASS : InteractionResult.SUCCESS;
+		return itemstack.getItem() instanceof BlockItem && (new BlockPlaceContext(entity, hand, itemstack, hit)).canPlace() ? ItemInteractionResult.PASS_TO_DEFAULT_BLOCK_INTERACTION : ItemInteractionResult.SUCCESS;
 	}
 
 	public static void interaction(LevelAccessor world, double x, double y, double z) {

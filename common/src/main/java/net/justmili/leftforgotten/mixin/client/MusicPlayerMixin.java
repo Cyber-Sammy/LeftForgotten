@@ -59,7 +59,7 @@ public class MusicPlayerMixin {
         return ALPHA_TRACKS;
     }
 
-    @Inject(method = "tick", at = @At("HEAD"), cancellable = true)
+    @Inject(method = "tick()V", at = @At("HEAD"), cancellable = true, remap = false)
     private void onTick(CallbackInfo ci) {
         if (minecraft.level == null) return;
         if (!minecraft.level.dimension().equals(LFResources.Levels.ALPHA_MINECRAFT)) return;

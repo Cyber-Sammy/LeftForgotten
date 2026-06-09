@@ -7,7 +7,7 @@ import net.minecraft.world.level.block.state.BlockState;
 
 public class CobblestoneStairs extends StairBlock {
 	public CobblestoneStairs() {
-		super(LFBlocks.COBBLESTONE.get().defaultBlockState(), Properties.copy(LFBlocks.COBBLESTONE.get()));
+		super(LFBlocks.COBBLESTONE.get().defaultBlockState(), Properties.ofFullCopy(LFBlocks.COBBLESTONE.get()));
 	}
 
 	@Override

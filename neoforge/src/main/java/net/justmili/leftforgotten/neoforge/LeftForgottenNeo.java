@@ -30,8 +30,8 @@ public final class LeftForgottenNeo {
         var generator = event.getGenerator();
         generator.addProvider(event.includeServer(), (DataProvider.Factory<? extends DataProvider>) ((output) -> new LFBlockTagProvider(output, event.getLookupProvider())));
         generator.addProvider(event.includeServer(), (DataProvider.Factory<? extends DataProvider>) ((output) -> new LFItemTagProvider(output, event.getLookupProvider())));
-        generator.addProvider(event.includeServer(), (DataProvider.Factory<? extends DataProvider>) (LFLootTableProvider::new));
-        generator.addProvider(event.includeServer(), (DataProvider.Factory<? extends DataProvider>) (LFRecipeProvider::new));
+        generator.addProvider(event.includeServer(), (DataProvider.Factory<? extends DataProvider>) ((output) -> new LFLootTableProvider(output, event.getLookupProvider())));
+        generator.addProvider(event.includeServer(), (DataProvider.Factory<? extends DataProvider>) ((output) -> new LFRecipeProvider(output, event.getLookupProvider())));
         generator.addProvider(event.includeClient(), (DataProvider.Factory<? extends DataProvider>) (LFModelProvider::new));
     }
 }

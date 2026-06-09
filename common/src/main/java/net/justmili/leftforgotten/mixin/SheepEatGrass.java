@@ -22,7 +22,7 @@ public class SheepEatGrass {
     @Shadow @Final private Mob mob;
     @Shadow @Final private Level level;
 
-    @ModifyReturnValue(method = "canUse", at = @At("RETURN"))
+    @ModifyReturnValue(method = "canUse()Z", at = @At("RETURN"), remap = false)
     public boolean canUse(boolean original) {
         BlockPos blockPos = this.mob.blockPosition();
         if (this.level.getBlockState(blockPos.below()).is(LFBlocks.GRASS_BLOCK.get())) {
@@ -32,7 +32,7 @@ public class SheepEatGrass {
         }
     }
 
-    @WrapOperation(method = "tick", at = @At(value = "INVOKE", target = "Lnet/minecraft/world/level/block/state/BlockState;is(Lnet/minecraft/world/level/block/Block;)Z"))
+    @WrapOperation(method = "tick()V", at = @At(value = "INVOKE", target = "Lnet/minecraft/world/level/block/state/BlockState;is(Lnet/minecraft/world/level/block/Block;)Z"), remap = false)
     private boolean redirectGrassCheck(BlockState state, Block block, Operation<Boolean> original) {
         // vanilla check
         if (state.is(block)) {

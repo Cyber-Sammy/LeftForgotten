@@ -1,7 +1,6 @@
 package net.justmili.leftforgotten.gui.neoforge;
 
 import com.mojang.blaze3d.vertex.PoseStack;
-import dev.architectury.event.events.common.TickEvent;
 import net.justmili.leftforgotten.LeftForgotten;
 import net.justmili.leftforgotten.registries.LFResources;
 import net.minecraft.client.Minecraft;
@@ -40,9 +39,7 @@ public class VersionOverlay {
     private static final Random random = new Random();
 
     @SubscribeEvent(priority = EventPriority.HIGHEST)
-    public static void onClientTick(ClientTickEvent event) {
-        if (event.phase != TickEvent.Phase.END) return;
-
+    public static void onClientTick(ClientTickEvent.Post event) {
         Minecraft mc = Minecraft.getInstance();
         if (mc.level == null || mc.level.dimension() != LFResources.Levels.ALPHA_MINECRAFT) {
             currentText = BASE_TEXT;

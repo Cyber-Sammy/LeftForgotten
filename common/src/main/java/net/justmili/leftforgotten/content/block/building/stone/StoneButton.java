@@ -10,7 +10,7 @@ import net.minecraft.world.level.block.state.properties.BlockSetType;
 
 public class StoneButton extends ButtonBlock {
     public StoneButton() {
-        super(CommonBlock.button(), BlockSetType.STONE, 20, false);
+        super(BlockSetType.STONE, 20, CommonBlock.button());
     }
 
     @Override

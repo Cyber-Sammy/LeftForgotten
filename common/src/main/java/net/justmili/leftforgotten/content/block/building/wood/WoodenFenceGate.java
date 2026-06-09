@@ -13,7 +13,7 @@ import net.minecraft.world.level.material.MapColor;
 
 public class WoodenFenceGate extends FenceGateBlock {
 	public WoodenFenceGate() {
-		super(Properties.of().mapColor(MapColor.WOOD).sound(SoundType.WOOD).strength(21f, 3f).noOcclusion().isRedstoneConductor(CommonBlock::never).forceSolidOn().instrument(NoteBlockInstrument.BASS).ignitedByLava(), WoodType.OAK);
+		super(WoodType.OAK, Properties.of().mapColor(MapColor.WOOD).sound(SoundType.WOOD).strength(21f, 3f).noOcclusion().isRedstoneConductor(CommonBlock::never).forceSolidOn().instrument(NoteBlockInstrument.BASS).ignitedByLava());
 	}
 
 	@Override

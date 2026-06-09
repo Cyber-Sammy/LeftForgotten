@@ -24,7 +24,6 @@ public class YellowFlower extends FlowerBlock {
                         .noCollission().offsetType(OffsetType.XZ).pushReaction(PushReaction.DESTROY));
     }
 
-    @Override
     public int getEffectDuration() {
         return 7;
     }
@@ -48,12 +47,12 @@ public class YellowFlower extends FlowerBlock {
     }
 
     @Override
-    public boolean mayPlaceOn(BlockState groundState, BlockGetter worldIn, BlockPos pos) {
+    protected boolean mayPlaceOn(BlockState groundState, BlockGetter worldIn, BlockPos pos) {
         return groundState.is(BlockTags.DIRT);
     }
 
     @Override
-    public boolean canSurvive(BlockState blockstate, LevelReader worldIn, BlockPos pos) {
+    protected boolean canSurvive(BlockState blockstate, LevelReader worldIn, BlockPos pos) {
         BlockPos blockpos = pos.below();
         BlockState groundState = worldIn.getBlockState(blockpos);
         return this.mayPlaceOn(groundState, worldIn, blockpos);
