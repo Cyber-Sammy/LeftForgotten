@@ -11,13 +11,13 @@ import net.minecraft.world.level.material.PushReaction;
 
 public class WoodenDoor extends DoorBlock {
     public WoodenDoor() {
-        super(Properties.of()
+        super(BlockSetType.OAK, Properties.of()
             .mapColor(MapColor.WOOD)
             .instrument(NoteBlockInstrument.BASS)
             .strength(3.0F)
             .noOcclusion()
             .ignitedByLava()
-            .pushReaction(PushReaction.DESTROY), BlockSetType.OAK);
+            .pushReaction(PushReaction.DESTROY));
     }
 
     @Override

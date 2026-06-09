@@ -7,7 +7,7 @@ import net.minecraft.world.level.block.state.BlockState;
 
 public class BrickStairs extends StairBlock {
 	public BrickStairs() {
-		super(LFBlocks.BRICKS.get().defaultBlockState(), Properties.copy(LFBlocks.BRICKS.get()));
+		super(LFBlocks.BRICKS.get().defaultBlockState(), Properties.ofFullCopy(LFBlocks.BRICKS.get()));
 	}
 
 	@Override

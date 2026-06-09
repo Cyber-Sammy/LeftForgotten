@@ -12,12 +12,12 @@ import net.minecraft.world.level.block.state.properties.NoteBlockInstrument;
 import net.minecraft.world.level.material.MapColor;
 
 public class WoodenTrapdoor extends TrapDoorBlock {
-	public WoodenTrapdoor() {
-		super(Properties.of().mapColor(MapColor.WOOD).sound(SoundType.WOOD).strength(3f).noOcclusion().isRedstoneConductor(CommonBlock::never).instrument(NoteBlockInstrument.BASS).ignitedByLava(), BlockSetType.OAK);
-	}
+    public WoodenTrapdoor() {
+        super(BlockSetType.OAK, Properties.of().mapColor(MapColor.WOOD).sound(SoundType.WOOD).strength(3f).noOcclusion().isRedstoneConductor(CommonBlock::never).instrument(NoteBlockInstrument.BASS).ignitedByLava());
+    }
 
-	@Override
-	public int getLightBlock(BlockState state, BlockGetter worldIn, BlockPos pos) {
-		return 0;
-	}
+    @Override
+    public int getLightBlock(BlockState state, BlockGetter worldIn, BlockPos pos) {
+        return 0;
+    }
 }

@@ -9,15 +9,13 @@ import net.minecraft.world.level.material.PushReaction;
 
 public class RedMushroom extends MushroomBlock {
     public RedMushroom() {
-        super(Properties.of()
+        super(TreeFeatures.HUGE_RED_MUSHROOM, Properties.of()
             .mapColor(MapColor.COLOR_RED)
             .noCollission()
             .randomTicks()
             .instabreak()
             .sound(SoundType.GRASS)
             .hasPostProcess(CommonBlock::always)
-            .pushReaction(PushReaction.DESTROY),
-            TreeFeatures.HUGE_RED_MUSHROOM
-        );
+            .pushReaction(PushReaction.DESTROY));
     }
 }

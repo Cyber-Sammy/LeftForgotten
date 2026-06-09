@@ -2,9 +2,13 @@
 package net.justmili.leftforgotten.content.block.nature.vegetation;
 
 import net.minecraft.core.BlockPos;
+import net.minecraft.core.Holder;
 import net.minecraft.tags.BlockTags;
+import net.minecraft.util.Mth;
+import net.minecraft.world.effect.MobEffect;
 import net.minecraft.world.effect.MobEffects;
 import net.minecraft.world.item.ItemStack;
+import net.minecraft.world.item.component.SuspiciousStewEffects;
 import net.minecraft.world.level.BlockGetter;
 import net.minecraft.world.level.LevelReader;
 import net.minecraft.world.level.block.FlowerBlock;
@@ -20,11 +24,11 @@ import java.util.List;
 public class YellowFlower extends FlowerBlock {
     public YellowFlower() {
         super(MobEffects.SATURATION, 100,
-                Properties.of().mapColor(MapColor.COLOR_YELLOW).sound(SoundType.GRASS).instabreak()
-                        .noCollission().offsetType(OffsetType.XZ).pushReaction(PushReaction.DESTROY));
+            Properties.of().mapColor(MapColor.COLOR_YELLOW).sound(SoundType.GRASS).instabreak()
+                .noCollission().offsetType(OffsetType.XZ).pushReaction(PushReaction.DESTROY));
     }
 
-    @Override
+    //@Override
     public int getEffectDuration() {
         return 7;
     }
@@ -48,12 +52,12 @@ public class YellowFlower extends FlowerBlock {
     }
 
     @Override
-    public boolean mayPlaceOn(BlockState groundState, BlockGetter worldIn, BlockPos pos) {
+    protected boolean mayPlaceOn(BlockState groundState, BlockGetter worldIn, BlockPos pos) {
         return groundState.is(BlockTags.DIRT);
     }
 
     @Override
-    public boolean canSurvive(BlockState blockstate, LevelReader worldIn, BlockPos pos) {
+    protected boolean canSurvive(BlockState blockstate, LevelReader worldIn, BlockPos pos) {
         BlockPos blockpos = pos.below();
         BlockState groundState = worldIn.getBlockState(blockpos);
         return this.mayPlaceOn(groundState, worldIn, blockpos);

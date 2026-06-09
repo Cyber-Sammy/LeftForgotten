@@ -10,12 +10,12 @@ import net.minecraft.world.level.material.PushReaction;
 
 public class IronDoor extends DoorBlock {
     public IronDoor() {
-        super(Properties.of()
+        super(BlockSetType.IRON, Properties.of()
             .mapColor(MapColor.METAL)
             .requiresCorrectToolForDrops()
             .strength(5.0f)
             .noOcclusion()
-            .pushReaction(PushReaction.DESTROY), BlockSetType.IRON);
+            .pushReaction(PushReaction.DESTROY));
     }
 
     @Override

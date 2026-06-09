@@ -10,12 +10,12 @@ import net.minecraft.world.level.block.state.properties.BlockSetType;
 
 public class WoodenButton extends ButtonBlock {
     public WoodenButton() {
-        super(CommonBlock.button(), BlockSetType.OAK, 30, true);
+        super(BlockSetType.OAK, 30, CommonBlock.button());
     }
 
-	@Override
-	public int getLightBlock(BlockState state, BlockGetter worldIn, BlockPos pos) {
-		return 0;
-	}
+    @Override
+    public int getLightBlock(BlockState state, BlockGetter worldIn, BlockPos pos) {
+        return 0;
+    }
 
 }

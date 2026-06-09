@@ -9,7 +9,7 @@ import net.minecraft.world.level.block.state.BlockState;
 
 public class CobblestoneWall extends WallBlock {
 	public CobblestoneWall() {
-		super(Properties.copy(LFBlocks.COBBLESTONE.get()).forceSolidOn());
+		super(Properties.ofFullCopy(LFBlocks.COBBLESTONE.get()).forceSolidOn());
 	}
 
 	@Override

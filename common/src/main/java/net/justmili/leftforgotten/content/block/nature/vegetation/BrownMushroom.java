@@ -9,15 +9,13 @@ import net.minecraft.world.level.material.PushReaction;
 
 public class BrownMushroom extends MushroomBlock {
     public BrownMushroom() {
-        super(Properties.of()
-                .mapColor(MapColor.COLOR_BROWN)
-                .noCollission()
-                .randomTicks()
-                .instabreak()
-                .sound(SoundType.GRASS)
-                .hasPostProcess(CommonBlock::always)
-                .pushReaction(PushReaction.DESTROY),
-            TreeFeatures.HUGE_BROWN_MUSHROOM
-        );
+        super(TreeFeatures.HUGE_BROWN_MUSHROOM, Properties.of()
+            .mapColor(MapColor.COLOR_BROWN)
+            .noCollission()
+            .randomTicks()
+            .instabreak()
+            .sound(SoundType.GRASS)
+            .hasPostProcess(CommonBlock::always)
+            .pushReaction(PushReaction.DESTROY));
     }
 }

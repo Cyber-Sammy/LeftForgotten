@@ -6,12 +6,9 @@ import net.justmili.leftforgotten.registries.LFResources;
 import net.minecraft.core.BlockPos;
 import net.minecraft.core.Direction;
 import net.minecraft.core.component.DataComponents;
-import net.minecraft.nbt.CompoundTag;
-import net.minecraft.nbt.ListTag;
 import net.minecraft.sounds.SoundEvents;
 import net.minecraft.sounds.SoundSource;
 import net.minecraft.world.InteractionHand;
-import net.minecraft.world.effect.MobEffect;
 import net.minecraft.world.effect.MobEffectInstance;
 import net.minecraft.world.effect.MobEffects;
 import net.minecraft.world.entity.player.Player;
@@ -175,14 +172,10 @@ public class AlphaFoodSystem {
     }
 
     private static void applySuspiciousStewEffect(Player player, ItemStack stack) {
-        CompoundTag tag = stack.getTag();
-        if (tag == null || !tag.contains("Effects", 9)) return;
-        ListTag list = tag.getList("Effects", 10);
-        for (int i = 0; i < list.size(); i++) {
-            CompoundTag entry = list.getCompound(i);
-            int duration = entry.contains("EffectDuration", 99) ? entry.getInt("EffectDuration") : 160;
-            MobEffect effect = MobEffect.byId(entry.getInt("EffectId"));
-            if (effect != null) player.addEffect(new MobEffectInstance(effect, duration));
+        var effects = stack.get(DataComponents.SUSPICIOUS_STEW_EFFECTS);
+        if (effects == null) return;
+        for (var entry : effects.effects()) {
+            player.addEffect(entry.createEffectInstance());
         }
     }
     private static void applyChorusTeleport(Player player) {

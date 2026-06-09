@@ -7,7 +7,6 @@ import net.justmili.leftforgotten.LeftForgotten;
 import net.justmili.leftforgotten.mixin.accessors.DimSpecialEffectsAccessor;
 import net.justmili.leftforgotten.client.dimension.AlphaMinecraft;
 import net.minecraft.client.resources.model.ModelResourceLocation;
-import net.minecraft.resources.ResourceLocation;
 
 @Environment(EnvType.CLIENT)
 public class CommonClient {
@@ -17,8 +16,10 @@ public class CommonClient {
         DimSpecialEffectsAccessor.getEffects().put(LeftForgotten.asResource("alpha_minecraft"), new AlphaMinecraft());
     }
 
-    public static boolean shouldReplaceBakedModel(ResourceLocation id) {
-        return id instanceof ModelResourceLocation resourceLocation && id.getNamespace().equals("minecraft") && !resourceLocation.getVariant().equals("inventory") &&
-            (id.getPath().equals("furnace") || id.getPath().equals("crafting_table"));
+    public static boolean shouldReplaceBakedModel(ModelResourceLocation modelLocation) {
+        return modelLocation.id().getNamespace().equals("minecraft")
+            && !modelLocation.getVariant().equals("inventory")
+            && (modelLocation.id().getPath().equals("furnace")
+            || modelLocation.id().getPath().equals("crafting_table"));
     }
 }

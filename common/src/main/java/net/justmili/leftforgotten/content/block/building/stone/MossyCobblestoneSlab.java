@@ -6,6 +6,6 @@ import net.minecraft.world.level.block.SlabBlock;
 
 public class MossyCobblestoneSlab extends SlabBlock {
 	public MossyCobblestoneSlab() {
-		super(Properties.copy(LFBlocks.MOSSY_COBBLESTONE.get()));
+		super(Properties.ofFullCopy(LFBlocks.MOSSY_COBBLESTONE.get()));
 	}
 }

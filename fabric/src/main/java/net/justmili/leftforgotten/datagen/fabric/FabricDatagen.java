@@ -8,10 +8,10 @@ public class FabricDatagen implements DataGeneratorEntrypoint {
     @Override
     public void onInitializeDataGenerator(FabricDataGenerator generator) {
         var pack = generator.createPack();
-        pack.addProvider((output, lookup) -> new LFLootTableProvider(output));
+        pack.addProvider(LFLootTableProvider::new);
         pack.addProvider(LFBlockTagProvider::new);
         pack.addProvider(LFItemTagProvider::new);
         pack.addProvider((output, lookup) -> new LFModelProvider(output));
-        pack.addProvider((output, lookup) -> new LFRecipeProvider(output));
+        pack.addProvider(LFRecipeProvider::new);
     }
 }

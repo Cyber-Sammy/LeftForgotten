@@ -30,15 +30,16 @@ import net.minecraft.world.level.storage.loot.providers.number.UniformGenerator;
 
 import java.util.List;
 import java.util.Set;
+import java.util.concurrent.CompletableFuture;
 import java.util.function.BiConsumer;
 import java.util.function.Supplier;
 
 public class LFLootTableProvider extends LootTableProvider {
-    public LFLootTableProvider(PackOutput output) {
+    public LFLootTableProvider(PackOutput output, CompletableFuture<HolderLookup.Provider> registries) {
         super(output, Set.of(), List.of(
             new SubProviderEntry(LFBlockLootProvider::new, LootContextParamSets.BLOCK),
             new SubProviderEntry(LFChestLootProvider::new, LootContextParamSets.CHEST)
-        ));
+        ), registries);
     }
 
     public static class LFBlockLootProvider extends BlockLootSubProvider implements KnownBlocksLootProvider {
@@ -48,6 +49,7 @@ public class LFLootTableProvider extends LootTableProvider {
 
         @Override
         public void generate() {
+            var FORTUNE = registries.lookupOrThrow(Registries.ENCHANTMENT).getOrThrow(Enchantments.FORTUNE);
 
             // Nature / Ground
             add(LFBlocks.GRASS_BLOCK.get(), createSingleItemTableWithSilkTouch(LFBlocks.GRASS_BLOCK.get(), LFBlocks.DIRT.get()));
@@ -55,7 +57,7 @@ public class LFLootTableProvider extends LootTableProvider {
             add(LFBlocks.FARMLAND.get(), createSingleItemTableWithSilkTouch(LFBlocks.FARMLAND.get(), LFBlocks.DIRT.get()));
             add(LFBlocks.GRAVEL.get(), createSilkTouchDispatchTable(LFBlocks.GRAVEL.get(),
                 LootItem.lootTableItem(Items.FLINT)
-                    .when(BonusLevelTableCondition.bonusLevelFlatChance(Enchantments.FORTUNE, 0.1F, 0.14285715F, 0.25F, 1.0F))
+                    .when(BonusLevelTableCondition.bonusLevelFlatChance(FORTUNE, 0.1F, 0.14285715F, 0.25F, 1.0F))
                     .otherwise(LootItem.lootTableItem(LFBlocks.GRAVEL.get()))));
             dropSelf(LFBlocks.SAND.get());
             add(LFBlocks.CLAY.get(), createSilkTouchDispatchTable(LFBlocks.CLAY.get(),
