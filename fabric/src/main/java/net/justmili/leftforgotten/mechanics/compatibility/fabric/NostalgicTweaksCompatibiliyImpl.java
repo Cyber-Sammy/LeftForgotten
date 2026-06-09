@@ -8,12 +8,13 @@ public class NostalgicTweaksCompatibiliyImpl {
 
     public static void storeVars() {
         ntVars = new NTVars(
-                CandyTweak.HIDE_STAMINA_BAR.get(),
-                CandyTweak.OLD_VERSION_OVERLAY.get()
+            CandyTweak.HIDE_STAMINA_BAR.get(),
+            CandyTweak.OLD_VERSION_OVERLAY.get()
         );
     }
 
     public static void restoreVars() {
+        if (ntVars == null) return;
         CandyTweak.OLD_VERSION_OVERLAY.setCacheAndDisk(ntVars.OLD_VERSION_OVERLAY);
         CandyTweak.HIDE_STAMINA_BAR.setCacheAndDisk(ntVars.HIDE_STAMINA_BAR);
 
@@ -23,5 +24,4 @@ public class NostalgicTweaksCompatibiliyImpl {
         CandyTweak.OLD_VERSION_OVERLAY.setCacheAndDisk(false);
         CandyTweak.HIDE_STAMINA_BAR.setCacheAndDisk(true);
     }
-
 }

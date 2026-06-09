@@ -4,6 +4,7 @@ import dev.architectury.registry.client.level.entity.EntityRendererRegistry;
 import net.fabricmc.api.ClientModInitializer;
 import net.fabricmc.fabric.api.blockrenderlayer.v1.BlockRenderLayerMap;
 import net.fabricmc.fabric.api.client.model.loading.v1.ModelLoadingPlugin;
+import net.justmili.leftforgotten.client.CommonClient;
 import net.justmili.leftforgotten.content.entity.renderer.LFBoatRenderer;
 import net.justmili.leftforgotten.registries.LFEntities;
 import net.justmili.leftforgotten.registries.LFResources;

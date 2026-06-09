@@ -5,6 +5,7 @@ import dev.architectury.event.EventResult;
 import net.justmili.leftforgotten.registries.LFResources;
 import net.minecraft.core.BlockPos;
 import net.minecraft.core.Direction;
+import net.minecraft.core.component.DataComponents;
 import net.minecraft.nbt.CompoundTag;
 import net.minecraft.nbt.ListTag;
 import net.minecraft.sounds.SoundEvents;
@@ -114,7 +115,7 @@ public class AlphaFoodSystem {
             return CompoundEventResult.interruptTrue(player.getItemInHand(hand));
         }
 
-        if (stack.getItem().isEdible()) {
+        if (stack.has(DataComponents.FOOD)) {
             return CompoundEventResult.interruptTrue(stack);
         }
 
@@ -127,7 +128,7 @@ public class AlphaFoodSystem {
         ItemStack stack = player.getItemInHand(hand);
 
         if (FOOD_HEALTH.containsKey(stack.getItem())) return EventResult.pass();
-        if (stack.getItem().isEdible()) return EventResult.interruptTrue();
+        if (stack.has(DataComponents.FOOD)) return EventResult.interruptTrue();
 
         return EventResult.pass();
     }

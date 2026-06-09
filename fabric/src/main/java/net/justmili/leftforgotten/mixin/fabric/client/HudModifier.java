@@ -33,14 +33,17 @@ public abstract class HudModifier {
     }
 
     // Defined widths and heights (X-Y pos)
-    @Unique private static final int playerHpH = 7;    // Player HP Y offset
-    @Unique private static final int armorW = 101;     // Armor X offset
-    @Unique private static final int armorH = 17;      // Armor Y offset
-    @Unique private static final int airLvlW = 101;    // Air level X offset
-    @Unique private static final int airLvlH = 2;      // Air level Y offset
-    @Unique private static final int horseBar = 7;     // Horse bar
-    @Unique private static final int mountHpH = 2;     // Mount HP Y offset
-    @Unique private static final int mountHpH_na = 7;  // Mount HP Y offset without Armor
+    @Unique
+    private static final int
+        playerHpH = 7,    // Player HP Y offset
+        armorW = 101,     // Armor X offset
+        armorH = 17,      // Armor Y offset
+        airLvlW = 101,    // Air level X offset
+        airLvlH = 2,      // Air level Y offset
+        horseBar = 7,     // Horse bar
+        mountHpH = 2,     // Mount HP Y offset
+        mountHpH_na = 7;  // Mount HP Y offset without Armor
+
     // Account for horse bar, Fabric doesn't need to account for fullscreen
     private int yOffset() {
         Player player = this.minecraft.player;
@@ -48,10 +51,14 @@ public abstract class HudModifier {
         return horseBarOffset;
     }
 
-    @Shadow @Final private Minecraft minecraft;
-    @Shadow private int screenWidth;
-    @Shadow private int screenHeight;
-    @Shadow protected abstract int getVehicleMaxHearts(LivingEntity vehicle);
+    @Shadow
+    @Final
+    private Minecraft minecraft;
+    @Shadow
+    private int screenWidth, screenHeight;
+
+    @Shadow
+    protected abstract int getVehicleMaxHearts(LivingEntity vehicle);
 
     // Draw identifier for renderPlayerHealth's redirectBlit profiler section
     private Stack<String> currentProfiler = new Stack<>();
@@ -80,7 +87,7 @@ public abstract class HudModifier {
     private int moveHeartsDown(int y) {
         if (!inAlpha()) return y;
 
-        return y + playerHpH - yOffset();
+        return y+playerHpH-yOffset();
     }
 
     // Food disable
@@ -103,44 +110,37 @@ public abstract class HudModifier {
         }
 
         if (this.currentProfiler.peek().equals("armor")) { // Armor move right and down
-            /*
-            Flip the way it goes
-            Millie: Fuck this, I'm not flipping the sprites
-            Edit by eetgeenappels: YEAH WE ARE FLIPPING THE SPRITES!!!!!!
-            */
-
             // Mirror the entire HUD element
-            int barStart = this.screenWidth / 2 - 91;
-            int mirroredX = 2 * barStart + 72 - x;
+            int barStart = this.screenWidth / 2-91,
+                mirroredX = 2 * barStart+72-x,
 
-            // Math before flipping sprites
-            int x1 = mirroredX + armorW;
-            int x2 = x1 + uWidth;
-            int y1 = y + armorH - yOffset();
-            int y2 = y1 + vHeight;
-            int blitOffset = 0;
-            float minU = (uOffset + (float)uWidth) / 256f;
-            float maxU = (uOffset + 0.0F) / 256f;
-            float minV = (vOffset + 0.0F) / 256f;
-            float maxV = (vOffset + (float)vHeight) / 256f;
+                // Math before flipping sprites
+                x1 = mirroredX+armorW,
+                x2 = x1+uWidth,
+                y1 = y+armorH-yOffset(),
+                y2 = y1+vHeight,
+                blitOffset = 0;
+            float minU = (uOffset+(float) uWidth) / 256f,
+                maxU = (uOffset+0.0F) / 256f,
+                minV = (vOffset+0.0F) / 256f,
+                maxV = (vOffset+(float) vHeight) / 256f;
 
             // Flip the sprites via Blaze3D engine
             RenderSystem.setShaderTexture(0, atlasLocation);
             RenderSystem.setShader(GameRenderer::getPositionTexShader);
             Matrix4f matrix4f = instance.pose().last().pose();
-            BufferBuilder bufferBuilder = Tesselator.getInstance().getBuilder();
-            bufferBuilder.begin(VertexFormat.Mode.QUADS, DefaultVertexFormat.POSITION_TEX);
-            bufferBuilder.vertex(matrix4f, (float)x1, (float)y1, (float)blitOffset).uv(minU, minV).endVertex();
-            bufferBuilder.vertex(matrix4f, (float)x1, (float)y2, (float)blitOffset).uv(minU, maxV).endVertex();
-            bufferBuilder.vertex(matrix4f, (float)x2, (float)y2, (float)blitOffset).uv(maxU, maxV).endVertex();
-            bufferBuilder.vertex(matrix4f, (float)x2, (float)y1, (float)blitOffset).uv(maxU, minV).endVertex();
-            BufferUploader.drawWithShader(bufferBuilder.end());
+            BufferBuilder bufferBuilder = Tesselator.getInstance().begin(VertexFormat.Mode.QUADS, DefaultVertexFormat.POSITION_TEX);
+            bufferBuilder.addVertex(matrix4f, (float)x1, (float)y1, (float)blitOffset).setUv(minU, minV);
+            bufferBuilder.addVertex(matrix4f, (float)x1, (float)y2, (float)blitOffset).setUv(minU, maxV);
+            bufferBuilder.addVertex(matrix4f, (float)x2, (float)y2, (float)blitOffset).setUv(maxU, maxV);
+            bufferBuilder.addVertex(matrix4f, (float)x2, (float)y1, (float)blitOffset).setUv(maxU, minV);
+            BufferUploader.drawWithShader(bufferBuilder.buildOrThrow());
 
         } else if (this.currentProfiler.peek().equals("air")) { // Air level move left and down
             // Flip the way it goes
-            int barEnd = this.screenWidth / 2 + 51;
-            int mirroredX = 2 * barEnd - 9 - x;
-            instance.blit(atlasLocation, mirroredX - airLvlW, y - airLvlH + yOffset(), uOffset, vOffset, uWidth, vHeight);
+            int barEnd = this.screenWidth / 2+51,
+                mirroredX = 2 * barEnd-9-x;
+            instance.blit(atlasLocation, mirroredX-airLvlW, y-airLvlH+yOffset(), uOffset, vOffset, uWidth, vHeight);
         } else {
             original.call(instance, atlasLocation, x, y, uOffset, vOffset, uWidth, vHeight);
         }
@@ -157,11 +157,11 @@ public abstract class HudModifier {
     private int moveMountHealthY(int y) {
         if (!inAlpha()) return y;
 
-        int base = this.screenHeight - 39 - yOffset();
+        int base = this.screenHeight-39-yOffset();
         if (this.minecraft.player.getArmorValue() > 0) {
-            return base - mountHpH;
+            return base-mountHpH;
         } else {
-            return base + mountHpH_na;
+            return base+mountHpH_na;
         }
     }
 }

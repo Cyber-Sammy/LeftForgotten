@@ -15,9 +15,7 @@ public class NostalgicTweaksCompatibiliy {
             loadVars();
             justOut = true;
         } else {
-
             if (justOut) {
-
                 justOut = false;
                 restoreVars();
             }

@@ -3,7 +3,6 @@ package net.justmili.leftforgotten.mixin.fabric.client;
 import net.justmili.leftforgotten.registries.LFResources;
 import net.minecraft.client.DeltaTracker;
 import net.minecraft.client.Minecraft;
-import net.minecraft.client.gui.Font;
 import net.minecraft.client.gui.Gui;
 import net.minecraft.client.gui.GuiGraphics;
 import net.minecraft.network.chat.Component;
@@ -20,9 +19,10 @@ public abstract class VersionOverlay {
         return this.minecraft.player != null && this.minecraft.player.level().dimension() == LFResources.Levels.ALPHA_MINECRAFT;
     }
 
-    @Shadow @Final private Minecraft minecraft;
+    @Shadow
+    @Final
+    private Minecraft minecraft;
 
-    @Shadow() public abstract Font getFont();
     @Inject(at = @At("TAIL"), method = "render")
     public void render(GuiGraphics guiGraphics, DeltaTracker deltaTracker, CallbackInfo ci) {
         if (!inAlpha()) return;
@@ -30,23 +30,22 @@ public abstract class VersionOverlay {
         Component component = Component.literal(net.justmili.leftforgotten.client.VersionOverlay.currentText);
 
         final int fontSize = 32;
-        float guiScaleFactor = (float) this.minecraft.getWindow().getScreenWidth() / (float) this.minecraft.getWindow().getGuiScaledWidth();
-        float baseFontHeight = (float) this.minecraft.font.lineHeight;
-        float userScale = fontSize / baseFontHeight;
+        float guiScaleFactor = (float) this.minecraft.getWindow().getScreenWidth() / (float) this.minecraft.getWindow().getGuiScaledWidth(),
+            baseFontHeight = (float) this.minecraft.font.lineHeight,
+            userScale = fontSize / baseFontHeight;
 
-        int i = this.getFont().width(component);
-        int x = 6;
-        int y = 6;
-        int textColor = 0xFFFFFF;
-        int textShadowColor = 0xFF3F3F3F;
-        int drawX = Math.round(x / userScale);
-        int drawY = Math.round(y / userScale);
+        int x = 6,
+            y = 6,
+            textColor = 0xFFFFFF,
+            textShadowColor = 0xFF3F3F3F,
+            drawX = Math.round(x / userScale),
+            drawY = Math.round(y / userScale);
 
         guiGraphics.pose().pushPose();
         guiGraphics.pose().scale(1f / guiScaleFactor, 1f / guiScaleFactor, 1f);
         guiGraphics.pose().scale((int) userScale, (int) userScale, 1f);
 
-        guiGraphics.drawString(minecraft.font, component, drawX + 1, drawY + 1, textShadowColor, false);
+        guiGraphics.drawString(minecraft.font, component, drawX+1, drawY+1, textShadowColor, false);
         guiGraphics.drawString(minecraft.font, component, drawX, drawY, textColor, false);
 
         guiGraphics.pose().popPose();
