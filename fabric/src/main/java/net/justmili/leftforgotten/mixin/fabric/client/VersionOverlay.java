@@ -24,14 +24,14 @@ public abstract class VersionOverlay {
     private Minecraft minecraft;
 
     @Inject(at = @At("TAIL"), method = "render")
-    public void render(GuiGraphics guiGraphics, DeltaTracker deltaTracker, CallbackInfo ci) {
+    public void render(GuiGraphics graphics, DeltaTracker deltaTracker, CallbackInfo ci) {
         if (!inAlpha()) return;
         this.minecraft.getProfiler().push("demo");
         Component component = Component.literal(net.justmili.leftforgotten.client.VersionOverlay.currentText);
 
         final int fontSize = 32;
-        float guiScaleFactor = (float) this.minecraft.getWindow().getScreenWidth() / (float) this.minecraft.getWindow().getGuiScaledWidth(),
-            baseFontHeight = (float) this.minecraft.font.lineHeight,
+        float guiScaleFactor = (float) this.minecraft.getWindow().getScreenWidth() / this.minecraft.getWindow().getGuiScaledWidth(),
+            baseFontHeight = this.minecraft.font.lineHeight,
             userScale = fontSize / baseFontHeight;
 
         int x = 6,
@@ -41,13 +41,13 @@ public abstract class VersionOverlay {
             drawX = Math.round(x / userScale),
             drawY = Math.round(y / userScale);
 
-        guiGraphics.pose().pushPose();
-        guiGraphics.pose().scale(1f / guiScaleFactor, 1f / guiScaleFactor, 1f);
-        guiGraphics.pose().scale((int) userScale, (int) userScale, 1f);
+        graphics.pose().pushPose();
+        graphics.pose().scale(1f / guiScaleFactor, 1f / guiScaleFactor, 1f);
+        graphics.pose().scale(userScale, userScale, 1f);
 
-        guiGraphics.drawString(minecraft.font, component, drawX+1, drawY+1, textShadowColor, false);
-        guiGraphics.drawString(minecraft.font, component, drawX, drawY, textColor, false);
+        graphics.drawString(minecraft.font, component, drawX+1, drawY+1, textShadowColor, false);
+        graphics.drawString(minecraft.font, component, drawX, drawY, textColor, false);
 
-        guiGraphics.pose().popPose();
+        graphics.pose().popPose();
     }
 }

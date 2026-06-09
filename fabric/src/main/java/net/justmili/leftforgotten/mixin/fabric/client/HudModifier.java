@@ -103,9 +103,9 @@ public abstract class HudModifier {
     // Armor and Air Level, flip armor sprites, account for AbstractHorse jump bar when saddled
     @WrapOperation(method = "renderPlayerHealth(Lnet/minecraft/client/gui/GuiGraphics;)V", at = @At(value = "INVOKE",
         target = "Lnet/minecraft/client/gui/GuiGraphics;blit(Lnet/minecraft/resources/ResourceLocation;IIIIII)V"))
-    private void redirectBlit(GuiGraphics instance, ResourceLocation atlasLocation, int x, int y, int uOffset, int vOffset, int uWidth, int vHeight, Operation<Void> original) {
+    private void redirectBlit(GuiGraphics graphics, ResourceLocation atlasLocation, int x, int y, int uOffset, int vOffset, int uWidth, int vHeight, Operation<Void> original) {
         if (!inAlpha()) {
-            original.call(instance, atlasLocation, x, y, uOffset, vOffset, uWidth, vHeight);
+            original.call(graphics, atlasLocation, x, y, uOffset, vOffset, uWidth, vHeight);
             return;
         }
 
@@ -128,21 +128,21 @@ public abstract class HudModifier {
             // Flip the sprites via Blaze3D engine
             RenderSystem.setShaderTexture(0, atlasLocation);
             RenderSystem.setShader(GameRenderer::getPositionTexShader);
-            Matrix4f matrix4f = instance.pose().last().pose();
+            Matrix4f matrix4f = graphics.pose().last().pose();
             BufferBuilder bufferBuilder = Tesselator.getInstance().begin(VertexFormat.Mode.QUADS, DefaultVertexFormat.POSITION_TEX);
-            bufferBuilder.addVertex(matrix4f, (float)x1, (float)y1, (float)blitOffset).setUv(minU, minV);
-            bufferBuilder.addVertex(matrix4f, (float)x1, (float)y2, (float)blitOffset).setUv(minU, maxV);
-            bufferBuilder.addVertex(matrix4f, (float)x2, (float)y2, (float)blitOffset).setUv(maxU, maxV);
-            bufferBuilder.addVertex(matrix4f, (float)x2, (float)y1, (float)blitOffset).setUv(maxU, minV);
+            bufferBuilder.addVertex(matrix4f, x1, y1, blitOffset).setUv(minU, minV);
+            bufferBuilder.addVertex(matrix4f, x1, y2, blitOffset).setUv(minU, maxV);
+            bufferBuilder.addVertex(matrix4f, x2, y2, blitOffset).setUv(maxU, maxV);
+            bufferBuilder.addVertex(matrix4f, x2, y1, blitOffset).setUv(maxU, minV);
             BufferUploader.drawWithShader(bufferBuilder.buildOrThrow());
 
         } else if (this.currentProfiler.peek().equals("air")) { // Air level move left and down
             // Flip the way it goes
             int barEnd = this.screenWidth / 2+51,
                 mirroredX = 2 * barEnd-9-x;
-            instance.blit(atlasLocation, mirroredX-airLvlW, y-airLvlH+yOffset(), uOffset, vOffset, uWidth, vHeight);
+            graphics.blit(atlasLocation, mirroredX-airLvlW, y-airLvlH+yOffset(), uOffset, vOffset, uWidth, vHeight);
         } else {
-            original.call(instance, atlasLocation, x, y, uOffset, vOffset, uWidth, vHeight);
+            original.call(graphics, atlasLocation, x, y, uOffset, vOffset, uWidth, vHeight);
         }
     }
 
