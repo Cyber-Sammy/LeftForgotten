@@ -57,10 +57,10 @@ This is not a horror mod, but rather a adventure and decoration mod. Just plain 
 
 ### When newer Minecraft versions?
 With version 1.1 Left Forgotten will update from Fabric+Forge 1.20.1 to:
-- 1.21.1 Fabric & NeoForge
+- 1.21.1 Fabric & NeoForge 
 - (1.21.6-)1.21.8 Fabric & NeoForge
 - 1.21.11 Fabric & NeoForge
-- 26.1+ Fabric-Only
+- 26.1.2 and onwards Fabric-Only
 
 ***REMEMBER! MOD DEVELOPMENT TAKES TIME! :D***
 
