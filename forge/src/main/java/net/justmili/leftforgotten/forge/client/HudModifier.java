@@ -37,8 +37,8 @@ public class HudModifier {
         NamedGuiOverlay getOverlay = event.getOverlay();
         IGuiOverlay overlay = getOverlay.overlay();
         ResourceLocation id = getOverlay.id();
-        GuiGraphics gui = event.getGuiGraphics();
-        float pt = event.getPartialTick();
+        GuiGraphics graphics = event.getGuiGraphics();
+        float partTick = event.getPartialTick();
 
         if (player.level().dimension().equals(LFResources.Levels.ALPHA_MINECRAFT) && !minecraft.options.hideGui && ((ForgeGui) minecraft.gui).shouldDrawSurvivalElements()) {
             int w = minecraft.getWindow().getGuiScaledWidth(),
@@ -88,7 +88,7 @@ public class HudModifier {
                     // Flip the sprites via Blaze3D engine
                     RenderSystem.setShaderTexture(0, GUI_ICONS_LOCATION);
                     RenderSystem.setShader(GameRenderer::getPositionTexShader);
-                    Matrix4f matrix4f = gui.pose().last().pose();
+                    Matrix4f matrix4f = graphics.pose().last().pose();
                     BufferBuilder bufferBuilder = Tesselator.getInstance().getBuilder();
                     bufferBuilder.begin(VertexFormat.Mode.QUADS, DefaultVertexFormat.POSITION_TEX);
                     bufferBuilder.vertex(matrix4f, x1, y1, 0).uv(minU, minV).endVertex();
@@ -101,7 +101,7 @@ public class HudModifier {
             // Player HP move down
             if (id.equals(VanillaGuiOverlay.PLAYER_HEALTH.id())) {
                 event.setCanceled(true);
-                overlay.render((ForgeGui) minecraft.gui, gui, pt, w, h+playerHpH-yOffset);
+                overlay.render((ForgeGui) minecraft.gui, graphics, partTick, w, h+playerHpH-yOffset);
             }
             // Air level move left and down, account for AbstractHorse jump bar when saddled
             if (id.equals(VanillaGuiOverlay.AIR_LEVEL.id())) {
@@ -119,7 +119,7 @@ public class HudModifier {
                 for (int i = 0; i < full+partial; ++i) {
                     int origX = w / 2-9-i * 8-9,
                         mirroredX = 2 * barEnd-9-origX-airLvlW;
-                    gui.blit(GUI_ICONS_LOCATION, mirroredX, top, (i < full ? 16 : 25), 18, 9, 9);
+                    graphics.blit(GUI_ICONS_LOCATION, mirroredX, top, (i < full ? 16 : 25), 18, 9, 9);
                 }
             }
             // Mount HP move down, account for AbstractHorse jump bar when saddled and Armor
@@ -127,10 +127,10 @@ public class HudModifier {
                 event.setCanceled(true);
                 if (player.getArmorValue() > 0) {
                     //Armor on
-                    overlay.render((ForgeGui) minecraft.gui, gui, pt, w-mountHpW, h-mountHpH-yOffset);
+                    overlay.render((ForgeGui) minecraft.gui, graphics, partTick, w-mountHpW, h-mountHpH-yOffset);
                 } else {
                     //Armor off
-                    overlay.render((ForgeGui) minecraft.gui, gui, pt, w-mountHpW, h-mountHpH-yOffset+mountHpH_na);
+                    overlay.render((ForgeGui) minecraft.gui, graphics, partTick, w-mountHpW, h-mountHpH-yOffset+mountHpH_na);
                 }
             }
         }
