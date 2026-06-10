@@ -19,8 +19,8 @@ import java.util.UUID;
 
 public class NoCooldown {
     private static final UUID MODIFIER_UUID = UUID.fromString("9b91a426-cc5c-4a08-a0e5-7d00627cb3ef");
-    private static final AttributeModifier baseModifier = new AttributeModifier(LeftForgotten.asResource("noCooldown"),255.0, AttributeModifier.Operation.ADD_VALUE);
-    private static final AttributeModifier bcModifier = new AttributeModifier(LeftForgotten.asResource("noCooldown"),2.0, AttributeModifier.Operation.ADD_VALUE);
+    private static final AttributeModifier baseModifier = new AttributeModifier(LeftForgotten.asResource("no_cooldown"),255.0, AttributeModifier.Operation.ADD_VALUE);
+    private static final AttributeModifier bcModifier = new AttributeModifier(LeftForgotten.asResource("no_cooldown"),2.0, AttributeModifier.Operation.ADD_VALUE);
 
     public static void onChangedDimension(ServerPlayer player, ResourceKey<Level> fromDimension, ResourceKey<Level> toDimension) {
         applyCooldown(player, toDimension);
