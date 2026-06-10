@@ -53,7 +53,7 @@ public class CommonVersionOverlay {
     public static final Random random = new Random();
 
     public static boolean inAlpha(Minecraft client) {
-        return client.player == null && client.player.level().dimension() == LFResources.Levels.ALPHA_MINECRAFT;
+        return client.player != null && client.player.level().dimension() == LFResources.Levels.ALPHA_MINECRAFT;
     }
 
     public static void onClientTick(Minecraft client) {

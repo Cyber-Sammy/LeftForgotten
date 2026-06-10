@@ -2,7 +2,6 @@ package net.justmili.leftforgotten.core.util;
 
 import com.google.gson.JsonArray;
 import com.google.gson.JsonObject;
-import net.justmili.leftforgotten.LeftForgotten;
 import net.minecraft.core.Direction;
 import net.minecraft.data.models.BlockModelGenerators;
 import net.minecraft.data.models.ItemModelGenerators;
@@ -171,13 +170,13 @@ public class DatagenAssetUtil {
      */
     public void createCraftingTable(Block table, Block bottomTexture) {
         TextureMapping mapping = new TextureMapping()
-            .put(TextureSlot.PARTICLE, TextureMapping.getBlockTexture(table, "_front"))
+            .put(TextureSlot.PARTICLE, ResourceUtil.mapTextureFront(table))
             .put(TextureSlot.DOWN, TextureMapping.getBlockTexture(bottomTexture))
-            .put(TextureSlot.UP, TextureMapping.getBlockTexture(table, "_top"))
-            .put(TextureSlot.NORTH, TextureMapping.getBlockTexture(table, "_front"))
-            .put(TextureSlot.EAST, TextureMapping.getBlockTexture(table, "_side"))
-            .put(TextureSlot.SOUTH, TextureMapping.getBlockTexture(table, "_front"))
-            .put(TextureSlot.WEST, TextureMapping.getBlockTexture(table, "_side"));
+            .put(TextureSlot.UP, ResourceUtil.mapTextureTop(table))
+            .put(TextureSlot.NORTH, ResourceUtil.mapTextureFront(table))
+            .put(TextureSlot.EAST, ResourceUtil.mapTextureSide(table))
+            .put(TextureSlot.SOUTH, ResourceUtil.mapTextureFront(table))
+            .put(TextureSlot.WEST, ResourceUtil.mapTextureSide(table));
 
         ResourceLocation model = ModelTemplates.CUBE.create(table, mapping, blockGen.modelOutput);
         blockGen.blockStateOutput.accept(BlockModelGenerators.createSimpleBlock(table, model));
@@ -187,12 +186,12 @@ public class DatagenAssetUtil {
     // Specifically to recreate the model of the furnace with stone texture above and below
     public void createFurnaceCUSTOM(Block furnace, Block topBottomTexture) {
         TextureMapping unlitMapping = new TextureMapping()
-            .put(TextureSlot.SIDE, TextureMapping.getBlockTexture(furnace, "_side"))
-            .put(TextureSlot.FRONT, TextureMapping.getBlockTexture(furnace, "_front"))
+            .put(TextureSlot.SIDE, ResourceUtil.mapTextureSide(furnace))
+            .put(TextureSlot.FRONT, ResourceUtil.mapTextureFront(furnace))
             .put(TextureSlot.TOP, TextureMapping.getBlockTexture(topBottomTexture));
         TextureMapping litMapping = new TextureMapping()
-            .put(TextureSlot.SIDE, TextureMapping.getBlockTexture(furnace, "_side"))
-            .put(TextureSlot.FRONT, TextureMapping.getBlockTexture(furnace, "_front_on"))
+            .put(TextureSlot.SIDE, ResourceUtil.mapTextureSide(furnace))
+            .put(TextureSlot.FRONT, ResourceUtil.mapTextureFrontOn(furnace))
             .put(TextureSlot.TOP, TextureMapping.getBlockTexture(topBottomTexture));
 
         ResourceLocation unlitModel = ModelTemplates.CUBE_ORIENTABLE.create(furnace, unlitMapping, blockGen.modelOutput);
@@ -212,17 +211,17 @@ public class DatagenAssetUtil {
 
     public void createFurnace(Block block) {
         TextureMapping unlitMapping = new TextureMapping()
-            .put(TextureSlot.SIDE, TextureMapping.getBlockTexture(block, "_side"))
-            .put(TextureSlot.FRONT, TextureMapping.getBlockTexture(block, "_front"))
-            .put(TextureSlot.TOP, TextureMapping.getBlockTexture(block, "_top"));
+            .put(TextureSlot.SIDE, ResourceUtil.mapTextureSide(block))
+            .put(TextureSlot.FRONT, ResourceUtil.mapTextureFront(block))
+            .put(TextureSlot.TOP, ResourceUtil.mapTextureTop(block));
         TextureMapping litMapping = new TextureMapping()
-            .put(TextureSlot.SIDE, TextureMapping.getBlockTexture(block, "_side"))
-            .put(TextureSlot.FRONT, TextureMapping.getBlockTexture(block, "_front_on"))
-            .put(TextureSlot.TOP, TextureMapping.getBlockTexture(block, "_top"));
+            .put(TextureSlot.SIDE, ResourceUtil.mapTextureSide(block))
+            .put(TextureSlot.FRONT, ResourceUtil.mapTextureFrontOn(block))
+            .put(TextureSlot.TOP, ResourceUtil.mapTextureTop(block));
 
         ResourceLocation unlitModel = ModelTemplates.CUBE_ORIENTABLE.create(block, unlitMapping, blockGen.modelOutput);
         ResourceLocation litModel = ModelTemplates.CUBE_ORIENTABLE.create(
-            TextureMapping.getBlockTexture(block, "_on"), litMapping, blockGen.modelOutput);
+            ResourceUtil.mapTextureOn(block), litMapping, blockGen.modelOutput);
 
         blockGen.blockStateOutput.accept(
             MultiVariantGenerator.multiVariant(block)
@@ -237,29 +236,29 @@ public class DatagenAssetUtil {
 
     public void createChest(Block block) {
         TextureMapping singleMapping = new TextureMapping()
-            .put(TextureSlot.SIDE, TextureMapping.getBlockTexture(block, "_side"))
-            .put(TextureSlot.TOP, TextureMapping.getBlockTexture(block, "_top"))
-            .put(TextureSlot.FRONT, TextureMapping.getBlockTexture(block, "_front"));
+            .put(TextureSlot.SIDE, ResourceUtil.mapTextureSide(block))
+            .put(TextureSlot.TOP, ResourceUtil.mapTextureTop(block))
+            .put(TextureSlot.FRONT, ResourceUtil.mapTextureFront(block));
 
         TextureMapping leftMapping = new TextureMapping()
-            .put(TextureSlot.SIDE, TextureMapping.getBlockTexture(block, "_side"))
-            .put(TextureSlot.TOP, TextureMapping.getBlockTexture(block, "_top"))
-            .put(TextureSlot.FRONT, TextureMapping.getBlockTexture(block, "_front_right")) // no this is not an error, this is correct
-            .put(TextureSlot.SOUTH, TextureMapping.getBlockTexture(block, "_back_right"));
+            .put(TextureSlot.SIDE, ResourceUtil.mapTextureSide(block))
+            .put(TextureSlot.TOP, ResourceUtil.mapTextureTop(block))
+            .put(TextureSlot.FRONT, ResourceUtil.mapTextureFrontRight(block))
+            .put(TextureSlot.SOUTH, ResourceUtil.mapTextureBackRight(block));
 
         TextureMapping rightMapping = new TextureMapping()
-            .put(TextureSlot.SIDE, TextureMapping.getBlockTexture(block, "_side"))
-            .put(TextureSlot.TOP, TextureMapping.getBlockTexture(block, "_top"))
-            .put(TextureSlot.FRONT, TextureMapping.getBlockTexture(block, "_front_left"))
-            .put(TextureSlot.SOUTH, TextureMapping.getBlockTexture(block, "_back_left"));
+            .put(TextureSlot.SIDE, ResourceUtil.mapTextureSide(block))
+            .put(TextureSlot.TOP, ResourceUtil.mapTextureTop(block))
+            .put(TextureSlot.FRONT, ResourceUtil.mapTextureFrontLeft(block))
+            .put(TextureSlot.SOUTH, ResourceUtil.mapTextureBackLeft(block));
 
-        ModelTemplate customBackOrientable = new ModelTemplate(Optional.of(LeftForgotten.asMcResource("block/orientable")),
+        ModelTemplate customBackOrientable = new ModelTemplate(Optional.of(ResourceUtil.asBlockPath("orientable")),
             Optional.empty(), TextureSlot.TOP, TextureSlot.FRONT, TextureSlot.SIDE, TextureSlot.SOUTH);
 
         ResourceLocation singleModel = ModelTemplates.CUBE_ORIENTABLE.create(block, singleMapping, blockGen.modelOutput);
-        ResourceLocation leftModel = customBackOrientable.create(TextureMapping.getBlockTexture(block, "_left"),
+        ResourceLocation leftModel = customBackOrientable.create(ResourceUtil.mapTextureLeft(block),
             leftMapping, blockGen.modelOutput);
-        ResourceLocation rightModel = customBackOrientable.create(TextureMapping.getBlockTexture(block, "_right"),
+        ResourceLocation rightModel = customBackOrientable.create(ResourceUtil.mapTextureRight(block),
             rightMapping, blockGen.modelOutput);
 
         blockGen.blockStateOutput.accept(
@@ -300,25 +299,25 @@ public class DatagenAssetUtil {
      * Individual
      * Nature
      */
-    public void createFarmland(Block topTexture, Block wraptexture) {
+    public void createFarmland(Block topTexture, Block wrapTexture) {
         TextureMapping dry = new TextureMapping()
-            .put(TextureSlot.DIRT, TextureMapping.getBlockTexture(wraptexture))
+            .put(TextureSlot.DIRT, TextureMapping.getBlockTexture(wrapTexture))
             .put(TextureSlot.TOP, TextureMapping.getBlockTexture(topTexture));
         TextureMapping moist = new TextureMapping()
-            .put(TextureSlot.DIRT, TextureMapping.getBlockTexture(wraptexture))
-            .put(TextureSlot.TOP, TextureMapping.getBlockTexture(topTexture, "_moist"));
+            .put(TextureSlot.DIRT, TextureMapping.getBlockTexture(wrapTexture))
+            .put(TextureSlot.TOP,ResourceUtil.mapTextureMoist(topTexture));
         ResourceLocation dryModel = ModelTemplates.FARMLAND.create(topTexture, dry, blockGen.modelOutput);
         ResourceLocation moistModel = ModelTemplates.FARMLAND.create(
-            TextureMapping.getBlockTexture(topTexture, "_moist"), moist, blockGen.modelOutput);
+           ResourceUtil.mapTextureMoist(topTexture), moist, blockGen.modelOutput);
         blockGen.blockStateOutput.accept(MultiVariantGenerator.multiVariant(topTexture)
             .with(BlockModelGenerators.createEmptyOrFullDispatch(
                 BlockStateProperties.MOISTURE, 7, moistModel, dryModel)));
     }
 
     public void createCactus(Block block) {
-        ResourceLocation sideTexture = TextureMapping.getBlockTexture(block, "_side");
-        ResourceLocation bottomTexture = TextureMapping.getBlockTexture(block, "_bottom");
-        ResourceLocation topTexture = TextureMapping.getBlockTexture(block, "_top");
+        ResourceLocation sideTexture = ResourceUtil.mapTextureSide(block);
+        ResourceLocation bottomTexture = ResourceUtil.mapTextureBottom(block);
+        ResourceLocation topTexture = ResourceUtil.mapTextureTop(block);
 
         ResourceLocation modelLocation = ModelLocationUtils.getModelLocation(block);
 

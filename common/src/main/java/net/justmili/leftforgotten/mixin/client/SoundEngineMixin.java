@@ -1,6 +1,6 @@
 package net.justmili.leftforgotten.mixin.client;
 
-import net.justmili.leftforgotten.LeftForgotten;
+import net.justmili.leftforgotten.core.util.ResourceUtil;
 import net.justmili.leftforgotten.registries.LFResources;
 import net.justmili.leftforgotten.registries.LFSounds;
 import net.minecraft.client.Minecraft;
@@ -17,9 +17,9 @@ import org.spongepowered.asm.mixin.injection.callback.CallbackInfo;
 
 @Mixin(SoundEngine.class)
 public class SoundEngineMixin {
-    @Unique private static final ResourceLocation STOMACH_GROWL = LeftForgotten.asPath("subtle_effects:entity.player.stomach_growl");
-    @Unique private static final ResourceLocation CHEST_OPEN = LeftForgotten.asPath("minecraft:block.chest.open");
-    @Unique private static final ResourceLocation CHEST_CLOSE = LeftForgotten.asPath("minecraft:block.chest.close");
+    @Unique private static final ResourceLocation STOMACH_GROWL = ResourceUtil.asPath("subtle_effects:entity.player.stomach_growl");
+    @Unique private static final ResourceLocation CHEST_OPEN = ResourceUtil.asPath("minecraft:block.chest.open");
+    @Unique private static final ResourceLocation CHEST_CLOSE = ResourceUtil.asPath("minecraft:block.chest.close");
     @Unique private static final ResourceLocation HURT_VANILLA = SoundEvents.PLAYER_HURT.getLocation();
     @Unique private static final ResourceLocation HURT_FREEZE_VANILLA = SoundEvents.PLAYER_HURT_FREEZE.getLocation();
     @Unique private static final ResourceLocation HURT_FIRE_VANILLA = SoundEvents.PLAYER_HURT_ON_FIRE.getLocation();

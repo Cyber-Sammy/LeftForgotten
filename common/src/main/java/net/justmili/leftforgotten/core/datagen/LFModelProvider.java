@@ -12,7 +12,7 @@ import net.minecraft.data.models.model.ModelTemplates;
 import net.minecraft.data.models.model.TextureMapping;
 import net.minecraft.data.models.model.TextureSlot;
 
-import static net.justmili.leftforgotten.core.util.DatagenAssetUtil.*;
+import static net.justmili.leftforgotten.core.util.DatagenAssetUtil.RotationType;
 
 public class LFModelProvider extends ImprovedModelProvider {
     public LFModelProvider(PackOutput output) {

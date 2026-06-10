@@ -1,6 +1,6 @@
 package net.justmili.leftforgotten.core.datagen;
 
-import net.justmili.leftforgotten.LeftForgotten;
+import net.justmili.leftforgotten.core.util.ResourceUtil;
 import net.justmili.leftforgotten.registries.LFBlocks;
 import net.minecraft.core.HolderLookup;
 import net.minecraft.core.registries.BuiltInRegistries;
@@ -14,8 +14,8 @@ import net.minecraft.world.level.block.Block;
 import java.util.concurrent.CompletableFuture;
 
 public class LFBlockTagProvider extends IntrinsicHolderTagsProvider<Block> {
-    public static final TagKey<Block> FORGE_COBBLE = TagKey.create(Registries.BLOCK, LeftForgotten.asForgeResource("cobblestone"));
-    public static final TagKey<Block> FORGE_STONE = TagKey.create(Registries.BLOCK, LeftForgotten.asForgeResource("stone"));
+    public static final TagKey<Block> FORGE_COBBLE = TagKey.create(Registries.BLOCK, ResourceUtil.forgeResource("cobblestone"));
+    public static final TagKey<Block> FORGE_STONE = TagKey.create(Registries.BLOCK, ResourceUtil.forgeResource("stone"));
 
     public LFBlockTagProvider(PackOutput output, CompletableFuture<HolderLookup.Provider> lookupProvider) {
         super(output, Registries.BLOCK, lookupProvider, block -> BuiltInRegistries.BLOCK.getResourceKey(block).orElseThrow());

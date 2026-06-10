@@ -1,5 +1,8 @@
 @echo off
 
+cd /D %~dp0
+del /q *.jar >nul
+
 echo Building...
 cd /D ../
 powershell -c "./gradlew :fabric:build"

@@ -16,9 +16,7 @@ loom {
                 "${rootProject.property("mod_id")}-forge.mixins.json"
     }
 
-    mixin {
-        useLegacyMixinAp = true
-    }
+    mixin.useLegacyMixinAp = true
 
     runs {
         data {
