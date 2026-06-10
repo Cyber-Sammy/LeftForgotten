@@ -120,10 +120,10 @@ public abstract class HudModifier {
                 y1 = y+armorH-yOffset(),
                 y2 = y1+vHeight,
                 blitOffset = 0;
-            float minU = (uOffset+(float) uWidth) / 256f,
+            float minU = (uOffset+uWidth) / 256f,
                 maxU = (uOffset+0.0F) / 256f,
                 minV = (vOffset+0.0F) / 256f,
-                maxV = (vOffset+(float) vHeight) / 256f;
+                maxV = (vOffset+vHeight) / 256f;
 
             // Flip the sprites via Blaze3D engine
             RenderSystem.setShaderTexture(0, atlasLocation);
@@ -153,9 +153,9 @@ public abstract class HudModifier {
     }
 
     // Mount HP move, account for AbstractHorse jump bar when saddled and Armor
-    @ModifyVariable(method = "renderVehicleHealth", at = @At("STORE"), ordinal = 2)
-    private int moveMountHealthY(int y) {
-        if (!inAlpha()) return y;
+    @ModifyVariable(method = "renderVehicleHealth", at = @At("STORE"), name = "k")
+    private int moveMountHealthY(int k) {
+        if (!inAlpha()) return k;
 
         int base = this.screenHeight-39-yOffset();
         if (this.minecraft.player.getArmorValue() > 0) {

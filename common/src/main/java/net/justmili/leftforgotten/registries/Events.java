@@ -5,7 +5,7 @@ import dev.architectury.event.events.common.InteractionEvent;
 import dev.architectury.event.events.common.PlayerEvent;
 import dev.architectury.event.events.common.TickEvent;
 import net.justmili.leftforgotten.mechanics.compatibility.NostalgicTweaksCompatibiliy;
-import net.justmili.leftforgotten.mechanics.events.DimChange;
+import net.justmili.leftforgotten.mechanics.events.MoveToAlpha;
 import net.justmili.leftforgotten.mechanics.gameplay.AlphaFoodSystem;
 import net.justmili.leftforgotten.mechanics.gameplay.NoCooldown;
 import net.justmili.leftforgotten.mechanics.gameplay.NoSprint;
@@ -23,9 +23,9 @@ public class Events {
         PlayerEvent.PLAYER_JOIN.register(NoCooldown::onPlayerJoin);
         EntityEvent.LIVING_HURT.register(WoolDrop::onEntityHurt);
 
-        EntityEvent.LIVING_HURT.register(DimChange::onEntityHurt);
-        EntityEvent.LIVING_HURT.register(DimChange::onEntityHurt1);
-        TickEvent.PLAYER_POST.register(DimChange::onPlayerTick);
+        EntityEvent.LIVING_HURT.register(MoveToAlpha::onEntityHurt);
+        EntityEvent.LIVING_HURT.register(MoveToAlpha::onEntityHurt1);
+        TickEvent.PLAYER_POST.register(MoveToAlpha::onPlayerTick);
 
         InteractionEvent.RIGHT_CLICK_ITEM.register(AlphaFoodSystem::onRightClickItem);
         InteractionEvent.RIGHT_CLICK_BLOCK.register(AlphaFoodSystem::onRightClickBlock);

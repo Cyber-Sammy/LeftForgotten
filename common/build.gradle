@@ -20,6 +20,7 @@ dependencies {
     // Do NOT use other classes from Fabric Loader.
     modImplementation(libs.fabric.loader.get())
 
+    // Common (Common/Fabric) dependencies go here
     modImplementation("dev.architectury:architectury:${libs.versions.arch.api.get()}")
 
     implementation(annotationProcessor("com.github.bawnorton.mixinsquared:mixinsquared-common:${libs.versions.mixinsquared.get()}"))

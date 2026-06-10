@@ -18,7 +18,7 @@ loom {
     runs {
         data {
             data()
-            programArgs "--all", "--mod", "left_forgotten"
+            programArgs "--all", "--mod", "${rootProject.property("mod_id")}"
             programArgs "--output", generatedResources.absolutePath
         }
     }
@@ -26,7 +26,7 @@ loom {
 
 architectury {
     platformSetupLoomIde()
-    neoForge()
+    forge()
 }
 
 configurations {
@@ -54,14 +54,15 @@ repositories {
 dependencies {
     neoForge("${libs.neoforge.get()}")
 
+    // NeoForge dependencies go here
+    modImplementation("dev.architectury:architectury-neoforge:${libs.versions.arch.api.get()}")
+
+    modImplementation("maven.modrinth:nostalgic-tweaks:${rootProject.property("nt_fabric")}")
+    modImplementation("me.shedaniel.cloth:cloth-config-neoforge:${rootProject.property("cloth_config")}")
+
     // NeoForge mainlines MixinExtras since 20.2.84, still requires MixinSquared tho
     compileOnly(annotationProcessor("com.github.bawnorton.mixinsquared:mixinsquared-common:${libs.versions.mixinsquared.get()}"))
     implementation(include("com.github.bawnorton.mixinsquared:mixinsquared-neoforge:${libs.versions.mixinsquared.get()}"))
-
-    modImplementation("dev.architectury:architectury-neoforge:${libs.versions.arch.api.get()}")
-
-    modImplementation("me.shedaniel.cloth:cloth-config-neoforge:15.0.140")
-    modCompileOnly("maven.modrinth:nostalgic-tweaks:POrRfSqe")
 
     common(project(path: ':common', configuration: 'namedElements')) { transitive = false }
     shadowBundle project(path: ':common', configuration: 'transformProductionNeoForge')
@@ -76,7 +77,7 @@ processResources {
                 "mod_authors": rootProject.property("mod_authors"),
                 "mod_license": rootProject.property("mod_license"),
                 "forge_version": libs.versions.neoforge.get(),
-                "minecraft_version_constraint": rootProject.property("minecraft_version_constraint_forge"),
+                "minecraft_version_constraint": rootProject.property("minecraft_version_constraint_neoforge"),
                 "architectury_api": libs.versions.arch.api.get()
     }
 }

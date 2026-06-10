@@ -16,12 +16,13 @@ import net.neoforged.fml.event.lifecycle.FMLClientSetupEvent;
 import net.neoforged.neoforge.client.event.EntityRenderersEvent;
 import net.neoforged.neoforge.client.event.ModelEvent;
 
+@SuppressWarnings("deprecation")
 @EventBusSubscriber(modid = LeftForgotten.MOD_ID, value = Dist.CLIENT)
 public class NeoClient {
     @SubscribeEvent
     public static void init(FMLClientSetupEvent event) {
         // DEV NOTE: DEPRECATED API USAGE
-        for (Block block : LFResources.getBlocks()) {
+        for (Block block : LFResources.getBlocksFromRegistry()) {
             ItemBlockRenderTypes.setRenderLayer(block, RenderType.cutoutMipped());
         }
         CommonClient.register();

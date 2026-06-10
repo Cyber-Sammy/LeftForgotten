@@ -12,13 +12,23 @@ import java.util.function.Supplier;
 
 @SuppressWarnings("NullableProblems")
 public class LFResources {
-    public static Block[] getBlocks() {
+    public static Block[] getBlocksFromRegistry() {
         return Streams.stream(LFBlocks.REGISTRY).filter(Objects::nonNull).map(Supplier::get).toArray(Block[]::new);
     }
 
     public static final class Levels {
+        public static final ResourceKey<Level> BETA_MINECRAFT = ResourceKey.create(
+            Registries.DIMENSION, LeftForgotten.asResource("beta_minecraft"));
         public static final ResourceKey<Level> ALPHA_MINECRAFT = ResourceKey.create(
             Registries.DIMENSION, LeftForgotten.asResource("alpha_minecraft"));
+        public static final ResourceKey<Level> INFDEV_MINECRAFT = ResourceKey.create(
+            Registries.DIMENSION, LeftForgotten.asResource("infdev_minecraft"));
+        public static final ResourceKey<Level> INDEV_MINECRAFT = ResourceKey.create(
+            Registries.DIMENSION, LeftForgotten.asResource("indev_minecraft"));
+        public static final ResourceKey<Level> CLASSIC_MINECRAFT = ResourceKey.create(
+            Registries.DIMENSION, LeftForgotten.asResource("classic_minecraft"));
+        public static final ResourceKey<Level> PRECLASSIC_MINECRAFT = ResourceKey.create(
+            Registries.DIMENSION, LeftForgotten.asResource("preclassic_minecraft"));
     }
 
     public static final class Tabs {

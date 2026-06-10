@@ -35,10 +35,12 @@ dependencies {
     // Fabric dependencies go here
     modImplementation("dev.architectury:architectury-fabric:${libs.versions.arch.api.get()}")
 
-    compileOnly("maven.modrinth:nostalgic-tweaks:z9xtzBS1")
-    modImplementation("com.terraformersmc:modmenu:${rootProject.property("mod_menu")}")
+    modImplementation("maven.modrinth:nostalgic-tweaks:${rootProject.property("nt_fabric")}")
+    modApi("me.shedaniel.cloth:cloth-config-fabric:${rootProject.property("cloth_config")}") {
+        exclude(group: "net.fabricmc.fabric-api")
+    }
 
-    // Fabric Loader has MixinExtras built-in since 0.15.0 but not MixinSquared
+    modImplementation("com.terraformersmc:modmenu:${rootProject.property("mod_menu")}")
     include(implementation(annotationProcessor("com.github.bawnorton.mixinsquared:mixinsquared-fabric:${libs.versions.mixinsquared.get()}")))
 
     common(project(path: ':common', configuration: 'namedElements')) { transitive = false }

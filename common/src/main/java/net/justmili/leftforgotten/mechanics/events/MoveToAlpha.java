@@ -13,7 +13,7 @@ import net.minecraft.world.entity.player.Player;
 import net.minecraft.world.level.Level;
 import net.minecraft.world.phys.Vec3;
 
-public class DimChange {
+public class MoveToAlpha {
     public static EventResult onEntityHurt(LivingEntity entity, DamageSource source, float v) {
         if (!(entity instanceof ServerPlayer player)) return EventResult.pass();
         if (source == null) return EventResult.pass();

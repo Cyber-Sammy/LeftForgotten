@@ -11,7 +11,7 @@ import net.minecraft.client.resources.model.ModelResourceLocation;
 @Environment(EnvType.CLIENT)
 public class CommonClient {
     public static void register() {
-        ClientTickEvent.CLIENT_POST.register(VersionOverlay::onClientTick);
+        ClientTickEvent.CLIENT_POST.register(CommonVersionOverlay::onClientTick);
 
         DimSpecialEffectsAccessor.getEffects().put(LeftForgotten.asResource("alpha_minecraft"), new AlphaMinecraft());
     }
