@@ -27,6 +27,7 @@ public final class LeftForgotten {
     }
 
     private static final ConcurrentLinkedQueue<WorkItem> workQueue = new ConcurrentLinkedQueue<>();
+
     private static class WorkItem {
         final Runnable task;
         int ticksRemaining;
@@ -36,6 +37,7 @@ public final class LeftForgotten {
             this.ticksRemaining = delay;
         }
     }
+
     public static void processQueue() {
         for (Iterator<WorkItem> iterator = workQueue.iterator(); iterator.hasNext(); ) {
             WorkItem item = iterator.next();
@@ -46,11 +48,14 @@ public final class LeftForgotten {
             }
         }
     }
+
     public static void wait(int tickDelay, Runnable action) {
         workQueue.add(new WorkItem(action, tickDelay));
     }
 
-
+    public static ResourceLocation parse(String modId, String path) {
+        return ResourceLocation.fromNamespaceAndPath(modId, path);
+    }
     public static ResourceLocation asResource(String path) {
         return ResourceLocation.fromNamespaceAndPath(MOD_ID, path);
     }
@@ -63,7 +68,6 @@ public final class LeftForgotten {
     public static ResourceLocation asForgeResource(String path) {
         return ResourceLocation.fromNamespaceAndPath("neoforge", path);
     }
-
     public static ResourceLocation asPath(String path) {
         return ResourceLocation.parse(path);
     }

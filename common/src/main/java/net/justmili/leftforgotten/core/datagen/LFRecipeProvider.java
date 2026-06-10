@@ -1,10 +1,7 @@
 package net.justmili.leftforgotten.core.datagen;
 
 import net.justmili.leftforgotten.LeftForgotten;
-import net.justmili.leftforgotten.core.util.DatagenDataUtil.Recipes.Building;
-import net.justmili.leftforgotten.core.util.DatagenDataUtil.Recipes.Crafting;
-import net.justmili.leftforgotten.core.util.DatagenDataUtil.Recipes.Processing;
-import net.justmili.leftforgotten.core.util.DatagenDataUtil.Recipes.Redstone;
+import net.justmili.leftforgotten.core.util.DatagenDataUtil;
 import net.justmili.leftforgotten.registries.LFItems;
 import net.minecraft.core.HolderLookup;
 import net.minecraft.data.PackOutput;
@@ -23,70 +20,72 @@ public class LFRecipeProvider extends RecipeProvider {
 
     @Override
     public void buildRecipes(RecipeOutput writer) {
+        var gen = new DatagenDataUtil(LeftForgotten.MOD_ID, writer);
+
         // Wood & Planks
-        Building.planks(writer, LFItems.WOOD.get(), LFItems.WOODEN_PLANKS.get());
-        Building.stairs(writer, LFItems.WOODEN_PLANKS.get(), LFItems.WOODEN_STAIRS.get());
-        Building.slab(writer, LFItems.WOODEN_PLANKS.get(), LFItems.WOODEN_SLAB.get());
-        Building.fence(writer, LFItems.WOODEN_PLANKS.get(), LFItems.FENCE.get());
-        Building.fenceGate(writer, LFItems.WOODEN_PLANKS.get(), LFItems.FENCE_GATE.get());
-        Building.door(writer, LFItems.WOODEN_PLANKS.get(), LFItems.DOOR.get());
-        Building.trapdoor(writer, LFItems.WOODEN_PLANKS.get(), LFItems.TRAPDOOR.get());
-        Redstone.pressurePlate(writer, LFItems.WOODEN_PLANKS.get(), LFItems.PRESSURE_PLATE.get());
-        Redstone.button(writer, LFItems.WOODEN_PLANKS.get(), LFItems.BUTTON.get());
+        gen.planks(LFItems.WOOD.get(), LFItems.WOODEN_PLANKS.get());
+        gen.stairs(LFItems.WOODEN_PLANKS.get(), LFItems.WOODEN_STAIRS.get());
+        gen.slab(LFItems.WOODEN_PLANKS.get(), LFItems.WOODEN_SLAB.get());
+        gen.fence(LFItems.WOODEN_PLANKS.get(), LFItems.FENCE.get());
+        gen.fenceGate(LFItems.WOODEN_PLANKS.get(), LFItems.FENCE_GATE.get());
+        gen.door(LFItems.WOODEN_PLANKS.get(), LFItems.DOOR.get());
+        gen.trapdoor(LFItems.WOODEN_PLANKS.get(), LFItems.TRAPDOOR.get());
+        gen.pressurePlate(LFItems.WOODEN_PLANKS.get(), LFItems.PRESSURE_PLATE.get());
+        gen.button(LFItems.WOODEN_PLANKS.get(), LFItems.BUTTON.get());
 
         // Stone
-        Processing.smelt(writer, LFItems.COBBLESTONE.get(), LFItems.STONE.get(), 0.1f);
-        Building.stairs(writer, LFItems.STONE.get(), LFItems.STONE_STAIRS.get());
-        Building.slab(writer, LFItems.STONE.get(), LFItems.STONE_SLAB.get());
-        Redstone.pressurePlate(writer, LFItems.STONE.get(), LFItems.STONE_PRESSURE_PLATE.get());
-        Redstone.button(writer, LFItems.STONE.get(), LFItems.STONE_BUTTON.get());
+        gen.smelt(LFItems.COBBLESTONE.get(), LFItems.STONE.get(), 0.1f);
+        gen.stairs(LFItems.STONE.get(), LFItems.STONE_STAIRS.get());
+        gen.slab(LFItems.STONE.get(), LFItems.STONE_SLAB.get());
+        gen.pressurePlate(LFItems.STONE.get(), LFItems.STONE_PRESSURE_PLATE.get());
+        gen.button(LFItems.STONE.get(), LFItems.STONE_BUTTON.get());
 
         // Ores
-        Processing.smelt(writer, LFItems.COAL_ORE.get(), Items.COAL, 0.1f);
-        Processing.smelt(writer, LFItems.IRON_ORE.get(), Items.IRON_INGOT, 0.7f);
-        Processing.smelt(writer, LFItems.GOLD_ORE.get(), Items.GOLD_INGOT, 1.0f);
-        Processing.smelt(writer, LFItems.REDSTONE_ORE.get(), Items.REDSTONE, 0.7f);
-        Processing.smelt(writer, LFItems.DIAMOND_ORE.get(), Items.DIAMOND, 1.0f);
-        Processing.blast(writer, LFItems.COAL_ORE.get(), Items.COAL, 0.1f);
-        Processing.blast(writer, LFItems.IRON_ORE.get(), Items.IRON_INGOT, 0.7f);
-        Processing.blast(writer, LFItems.GOLD_ORE.get(), Items.GOLD_INGOT, 1.0f);
-        Processing.blast(writer, LFItems.REDSTONE_ORE.get(), Items.REDSTONE, 0.7f);
-        Processing.blast(writer, LFItems.DIAMOND_ORE.get(), Items.DIAMOND, 1.0f);
+        gen.smelt(LFItems.COAL_ORE.get(), Items.COAL, 0.1f);
+        gen.smelt(LFItems.IRON_ORE.get(), Items.IRON_INGOT, 0.7f);
+        gen.smelt(LFItems.GOLD_ORE.get(), Items.GOLD_INGOT, 1.0f);
+        gen.smelt(LFItems.REDSTONE_ORE.get(), Items.REDSTONE, 0.7f);
+        gen.smelt(LFItems.DIAMOND_ORE.get(), Items.DIAMOND, 1.0f);
+        gen.blast(LFItems.COAL_ORE.get(), Items.COAL, 0.1f);
+        gen.blast(LFItems.IRON_ORE.get(), Items.IRON_INGOT, 0.7f);
+        gen.blast(LFItems.GOLD_ORE.get(), Items.GOLD_INGOT, 1.0f);
+        gen.blast(LFItems.REDSTONE_ORE.get(), Items.REDSTONE, 0.7f);
+        gen.blast(LFItems.DIAMOND_ORE.get(), Items.DIAMOND, 1.0f);
 
         // Cobblestone
-        Building.stairs(writer, LFItems.COBBLESTONE.get(), LFItems.COBBLESTONE_STAIRS.get());
-        Building.slab(writer, LFItems.COBBLESTONE.get(), LFItems.COBBLESTONE_SLAB.get());
-        Building.wall(writer, LFItems.COBBLESTONE.get(), LFItems.COBBLESTONE_WALL.get());
-        Processing.cut(writer, LFItems.COBBLESTONE.get(), LFItems.COBBLESTONE_STAIRS.get(), 1);
-        Processing.cut(writer, LFItems.COBBLESTONE.get(), LFItems.COBBLESTONE_SLAB.get(), 2);
-        Processing.cut(writer, LFItems.COBBLESTONE.get(), LFItems.COBBLESTONE_WALL.get());
+        gen.stairs(LFItems.COBBLESTONE.get(), LFItems.COBBLESTONE_STAIRS.get());
+        gen.slab(LFItems.COBBLESTONE.get(), LFItems.COBBLESTONE_SLAB.get());
+        gen.wall(LFItems.COBBLESTONE.get(), LFItems.COBBLESTONE_WALL.get());
+        gen.cut(LFItems.COBBLESTONE.get(), LFItems.COBBLESTONE_STAIRS.get(), 1);
+        gen.cut(LFItems.COBBLESTONE.get(), LFItems.COBBLESTONE_SLAB.get(), 2);
+        gen.cut(LFItems.COBBLESTONE.get(), LFItems.COBBLESTONE_WALL.get());
 
         // Mossy Cobblestone
-        Crafting.shapeless(writer, RecipeCategory.BUILDING_BLOCKS, LFItems.MOSSY_COBBLESTONE.get(), LFItems.COBBLESTONE.get(), Items.VINE);
-        Crafting.shapeless(writer, RecipeCategory.BUILDING_BLOCKS, LFItems.MOSSY_COBBLESTONE.get(), LFItems.COBBLESTONE.get(), Items.MOSS_BLOCK);
-        Building.stairs(writer, LFItems.MOSSY_COBBLESTONE.get(), LFItems.MOSSY_COBBLESTONE_STAIRS.get());
-        Building.slab(writer, LFItems.MOSSY_COBBLESTONE.get(), LFItems.MOSSY_COBBLESTONE_SLAB.get());
-        Building.wall(writer, LFItems.MOSSY_COBBLESTONE.get(), LFItems.MOSSY_COBBLESTONE_WALL.get());
-        Processing.cut(writer, LFItems.MOSSY_COBBLESTONE.get(), LFItems.MOSSY_COBBLESTONE_STAIRS.get(), 1);
-        Processing.cut(writer, LFItems.MOSSY_COBBLESTONE.get(), LFItems.MOSSY_COBBLESTONE_SLAB.get(), 2);
-        Processing.cut(writer, LFItems.MOSSY_COBBLESTONE.get(), LFItems.MOSSY_COBBLESTONE_WALL.get());
+        gen.shapeless(RecipeCategory.BUILDING_BLOCKS, LFItems.MOSSY_COBBLESTONE.get(), LFItems.COBBLESTONE.get(), Items.VINE);
+        gen.shapeless(RecipeCategory.BUILDING_BLOCKS, LFItems.MOSSY_COBBLESTONE.get(), LFItems.COBBLESTONE.get(), Items.MOSS_BLOCK);
+        gen.stairs(LFItems.MOSSY_COBBLESTONE.get(), LFItems.MOSSY_COBBLESTONE_STAIRS.get());
+        gen.slab(LFItems.MOSSY_COBBLESTONE.get(), LFItems.MOSSY_COBBLESTONE_SLAB.get());
+        gen.wall(LFItems.MOSSY_COBBLESTONE.get(), LFItems.MOSSY_COBBLESTONE_WALL.get());
+        gen.cut(LFItems.MOSSY_COBBLESTONE.get(), LFItems.MOSSY_COBBLESTONE_STAIRS.get(), 1);
+        gen.cut(LFItems.MOSSY_COBBLESTONE.get(), LFItems.MOSSY_COBBLESTONE_SLAB.get(), 2);
+        gen.cut(LFItems.MOSSY_COBBLESTONE.get(), LFItems.MOSSY_COBBLESTONE_WALL.get());
 
         // Bricks
-        Crafting.shaped2x2(writer, RecipeCategory.BUILDING_BLOCKS, LFItems.BRICKS.get(), LFItems.BRICK.get(), 1);
-        Building.stairs(writer, LFItems.BRICKS.get(), LFItems.BRICK_STAIRS.get());
-        Building.slab(writer, LFItems.BRICKS.get(), LFItems.BRICK_SLAB.get());
-        Building.wall(writer, LFItems.BRICKS.get(), LFItems.BRICK_WALL.get());
-        Processing.cut(writer, LFItems.BRICKS.get(), LFItems.BRICK_STAIRS.get(), 1);
-        Processing.cut(writer, LFItems.BRICKS.get(), LFItems.BRICK_SLAB.get(), 2);
-        Processing.cut(writer, LFItems.BRICKS.get(), LFItems.BRICK_WALL.get());
+        gen.shaped2x2(RecipeCategory.BUILDING_BLOCKS, LFItems.BRICKS.get(), LFItems.BRICK.get(), 1);
+        gen.stairs(LFItems.BRICKS.get(), LFItems.BRICK_STAIRS.get());
+        gen.slab(LFItems.BRICKS.get(), LFItems.BRICK_SLAB.get());
+        gen.wall(LFItems.BRICKS.get(), LFItems.BRICK_WALL.get());
+        gen.cut(LFItems.BRICKS.get(), LFItems.BRICK_STAIRS.get(), 1);
+        gen.cut(LFItems.BRICKS.get(), LFItems.BRICK_SLAB.get(), 2);
+        gen.cut(LFItems.BRICKS.get(), LFItems.BRICK_WALL.get());
 
         // Clay & Brick item
-        Crafting.shaped2x2(writer, RecipeCategory.BUILDING_BLOCKS, LFItems.CLAY.get(), LFItems.CLAY_BALL.get(), 1);
-        Processing.smelt(writer, LFItems.CLAY_BALL.get(), LFItems.BRICK.get(), 0.3f);
+        gen.shaped2x2(RecipeCategory.BUILDING_BLOCKS, LFItems.CLAY.get(), LFItems.CLAY_BALL.get(), 1);
+        gen.smelt(LFItems.CLAY_BALL.get(), LFItems.BRICK.get(), 0.3f);
 
         // Glass
-        Processing.smelt(writer, LFItems.SAND.get(), LFItems.GLASS.get(), 0.1f);
-        Building.bars(writer, LFItems.GLASS.get(), LFItems.GLASS_PANE.get());
+        gen.smelt(LFItems.SAND.get(), LFItems.GLASS.get(), 0.1f);
+        gen.bars(LFItems.GLASS.get(), LFItems.GLASS_PANE.get());
 
         // TNT
         ShapedRecipeBuilder.shaped(RecipeCategory.REDSTONE, LFItems.TNT.get())
@@ -99,9 +98,9 @@ public class LFRecipeProvider extends RecipeProvider {
             .save(writer);
 
         // Wood 6-sided
-        Crafting.shaped2x2(writer, RecipeCategory.BUILDING_BLOCKS, LFItems.WOOD.get(), LFItems.WOOD_6_SIDED.get(), 3);
+        gen.shaped2x2(RecipeCategory.BUILDING_BLOCKS, LFItems.WOOD.get(), LFItems.WOOD_6_SIDED.get(), 3);
 
-        // Furnace and Crafting Table
+        // Furnace and gen Table
         ShapedRecipeBuilder.shaped(RecipeCategory.BUILDING_BLOCKS, Items.FURNACE, 1)
             .define('#', LFItems.COBBLESTONE.get())
             .pattern("###")
@@ -111,15 +110,15 @@ public class LFRecipeProvider extends RecipeProvider {
             .save(writer, LeftForgotten.asResource("furnace"));
 
         // Resource Blocks
-        Crafting.shaped3x3(writer, RecipeCategory.BUILDING_BLOCKS, LFItems.IRON_BLOCK.get(), Items.IRON_INGOT, 1);
-        Crafting.shaped3x3(writer, RecipeCategory.BUILDING_BLOCKS, LFItems.GOLD_BLOCK.get(), Items.GOLD_INGOT, 1);
-        Crafting.shaped3x3(writer, RecipeCategory.BUILDING_BLOCKS, LFItems.DIAMOND_BLOCK.get(), Items.DIAMOND, 1);
-        Crafting.shapeless(writer, RecipeCategory.MISC, Items.IRON_INGOT, 9, LFItems.IRON_BLOCK.get());
-        Crafting.shapeless(writer, RecipeCategory.MISC, Items.GOLD_INGOT, 9, LFItems.GOLD_BLOCK.get());
-        Crafting.shapeless(writer, RecipeCategory.MISC, Items.DIAMOND, 9, LFItems.DIAMOND_BLOCK.get());
+        gen.shaped3x3(RecipeCategory.BUILDING_BLOCKS, LFItems.IRON_BLOCK.get(), Items.IRON_INGOT, 1);
+        gen.shaped3x3(RecipeCategory.BUILDING_BLOCKS, LFItems.GOLD_BLOCK.get(), Items.GOLD_INGOT, 1);
+        gen.shaped3x3(RecipeCategory.BUILDING_BLOCKS, LFItems.DIAMOND_BLOCK.get(), Items.DIAMOND, 1);
+        gen.shapeless(RecipeCategory.MISC, Items.IRON_INGOT, 9, LFItems.IRON_BLOCK.get());
+        gen.shapeless(RecipeCategory.MISC, Items.GOLD_INGOT, 9, LFItems.GOLD_BLOCK.get());
+        gen.shapeless(RecipeCategory.MISC, Items.DIAMOND, 9, LFItems.DIAMOND_BLOCK.get());
 
         // Building / Iron
-        Building.door(writer, LFItems.IRON_ORE.get(), LFItems.IRON_DOOR.get());
+        gen.door(LFItems.IRON_ORE.get(), LFItems.IRON_DOOR.get());
 
         // Boat
         ShapedRecipeBuilder.shaped(RecipeCategory.TRANSPORTATION, LFItems.BOAT.get())
