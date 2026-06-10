@@ -26,6 +26,8 @@ public class LFResources {
             Registries.DIMENSION, LeftForgotten.asResource("indev_minecraft"));
         public static final ResourceKey<Level> CLASSIC_MINECRAFT = ResourceKey.create(
             Registries.DIMENSION, LeftForgotten.asResource("classic_minecraft"));
+        public static final ResourceKey<Level> PRECLASSIC_MINECRAFT = ResourceKey.create(
+            Registries.DIMENSION, LeftForgotten.asResource("preclassic_minecraft"));
     }
 
     public static final class Tabs {

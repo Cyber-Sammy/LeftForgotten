@@ -126,10 +126,10 @@ public abstract class HudModifier {
                 y1 = y+armorH-yOffset(),
                 y2 = y1+vHeight,
                 blitOffset = 0;
-            float minU = (uOffset+(float) uWidth) / 256f,
+            float minU = (uOffset+uWidth) / 256f,
                 maxU = (uOffset+0.0F) / 256f,
                 minV = (vOffset+0.0F) / 256f,
-                maxV = (vOffset+(float) vHeight) / 256f;
+                maxV = (vOffset+vHeight) / 256f;
 
             // Flip the sprites via Blaze3D engine
             RenderSystem.setShaderTexture(0, atlasLocation);
@@ -137,10 +137,10 @@ public abstract class HudModifier {
             Matrix4f matrix4f = instance.pose().last().pose();
             BufferBuilder bufferBuilder = Tesselator.getInstance().getBuilder();
             bufferBuilder.begin(VertexFormat.Mode.QUADS, DefaultVertexFormat.POSITION_TEX);
-            bufferBuilder.vertex(matrix4f, (float) x1, (float) y1, (float) blitOffset).uv(minU, minV).endVertex();
-            bufferBuilder.vertex(matrix4f, (float) x1, (float) y2, (float) blitOffset).uv(minU, maxV).endVertex();
-            bufferBuilder.vertex(matrix4f, (float) x2, (float) y2, (float) blitOffset).uv(maxU, maxV).endVertex();
-            bufferBuilder.vertex(matrix4f, (float) x2, (float) y1, (float) blitOffset).uv(maxU, minV).endVertex();
+            bufferBuilder.vertex(matrix4f, x1, y1, blitOffset).uv(minU, minV).endVertex();
+            bufferBuilder.vertex(matrix4f, x1, y2, blitOffset).uv(minU, maxV).endVertex();
+            bufferBuilder.vertex(matrix4f, x2, y2, blitOffset).uv(maxU, maxV).endVertex();
+            bufferBuilder.vertex(matrix4f, x2, y1, blitOffset).uv(maxU, minV).endVertex();
             BufferUploader.drawWithShader(bufferBuilder.end());
 
         } else if (this.currentProfiler.peek().equals("air")) { // Air level move left and down
@@ -160,9 +160,9 @@ public abstract class HudModifier {
     }
 
     // Mount HP move, account for AbstractHorse jump bar when saddled and Armor
-    @ModifyVariable(method = "renderVehicleHealth", at = @At("STORE"), ordinal = 2)
-    private int moveMountHealthY(int y) {
-        if (!inAlpha()) return y;
+    @ModifyVariable(method = "renderVehicleHealth", at = @At("STORE"), name = "k")
+    private int moveMountHealthY(int k) {
+        if (!inAlpha()) return k;
 
         int base = this.screenHeight-39-yOffset();
         if (this.minecraft.player.getArmorValue() > 0) {

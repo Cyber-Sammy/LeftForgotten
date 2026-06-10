@@ -110,8 +110,8 @@ public class HudModifier {
                     maxAir = player.getMaxAirSupply();
                 if (!player.isEyeInFluid(FluidTags.WATER) && air >= maxAir) return;
 
-                int full = Mth.ceil((double) (air-2) * 10.0 / maxAir),
-                    partial = Mth.ceil((double) air * 10.0 / maxAir)-full,
+                int full = Mth.ceil((air-2) * 10.0 / maxAir),
+                    partial = Mth.ceil(air * 10.0 / maxAir)-full,
                     rh = ((ForgeGui) mc.gui).rightHeight,
                     top = h-rh-airLvlH-yOffset,
                     barEnd = w / 2+51;

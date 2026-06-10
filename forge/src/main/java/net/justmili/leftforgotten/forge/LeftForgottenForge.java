@@ -22,7 +22,10 @@ public final class LeftForgottenForge {
                 
                 Left Forgotten and True End are incompatible! This is due duplicate code of each other's codebases
                 caused by both being fully or/and partially made and managed by user JustMili.
-                Please remove one of the mods from your instance.""");
+                Please remove one of the mods from your instance.
+                
+                (Why would you even have both installed?)
+                """);
         }
 
         EVENT_BUS = modContext.getModEventBus();
@@ -34,10 +37,12 @@ public final class LeftForgottenForge {
 
     public static void onDatagenSetup(GatherDataEvent event) {
         var generator = event.getGenerator();
-        generator.addProvider(event.includeServer(), (DataProvider.Factory<? extends DataProvider>) ((output) -> new LFBlockTagProvider(output, event.getLookupProvider())));
-        generator.addProvider(event.includeServer(), (DataProvider.Factory<? extends DataProvider>) ((output) -> new LFItemTagProvider(output, event.getLookupProvider())));
-        generator.addProvider(event.includeServer(), (DataProvider.Factory<? extends DataProvider>) (LFLootTableProvider::new));
-        generator.addProvider(event.includeServer(), (DataProvider.Factory<? extends DataProvider>) (LFRecipeProvider::new));
-        generator.addProvider(event.includeClient(), (DataProvider.Factory<? extends DataProvider>) (LFModelProvider::new));
+        var server = event.includeServer();
+        var client = event.includeClient();
+        generator.addProvider(server, (DataProvider.Factory<? extends DataProvider>) ((output) -> new LFBlockTagProvider(output, event.getLookupProvider())));
+        generator.addProvider(server, (DataProvider.Factory<? extends DataProvider>) ((output) -> new LFItemTagProvider(output, event.getLookupProvider())));
+        generator.addProvider(server, (DataProvider.Factory<? extends DataProvider>) (LFLootTableProvider::new));
+        generator.addProvider(server, (DataProvider.Factory<? extends DataProvider>) (LFRecipeProvider::new));
+        generator.addProvider(client, (DataProvider.Factory<? extends DataProvider>) (LFModelProvider::new));
     }
 }
