@@ -4,6 +4,7 @@ import com.llamalad7.mixinextras.injector.wrapoperation.Operation;
 import com.llamalad7.mixinextras.injector.wrapoperation.WrapOperation;
 import com.mojang.blaze3d.systems.RenderSystem;
 import com.mojang.blaze3d.vertex.*;
+import net.justmili.leftforgotten.client.CommonVersionOverlay;
 import net.justmili.leftforgotten.registries.LFResources;
 import net.minecraft.client.Minecraft;
 import net.minecraft.client.gui.Gui;
@@ -28,13 +29,8 @@ import java.util.Stack;
 
 @Mixin(value = Gui.class, priority = 2500)
 public abstract class HudModifier {
-    private boolean inAlpha() {
-        return this.minecraft.player != null && this.minecraft.player.level().dimension() == LFResources.Levels.ALPHA_MINECRAFT;
-    }
-
-    // Defined widths and heights (X-Y pos)
     @Unique
-    private static final int
+    private static final int // Defined widths and heights (X-Y pos)
         playerHpH = 7,    // Player HP Y offset
         armorW = 101,     // Armor X offset
         armorH = 17,      // Armor Y offset
@@ -45,10 +41,9 @@ public abstract class HudModifier {
         mountHpH_na = 7;  // Mount HP Y offset without Armor
 
     // Account for horse bar, Fabric doesn't need to account for fullscreen
+    @Unique
     private int yOffset() {
-        Player player = this.minecraft.player;
-        int horseBarOffset = (player.getVehicle() instanceof AbstractHorse horse && horse.isSaddled()) ? horseBar : 0;
-        return horseBarOffset;
+        return (this.minecraft.player.getVehicle() instanceof AbstractHorse horse && horse.isSaddled()) ? horseBar : 0;
     }
 
     @Shadow
@@ -61,6 +56,7 @@ public abstract class HudModifier {
     protected abstract int getVehicleMaxHearts(LivingEntity vehicle);
 
     // Draw identifier for renderPlayerHealth's redirectBlit profiler section
+    @Unique
     private Stack<String> currentProfiler = new Stack<>();
     @WrapOperation(method = "renderPlayerHealth(Lnet/minecraft/client/gui/GuiGraphics;)V", at = @At(value = "INVOKE",
         target = "Lnet/minecraft/util/profiling/ProfilerFiller;push(Ljava/lang/String;)V"))
@@ -83,9 +79,9 @@ public abstract class HudModifier {
     }
 
     // Player HP - move down, account for AbstractHorse jump bar when saddled
-    @ModifyVariable(method = "renderHearts", at = @At("HEAD"), ordinal = 1, argsOnly = true)
+    @ModifyVariable(method = "renderHearts", at = @At("HEAD"), argsOnly = true, name = "y")
     private int moveHeartsDown(int y) {
-        if (!inAlpha()) return y;
+        if (!CommonVersionOverlay.inAlpha(minecraft)) return y;
 
         return y+playerHpH-yOffset();
     }
@@ -104,18 +100,12 @@ public abstract class HudModifier {
     @WrapOperation(method = "renderPlayerHealth(Lnet/minecraft/client/gui/GuiGraphics;)V", at = @At(value = "INVOKE",
         target = "Lnet/minecraft/client/gui/GuiGraphics;blit(Lnet/minecraft/resources/ResourceLocation;IIIIII)V"))
     private void redirectBlit(GuiGraphics instance, ResourceLocation atlasLocation, int x, int y, int uOffset, int vOffset, int uWidth, int vHeight, Operation<Void> original) {
-        if (!inAlpha()) {
+        if (!CommonVersionOverlay.inAlpha(minecraft)) {
             original.call(instance, atlasLocation, x, y, uOffset, vOffset, uWidth, vHeight);
             return;
         }
 
         if (this.currentProfiler.peek().equals("armor")) { // Armor move right and down
-            /*
-            Flip the way it goes
-            Millie: Fuck this, I'm not flipping the sprites
-            Edit by eetgeenappels: YEAH WE ARE FLIPPING THE SPRITES!!!!!!
-            */
-
             // Mirror the entire HUD element
             int barStart = this.screenWidth / 2-91,
                 mirroredX = 2 * barStart+72-x,
@@ -156,13 +146,13 @@ public abstract class HudModifier {
     // EXP bar disable
     @Inject(at = @At("HEAD"), method = "renderExperienceBar", cancellable = true)
     private void renderExperienceBar(CallbackInfo ci) {
-        if (inAlpha()) ci.cancel();
+        if (CommonVersionOverlay.inAlpha(minecraft)) ci.cancel();
     }
 
     // Mount HP move, account for AbstractHorse jump bar when saddled and Armor
     @ModifyVariable(method = "renderVehicleHealth", at = @At("STORE"), name = "k")
     private int moveMountHealthY(int k) {
-        if (!inAlpha()) return k;
+        if (!CommonVersionOverlay.inAlpha(minecraft)) return k;
 
         int base = this.screenHeight-39-yOffset();
         if (this.minecraft.player.getArmorValue() > 0) {

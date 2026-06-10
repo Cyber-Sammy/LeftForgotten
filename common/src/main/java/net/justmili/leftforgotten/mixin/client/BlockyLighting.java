@@ -12,8 +12,8 @@ import org.spongepowered.asm.mixin.injection.callback.CallbackInfoReturnable;
 public abstract class BlockyLighting {
     @Inject(method = "useAmbientOcclusion", at = @At("HEAD"), cancellable = true)
     private static void blockyLighting(CallbackInfoReturnable<Boolean> cir) {
-        Minecraft mc = Minecraft.getInstance();
-        if (mc.level != null && mc.level.dimension().equals(LFResources.Levels.ALPHA_MINECRAFT)) {
+        Minecraft minecraft = Minecraft.getInstance();
+        if (minecraft.level != null && minecraft.level.dimension().equals(LFResources.Levels.ALPHA_MINECRAFT)) {
             cir.setReturnValue(false);
         }
     }
