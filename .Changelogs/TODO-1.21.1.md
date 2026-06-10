@@ -1,6 +1,7 @@
 TODO:
 - Fix Mod Menu and Datagen on Fabric
-- Port NeoForge fully
+- Fix HudModifier mixin on Fabric
+- Fix flower spawning in dimension in NeoForge
 
 PLANNED FOR 1.1:
 - Support for:
