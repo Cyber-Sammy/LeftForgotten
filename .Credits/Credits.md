@@ -10,3 +10,4 @@
 ## Contributors
 - Eetgeenappels - Helped with armor sprite flipping on Fabric
 - NBSurprise - Built all the (unused) structures for the mod
+- Cyber_Sammy - Helped port to 1.21.1
