@@ -11,9 +11,7 @@ sourceSets {
 }
 
 loom {
-    mixin {
-        useLegacyMixinAp = true
-    }
+    mixin.useLegacyMixinAp = true
 
     runs {
         data {

@@ -13,6 +13,8 @@ fabricApi {
     }
 }
 
+loom.mixin.useLegacyMixinAp = true
+
 configurations {
     common {
         canBeResolved = true

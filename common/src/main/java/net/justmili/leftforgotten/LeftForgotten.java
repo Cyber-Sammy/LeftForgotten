@@ -53,22 +53,7 @@ public final class LeftForgotten {
         workQueue.add(new WorkItem(action, tickDelay));
     }
 
-    public static ResourceLocation parse(String modId, String path) {
-        return ResourceLocation.fromNamespaceAndPath(modId, path);
-    }
     public static ResourceLocation asResource(String path) {
         return ResourceLocation.fromNamespaceAndPath(MOD_ID, path);
-    }
-    public static ResourceLocation asMcResource(String path) {
-        return ResourceLocation.fromNamespaceAndPath("minecraft", path);
-    }
-    public static ResourceLocation asFabricResource(String path) {
-        return ResourceLocation.fromNamespaceAndPath("fabric", path);
-    }
-    public static ResourceLocation asForgeResource(String path) {
-        return ResourceLocation.fromNamespaceAndPath("neoforge", path);
-    }
-    public static ResourceLocation asPath(String path) {
-        return ResourceLocation.parse(path);
     }
 }

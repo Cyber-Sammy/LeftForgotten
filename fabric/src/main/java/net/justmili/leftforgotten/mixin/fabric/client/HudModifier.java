@@ -14,7 +14,6 @@ import net.minecraft.resources.ResourceLocation;
 import net.minecraft.util.profiling.ProfilerFiller;
 import net.minecraft.world.entity.LivingEntity;
 import net.minecraft.world.entity.animal.horse.AbstractHorse;
-import net.minecraft.world.entity.player.Player;
 import org.joml.Matrix4f;
 import org.spongepowered.asm.mixin.Final;
 import org.spongepowered.asm.mixin.Mixin;
@@ -59,26 +58,26 @@ public abstract class HudModifier {
     private Stack<String> currentProfiler = new Stack<>();
     @WrapOperation(method = "renderPlayerHealth(Lnet/minecraft/client/gui/GuiGraphics;)V", at = @At(value = "INVOKE",
         target = "Lnet/minecraft/util/profiling/ProfilerFiller;push(Ljava/lang/String;)V"))
-    private void logProfilePushes(ProfilerFiller instance, String name, Operation<Void> original) {
+    private void logProfilePushes(ProfilerFiller filler, String name, Operation<Void> original) {
         currentProfiler.push(name);
-        original.call(instance, name);
+        original.call(filler, name);
     }
     @WrapOperation(method = "renderPlayerHealth(Lnet/minecraft/client/gui/GuiGraphics;)V", at = @At(value = "INVOKE",
         target = "Lnet/minecraft/util/profiling/ProfilerFiller;popPush(Ljava/lang/String;)V"))
-    private void logProfilePopPushes(ProfilerFiller instance, String name, Operation<Void> original) {
+    private void logProfilePopPushes(ProfilerFiller filler, String name, Operation<Void> original) {
         currentProfiler.pop();
         currentProfiler.push(name);
-        original.call(instance, name);
+        original.call(filler, name);
     }
     @WrapOperation(method = "renderPlayerHealth(Lnet/minecraft/client/gui/GuiGraphics;)V", at = @At(value = "INVOKE",
         target = "Lnet/minecraft/util/profiling/ProfilerFiller;pop()V"))
-    private void logProfilePops(ProfilerFiller instance, Operation<Void> original) {
+    private void logProfilePops(ProfilerFiller filler, Operation<Void> original) {
         currentProfiler.pop();
-        original.call(instance);
+        original.call(filler);
     }
 
     // Player HP - move down, account for AbstractHorse jump bar when saddled
-    @ModifyVariable(method = "renderHearts", at = @At("HEAD"), argsOnly = true, name = "y")
+    @ModifyVariable(method = "renderHearts", at = @At("HEAD"), ordinal = 1, argsOnly = true)
     private int moveHeartsDown(int y) {
         if (!CommonVersionOverlay.inAlpha(minecraft)) return y;
 
@@ -88,11 +87,10 @@ public abstract class HudModifier {
     // Food disable
     @WrapOperation(method = "renderPlayerHealth(Lnet/minecraft/client/gui/GuiGraphics;)V", at = @At(value = "INVOKE",
         target = "Lnet/minecraft/client/gui/Gui;getVehicleMaxHearts(Lnet/minecraft/world/entity/LivingEntity;)I"))
-    private int wrapVehicleHearts(Gui instance, LivingEntity vehicle, Operation<Integer> original) {
-        if (this.minecraft.player.level().dimension() != LFResources.Levels.ALPHA_MINECRAFT) {
-            return this.getVehicleMaxHearts(vehicle);
-        }
-        return -1;
+    private int disableFoodBar(Gui gui, LivingEntity vehicle, Operation<Integer> original) {
+        if (CommonVersionOverlay.inAlpha(minecraft)) return -1;
+
+        return this.getVehicleMaxHearts(vehicle);
     }
 
     // Armor and Air Level, flip armor sprites, account for AbstractHorse jump bar when saddled
@@ -148,9 +146,9 @@ public abstract class HudModifier {
     }
 
     // Mount HP move, account for AbstractHorse jump bar when saddled and Armor
-    @ModifyVariable(method = "renderVehicleHealth", at = @At("STORE"), name = "k")
-    private int moveMountHealthY(int k) {
-        if (!CommonVersionOverlay.inAlpha(minecraft)) return k;
+    @ModifyVariable(method = "renderVehicleHealth", at = @At("STORE"), ordinal = 2)
+    private int moveMountHealthY(int y) {
+        if (!CommonVersionOverlay.inAlpha(minecraft)) return y;
 
         int base = this.screenHeight-39-yOffset();
         if (this.minecraft.player.getArmorValue() > 0) {
