@@ -50,7 +50,7 @@ public final class LeftForgotten {
         workQueue.add(new WorkItem(action, tickDelay));
     }
 
-
+    public static ResourceLocation parse(String modId, String path) {return new ResourceLocation(modId, path);}
     public static ResourceLocation asResource(String path) {
         return new ResourceLocation(MOD_ID, path);
     }
