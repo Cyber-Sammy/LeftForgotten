@@ -53,7 +53,7 @@ subprojects {
         // IMPORTANT: Only for the sake of compiling - not to be used for anything else!
         "modCompileOnly"(fabricApi.module("fabric-recipe-api-v1", libs.versions.fabric.api.get()))
 
-        "mappings"(loom.layered() {
+        "mappings"(loom.layered {
             officialMojangMappings()
             parchment("org.parchmentmc.data:parchment-${mcVersion}:${libs.versions.parchment.get()}@zip")
         })
@@ -70,7 +70,7 @@ subprojects {
 
     val detectedPlatform = when {
         project.name.contains("fabric", ignoreCase = true) -> "Fabric"
-        project.name.contains("forge", ignoreCase = true) -> "Forge"
+        project.name.contains("neoforge", ignoreCase = true) -> "NeoForge"
         else -> "Common"
     }
     project.version = if (detectedPlatform != null) {

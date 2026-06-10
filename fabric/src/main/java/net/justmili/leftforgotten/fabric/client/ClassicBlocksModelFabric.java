@@ -1,9 +1,8 @@
 package net.justmili.leftforgotten.fabric.client;
 
-import java.util.function.Supplier;
-
+import net.fabricmc.fabric.api.renderer.v1.model.FabricBakedModel;
+import net.fabricmc.fabric.api.renderer.v1.render.RenderContext;
 import net.justmili.leftforgotten.client.ClassicBlocksModel;
-
 import net.minecraft.client.resources.model.BakedModel;
 import net.minecraft.core.BlockPos;
 import net.minecraft.util.RandomSource;
@@ -11,8 +10,7 @@ import net.minecraft.world.item.ItemStack;
 import net.minecraft.world.level.BlockAndTintGetter;
 import net.minecraft.world.level.block.state.BlockState;
 
-import net.fabricmc.fabric.api.renderer.v1.model.FabricBakedModel;
-import net.fabricmc.fabric.api.renderer.v1.render.RenderContext;
+import java.util.function.Supplier;
 
 public class ClassicBlocksModelFabric extends ClassicBlocksModel implements FabricBakedModel {
     public ClassicBlocksModelFabric(BakedModel wrapped) {

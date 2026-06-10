@@ -54,10 +54,9 @@ repositories {
 dependencies {
     neoForge("${libs.neoforge.get()}")
 
-    compileOnly(annotationProcessor("io.github.llamalad7:mixinextras-common:${libs.versions.mixinextras.get()}"))
-    modImplementation(include("io.github.llamalad7:mixinextras-forge:${libs.versions.mixinextras.get()}"))
+    // NeoForge mainlines MixinExtras since 20.2.84, still requires MixinSquared tho
     compileOnly(annotationProcessor("com.github.bawnorton.mixinsquared:mixinsquared-common:${libs.versions.mixinsquared.get()}"))
-    modImplementation(include("com.github.bawnorton.mixinsquared:mixinsquared-forge:${libs.versions.mixinsquared.get()}"))
+    implementation(include("com.github.bawnorton.mixinsquared:mixinsquared-neoforge:${libs.versions.mixinsquared.get()}"))
 
     modImplementation("dev.architectury:architectury-neoforge:${libs.versions.arch.api.get()}")
 
@@ -65,11 +64,11 @@ dependencies {
     modCompileOnly("maven.modrinth:nostalgic-tweaks:POrRfSqe")
 
     common(project(path: ':common', configuration: 'namedElements')) { transitive = false }
-    shadowBundle project(path: ':common', configuration: 'transformProductionForge')
+    shadowBundle project(path: ':common', configuration: 'transformProductionNeoForge')
 }
 
 processResources {
-    filesMatching('META-INF/mods.toml') {
+    filesMatching('META-INF/neoforge.mods.toml') {
         expand "mod_id": rootProject.property("mod_id"),
                 "mod_name": rootProject.property("mod_name"),
                 "mod_version": rootProject.property("mod_version"),
