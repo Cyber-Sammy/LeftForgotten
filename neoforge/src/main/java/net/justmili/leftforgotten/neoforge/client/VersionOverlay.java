@@ -15,8 +15,8 @@ public class VersionOverlay {
 
     @SubscribeEvent(priority = EventPriority.HIGHEST)
     public static void onClientTick(ClientTickEvent.Post event) {
-        Minecraft minecraft = Minecraft.getInstance();
-        CommonVersionOverlay.onClientTick(minecraft);
+
+        CommonVersionOverlay.onClientTick(Minecraft.getInstance());
     }
 
     @SubscribeEvent(priority = EventPriority.NORMAL)
