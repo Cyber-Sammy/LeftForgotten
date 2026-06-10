@@ -4,15 +4,15 @@ import dev.architectury.event.events.client.ClientTickEvent;
 import net.fabricmc.api.EnvType;
 import net.fabricmc.api.Environment;
 import net.justmili.leftforgotten.LeftForgotten;
-import net.justmili.leftforgotten.mixin.accessors.DimSpecialEffectsAccessor;
 import net.justmili.leftforgotten.client.dimension.AlphaMinecraft;
+import net.justmili.leftforgotten.mixin.accessors.DimSpecialEffectsAccessor;
 import net.minecraft.client.resources.model.ModelResourceLocation;
 import net.minecraft.resources.ResourceLocation;
 
 @Environment(EnvType.CLIENT)
 public class CommonClient {
     public static void register() {
-        ClientTickEvent.CLIENT_POST.register(VersionOverlay::onClientTick);
+        ClientTickEvent.CLIENT_POST.register(CommonVersionOverlay::onClientTick);
 
         DimSpecialEffectsAccessor.getEffects().put(LeftForgotten.asResource("alpha_minecraft"), new AlphaMinecraft());
     }

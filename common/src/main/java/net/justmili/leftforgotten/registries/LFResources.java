@@ -7,12 +7,13 @@ import net.minecraft.resources.ResourceKey;
 import net.minecraft.world.level.Level;
 import net.minecraft.world.level.block.Block;
 
+import java.util.Objects;
 import java.util.function.Supplier;
 
 @SuppressWarnings("NullableProblems")
 public class LFResources {
-    public static Block[] getBlocks() {
-        return Streams.stream(LFBlocks.REGISTRY).map(Supplier::get).toArray(Block[]::new);
+    public static Block[] getBlocksFromRegistry() {
+        return Streams.stream(LFBlocks.REGISTRY).filter(Objects::nonNull).map(Supplier::get).toArray(Block[]::new);
     }
 
     public static final class Levels {

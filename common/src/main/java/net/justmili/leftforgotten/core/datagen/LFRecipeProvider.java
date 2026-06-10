@@ -1,8 +1,11 @@
 package net.justmili.leftforgotten.core.datagen;
 
 import net.justmili.leftforgotten.LeftForgotten;
+import net.justmili.leftforgotten.core.util.DatagenDataUtil.Recipes.Building;
+import net.justmili.leftforgotten.core.util.DatagenDataUtil.Recipes.Crafting;
+import net.justmili.leftforgotten.core.util.DatagenDataUtil.Recipes.Processing;
+import net.justmili.leftforgotten.core.util.DatagenDataUtil.Recipes.Redstone;
 import net.justmili.leftforgotten.registries.LFItems;
-import net.justmili.leftforgotten.core.util.DatagenDataUtil.Recipes.*;
 import net.minecraft.data.PackOutput;
 import net.minecraft.data.recipes.FinishedRecipe;
 import net.minecraft.data.recipes.RecipeCategory;

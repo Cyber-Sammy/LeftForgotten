@@ -9,7 +9,6 @@ import net.minecraft.client.renderer.RenderType;
 import net.minecraft.resources.ResourceLocation;
 import net.minecraft.world.level.block.Block;
 import net.minecraftforge.api.distmarker.Dist;
-import net.minecraftforge.api.distmarker.OnlyIn;
 import net.minecraftforge.client.event.EntityRenderersEvent;
 import net.minecraftforge.client.event.ModelEvent;
 import net.minecraftforge.eventbus.api.SubscribeEvent;
@@ -21,7 +20,7 @@ public class ForgeClient {
     @SubscribeEvent
     public static void init(FMLClientSetupEvent event) {
         /// DEV NOTE: DEPRECATED API USAGE
-        for (Block block : LFResources.getBlocks()) {
+        for (Block block : LFResources.getBlocksFromRegistry()) {
             ItemBlockRenderTypes.setRenderLayer(block, RenderType.cutout());
         }
         CommonClient.register();

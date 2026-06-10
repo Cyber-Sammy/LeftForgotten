@@ -9,10 +9,6 @@ import net.minecraft.sounds.SoundEvent;
 public class LFSounds {
     public static final DeferredRegister<SoundEvent> REGISTRY = DeferredRegister.create(LeftForgotten.MOD_ID,Registries.SOUND_EVENT);
 
-    /**ISSUE:
-     * All the music events are reistered and everything but when played via /playsound or via other means, no sound is heared.
-     * player.entity.hurt does work tho and I have no fucking clue why or how
-     */
     public static final RegistrySupplier<SoundEvent> HURT = registerSound("entity.player.hurt");
     public static final RegistrySupplier<SoundEvent> MUSIC_13 = registerSound("music.game.13");
     public static final RegistrySupplier<SoundEvent> MUSIC_BOO = registerSound("music.game.boo");

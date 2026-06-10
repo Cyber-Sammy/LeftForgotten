@@ -1,7 +1,6 @@
 package net.justmili.leftforgotten.core.datagen;
 
 import net.justmili.leftforgotten.LeftForgotten;
-import net.justmili.leftforgotten.registries.LFBlocks;
 import net.justmili.leftforgotten.registries.LFItems;
 import net.minecraft.core.HolderLookup;
 import net.minecraft.core.registries.BuiltInRegistries;

@@ -1,13 +1,18 @@
 package net.justmili.leftforgotten.client;
 
+import net.fabricmc.api.EnvType;
+import net.fabricmc.api.Environment;
 import net.justmili.leftforgotten.registries.LFResources;
 import net.minecraft.client.Minecraft;
+import net.minecraft.client.gui.GuiGraphics;
+import net.minecraft.network.chat.Component;
 
 import java.util.Random;
 
-public class VersionOverlay {
-    private static final String BASE_TEXT = "Minecraft Alpha v1.1.2_01";
-    private static final String[] VERSIONS = { // List of texts to glitch between
+@Environment(EnvType.CLIENT)
+public class CommonVersionOverlay {
+    public static final String BASE_TEXT = "Minecraft Alpha v1.1.2_01";
+    public static final String[] VERSIONS = { // List of texts to glitch between
         "Cave Game",
         "Minecraft Classic v0.0.11a",
         "Minecraft Infdev v20100227", // Infinite terrain
@@ -44,11 +49,15 @@ public class VersionOverlay {
     };
 
     public static String currentText = BASE_TEXT;
-    private static int flashTicks = 4;
-    private static final Random random = new Random();
+    public static int flashTicks = 4;
+    public static final Random random = new Random();
 
-    public static void onClientTick(Minecraft mc) {
-        if (mc.level == null || mc.level.dimension() != LFResources.Levels.ALPHA_MINECRAFT) {
+    public static boolean inAlpha(Minecraft client) {
+        return client.player == null && client.player.level().dimension() == LFResources.Levels.ALPHA_MINECRAFT;
+    }
+
+    public static void onClientTick(Minecraft client) {
+        if (client.level == null || client.level.dimension() != LFResources.Levels.ALPHA_MINECRAFT) {
             currentText = BASE_TEXT;
             flashTicks = 0;
             return;
@@ -66,5 +75,28 @@ public class VersionOverlay {
             currentText = VERSIONS[random.nextInt(VERSIONS.length)];
             flashTicks = 2 + random.nextInt(5); // 2–4 ticks
         }
+    }
+
+    public static void render(Minecraft client, GuiGraphics graphics) {
+        final int fontSize = 32;
+        float guiScaleFactor = (float) client.getWindow().getScreenWidth() / client.getWindow().getGuiScaledWidth(),
+            baseFontHeight = client.font.lineHeight,
+            userScale = fontSize / baseFontHeight;
+
+        int x = 6,
+            y = 6,
+            textColor = 0xFFFFFF,
+            textShadowColor = 0xFF3F3F3F,
+            drawX = Math.round(x / userScale),
+            drawY = Math.round(y / userScale);
+
+        graphics.pose().pushPose();
+        graphics.pose().scale(1f / guiScaleFactor, 1f / guiScaleFactor, 1f);
+        graphics.pose().scale(userScale, userScale, 1f);
+
+        graphics.drawString(client.font, Component.literal(currentText), drawX+1, drawY+1, textShadowColor, false);
+        graphics.drawString(client.font, Component.literal(currentText), drawX, drawY, textColor, false);
+
+        graphics.pose().popPose();
     }
 }
