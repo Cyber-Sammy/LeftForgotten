@@ -1,4 +1,4 @@
-package net.justmili.leftforgotten.gui.neoforge;
+package net.justmili.leftforgotten.neoforge.client;
 
 import com.mojang.blaze3d.systems.RenderSystem;
 import com.mojang.blaze3d.vertex.*;

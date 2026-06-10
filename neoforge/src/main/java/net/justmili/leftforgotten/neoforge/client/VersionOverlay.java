@@ -1,4 +1,4 @@
-package net.justmili.leftforgotten.gui.neoforge;
+package net.justmili.leftforgotten.neoforge.client;
 
 import net.justmili.leftforgotten.LeftForgotten;
 import net.justmili.leftforgotten.client.CommonVersionOverlay;
