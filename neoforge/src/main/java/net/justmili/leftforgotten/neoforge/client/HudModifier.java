@@ -28,8 +28,8 @@ public class HudModifier {
 
     @SubscribeEvent
     public static void onGuiOverlayPre(RenderGuiLayerEvent.Pre event) {
-        Minecraft mc = Minecraft.getInstance();
-        Player player = mc.player;
+        Minecraft minecarft = Minecraft.getInstance();
+        Player player = minecarft.player;
         if (player == null) return;
 
         LayeredDraw.Layer overlay = event.getLayer();
@@ -37,9 +37,9 @@ public class HudModifier {
         GuiGraphics graphics = event.getGuiGraphics();
         DeltaTracker partTick = event.getPartialTick();
 
-        if (player.level().dimension().equals(LFResources.Levels.ALPHA_MINECRAFT) && !mc.options.hideGui) {
-            int w = mc.getWindow().getGuiScaledWidth();
-            int h = mc.getWindow().getGuiScaledHeight();
+        if (player.level().dimension().equals(LFResources.Levels.ALPHA_MINECRAFT) && !minecarft.options.hideGui) {
+            int w = minecarft.getWindow().getGuiScaledWidth();
+            int h = minecarft.getWindow().getGuiScaledHeight();
 
             // Defined widths and heights (X-Y pos)
             int playerHpH = 6,    // Player HP Y offset
@@ -109,7 +109,7 @@ public class HudModifier {
 
                 int full = net.minecraft.util.Mth.ceil((double)(air - 2) * 10.0 / maxAir),
                     partial = net.minecraft.util.Mth.ceil((double)air * 10.0 / maxAir) - full,
-                    rh = mc.gui.rightHeight,
+                    rh = minecarft.gui.rightHeight,
                     top = h - rh - airLvlH - yOffset,
                     barEnd = w / 2 + 51;
 

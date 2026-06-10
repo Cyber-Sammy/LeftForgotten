@@ -28,29 +28,29 @@ public class SoundEngineMixin {
 
     @Inject(method = "play", at = @At("HEAD"), cancellable = true)
     private void onPlay(SoundInstance sound, CallbackInfo ci) {
-        Minecraft mc = Minecraft.getInstance();
-        if (sound == null || mc.level == null) return;
-        if (!mc.level.dimension().equals(LFResources.Levels.ALPHA_MINECRAFT)) return;
+        Minecraft minecraft = Minecraft.getInstance();
+        if (sound == null || minecraft.level == null) return;
+        if (!minecraft.level.dimension().equals(LFResources.Levels.ALPHA_MINECRAFT)) return;
 
-        ResourceLocation loc = sound.getLocation();
+        ResourceLocation soundPath = sound.getLocation();
 
         // Cancel stomach growl and chest opening/closing sounds as they didn't exist
-        if (STOMACH_GROWL.equals(loc) || CHEST_OPEN.equals(loc) || CHEST_CLOSE.equals(loc)) {
+        if (STOMACH_GROWL.equals(soundPath) || CHEST_OPEN.equals(soundPath) || CHEST_CLOSE.equals(soundPath)) {
             ci.cancel();
             return;
         }
 
         // Replace vanilla hurt with alpha hurt
-        if (HURT_VANILLA.equals(loc)) {
+        if (HURT_VANILLA.equals(soundPath)) {
             ci.cancel();
             ((SoundEngine)(Object)this).play(SimpleSoundInstance.forUI(LFSounds.HURT.get(), 1.0f));
             return;
         }
         // Play alpha hurt on top of other hurt sounds
-        if (HURT_FREEZE_VANILLA.equals(loc)
-            || HURT_FIRE_VANILLA.equals(loc)
-            || HURT_DROWN_VANILLA.equals(loc)
-            || HURT_BERRY_VANILLA.equals(loc)) {
+        if (HURT_FREEZE_VANILLA.equals(soundPath)
+            || HURT_FIRE_VANILLA.equals(soundPath)
+            || HURT_DROWN_VANILLA.equals(soundPath)
+            || HURT_BERRY_VANILLA.equals(soundPath)) {
             ((SoundEngine)(Object)this).play(SimpleSoundInstance.forUI(LFSounds.HURT.get(), 1.0f));
             // Don't cancel original sound
         }
