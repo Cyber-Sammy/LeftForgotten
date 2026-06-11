@@ -13,7 +13,7 @@ public class ResourceUtil {
         return ResourceLocation.parse(path);
     }
     public static ResourceLocation minecraftResource(String path) {
-        return ResourceLocation.fromNamespaceAndPath("minecraft", path);
+        return ResourceLocation.withDefaultNamespace(path);
     }
     public static ResourceLocation fabricResource(String path) {
         return ResourceLocation.fromNamespaceAndPath("fabric", path);
@@ -29,10 +29,10 @@ public class ResourceUtil {
     }
 
     public static ResourceLocation asBlockPath(String path) {
-        return ResourceLocation.fromNamespaceAndPath("minecraft:block/", path);
+        return ResourceLocation.parse("minecraft:block/"+path);
     }
     public static ResourceLocation asItemPath(String path) {
-        return ResourceLocation.fromNamespaceAndPath("minecraft:item/", path);
+        return ResourceLocation.parse("minecraft:item/"+path);
     }
 
     // Generic

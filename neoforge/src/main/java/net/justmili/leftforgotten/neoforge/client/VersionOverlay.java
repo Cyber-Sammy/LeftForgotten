@@ -22,7 +22,7 @@ public class VersionOverlay {
     @SubscribeEvent(priority = EventPriority.NORMAL)
     public static void render(RenderGuiEvent.Post event) {
         Minecraft minecraft = Minecraft.getInstance();
-        if (CommonVersionOverlay.inAlpha(minecraft)) return;
+        if (!CommonVersionOverlay.inAlpha(minecraft)) return;
 
         CommonVersionOverlay.render(minecraft, event.getGuiGraphics());
     }

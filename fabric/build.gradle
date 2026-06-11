@@ -13,7 +13,7 @@ fabricApi {
     }
 }
 
-loom.mixin.useLegacyMixinAp = true
+//loom.mixin.useLegacyMixinAp = true
 
 configurations {
     common {

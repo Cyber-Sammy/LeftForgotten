@@ -7,7 +7,6 @@ import net.minecraft.world.item.Item;
 import net.minecraft.world.item.crafting.Ingredient;
 
 import java.util.Arrays;
-import java.util.function.Consumer;
 import java.util.stream.Collectors;
 
 public record DatagenDataUtil(String modId, RecipeOutput writer) {

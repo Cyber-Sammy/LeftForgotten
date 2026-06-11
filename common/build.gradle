@@ -13,7 +13,7 @@ architectury {
 loom {
     accessWidenerPath = file("src/main/resources/${rootProject.property("mod_id")}.accesswidener")
 
-    mixin.useLegacyMixinAp = true
+    //mixin.useLegacyMixinAp = true
 }
 
 dependencies {

@@ -2,19 +2,14 @@ package net.justmili.leftforgotten.mixin.fabric.client;
 
 import com.llamalad7.mixinextras.injector.wrapoperation.Operation;
 import com.llamalad7.mixinextras.injector.wrapoperation.WrapOperation;
-import com.mojang.blaze3d.systems.RenderSystem;
-import com.mojang.blaze3d.vertex.*;
 import net.justmili.leftforgotten.client.CommonVersionOverlay;
-import net.justmili.leftforgotten.registries.LFResources;
 import net.minecraft.client.Minecraft;
 import net.minecraft.client.gui.Gui;
 import net.minecraft.client.gui.GuiGraphics;
-import net.minecraft.client.renderer.GameRenderer;
+import net.minecraft.client.renderer.texture.TextureAtlasSprite;
 import net.minecraft.resources.ResourceLocation;
 import net.minecraft.util.profiling.ProfilerFiller;
 import net.minecraft.world.entity.LivingEntity;
-import net.minecraft.world.entity.animal.horse.AbstractHorse;
-import org.joml.Matrix4f;
 import org.spongepowered.asm.mixin.Final;
 import org.spongepowered.asm.mixin.Mixin;
 import org.spongepowered.asm.mixin.Shadow;
@@ -26,23 +21,14 @@ import org.spongepowered.asm.mixin.injection.callback.CallbackInfo;
 
 import java.util.Stack;
 
+import static net.justmili.leftforgotten.client.CommonHudModifier.Common.mirrorX;
+import static net.justmili.leftforgotten.client.CommonHudModifier.Common.renderFlippedSprite;
+import static net.justmili.leftforgotten.client.CommonHudModifier.Fabric.*;
+import static net.justmili.leftforgotten.client.CommonHudModifier.getHeight;
+import static net.justmili.leftforgotten.client.CommonHudModifier.getWidth;
+
 @Mixin(value = Gui.class, priority = 2500)
 public abstract class HudModifier {
-    @Unique
-    private static final int // Defined widths and heights (X-Y pos)
-        playerHpH = 7,    // Player HP Y offset
-        armorW = 101,     // Armor X offset
-        armorH = 17,      // Armor Y offset
-        airLvlW = 101,    // Air level X offset
-        airLvlH = 2,      // Air level Y offset
-        horseBar = 7,     // Horse bar
-        mountHpH = 2,     // Mount HP Y offset
-        mountHpH_na = 7;  // Mount HP Y offset without Armor
-
-    @Unique
-    private int yOffset() { // Account for horse bar, Fabric doesn't need to account for fullscreen
-        return (this.minecraft.player.getVehicle() instanceof AbstractHorse horse && horse.isSaddled()) ? horseBar : 0;
-    }
 
     @Shadow
     @Final
@@ -91,49 +77,38 @@ public abstract class HudModifier {
         return this.getVehicleMaxHearts(vehicle);
     }
 
-    // Armor and Air Level, flip armor sprites, account for AbstractHorse jump bar when saddled
-    @WrapOperation(method = "renderPlayerHealth(Lnet/minecraft/client/gui/GuiGraphics;)V", at = @At(value = "INVOKE",
-        target = "Lnet/minecraft/client/gui/GuiGraphics;blit(Lnet/minecraft/resources/ResourceLocation;IIIIII)V"))
-    private void redirectBlit(GuiGraphics graphics, ResourceLocation atlasLocation, int x, int y, int uOffset, int vOffset, int uWidth, int vHeight, Operation<Void> original) {
-        if (!CommonVersionOverlay.inAlpha(minecraft)) {
-            original.call(graphics, atlasLocation, x, y, uOffset, vOffset, uWidth, vHeight);
+    // Armor - flip sprites, move right and down, account for AbstractHorse jump bar when saddled
+    @WrapOperation(method = "renderArmor(Lnet/minecraft/client/gui/GuiGraphics;Lnet/minecraft/world/entity/player/Player;IIII)V", at = @At(value = "INVOKE",
+        target = "Lnet/minecraft/client/gui/GuiGraphics;blitSprite(Lnet/minecraft/resources/ResourceLocation;IIII)V"))
+    private static void redirectArmorBlit(GuiGraphics graphics, ResourceLocation sprite, int x, int y, int width, int height, Operation<Void> original) {
+        if (!CommonVersionOverlay.inAlpha(Minecraft.getInstance())) {
+            original.call(graphics, sprite, x, y, width, height);
             return;
         }
 
-        if (this.currentProfiler.peek().equals("armor")) { // Armor move right and down
-            // Mirror the entire HUD element
-            int barStart = graphics.guiWidth() / 2-91,
-                mirroredX = 2 * barStart+72-x,
+        TextureAtlasSprite atlasSprite = Minecraft.getInstance().getGuiSprites().getSprite(sprite);
+        int x1 = mirrorX(x)+armorW,
+            y1 = y+armorH-yOffset();
 
-                // Math before flipping sprites
-                x1 = mirroredX+armorW,
-                x2 = x1+uWidth,
-                y1 = y+armorH-yOffset(),
-                y2 = y1+vHeight,
-                blitOffset = 0;
-            float minU = (uOffset+uWidth) / 256f,
-                maxU = (uOffset+0.0F) / 256f,
-                minV = (vOffset+0.0F) / 256f,
-                maxV = (vOffset+vHeight) / 256f;
+        renderFlippedSprite(graphics, atlasSprite, x1, y1, width, height);
+    }
 
-            // Flip the sprites via Blaze3D engine
-            RenderSystem.setShaderTexture(0, atlasLocation);
-            RenderSystem.setShader(GameRenderer::getPositionTexShader);
-            Matrix4f matrix4f = graphics.pose().last().pose();
-            BufferBuilder bufferBuilder = Tesselator.getInstance().begin(VertexFormat.Mode.QUADS, DefaultVertexFormat.POSITION_TEX);
-            bufferBuilder.addVertex(matrix4f, x1, y1, blitOffset).setUv(minU, minV);
-            bufferBuilder.addVertex(matrix4f, x1, y2, blitOffset).setUv(minU, maxV);
-            bufferBuilder.addVertex(matrix4f, x2, y2, blitOffset).setUv(maxU, maxV);
-            bufferBuilder.addVertex(matrix4f, x2, y1, blitOffset).setUv(maxU, minV);
-            BufferUploader.drawWithShader(bufferBuilder.buildOrThrow());
+    // Air Level - move left and down, account for AbstractHorse jump bar when saddled
+    @WrapOperation(method = "renderPlayerHealth(Lnet/minecraft/client/gui/GuiGraphics;)V", at = @At(value = "INVOKE",
+        target = "Lnet/minecraft/client/gui/GuiGraphics;blitSprite(Lnet/minecraft/resources/ResourceLocation;IIII)V"))
+    private void redirectAirBlit(GuiGraphics graphics, ResourceLocation sprite, int x, int y, int width, int height, Operation<Void> original) {
+        if (!CommonVersionOverlay.inAlpha(minecraft)) {
+            original.call(graphics, sprite, x, y, width, height);
+            return;
+        }
 
-        } else if (this.currentProfiler.peek().equals("air")) { // Air level move left and down
+        if (this.currentProfiler.peek().equals("air")) { // Air level move left and down
             // Flip the way it goes
-            int barEnd = graphics.guiWidth() / 2+51,
+            int barEnd = getWidth() / 2+51,
                 mirroredX = 2 * barEnd-9-x;
-            graphics.blit(atlasLocation, mirroredX-airLvlW, y-airLvlH+yOffset(), uOffset, vOffset, uWidth, vHeight);
+            graphics.blitSprite(sprite, mirroredX-airLvlW, y-airLvlH+yOffset(), width, height);
         } else {
-            original.call(graphics, atlasLocation, x, y, uOffset, vOffset, uWidth, vHeight);
+            original.call(graphics, sprite, x, y, width, height);
         }
     }
 
@@ -148,8 +123,7 @@ public abstract class HudModifier {
     private int moveMountHealthY(int y) {
         if (!CommonVersionOverlay.inAlpha(minecraft)) return y;
 
-        int screenHeight = this.minecraft.getWindow().getGuiScaledHeight(),
-            base = screenHeight-39-yOffset();
+        int base = getHeight()-39-yOffset();
         if (this.minecraft.player.getArmorValue() > 0) {
             return base-mountHpH;
         } else {
