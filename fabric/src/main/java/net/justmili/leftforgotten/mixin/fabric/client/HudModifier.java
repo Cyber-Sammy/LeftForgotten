@@ -47,8 +47,6 @@ public abstract class HudModifier {
     @Shadow
     @Final
     private Minecraft minecraft;
-    @Shadow
-    private int screenWidth, screenHeight;
 
     @Shadow
     protected abstract int getVehicleMaxHearts(LivingEntity vehicle);
@@ -104,7 +102,7 @@ public abstract class HudModifier {
 
         if (this.currentProfiler.peek().equals("armor")) { // Armor move right and down
             // Mirror the entire HUD element
-            int barStart = this.screenWidth / 2-91,
+            int barStart = graphics.guiWidth() / 2-91,
                 mirroredX = 2 * barStart+72-x,
 
                 // Math before flipping sprites
@@ -131,7 +129,7 @@ public abstract class HudModifier {
 
         } else if (this.currentProfiler.peek().equals("air")) { // Air level move left and down
             // Flip the way it goes
-            int barEnd = this.screenWidth / 2+51,
+            int barEnd = graphics.guiWidth() / 2+51,
                 mirroredX = 2 * barEnd-9-x;
             graphics.blit(atlasLocation, mirroredX-airLvlW, y-airLvlH+yOffset(), uOffset, vOffset, uWidth, vHeight);
         } else {
@@ -150,7 +148,8 @@ public abstract class HudModifier {
     private int moveMountHealthY(int y) {
         if (!CommonVersionOverlay.inAlpha(minecraft)) return y;
 
-        int base = this.screenHeight-39-yOffset();
+        int screenHeight = this.minecraft.getWindow().getGuiScaledHeight(),
+            base = screenHeight-39-yOffset();
         if (this.minecraft.player.getArmorValue() > 0) {
             return base-mountHpH;
         } else {
