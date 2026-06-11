@@ -20,7 +20,7 @@ public abstract class VersionOverlay {
 
     @Inject(at = @At("TAIL"), method = "render")
     public void render(GuiGraphics graphics, float partialTick, CallbackInfo ci) {
-        if (!CommonVersionOverlay.inAlpha(minecraft)) return;
+        if (CommonVersionOverlay.notInAlpha(minecraft)) return;
         this.minecraft.getProfiler().push("demo");
 
         CommonVersionOverlay.render(this.minecraft, graphics);

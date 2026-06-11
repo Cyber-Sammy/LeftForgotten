@@ -55,6 +55,9 @@ public class CommonVersionOverlay {
     public static boolean inAlpha(Minecraft client) {
         return client.player != null && client.player.level().dimension() == LFResources.Levels.ALPHA_MINECRAFT;
     }
+    public static boolean notInAlpha(Minecraft client) {
+        return !inAlpha(client);
+    }
 
     public static void onClientTick(Minecraft client) {
         if (client.level == null || client.level.dimension() != LFResources.Levels.ALPHA_MINECRAFT) {

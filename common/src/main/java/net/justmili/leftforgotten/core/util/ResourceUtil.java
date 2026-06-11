@@ -5,8 +5,6 @@ import net.minecraft.resources.ResourceLocation;
 import net.minecraft.world.level.block.Block;
 
 public class ResourceUtil {
-
-
     public static ResourceLocation parse(String modId, String path) {
         return new ResourceLocation(modId, path);
     }
@@ -30,10 +28,10 @@ public class ResourceUtil {
     }
 
     public static ResourceLocation asBlockPath(String path) {
-        return new ResourceLocation("minecraft:block/", path);
+        return new ResourceLocation("minecraft:block/"+path);
     }
     public static ResourceLocation asItemPath(String path) {
-        return new ResourceLocation("minecraft:item/", path);
+        return new ResourceLocation("minecraft:item/"+path);
     }
 
     // Generic

@@ -1,18 +1,13 @@
 package net.justmili.leftforgotten.forge.client;
 
-import com.mojang.blaze3d.systems.RenderSystem;
-import com.mojang.blaze3d.vertex.*;
 import dev.architectury.platform.Platform;
 import mod.adrenix.nostalgic.tweak.config.CandyTweak;
-import net.justmili.leftforgotten.core.util.ResourceUtil;
 import net.justmili.leftforgotten.registries.LFResources;
 import net.minecraft.client.Minecraft;
 import net.minecraft.client.gui.GuiGraphics;
-import net.minecraft.client.renderer.GameRenderer;
 import net.minecraft.resources.ResourceLocation;
 import net.minecraft.tags.FluidTags;
 import net.minecraft.util.Mth;
-import net.minecraft.world.entity.animal.horse.AbstractHorse;
 import net.minecraft.world.entity.player.Player;
 import net.minecraftforge.api.distmarker.Dist;
 import net.minecraftforge.client.event.RenderGuiOverlayEvent;
@@ -22,11 +17,14 @@ import net.minecraftforge.client.gui.overlay.NamedGuiOverlay;
 import net.minecraftforge.client.gui.overlay.VanillaGuiOverlay;
 import net.minecraftforge.eventbus.api.SubscribeEvent;
 import net.minecraftforge.fml.common.Mod;
-import org.joml.Matrix4f;
+
+import static net.justmili.leftforgotten.client.CommonHudModifier.Common.mirrorX;
+import static net.justmili.leftforgotten.client.CommonHudModifier.Common.renderFlippedBlit;
+import static net.justmili.leftforgotten.client.CommonHudModifier.Forge.*;
+import static net.justmili.leftforgotten.client.CommonHudModifier.*;
 
 @Mod.EventBusSubscriber(value = Dist.CLIENT)
 public class HudModifier {
-    private static final ResourceLocation GUI_ICONS_LOCATION = ResourceUtil.asPath("textures/gui/icons.png");
 
     @SubscribeEvent
     public static void onGuiOverlayPre(RenderGuiOverlayEvent.Pre event) {
@@ -41,25 +39,6 @@ public class HudModifier {
         float partTick = event.getPartialTick();
 
         if (player.level().dimension().equals(LFResources.Levels.ALPHA_MINECRAFT) && !minecraft.options.hideGui && ((ForgeGui) minecraft.gui).shouldDrawSurvivalElements()) {
-            int w = minecraft.getWindow().getGuiScaledWidth(),
-                h = minecraft.getWindow().getGuiScaledHeight(),
-
-                // Defined widths and heights (X-Y pos)
-                playerHpH = 6,    // Player HP Y offset
-                armorW = 101,     // Armor X offset
-                armorH = 6,       // Armor Y offset
-                airLvlW = 202,    // Air level X offset
-                airLvlH = 3,      // Air level Y offset
-                horseBar = 7,     // Horse bar
-                mountHpH = 3,     // Mount HP Y offset
-                mountHpW = 0,     // Mount HP X offset - useless, but I say let it stay just in case
-                mountHpH_na = 9,  // Mount HP Y offset without Armor
-                fullscreenOffset = 1, // Fullscreen accountability because Forge is weird
-
-                // Account for AbstractHorse jump bar when saddled and fullscreen
-                horseBarOffset = player.getVehicle() instanceof AbstractHorse horse && horse.isSaddled() ? horseBar : 0,
-                yOffset = horseBarOffset-fullscreenOffset;
-
             // Food disable
             if (id.equals(VanillaGuiOverlay.FOOD_LEVEL.id())) event.setCanceled(true);
             // Experience disable
@@ -69,39 +48,22 @@ public class HudModifier {
             if (id.equals(VanillaGuiOverlay.ARMOR_LEVEL.id())) {
                 event.setCanceled(true);
 
+                if (player.isCreative()) return;
+
                 int level = player.getArmorValue();
                 for (int i = 1; level > 0 && i < 20; i += 2) {
                     int uOffset = i < level ? 34 : i == level ? 25 : 16,
-                        origX = w / 2-91+((i-1) / 2) * 8,
-                        barStart = w / 2-91,
-                        mirroredX = 2 * barStart+72-origX,
+                        origX = getWidth() / 2-91+((i-1) / 2) * 8,
+                        x1 = mirrorX(origX)+armorW,
+                        y1 = getHeight()-39+armorH-yOffset();
 
-                        x1 = mirroredX+armorW,
-                        x2 = x1+9,
-                        y1 = h-39+armorH-yOffset,
-                        y2 = y1+9;
-                    float minU = (uOffset+9f) / 256f,
-                        maxU = (uOffset+0.0f) / 256f,
-                        minV = 9f / 256f,
-                        maxV = 18f / 256f;
-
-                    // Flip the sprites via Blaze3D engine
-                    RenderSystem.setShaderTexture(0, GUI_ICONS_LOCATION);
-                    RenderSystem.setShader(GameRenderer::getPositionTexShader);
-                    Matrix4f matrix4f = graphics.pose().last().pose();
-                    BufferBuilder bufferBuilder = Tesselator.getInstance().getBuilder();
-                    bufferBuilder.begin(VertexFormat.Mode.QUADS, DefaultVertexFormat.POSITION_TEX);
-                    bufferBuilder.vertex(matrix4f, x1, y1, 0).uv(minU, minV).endVertex();
-                    bufferBuilder.vertex(matrix4f, x1, y2, 0).uv(minU, maxV).endVertex();
-                    bufferBuilder.vertex(matrix4f, x2, y2, 0).uv(maxU, maxV).endVertex();
-                    bufferBuilder.vertex(matrix4f, x2, y1, 0).uv(maxU, minV).endVertex();
-                    BufferUploader.drawWithShader(bufferBuilder.end());
+                    renderFlippedBlit(graphics, GUI_ICONS_LOCATION, x1, y1, 9, 9, uOffset, 9f);
                 }
             }
             // Player HP move down
             if (id.equals(VanillaGuiOverlay.PLAYER_HEALTH.id())) {
                 event.setCanceled(true);
-                overlay.render((ForgeGui) minecraft.gui, graphics, partTick, w, h+playerHpH-yOffset);
+                overlay.render((ForgeGui) minecraft.gui, graphics, partTick, getWidth(), getHeight()+playerHpH-yOffset());
             }
             // Air level move left and down, account for AbstractHorse jump bar when saddled
             if (id.equals(VanillaGuiOverlay.AIR_LEVEL.id())) {
@@ -113,11 +75,11 @@ public class HudModifier {
                 int full = Mth.ceil((air-2) * 10.0 / maxAir),
                     partial = Mth.ceil(air * 10.0 / maxAir)-full,
                     rh = ((ForgeGui) minecraft.gui).rightHeight,
-                    top = h-rh-airLvlH-yOffset,
-                    barEnd = w / 2+51;
+                    top = getHeight()-rh-airLvlH-yOffset(),
+                    barEnd = getWidth() / 2+51;
 
                 for (int i = 0; i < full+partial; ++i) {
-                    int origX = w / 2-9-i * 8-9,
+                    int origX = getWidth() / 2-9-i * 8-9,
                         mirroredX = 2 * barEnd-9-origX-airLvlW;
                     graphics.blit(GUI_ICONS_LOCATION, mirroredX, top, (i < full ? 16 : 25), 18, 9, 9);
                 }
@@ -125,12 +87,14 @@ public class HudModifier {
             // Mount HP move down, account for AbstractHorse jump bar when saddled and Armor
             if (id.equals(VanillaGuiOverlay.MOUNT_HEALTH.id())) {
                 event.setCanceled(true);
-                if (player.getArmorValue() > 0) {
-                    //Armor on
-                    overlay.render((ForgeGui) minecraft.gui, graphics, partTick, w-mountHpW, h-mountHpH-yOffset);
+                if (player.isCreative()) {
+                    overlay.render((ForgeGui) minecraft.gui, graphics, partTick, getWidth()-mountHpW, getHeight()+mountHpOffset());
                 } else {
-                    //Armor off
-                    overlay.render((ForgeGui) minecraft.gui, graphics, partTick, w-mountHpW, h-mountHpH-yOffset+mountHpH_na);
+                    if (player.getArmorValue() > 0) {
+                        overlay.render((ForgeGui) minecraft.gui, graphics, partTick, getWidth()-mountHpW, getHeight()-mountHpH-yOffset());
+                    } else {
+                        overlay.render((ForgeGui) minecraft.gui, graphics, partTick, getWidth()-mountHpW, getHeight()-mountHpH-yOffset()+mountHpH_na);
+                    }
                 }
             }
         }
@@ -140,9 +104,8 @@ public class HudModifier {
             if (player.level().dimension().equals(LFResources.Levels.ALPHA_MINECRAFT)) {
                 String ns = id.getNamespace(),
                     path = id.getPath().toLowerCase();
-                if (!("nostalgic_tweaks".equals(ns))) return; // "Is it from NT?"
-                if (path.contains("stamina")) event.setCanceled(true); // Get rid of the stamina bar
-                // Get rid of NT's version overlay
+                if (!("nostalgic_tweaks".equals(ns))) return;
+                if (path.contains("stamina")) event.setCanceled(true);
                 if (CandyTweak.OLD_VERSION_OVERLAY.get()) CandyTweak.OLD_VERSION_OVERLAY.setCacheAndDiskThenSave(false);
             } else {
                 if (!CandyTweak.OLD_VERSION_OVERLAY.get()) CandyTweak.OLD_VERSION_OVERLAY.setCacheAndDiskThenSave(true);
