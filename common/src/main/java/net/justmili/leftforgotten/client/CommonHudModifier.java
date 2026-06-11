@@ -92,9 +92,5 @@ public class CommonHudModifier {
                 inCreative = (minecraft.player.isCreative() && hasSaddle()) ? -9 : 0;
             return horseBarOffset + inCreative - fullscreenOffset;
         }
-        public static int mountHpOffset() {
-            int creativeNoSaddleFix = (minecraft.player.isCreative() && !hasSaddle()) ? horseBar + 2 : 0;
-            return -mountHpH - yOffset() + creativeNoSaddleFix;
-        }
     }
 }
