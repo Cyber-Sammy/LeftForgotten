@@ -1,5 +1,5 @@
 TODO:
-- Fix HudModifier mixin on Fabric
+- Test and debug VersionOverlay and HudModifier mixin/class on Fabric and Neo AND COPY EVERYTHING OVER TO 1.20.1
 - Fix flower spawning in dimension
 - Regenerate data (data/, assets/) for both Fabric and Neo
 
