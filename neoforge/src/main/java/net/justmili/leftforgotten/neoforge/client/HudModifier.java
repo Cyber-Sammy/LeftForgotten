@@ -11,6 +11,7 @@ import net.minecraft.client.gui.LayeredDraw;
 import net.minecraft.client.renderer.texture.TextureAtlasSprite;
 import net.minecraft.resources.ResourceLocation;
 import net.minecraft.tags.FluidTags;
+import net.minecraft.util.Mth;
 import net.minecraft.world.entity.player.Player;
 import net.neoforged.api.distmarker.Dist;
 import net.neoforged.bus.api.SubscribeEvent;
@@ -49,6 +50,8 @@ public class HudModifier {
             if (id.equals(VanillaGuiLayers.ARMOR_LEVEL)) {
                 event.setCanceled(true);
 
+                if (player.isCreative()) return;
+
                 int level = player.getArmorValue();
                 for (int i = 1; level > 0 && i < 20; i += 2) {
                     ResourceLocation sprite = i < level ? ARMOR_FULL_SPRITE : i == level ? ARMOR_HALF_SPRITE : ARMOR_EMPTY_SPRITE;
@@ -72,8 +75,8 @@ public class HudModifier {
                     maxAir = player.getMaxAirSupply();
                 if (!player.isEyeInFluid(FluidTags.WATER) && air >= maxAir) return;
 
-                int full = net.minecraft.util.Mth.ceil((air-2) * 10.0 / maxAir),
-                    partial = net.minecraft.util.Mth.ceil(air * 10.0 / maxAir)-full,
+                int full = Mth.ceil((air-2) * 10.0 / maxAir),
+                    partial = Mth.ceil(air * 10.0 / maxAir)-full,
                     rh = minecarft.gui.rightHeight,
                     top = getHeight()-rh-airLvlH-yOffset(),
                     barEnd = getWidth() / 2+51;
@@ -87,12 +90,18 @@ public class HudModifier {
             // Mount HP move down, account for AbstractHorse jump bar when saddled and Armor
             if (id.equals(VanillaGuiLayers.VEHICLE_HEALTH)) {
                 event.setCanceled(true);
-                if (player.getArmorValue() > 0) {
-                    //Armor on
-                    render(graphics, overlay, partTick, -mountHpW, -mountHpH-yOffset());
+
+                if (player.isCreative()) {
+                    // In creative, so no armor but still need to account for mount health and jump bar
+                    render(graphics, overlay, partTick, -mountHpW, mountHpOffset());
                 } else {
-                    //Armor off
-                    render(graphics, overlay, partTick, -mountHpW, -mountHpH-yOffset()+mountHpH_na);
+                    if (player.getArmorValue() > 0) {
+                        // Armor on
+                        render(graphics, overlay, partTick, -mountHpW, -mountHpH - yOffset());
+                    } else {
+                        // Armor off
+                        render(graphics, overlay, partTick, -mountHpW, -mountHpH - yOffset() + mountHpH_na);
+                    }
                 }
             }
         }

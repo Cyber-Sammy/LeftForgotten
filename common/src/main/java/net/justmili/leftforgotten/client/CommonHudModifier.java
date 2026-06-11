@@ -66,6 +66,9 @@ public class CommonHudModifier {
             int inCreative = minecraft.player.isCreative() ? -9 : 0;
             return (minecraft.player.getVehicle() instanceof AbstractHorse horse && horse.isSaddled()) ? horseBar+inCreative : inCreative;
         }
+        public static int mountHpOffset() {
+            return getHeight() - 39 - yOffset() - mountHpH;
+        }
     }
 
     public static class NeoForge {
@@ -81,10 +84,17 @@ public class CommonHudModifier {
             mountHpH_na = 9,  // Mount HP Y offset without Armor
             fullscreenOffset = 1; // Fullscreen accountability because Forge is weird
 
-        public static int yOffset() { // Account for horse bar and Creative, Fabric doesn't need to account for fullscreen
-            int inCreative = minecraft.player.isCreative() ? -9 : 0,
-                horseBarOffset = minecraft.player.getVehicle() instanceof AbstractHorse horse && horse.isSaddled() ? horseBar+inCreative : inCreative;
-            return horseBarOffset-fullscreenOffset;
+        private static boolean hasSaddle() {
+            return minecraft.player.getVehicle() instanceof AbstractHorse horse && horse.isSaddled();
+        }
+        public static int yOffset() {
+            int horseBarOffset = hasSaddle() ? horseBar : 0,
+                inCreative = (minecraft.player.isCreative() && hasSaddle()) ? -9 : 0;
+            return horseBarOffset + inCreative - fullscreenOffset;
+        }
+        public static int mountHpOffset() {
+            int creativeNoSaddleFix = (minecraft.player.isCreative() && !hasSaddle()) ? horseBar + 2 : 0;
+            return -mountHpH - yOffset() + creativeNoSaddleFix;
         }
     }
 }
