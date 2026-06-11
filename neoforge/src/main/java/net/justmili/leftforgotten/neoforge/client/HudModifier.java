@@ -40,7 +40,7 @@ public class HudModifier {
         DeltaTracker partTick = event.getPartialTick();
 
         if (player.level().dimension().equals(LFResources.Levels.ALPHA_MINECRAFT) && !minecarft.options.hideGui) {
-            
+
             // Food disable
             if (id.equals(VanillaGuiLayers.FOOD_LEVEL)) event.setCanceled(true);
             // Experience disable
@@ -90,18 +90,14 @@ public class HudModifier {
             // Mount HP move down, account for AbstractHorse jump bar when saddled and Armor
             if (id.equals(VanillaGuiLayers.VEHICLE_HEALTH)) {
                 event.setCanceled(true);
+                if (player.isCreative()) return; // Doesn't render in Creative
 
-                if (player.isCreative()) {
-                    // In creative, so no armor but still need to account for mount health and jump bar
-                    render(graphics, overlay, partTick, -mountHpW, mountHpOffset());
+                if (player.getArmorValue() > 0) {
+                    // Armor on
+                    render(graphics, overlay, partTick, -mountHpW, -mountHpH-yOffset());
                 } else {
-                    if (player.getArmorValue() > 0) {
-                        // Armor on
-                        render(graphics, overlay, partTick, -mountHpW, -mountHpH - yOffset());
-                    } else {
-                        // Armor off
-                        render(graphics, overlay, partTick, -mountHpW, -mountHpH - yOffset() + mountHpH_na);
-                    }
+                    // Armor off
+                    render(graphics, overlay, partTick, -mountHpW, -mountHpH-yOffset()+mountHpH_na);
                 }
             }
         }

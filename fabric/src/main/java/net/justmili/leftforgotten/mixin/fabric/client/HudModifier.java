@@ -39,12 +39,14 @@ public abstract class HudModifier {
     // Draw identifier for renderPlayerHealth's redirectBlit profiler section
     @Unique
     private Stack<String> currentProfiler = new Stack<>();
+
     @WrapOperation(method = "renderPlayerHealth(Lnet/minecraft/client/gui/GuiGraphics;)V", at = @At(value = "INVOKE",
         target = "Lnet/minecraft/util/profiling/ProfilerFiller;push(Ljava/lang/String;)V"))
     private void logProfilePushes(ProfilerFiller filler, String name, Operation<Void> original) {
         currentProfiler.push(name);
         original.call(filler, name);
     }
+
     @WrapOperation(method = "renderPlayerHealth(Lnet/minecraft/client/gui/GuiGraphics;)V", at = @At(value = "INVOKE",
         target = "Lnet/minecraft/util/profiling/ProfilerFiller;popPush(Ljava/lang/String;)V"))
     private void logProfilePopPushes(ProfilerFiller filler, String name, Operation<Void> original) {
@@ -52,6 +54,7 @@ public abstract class HudModifier {
         currentProfiler.push(name);
         original.call(filler, name);
     }
+
     @WrapOperation(method = "renderPlayerHealth(Lnet/minecraft/client/gui/GuiGraphics;)V", at = @At(value = "INVOKE",
         target = "Lnet/minecraft/util/profiling/ProfilerFiller;pop()V"))
     private void logProfilePops(ProfilerFiller filler, Operation<Void> original) {
@@ -120,16 +123,12 @@ public abstract class HudModifier {
     // Mount HP move, account for AbstractHorse jump bar when saddled and Armor
     @ModifyVariable(method = "renderVehicleHealth", at = @At("STORE"), ordinal = 2)
     private int moveMountHealthY(int y) {
-        if (CommonVersionOverlay.notInAlpha(minecraft)) return y;
+        if (CommonVersionOverlay.notInAlpha(minecraft) || minecraft.player.isCreative()) return y;
 
-        if (minecraft.player.isCreative()) {
+        if (minecraft.player.getArmorValue() > 0) {
             return mountHpOffset();
         } else {
-            if (minecraft.player.getArmorValue() > 0) {
-                return mountHpOffset();
-            } else {
-                return mountHpOffset() + mountHpH_na + mountHpH;
-            }
+            return mountHpOffset()+mountHpH_na+mountHpH;
         }
     }
 }
