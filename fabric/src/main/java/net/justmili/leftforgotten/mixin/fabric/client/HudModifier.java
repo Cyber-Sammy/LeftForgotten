@@ -110,16 +110,12 @@ public abstract class HudModifier {
     // Mount HP move, account for AbstractHorse jump bar when saddled and Armor
     @ModifyVariable(method = "renderVehicleHealth", at = @At("STORE"), ordinal = 2)
     private int moveMountHealthY(int y) {
-        if (CommonVersionOverlay.notInAlpha(minecraft)) return y;
+        if (CommonVersionOverlay.notInAlpha(minecraft) || minecraft.player.isCreative()) return y;
 
-        if (minecraft.player.isCreative()) {
+        if (minecraft.player.getArmorValue() > 0) {
             return mountHpOffset();
         } else {
-            if (minecraft.player.getArmorValue() > 0) {
-                return mountHpOffset();
-            } else {
-                return mountHpOffset() + mountHpH_na + mountHpH;
-            }
+            return mountHpOffset()+mountHpH_na+mountHpH;
         }
     }
 }

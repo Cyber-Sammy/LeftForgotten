@@ -87,14 +87,12 @@ public class HudModifier {
             // Mount HP move down, account for AbstractHorse jump bar when saddled and Armor
             if (id.equals(VanillaGuiOverlay.MOUNT_HEALTH.id())) {
                 event.setCanceled(true);
-                if (player.isCreative()) {
-                    overlay.render((ForgeGui) minecraft.gui, graphics, partTick, getWidth()-mountHpW, getHeight()+mountHpOffset());
+                if (player.isCreative()) return;
+
+                if (player.getArmorValue() > 0) {
+                    overlay.render((ForgeGui) minecraft.gui, graphics, partTick, getWidth()-mountHpW, getHeight()-mountHpH-yOffset());
                 } else {
-                    if (player.getArmorValue() > 0) {
-                        overlay.render((ForgeGui) minecraft.gui, graphics, partTick, getWidth()-mountHpW, getHeight()-mountHpH-yOffset());
-                    } else {
-                        overlay.render((ForgeGui) minecraft.gui, graphics, partTick, getWidth()-mountHpW, getHeight()-mountHpH-yOffset()+mountHpH_na);
-                    }
+                    overlay.render((ForgeGui) minecraft.gui, graphics, partTick, getWidth()-mountHpW, getHeight()-mountHpH-yOffset()+mountHpH_na);
                 }
             }
         }
