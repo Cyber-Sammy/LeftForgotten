@@ -1,0 +1,12 @@
+{
+  "type": "minecraft:smelting",
+  "category": "misc",
+  "cookingtime": 200,
+  "experience": 0.1,
+  "ingredient": {
+    "item": "left_forgotten:coal_ore"
+  },
+  "result": {
+    "id": "minecraft:coal"
+  }
+}

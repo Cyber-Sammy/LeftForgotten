@@ -1,0 +1,10 @@
+{
+  "type": "minecraft:stonecutting",
+  "ingredient": {
+    "item": "left_forgotten:cobblestone"
+  },
+  "result": {
+    "count": 1,
+    "id": "left_forgotten:cobblestone_wall"
+  }
+}

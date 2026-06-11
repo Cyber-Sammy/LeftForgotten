@@ -1,0 +1,10 @@
+{
+  "type": "minecraft:stonecutting",
+  "ingredient": {
+    "item": "left_forgotten:bricks"
+  },
+  "result": {
+    "count": 1,
+    "id": "left_forgotten:brick_wall"
+  }
+}
