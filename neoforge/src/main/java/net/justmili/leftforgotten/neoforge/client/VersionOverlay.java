@@ -7,20 +7,12 @@ import net.neoforged.api.distmarker.Dist;
 import net.neoforged.bus.api.EventPriority;
 import net.neoforged.bus.api.SubscribeEvent;
 import net.neoforged.fml.common.EventBusSubscriber;
-import net.neoforged.neoforge.client.event.ClientTickEvent;
 import net.neoforged.neoforge.client.event.RenderGuiEvent;
 
 import static net.justmili.leftforgotten.core.util.ClientUtil.minecraft;
 
 @EventBusSubscriber(modid = LeftForgotten.MOD_ID, value = Dist.CLIENT)
 public class VersionOverlay {
-
-    @SubscribeEvent(priority = EventPriority.HIGHEST)
-    public static void onClientTick(ClientTickEvent.Post event) {
-        if (minecraft.getDebugOverlay().showDebugScreen()) return;
-
-        CommonVersionOverlay.onClientTick(minecraft);
-    }
 
     @SubscribeEvent(priority = EventPriority.NORMAL)
     public static void render(RenderGuiEvent.Post event) {

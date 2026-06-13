@@ -24,7 +24,7 @@ loom {
 
 architectury {
     platformSetupLoomIde()
-    forge()
+    neoForge()
 }
 
 configurations {
