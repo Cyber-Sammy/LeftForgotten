@@ -25,11 +25,6 @@ public class YellowFlower extends FlowerBlock {
     }
 
     //@Override
-    public int getEffectDuration() {
-        return 7;
-    }
-
-    //@Override
     //public int getFlammability(BlockState state, BlockGetter world, BlockPos pos, Direction face) {
     //    return 100;
     //}

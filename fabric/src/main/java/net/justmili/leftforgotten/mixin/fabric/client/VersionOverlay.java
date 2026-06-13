@@ -1,5 +1,6 @@
 package net.justmili.leftforgotten.mixin.fabric.client;
 
+import net.justmili.leftforgotten.client.CommonClient;
 import net.justmili.leftforgotten.client.CommonVersionOverlay;
 import net.minecraft.client.DeltaTracker;
 import net.minecraft.client.Minecraft;
@@ -12,18 +13,17 @@ import org.spongepowered.asm.mixin.injection.At;
 import org.spongepowered.asm.mixin.injection.Inject;
 import org.spongepowered.asm.mixin.injection.callback.CallbackInfo;
 
+import static net.justmili.leftforgotten.core.util.ClientUtil.isDebugScreenOn;
+import static net.justmili.leftforgotten.core.util.ClientUtil.minecraft;
+
 @Mixin(Gui.class)
 public abstract class VersionOverlay {
 
-    @Shadow
-    @Final
-    private Minecraft minecraft;
-
     @Inject(at = @At("TAIL"), method = "render")
     public void render(GuiGraphics graphics, DeltaTracker deltaTracker, CallbackInfo ci) {
-        if (!CommonVersionOverlay.inAlpha(minecraft)) return;
-        this.minecraft.getProfiler().push("demo");
+        if (isDebugScreenOn()) return;
+        if (!CommonClient.inAlpha()) return;
 
-        CommonVersionOverlay.render(this.minecraft, graphics);
+        CommonVersionOverlay.render(minecraft, graphics);
     }
 }

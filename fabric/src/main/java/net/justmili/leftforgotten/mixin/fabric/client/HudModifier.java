@@ -2,7 +2,7 @@ package net.justmili.leftforgotten.mixin.fabric.client;
 
 import com.llamalad7.mixinextras.injector.wrapoperation.Operation;
 import com.llamalad7.mixinextras.injector.wrapoperation.WrapOperation;
-import net.justmili.leftforgotten.client.CommonVersionOverlay;
+import net.justmili.leftforgotten.client.CommonClient;
 import net.minecraft.client.Minecraft;
 import net.minecraft.client.gui.Gui;
 import net.minecraft.client.gui.GuiGraphics;
@@ -10,7 +10,6 @@ import net.minecraft.client.renderer.texture.TextureAtlasSprite;
 import net.minecraft.resources.ResourceLocation;
 import net.minecraft.util.profiling.ProfilerFiller;
 import net.minecraft.world.entity.LivingEntity;
-import org.spongepowered.asm.mixin.Final;
 import org.spongepowered.asm.mixin.Mixin;
 import org.spongepowered.asm.mixin.Shadow;
 import org.spongepowered.asm.mixin.Unique;
@@ -21,17 +20,14 @@ import org.spongepowered.asm.mixin.injection.callback.CallbackInfo;
 
 import java.util.Stack;
 
+import static net.justmili.leftforgotten.client.CommonClient.getPlayer;
+import static net.justmili.leftforgotten.client.CommonClient.getWidth;
 import static net.justmili.leftforgotten.client.CommonHudModifier.Common.mirrorX;
 import static net.justmili.leftforgotten.client.CommonHudModifier.Common.renderFlippedSprite;
 import static net.justmili.leftforgotten.client.CommonHudModifier.Fabric.*;
-import static net.justmili.leftforgotten.client.CommonHudModifier.getWidth;
 
 @Mixin(value = Gui.class, priority = 2500)
 public abstract class HudModifier {
-
-    @Shadow
-    @Final
-    private Minecraft minecraft;
 
     @Shadow
     protected abstract int getVehicleMaxHearts(LivingEntity vehicle);
@@ -65,7 +61,7 @@ public abstract class HudModifier {
     // Player HP - move down, account for AbstractHorse jump bar when saddled
     @ModifyVariable(method = "renderHearts", at = @At("HEAD"), ordinal = 1, argsOnly = true)
     private int moveHeartsDown(int y) {
-        if (CommonVersionOverlay.notInAlpha(minecraft)) return y;
+        if (CommonClient.notInAlpha()) return y;
 
         return y+playerHpH-yOffset();
     }
@@ -74,7 +70,7 @@ public abstract class HudModifier {
     @WrapOperation(method = "renderPlayerHealth(Lnet/minecraft/client/gui/GuiGraphics;)V", at = @At(value = "INVOKE",
         target = "Lnet/minecraft/client/gui/Gui;getVehicleMaxHearts(Lnet/minecraft/world/entity/LivingEntity;)I"))
     private int disableFoodBar(Gui gui, LivingEntity vehicle, Operation<Integer> original) {
-        if (CommonVersionOverlay.inAlpha(minecraft)) return -1;
+        if (CommonClient.inAlpha()) return -1;
 
         return this.getVehicleMaxHearts(vehicle);
     }
@@ -83,7 +79,7 @@ public abstract class HudModifier {
     @WrapOperation(method = "renderArmor(Lnet/minecraft/client/gui/GuiGraphics;Lnet/minecraft/world/entity/player/Player;IIII)V", at = @At(value = "INVOKE",
         target = "Lnet/minecraft/client/gui/GuiGraphics;blitSprite(Lnet/minecraft/resources/ResourceLocation;IIII)V"))
     private static void redirectArmorBlit(GuiGraphics graphics, ResourceLocation sprite, int x, int y, int width, int height, Operation<Void> original) {
-        if (CommonVersionOverlay.notInAlpha(Minecraft.getInstance())) {
+        if (CommonClient.notInAlpha()) {
             original.call(graphics, sprite, x, y, width, height);
             return;
         }
@@ -99,7 +95,7 @@ public abstract class HudModifier {
     @WrapOperation(method = "renderPlayerHealth(Lnet/minecraft/client/gui/GuiGraphics;)V", at = @At(value = "INVOKE",
         target = "Lnet/minecraft/client/gui/GuiGraphics;blitSprite(Lnet/minecraft/resources/ResourceLocation;IIII)V"))
     private void redirectAirBlit(GuiGraphics graphics, ResourceLocation sprite, int x, int y, int width, int height, Operation<Void> original) {
-        if (CommonVersionOverlay.notInAlpha(minecraft)) {
+        if (CommonClient.notInAlpha()) {
             original.call(graphics, sprite, x, y, width, height);
             return;
         }
@@ -117,15 +113,15 @@ public abstract class HudModifier {
     // EXP bar disable
     @Inject(at = @At("HEAD"), method = "renderExperienceBar", cancellable = true)
     private void renderExperienceBar(CallbackInfo ci) {
-        if (CommonVersionOverlay.inAlpha(minecraft)) ci.cancel();
+        if (CommonClient.inAlpha()) ci.cancel();
     }
 
     // Mount HP move, account for AbstractHorse jump bar when saddled and Armor
     @ModifyVariable(method = "renderVehicleHealth", at = @At("STORE"), ordinal = 2)
     private int moveMountHealthY(int y) {
-        if (CommonVersionOverlay.notInAlpha(minecraft) || minecraft.player.isCreative()) return y;
+        if (CommonClient.notInAlpha() || getPlayer().isCreative()) return y;
 
-        if (minecraft.player.getArmorValue() > 0) {
+        if (getPlayer().getArmorValue() > 0) {
             return mountHpOffset();
         } else {
             return mountHpOffset()+mountHpH_na+mountHpH;

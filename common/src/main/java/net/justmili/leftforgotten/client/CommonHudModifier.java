@@ -3,7 +3,6 @@ package net.justmili.leftforgotten.client;
 import com.mojang.blaze3d.systems.RenderSystem;
 import com.mojang.blaze3d.vertex.*;
 import net.justmili.leftforgotten.core.util.ResourceUtil;
-import net.minecraft.client.Minecraft;
 import net.minecraft.client.gui.GuiGraphics;
 import net.minecraft.client.renderer.GameRenderer;
 import net.minecraft.client.renderer.texture.TextureAtlasSprite;
@@ -11,15 +10,9 @@ import net.minecraft.resources.ResourceLocation;
 import net.minecraft.world.entity.animal.horse.AbstractHorse;
 import org.joml.Matrix4f;
 
-public class CommonHudModifier {
-    private static final Minecraft minecraft = Minecraft.getInstance();
-    public static int getWidth() {
-        return minecraft.getWindow().getGuiScaledWidth();
-    }
-    public static int getHeight() {
-        return minecraft.getWindow().getGuiScaledHeight();
-    }
+import static net.justmili.leftforgotten.core.util.ClientUtil.*;
 
+public class CommonHudModifier {
     public static class Common {
         public static final ResourceLocation ARMOR_EMPTY_SPRITE = ResourceUtil.minecraftResource("hud/armor_empty");
         public static final ResourceLocation ARMOR_HALF_SPRITE = ResourceUtil.minecraftResource("hud/armor_half");
@@ -63,8 +56,8 @@ public class CommonHudModifier {
             mountHpH_na = 7;  // Mount HP Y offset without Armor
 
         public static int yOffset() { // Account for horse bar and Creative, Fabric doesn't need to account for fullscreen
-            int inCreative = minecraft.player.isCreative() ? -9 : 0;
-            return (minecraft.player.getVehicle() instanceof AbstractHorse horse && horse.isSaddled()) ? horseBar+inCreative : inCreative;
+            int inCreative = getPlayer().isCreative() ? -9 : 0;
+            return (getPlayer().getVehicle() instanceof AbstractHorse horse && horse.isSaddled()) ? horseBar+inCreative : inCreative;
         }
         public static int mountHpOffset() {
             return getHeight() - 39 - yOffset() - mountHpH;
@@ -85,11 +78,11 @@ public class CommonHudModifier {
             fullscreenOffset = 1; // Fullscreen accountability because Forge is weird
 
         private static boolean hasSaddle() {
-            return minecraft.player.getVehicle() instanceof AbstractHorse horse && horse.isSaddled();
+            return getPlayer().getVehicle() instanceof AbstractHorse horse && horse.isSaddled();
         }
         public static int yOffset() {
             int horseBarOffset = hasSaddle() ? horseBar : 0,
-                inCreative = (minecraft.player.isCreative() && hasSaddle()) ? -9 : 0;
+                inCreative = (getPlayer().isCreative() && hasSaddle()) ? -9 : 0;
             return horseBarOffset + inCreative - fullscreenOffset;
         }
     }

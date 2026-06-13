@@ -12,7 +12,6 @@ import net.minecraft.client.renderer.texture.TextureAtlasSprite;
 import net.minecraft.resources.ResourceLocation;
 import net.minecraft.tags.FluidTags;
 import net.minecraft.util.Mth;
-import net.minecraft.world.entity.player.Player;
 import net.neoforged.api.distmarker.Dist;
 import net.neoforged.bus.api.SubscribeEvent;
 import net.neoforged.fml.common.EventBusSubscriber;
@@ -21,8 +20,7 @@ import net.neoforged.neoforge.client.gui.VanillaGuiLayers;
 
 import static net.justmili.leftforgotten.client.CommonHudModifier.Common.*;
 import static net.justmili.leftforgotten.client.CommonHudModifier.NeoForge.*;
-import static net.justmili.leftforgotten.client.CommonHudModifier.getHeight;
-import static net.justmili.leftforgotten.client.CommonHudModifier.getWidth;
+import static net.justmili.leftforgotten.core.util.ClientUtil.*;
 
 @EventBusSubscriber(value = Dist.CLIENT)
 public class HudModifier {
@@ -30,16 +28,14 @@ public class HudModifier {
 
     @SubscribeEvent
     public static void onGuiOverlayPre(RenderGuiLayerEvent.Pre event) {
-        Minecraft minecarft = Minecraft.getInstance();
-        Player player = minecarft.player;
-        if (player == null) return;
+        if (getPlayer() == null) return;
 
         LayeredDraw.Layer overlay = event.getLayer();
         ResourceLocation id = event.getName();
         GuiGraphics graphics = event.getGuiGraphics();
         DeltaTracker partTick = event.getPartialTick();
 
-        if (player.level().dimension().equals(LFResources.Levels.ALPHA_MINECRAFT) && !minecarft.options.hideGui) {
+        if (inDimension(LFResources.Levels.ALPHA_MINECRAFT) && !isDebugScreenOn()) {
 
             // Food disable
             if (id.equals(VanillaGuiLayers.FOOD_LEVEL)) event.setCanceled(true);
@@ -50,9 +46,9 @@ public class HudModifier {
             if (id.equals(VanillaGuiLayers.ARMOR_LEVEL)) {
                 event.setCanceled(true);
 
-                if (player.isCreative()) return;
+                if (getPlayer().isCreative()) return;
 
-                int level = player.getArmorValue();
+                int level = getPlayer().getArmorValue();
                 for (int i = 1; level > 0 && i < 20; i += 2) {
                     ResourceLocation sprite = i < level ? ARMOR_FULL_SPRITE : i == level ? ARMOR_HALF_SPRITE : ARMOR_EMPTY_SPRITE;
                     TextureAtlasSprite atlasSprite = Minecraft.getInstance().getGuiSprites().getSprite(sprite);
@@ -71,13 +67,13 @@ public class HudModifier {
             // Air level move left and down, account for AbstractHorse jump bar when saddled
             if (id.equals(VanillaGuiLayers.AIR_LEVEL)) {
                 event.setCanceled(true);
-                int air = Math.min(player.getAirSupply(), player.getMaxAirSupply()),
-                    maxAir = player.getMaxAirSupply();
-                if (!player.isEyeInFluid(FluidTags.WATER) && air >= maxAir) return;
+                int air = Math.min(getPlayer().getAirSupply(), getPlayer().getMaxAirSupply()),
+                    maxAir = getPlayer().getMaxAirSupply();
+                if (!getPlayer().isEyeInFluid(FluidTags.WATER) && air >= maxAir) return;
 
                 int full = Mth.ceil((air-2) * 10.0 / maxAir),
                     partial = Mth.ceil(air * 10.0 / maxAir)-full,
-                    rh = minecarft.gui.rightHeight,
+                    rh = minecraft.gui.rightHeight,
                     top = getHeight()-rh-airLvlH-yOffset(),
                     barEnd = getWidth() / 2+51;
 
@@ -90,9 +86,9 @@ public class HudModifier {
             // Mount HP move down, account for AbstractHorse jump bar when saddled and Armor
             if (id.equals(VanillaGuiLayers.VEHICLE_HEALTH)) {
                 event.setCanceled(true);
-                if (player.isCreative()) return; // Doesn't render in Creative
+                if (getPlayer().isCreative()) return; // Doesn't render in Creative
 
-                if (player.getArmorValue() > 0) {
+                if (getPlayer().getArmorValue() > 0) {
                     // Armor on
                     render(graphics, overlay, partTick, -mountHpW, -mountHpH-yOffset());
                 } else {
@@ -104,7 +100,7 @@ public class HudModifier {
 
         // Get rid of NT's version overlay and stamina bar when in dimension
         if (Platform.isModLoaded("nostalgic_tweaks")) {
-            if (player.level().dimension().equals(LFResources.Levels.ALPHA_MINECRAFT)) {
+            if (getPlayer().level().dimension().equals(LFResources.Levels.ALPHA_MINECRAFT)) {
                 String ns = id.getNamespace(),
                     path = id.getPath().toLowerCase();
                 if (!("nostalgic_tweaks".equals(ns))) return; // "Is it from NT?"

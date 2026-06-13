@@ -19,12 +19,9 @@ import java.util.List;
 
 public class RedFlower extends FlowerBlock {
     public RedFlower() {
-        super(MobEffects.NIGHT_VISION, 100, Properties.of().mapColor(MapColor.COLOR_RED).sound(SoundType.GRASS).instabreak().noCollission().offsetType(OffsetType.XZ).pushReaction(PushReaction.DESTROY));
-    }
-
-    //@Override
-    public int getEffectDuration() {
-        return 100;
+        super(MobEffects.NIGHT_VISION, 100,
+            Properties.of().mapColor(MapColor.COLOR_RED).sound(SoundType.GRASS).instabreak()
+                .noCollission().offsetType(OffsetType.XZ).pushReaction(PushReaction.DESTROY));
     }
 
     //@Override
