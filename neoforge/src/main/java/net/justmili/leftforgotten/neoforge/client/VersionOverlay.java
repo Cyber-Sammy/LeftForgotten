@@ -3,7 +3,6 @@ package net.justmili.leftforgotten.neoforge.client;
 import net.justmili.leftforgotten.LeftForgotten;
 import net.justmili.leftforgotten.client.CommonClient;
 import net.justmili.leftforgotten.client.CommonVersionOverlay;
-import net.minecraft.client.Minecraft;
 import net.neoforged.api.distmarker.Dist;
 import net.neoforged.bus.api.EventPriority;
 import net.neoforged.bus.api.SubscribeEvent;

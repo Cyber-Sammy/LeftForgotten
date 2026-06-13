@@ -20,11 +20,11 @@ import org.spongepowered.asm.mixin.injection.callback.CallbackInfo;
 
 import java.util.Stack;
 
-import static net.justmili.leftforgotten.client.CommonClient.getPlayer;
-import static net.justmili.leftforgotten.client.CommonClient.getWidth;
 import static net.justmili.leftforgotten.client.CommonHudModifier.Common.mirrorX;
 import static net.justmili.leftforgotten.client.CommonHudModifier.Common.renderFlippedSprite;
 import static net.justmili.leftforgotten.client.CommonHudModifier.Fabric.*;
+import static net.justmili.leftforgotten.core.util.ClientUtil.getPlayer;
+import static net.justmili.leftforgotten.core.util.ClientUtil.getWidth;
 
 @Mixin(value = Gui.class, priority = 2500)
 public abstract class HudModifier {

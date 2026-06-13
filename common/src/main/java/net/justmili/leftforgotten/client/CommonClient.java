@@ -7,9 +7,7 @@ import net.justmili.leftforgotten.LeftForgotten;
 import net.justmili.leftforgotten.client.dimension.AlphaMinecraft;
 import net.justmili.leftforgotten.mixin.accessors.DimSpecialEffectsAccessor;
 import net.justmili.leftforgotten.registries.LFResources;
-import net.minecraft.client.Minecraft;
 import net.minecraft.client.resources.model.ModelResourceLocation;
-import net.minecraft.world.entity.player.Player;
 
 import static net.justmili.leftforgotten.core.util.ClientUtil.*;
 

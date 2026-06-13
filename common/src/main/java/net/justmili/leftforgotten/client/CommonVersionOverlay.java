@@ -9,8 +9,7 @@ import net.minecraft.network.chat.Component;
 
 import java.util.Random;
 
-import static net.justmili.leftforgotten.core.util.ClientUtil.getHeight;
-import static net.justmili.leftforgotten.core.util.ClientUtil.getWidth;
+import static net.justmili.leftforgotten.core.util.ClientUtil.*;
 
 @Environment(EnvType.CLIENT)
 public class CommonVersionOverlay {
@@ -56,7 +55,7 @@ public class CommonVersionOverlay {
     public static final Random random = new Random();
 
     public static void onClientTick(Minecraft minecraft) {
-        if (minecraft.level == null || minecraft.level.dimension() != LFResources.Levels.ALPHA_MINECRAFT) {
+        if (getLevel() == null || !inDimension(LFResources.Levels.ALPHA_MINECRAFT)) {
             currentText = BASE_TEXT;
             flashTicks = 0;
             return;
@@ -77,20 +76,18 @@ public class CommonVersionOverlay {
     }
 
     public static void render(Minecraft minecraft, GuiGraphics graphics) {
-        float guiScaleFactor = (float) getHeight() / getWidth(),
-            baseFontHeight = minecraft.font.lineHeight,
-            userScale = (float) Math.round(baseFontHeight * minecraft.getWindow().getGuiScale()) / baseFontHeight;
+        float targetHeight = 8f,
+            userScale = (float) Math.round(targetHeight / minecraft.font.lineHeight);
 
-        int x = 6,
-            y = 6,
+        int x = 2,
+            y = 2,
             textColor = 0xFFFFFF,
             textShadowColor = 0xFF3F3F3F,
             drawX = Math.round(x / userScale),
             drawY = Math.round(y / userScale);
 
         graphics.pose().pushPose();
-        graphics.pose().scale(1f / guiScaleFactor, 1f / guiScaleFactor, 1f);
-        graphics.pose().scale(userScale, userScale, 1f);
+        graphics.pose().scale((int) userScale, (int) userScale, 1f);
 
         graphics.drawString(minecraft.font, Component.literal(currentText), drawX+1, drawY+1, textShadowColor, false);
         graphics.drawString(minecraft.font, Component.literal(currentText), drawX, drawY, textColor, false);

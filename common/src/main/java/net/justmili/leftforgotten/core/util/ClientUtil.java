@@ -4,13 +4,9 @@ import com.mojang.blaze3d.platform.Window;
 import net.fabricmc.api.EnvType;
 import net.fabricmc.api.Environment;
 import net.minecraft.client.Minecraft;
-import net.minecraft.client.resources.model.BakedModel;
 import net.minecraft.resources.ResourceKey;
-import net.minecraft.server.MinecraftServer;
 import net.minecraft.world.entity.player.Player;
 import net.minecraft.world.level.Level;
-import net.minecraft.world.level.block.state.BlockState;
-import net.minecraft.world.level.dimension.DimensionType;
 
 @Environment(EnvType.CLIENT)
 public class ClientUtil {
@@ -35,11 +31,11 @@ public class ClientUtil {
         return minecraft.player;
     }
     public static Level getLevel() {
-        return getPlayer().level();
+        return minecraft.level;
     }
 
     public static ResourceKey<Level> getDimension() {
-        return getLevel().dimension();
+        return getPlayer().level().dimension();
     }
 
     public static boolean inDimension(ResourceKey<Level> dimension) {
