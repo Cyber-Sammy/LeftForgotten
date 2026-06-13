@@ -1,28 +1,23 @@
 package net.justmili.leftforgotten.mixin.fabric.client;
 
+import net.justmili.leftforgotten.client.CommonClient;
 import net.justmili.leftforgotten.client.CommonVersionOverlay;
-import net.minecraft.client.Minecraft;
 import net.minecraft.client.gui.Gui;
 import net.minecraft.client.gui.GuiGraphics;
-import org.spongepowered.asm.mixin.Final;
 import org.spongepowered.asm.mixin.Mixin;
-import org.spongepowered.asm.mixin.Shadow;
 import org.spongepowered.asm.mixin.injection.At;
 import org.spongepowered.asm.mixin.injection.Inject;
 import org.spongepowered.asm.mixin.injection.callback.CallbackInfo;
 
+import static net.justmili.leftforgotten.core.util.ClientUtil.minecraft;
+
 @Mixin(Gui.class)
 public abstract class VersionOverlay {
 
-    @Shadow
-    @Final
-    private Minecraft minecraft;
-
     @Inject(at = @At("TAIL"), method = "render")
     public void render(GuiGraphics graphics, float partialTick, CallbackInfo ci) {
-        if (CommonVersionOverlay.notInAlpha(minecraft)) return;
-        this.minecraft.getProfiler().push("demo");
+        if (CommonClient.notInAlpha()) return;
 
-        CommonVersionOverlay.render(this.minecraft, graphics);
+        CommonVersionOverlay.render(minecraft, graphics);
     }
 }

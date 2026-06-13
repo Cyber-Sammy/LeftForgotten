@@ -3,23 +3,16 @@ package net.justmili.leftforgotten.client;
 import com.mojang.blaze3d.systems.RenderSystem;
 import com.mojang.blaze3d.vertex.*;
 import net.justmili.leftforgotten.core.util.ResourceUtil;
-import net.minecraft.client.Minecraft;
 import net.minecraft.client.gui.GuiGraphics;
 import net.minecraft.client.renderer.GameRenderer;
 import net.minecraft.resources.ResourceLocation;
 import net.minecraft.world.entity.animal.horse.AbstractHorse;
 import org.joml.Matrix4f;
 
-public class CommonHudModifier {
-    private static final Minecraft minecraft = Minecraft.getInstance();
-    public static final ResourceLocation GUI_ICONS_LOCATION = ResourceUtil.asPath("textures/gui/icons.png");
+import static net.justmili.leftforgotten.core.util.ClientUtil.*;
 
-    public static int getWidth() {
-        return minecraft.getWindow().getGuiScaledWidth();
-    }
-    public static int getHeight() {
-        return minecraft.getWindow().getGuiScaledHeight();
-    }
+public class CommonHudModifier {
+    public static final ResourceLocation GUI_ICONS_LOCATION = ResourceUtil.asPath("textures/gui/icons.png");
 
     public static class Common {
         public static int mirrorX(int x) {
@@ -61,8 +54,8 @@ public class CommonHudModifier {
             mountHpH_na = 7;  // Mount HP Y offset without Armor
 
         public static int yOffset() {
-            int inCreative = minecraft.player.isCreative() ? -9 : 0;
-            return (minecraft.player.getVehicle() instanceof AbstractHorse horse && horse.isSaddled()) ? horseBar+inCreative : inCreative;
+            int inCreative = getPlayer().isCreative() ? -9 : 0;
+            return (getPlayer().getVehicle() instanceof AbstractHorse horse && horse.isSaddled()) ? horseBar+inCreative : inCreative;
         }
         public static int mountHpOffset() {
             return getHeight()-39-yOffset()-mountHpH;
@@ -83,11 +76,11 @@ public class CommonHudModifier {
             fullscreenOffset = 1;
 
         private static boolean hasSaddle() {
-            return minecraft.player.getVehicle() instanceof AbstractHorse horse && horse.isSaddled();
+            return getPlayer().getVehicle() instanceof AbstractHorse horse && horse.isSaddled();
         }
         public static int yOffset() {
             int horseBarOffset = hasSaddle() ? horseBar : 0,
-                inCreative = (minecraft.player.isCreative() && hasSaddle()) ? -9 : 0;
+                inCreative = (getPlayer().isCreative() && hasSaddle()) ? -9 : 0;
             return horseBarOffset+inCreative-fullscreenOffset;
         }
     }

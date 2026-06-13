@@ -3,12 +3,10 @@ package net.justmili.leftforgotten.forge.client;
 import dev.architectury.platform.Platform;
 import mod.adrenix.nostalgic.tweak.config.CandyTweak;
 import net.justmili.leftforgotten.registries.LFResources;
-import net.minecraft.client.Minecraft;
 import net.minecraft.client.gui.GuiGraphics;
 import net.minecraft.resources.ResourceLocation;
 import net.minecraft.tags.FluidTags;
 import net.minecraft.util.Mth;
-import net.minecraft.world.entity.player.Player;
 import net.minecraftforge.api.distmarker.Dist;
 import net.minecraftforge.client.event.RenderGuiOverlayEvent;
 import net.minecraftforge.client.gui.overlay.ForgeGui;
@@ -21,16 +19,15 @@ import net.minecraftforge.fml.common.Mod;
 import static net.justmili.leftforgotten.client.CommonHudModifier.Common.mirrorX;
 import static net.justmili.leftforgotten.client.CommonHudModifier.Common.renderFlippedBlit;
 import static net.justmili.leftforgotten.client.CommonHudModifier.Forge.*;
-import static net.justmili.leftforgotten.client.CommonHudModifier.*;
+import static net.justmili.leftforgotten.client.CommonHudModifier.GUI_ICONS_LOCATION;
+import static net.justmili.leftforgotten.core.util.ClientUtil.*;
 
 @Mod.EventBusSubscriber(value = Dist.CLIENT)
 public class HudModifier {
 
     @SubscribeEvent
     public static void onGuiOverlayPre(RenderGuiOverlayEvent.Pre event) {
-        Minecraft minecraft = Minecraft.getInstance();
-        Player player = minecraft.player;
-        if (player == null) return;
+        if (getPlayer() == null) return;
 
         NamedGuiOverlay getOverlay = event.getOverlay();
         IGuiOverlay overlay = getOverlay.overlay();
@@ -38,7 +35,8 @@ public class HudModifier {
         GuiGraphics graphics = event.getGuiGraphics();
         float partTick = event.getPartialTick();
 
-        if (player.level().dimension().equals(LFResources.Levels.ALPHA_MINECRAFT) && !minecraft.options.hideGui && ((ForgeGui) minecraft.gui).shouldDrawSurvivalElements()) {
+        if (inDimension(LFResources.Levels.ALPHA_MINECRAFT) && !isDebugScreenOn() && ((ForgeGui) minecraft.gui).shouldDrawSurvivalElements()) {
+
             // Food disable
             if (id.equals(VanillaGuiOverlay.FOOD_LEVEL.id())) event.setCanceled(true);
             // Experience disable
@@ -48,9 +46,9 @@ public class HudModifier {
             if (id.equals(VanillaGuiOverlay.ARMOR_LEVEL.id())) {
                 event.setCanceled(true);
 
-                if (player.isCreative()) return;
+                if (getPlayer().isCreative()) return;
 
-                int level = player.getArmorValue();
+                int level = getPlayer().getArmorValue();
                 for (int i = 1; level > 0 && i < 20; i += 2) {
                     int uOffset = i < level ? 34 : i == level ? 25 : 16,
                         origX = getWidth() / 2-91+((i-1) / 2) * 8,
@@ -68,9 +66,9 @@ public class HudModifier {
             // Air level move left and down, account for AbstractHorse jump bar when saddled
             if (id.equals(VanillaGuiOverlay.AIR_LEVEL.id())) {
                 event.setCanceled(true);
-                int air = Math.min(player.getAirSupply(), player.getMaxAirSupply()),
-                    maxAir = player.getMaxAirSupply();
-                if (!player.isEyeInFluid(FluidTags.WATER) && air >= maxAir) return;
+                int air = Math.min(getPlayer().getAirSupply(), getPlayer().getMaxAirSupply()),
+                    maxAir = getPlayer().getMaxAirSupply();
+                if (!getPlayer().isEyeInFluid(FluidTags.WATER) && air >= maxAir) return;
 
                 int full = Mth.ceil((air-2) * 10.0 / maxAir),
                     partial = Mth.ceil(air * 10.0 / maxAir)-full,
@@ -87,11 +85,13 @@ public class HudModifier {
             // Mount HP move down, account for AbstractHorse jump bar when saddled and Armor
             if (id.equals(VanillaGuiOverlay.MOUNT_HEALTH.id())) {
                 event.setCanceled(true);
-                if (player.isCreative()) return;
+                if (getPlayer().isCreative()) return; // Doesn't render in Creative
 
-                if (player.getArmorValue() > 0) {
+                if (getPlayer().getArmorValue() > 0) {
+                    // Armor on
                     overlay.render((ForgeGui) minecraft.gui, graphics, partTick, getWidth()-mountHpW, getHeight()-mountHpH-yOffset());
                 } else {
+                    // Armor off
                     overlay.render((ForgeGui) minecraft.gui, graphics, partTick, getWidth()-mountHpW, getHeight()-mountHpH-yOffset()+mountHpH_na);
                 }
             }
@@ -99,11 +99,12 @@ public class HudModifier {
 
         // Get rid of NT's version overlay and stamina bar when in dimension
         if (Platform.isModLoaded("nostalgic_tweaks")) {
-            if (player.level().dimension().equals(LFResources.Levels.ALPHA_MINECRAFT)) {
+            if (getPlayer().level().dimension().equals(LFResources.Levels.ALPHA_MINECRAFT)) {
                 String ns = id.getNamespace(),
                     path = id.getPath().toLowerCase();
                 if (!("nostalgic_tweaks".equals(ns))) return;
                 if (path.contains("stamina")) event.setCanceled(true);
+                // Get rid of NT's version overlay
                 if (CandyTweak.OLD_VERSION_OVERLAY.get()) CandyTweak.OLD_VERSION_OVERLAY.setCacheAndDiskThenSave(false);
             } else {
                 if (!CandyTweak.OLD_VERSION_OVERLAY.get()) CandyTweak.OLD_VERSION_OVERLAY.setCacheAndDiskThenSave(true);

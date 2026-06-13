@@ -2,14 +2,12 @@ package net.justmili.leftforgotten.mixin.fabric.client;
 
 import com.llamalad7.mixinextras.injector.wrapoperation.Operation;
 import com.llamalad7.mixinextras.injector.wrapoperation.WrapOperation;
-import net.justmili.leftforgotten.client.CommonVersionOverlay;
-import net.minecraft.client.Minecraft;
+import net.justmili.leftforgotten.client.CommonClient;
 import net.minecraft.client.gui.Gui;
 import net.minecraft.client.gui.GuiGraphics;
 import net.minecraft.resources.ResourceLocation;
 import net.minecraft.util.profiling.ProfilerFiller;
 import net.minecraft.world.entity.LivingEntity;
-import org.spongepowered.asm.mixin.Final;
 import org.spongepowered.asm.mixin.Mixin;
 import org.spongepowered.asm.mixin.Shadow;
 import org.spongepowered.asm.mixin.Unique;
@@ -22,15 +20,11 @@ import java.util.Stack;
 
 import static net.justmili.leftforgotten.client.CommonHudModifier.Common.renderFlippedBlit;
 import static net.justmili.leftforgotten.client.CommonHudModifier.Fabric.*;
+import static net.justmili.leftforgotten.core.util.ClientUtil.getPlayer;
+import static net.justmili.leftforgotten.core.util.ClientUtil.getWidth;
 
 @Mixin(value = Gui.class, priority = 2500)
 public abstract class HudModifier {
-
-    @Shadow
-    @Final
-    private Minecraft minecraft;
-    @Shadow
-    private int screenWidth, screenHeight;
 
     @Shadow
     protected abstract int getVehicleMaxHearts(LivingEntity vehicle);
@@ -61,7 +55,7 @@ public abstract class HudModifier {
     // Player HP - move down, account for AbstractHorse jump bar when saddled
     @ModifyVariable(method = "renderHearts", at = @At("HEAD"), ordinal = 1, argsOnly = true)
     private int moveHeartsDown(int y) {
-        if (!CommonVersionOverlay.inAlpha(minecraft)) return y;
+        if (!CommonClient.inAlpha()) return y;
 
         return y+playerHpH-yOffset();
     }
@@ -70,7 +64,7 @@ public abstract class HudModifier {
     @WrapOperation(method = "renderPlayerHealth(Lnet/minecraft/client/gui/GuiGraphics;)V", at = @At(value = "INVOKE",
         target = "Lnet/minecraft/client/gui/Gui;getVehicleMaxHearts(Lnet/minecraft/world/entity/LivingEntity;)I"))
     private int disableFoodBar(Gui gui, LivingEntity vehicle, Operation<Integer> original) {
-        if (CommonVersionOverlay.inAlpha(minecraft)) return -1;
+        if (CommonClient.inAlpha()) return -1;
 
         return this.getVehicleMaxHearts(vehicle);
     }
@@ -79,13 +73,13 @@ public abstract class HudModifier {
     @WrapOperation(method = "renderPlayerHealth(Lnet/minecraft/client/gui/GuiGraphics;)V", at = @At(value = "INVOKE",
         target = "Lnet/minecraft/client/gui/GuiGraphics;blit(Lnet/minecraft/resources/ResourceLocation;IIIIII)V"))
     private void redirectBlit(GuiGraphics graphics, ResourceLocation atlasLocation, int x, int y, int uOffset, int vOffset, int uWidth, int vHeight, Operation<Void> original) {
-        if (!CommonVersionOverlay.inAlpha(minecraft)) {
+        if (!CommonClient.inAlpha()) {
             original.call(graphics, atlasLocation, x, y, uOffset, vOffset, uWidth, vHeight);
             return;
         }
 
         if (this.currentProfiler.peek().equals("armor")) { // Armor move right and down
-            int barStart = this.screenWidth / 2-91,
+            int barStart = getWidth() / 2-91,
                 mirroredX = 2 * barStart+72-x,
                 x1 = mirroredX+armorW,
                 y1 = y+armorH-yOffset();
@@ -93,7 +87,7 @@ public abstract class HudModifier {
             renderFlippedBlit(graphics, atlasLocation, x1, y1, uWidth, vHeight, uOffset, vOffset);
 
         } else if (this.currentProfiler.peek().equals("air")) { // Air level move left and down
-            int barEnd = this.screenWidth / 2+51,
+            int barEnd = getWidth() / 2+51,
                 mirroredX = 2 * barEnd-9-x;
             graphics.blit(atlasLocation, mirroredX-airLvlW, y-airLvlH+yOffset(), uOffset, vOffset, uWidth, vHeight);
         } else {
@@ -104,15 +98,15 @@ public abstract class HudModifier {
     // EXP bar disable
     @Inject(at = @At("HEAD"), method = "renderExperienceBar", cancellable = true)
     private void renderExperienceBar(CallbackInfo ci) {
-        if (CommonVersionOverlay.inAlpha(minecraft)) ci.cancel();
+        if (CommonClient.inAlpha()) ci.cancel();
     }
 
     // Mount HP move, account for AbstractHorse jump bar when saddled and Armor
     @ModifyVariable(method = "renderVehicleHealth", at = @At("STORE"), ordinal = 2)
     private int moveMountHealthY(int y) {
-        if (CommonVersionOverlay.notInAlpha(minecraft) || minecraft.player.isCreative()) return y;
+        if (CommonClient.notInAlpha() || getPlayer().isCreative()) return y;
 
-        if (minecraft.player.getArmorValue() > 0) {
+        if (getPlayer().getArmorValue() > 0) {
             return mountHpOffset();
         } else {
             return mountHpOffset()+mountHpH_na+mountHpH;
