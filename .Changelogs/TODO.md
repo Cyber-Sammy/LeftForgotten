@@ -1,6 +1,7 @@
 # TODO - Code
 - [FABRIC 1.21.1] Account air level and armor level to adjust for status effects that grant additional health
 - [NEOFORGE 1.21.1] Account air level to adjust for status effects that grant additional health
+- [NEOFORGE 1.20.1] Account air level to adjust for status effects that grant additional health
 - Check for any small issues like some features (flowers, shrooms) not getting placed in the world (Might be an issue for Forge/Neo)
 
 # TODO - Testing and publishing
