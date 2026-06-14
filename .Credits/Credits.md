@@ -4,10 +4,10 @@
   - JustMili is the founder of Lumynity Studios, that's why it is like so
 
 ## Authors
-- JustMili - Large portion of the current (Left Forgotten's) and source (True End's) codebase
-- BluSpring - Datagen help, block remodel rendering
+- JustMili - Large portion of (most of) the current (Left Forgotten's) and source (True End's) codebase
 
 ## Contributors
+- BluSpring - Datagen help, block remodel rendering
+- - NBSurprise - Built all the (unused) structures for the mod
 - Eetgeenappels - Helped with armor sprite flipping on Fabric
-- NBSurprise - Built all the (unused) structures for the mod
 - Cyber_Sammy - Helped port to 1.21.1
