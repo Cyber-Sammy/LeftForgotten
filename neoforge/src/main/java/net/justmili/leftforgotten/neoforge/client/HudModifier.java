@@ -24,7 +24,11 @@ import static net.justmili.leftforgotten.core.util.ClientUtil.*;
 
 @EventBusSubscriber(value = Dist.CLIENT)
 public class HudModifier {
-    private static final ResourceLocation GUI_ICONS_LOCATION = ResourceUtil.asPath("textures/gui/icons.png");
+    private static final ResourceLocation ARMOR_EMPTY = ResourceUtil.minecraftResource("hud/armor_empty");
+    private static final ResourceLocation ARMOR_HALF = ResourceUtil.minecraftResource("hud/armor_half");
+    private static final ResourceLocation ARMOR_FULL = ResourceUtil.minecraftResource("hud/armor_full");
+    private static final ResourceLocation AIR = ResourceUtil.minecraftResource("hud/air");
+    private static final ResourceLocation AIR_BURST = ResourceUtil.minecraftResource("hud/air_bursting");
 
     @SubscribeEvent
     public static void onGuiOverlayPre(RenderGuiLayerEvent.Pre event) {
@@ -50,7 +54,7 @@ public class HudModifier {
 
                 int level = getPlayer().getArmorValue();
                 for (int i = 1; level > 0 && i < 20; i += 2) {
-                    ResourceLocation sprite = i < level ? ARMOR_FULL_SPRITE : i == level ? ARMOR_HALF_SPRITE : ARMOR_EMPTY_SPRITE;
+                    ResourceLocation sprite = i < level ? ARMOR_FULL : i == level ? ARMOR_HALF : ARMOR_EMPTY;
                     TextureAtlasSprite atlasSprite = Minecraft.getInstance().getGuiSprites().getSprite(sprite);
                     int origX = getWidth() / 2-91+((i-1) / 2) * 8,
                         x1 = mirrorX(origX)+armorW,
@@ -80,7 +84,7 @@ public class HudModifier {
                 for (int i = 0; i < full+partial; ++i) {
                     int origX = getWidth() / 2-9-i * 8-9,
                         mirroredX = 2 * barEnd-9-origX-airLvlW;
-                    graphics.blit(GUI_ICONS_LOCATION, mirroredX, top, (i < full ? 16 : 25), 18, 9, 9);
+                    graphics.blitSprite(i < full ? AIR : AIR_BURST, mirroredX, top, 9, 9);
                 }
             }
             // Mount HP move down, account for AbstractHorse jump bar when saddled and Armor

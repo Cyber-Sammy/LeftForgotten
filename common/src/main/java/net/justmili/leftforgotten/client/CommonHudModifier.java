@@ -14,9 +14,12 @@ import static net.justmili.leftforgotten.core.util.ClientUtil.*;
 
 public class CommonHudModifier {
     public static class Common {
-        public static final ResourceLocation ARMOR_EMPTY_SPRITE = ResourceUtil.minecraftResource("hud/armor_empty");
-        public static final ResourceLocation ARMOR_HALF_SPRITE = ResourceUtil.minecraftResource("hud/armor_half");
-        public static final ResourceLocation ARMOR_FULL_SPRITE = ResourceUtil.minecraftResource("hud/armor_full");
+        private static boolean hasSaddle() {
+            return getPlayer().getVehicle() instanceof AbstractHorse horse && horse.isSaddled();
+        }
+        private static boolean inCreative() {
+            return getPlayer().isCreative();
+        }
 
         public static int mirrorX(int x) {
             return 2 * (getWidth() / 2-91)+72-x;
@@ -49,15 +52,15 @@ public class CommonHudModifier {
             playerHpH = 7,    // Player HP Y offset
             armorW = 101,     // Armor X offset
             armorH = 17,      // Armor Y offset
-            airLvlW = 101,    // Air level X offset
+            airLvlW = 102,    // Air level X offset
             airLvlH = 2,      // Air level Y offset
             horseBar = 7,     // Horse bar
             mountHpH = 2,     // Mount HP Y offset
             mountHpH_na = 7;  // Mount HP Y offset without Armor
 
         public static int yOffset() { // Account for horse bar and Creative, Fabric doesn't need to account for fullscreen
-            int inCreative = getPlayer().isCreative() ? -9 : 0;
-            return (getPlayer().getVehicle() instanceof AbstractHorse horse && horse.isSaddled()) ? horseBar+inCreative : inCreative;
+            int creativeOffset = Common.inCreative()? -9 : 0;
+            return Common.hasSaddle()? horseBar + creativeOffset : creativeOffset;
         }
         public static int mountHpOffset() {
             return getHeight() - 39 - yOffset() - mountHpH;
@@ -77,13 +80,8 @@ public class CommonHudModifier {
             mountHpH_na = 9,  // Mount HP Y offset without Armor
             fullscreenOffset = 1; // Fullscreen accountability because Forge is weird
 
-        private static boolean hasSaddle() {
-            return getPlayer().getVehicle() instanceof AbstractHorse horse && horse.isSaddled();
-        }
         public static int yOffset() {
-            int horseBarOffset = hasSaddle() ? horseBar : 0,
-                inCreative = (getPlayer().isCreative() && hasSaddle()) ? -9 : 0;
-            return horseBarOffset + inCreative - fullscreenOffset;
+            return (Common.hasSaddle() ? horseBar : 0) - fullscreenOffset;
         }
     }
 }

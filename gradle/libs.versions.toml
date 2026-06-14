@@ -7,8 +7,7 @@ arch_loom = "1.14-SNAPSHOT"
 arch_plugin = "3.4-SNAPSHOT"
 arch_api = "13.0.8"
 
-# https://files.minecraftforge.net/net/minecraftforge/forge/
-# You can bump the version up if you don't plan on keeping compatibility with NeoForge on 1.20.1
+# https://neoforged.net/
 neoforge = "21.1.223"
 
 # https://fabricmc.net/develop

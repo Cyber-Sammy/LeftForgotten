@@ -119,12 +119,16 @@ public abstract class HudModifier {
     // Mount HP move, account for AbstractHorse jump bar when saddled and Armor
     @ModifyVariable(method = "renderVehicleHealth", at = @At("STORE"), ordinal = 2)
     private int moveMountHealthY(int y) {
-        if (CommonClient.notInAlpha() || getPlayer().isCreative()) return y;
+        if (CommonClient.notInAlpha()) return y;
 
-        if (getPlayer().getArmorValue() > 0) {
-            return mountHpOffset();
-        } else {
-            return mountHpOffset()+mountHpH_na+mountHpH;
+        if (!getPlayer().isCreative() && getPlayer().getArmorValue() == 0) {
+            return mountHpOffset() + mountHpH_na + mountHpH;
         }
+        return mountHpOffset();
+    }
+
+    @Inject(at = @At("HEAD"), method = "renderVehicleHealth", cancellable = true)
+    private void mountHealthCreativeCancel(GuiGraphics graphics, CallbackInfo ci) {
+        if (CommonClient.inAlpha() && getPlayer().isCreative()) ci.cancel();
     }
 }
