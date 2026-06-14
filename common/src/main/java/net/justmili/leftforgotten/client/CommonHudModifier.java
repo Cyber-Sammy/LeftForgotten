@@ -12,9 +12,14 @@ import org.joml.Matrix4f;
 import static net.justmili.leftforgotten.core.util.ClientUtil.*;
 
 public class CommonHudModifier {
-    public static final ResourceLocation GUI_ICONS_LOCATION = ResourceUtil.asPath("textures/gui/icons.png");
-
     public static class Common {
+        private static boolean hasSaddle() {
+            return getPlayer().getVehicle() instanceof AbstractHorse horse && horse.isSaddled();
+        }
+        private static boolean inCreative() {
+            return getPlayer().isCreative();
+        }
+
         public static int mirrorX(int x) {
             return 2 * (getWidth() / 2-91)+72-x;
         }
@@ -47,18 +52,18 @@ public class CommonHudModifier {
             playerHpH = 7,    // Player HP Y offset
             armorW = 101,     // Armor X offset
             armorH = 17,      // Armor Y offset
-            airLvlW = 101,    // Air level X offset
+            airLvlW = 102,    // Air level X offset
             airLvlH = 2,      // Air level Y offset
             horseBar = 7,     // Horse bar
             mountHpH = 2,     // Mount HP Y offset
             mountHpH_na = 7;  // Mount HP Y offset without Armor
 
-        public static int yOffset() {
-            int inCreative = getPlayer().isCreative() ? -9 : 0;
-            return (getPlayer().getVehicle() instanceof AbstractHorse horse && horse.isSaddled()) ? horseBar+inCreative : inCreative;
+        public static int yOffset() { // Account for horse bar and Creative, Fabric doesn't need to account for fullscreen
+            int creativeOffset = Common.inCreative()? -9 : 0;
+            return Common.hasSaddle()? horseBar + creativeOffset : creativeOffset;
         }
         public static int mountHpOffset() {
-            return getHeight()-39-yOffset()-mountHpH;
+            return getHeight() - 39 - yOffset() - mountHpH;
         }
     }
 
@@ -75,13 +80,8 @@ public class CommonHudModifier {
             mountHpH_na = 9,
             fullscreenOffset = 1;
 
-        private static boolean hasSaddle() {
-            return getPlayer().getVehicle() instanceof AbstractHorse horse && horse.isSaddled();
-        }
         public static int yOffset() {
-            int horseBarOffset = hasSaddle() ? horseBar : 0,
-                inCreative = (getPlayer().isCreative() && hasSaddle()) ? -9 : 0;
-            return horseBarOffset+inCreative-fullscreenOffset;
+            return (Common.hasSaddle() ? horseBar : 0) - fullscreenOffset;
         }
     }
 }
