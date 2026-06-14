@@ -29,6 +29,11 @@ import static net.justmili.leftforgotten.core.util.ClientUtil.getWidth;
 @Mixin(value = Gui.class, priority = 2500)
 public abstract class HudModifier {
 
+    @Unique
+    private static boolean nonSurvivalGamemode() {
+        return getPlayer().isCreative() || getPlayer().isSpectator();
+    }
+
     @Shadow
     protected abstract int getVehicleMaxHearts(LivingEntity vehicle);
 
@@ -120,8 +125,9 @@ public abstract class HudModifier {
     @ModifyVariable(method = "renderVehicleHealth", at = @At("STORE"), ordinal = 2)
     private int moveMountHealthY(int y) {
         if (CommonClient.notInAlpha()) return y;
+        if (nonSurvivalGamemode()) return y;
 
-        if (!getPlayer().isCreative() && getPlayer().getArmorValue() == 0) {
+        if (getPlayer().getArmorValue() == 0) {
             return mountHpOffset() + mountHpH_na + mountHpH;
         }
         return mountHpOffset();
@@ -129,6 +135,6 @@ public abstract class HudModifier {
 
     @Inject(at = @At("HEAD"), method = "renderVehicleHealth", cancellable = true)
     private void mountHealthCreativeCancel(GuiGraphics graphics, CallbackInfo ci) {
-        if (CommonClient.inAlpha() && getPlayer().isCreative()) ci.cancel();
+        if (CommonClient.inAlpha() && nonSurvivalGamemode()) ci.cancel();
     }
 }
