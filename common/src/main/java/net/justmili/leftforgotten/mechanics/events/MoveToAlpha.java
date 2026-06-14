@@ -1,6 +1,7 @@
 package net.justmili.leftforgotten.mechanics.events;
 
 import dev.architectury.event.EventResult;
+import dev.architectury.platform.Platform;
 import net.justmili.leftforgotten.registries.LFResources;
 import net.minecraft.server.level.ServerLevel;
 import net.minecraft.server.level.ServerPlayer;
@@ -14,6 +15,10 @@ import net.minecraft.world.level.Level;
 import net.minecraft.world.phys.Vec3;
 
 public class MoveToAlpha {
+    private static int returnY() {
+        return !Platform.isModLoaded("bigglobe")? -88 : -1049;
+    }
+
     public static EventResult onEntityHurt(LivingEntity entity, DamageSource source, float v) {
         if (!(entity instanceof ServerPlayer player)) return EventResult.pass();
         if (source == null) return EventResult.pass();
@@ -51,13 +56,13 @@ public class MoveToAlpha {
         if (overworld == null) return;
 
         Vec3 momentum = player.getDeltaMovement();
-        player.teleportTo(overworld, player.getX(), -88, player.getZ(), player.getYRot(), player.getXRot());
+        player.teleportTo(overworld, player.getX(), returnY(), player.getZ(), player.getYRot(), player.getXRot());
         player.setDeltaMovement(momentum);
         player.startFallFlying();
 
         // Schedule effect for next tick
         overworld.getServer().execute(() -> {
-            player.addEffect(new MobEffectInstance(MobEffects.SLOW_FALLING, 1, 0, false, false));
+            player.addEffect(new MobEffectInstance(MobEffects.SLOW_FALLING, 40, 0, false, false));
         });
     }
 }
