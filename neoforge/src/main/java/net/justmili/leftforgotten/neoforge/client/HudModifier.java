@@ -12,13 +12,15 @@ import net.minecraft.client.renderer.texture.TextureAtlasSprite;
 import net.minecraft.resources.ResourceLocation;
 import net.minecraft.tags.FluidTags;
 import net.minecraft.util.Mth;
+import net.minecraft.world.entity.player.Player;
 import net.neoforged.api.distmarker.Dist;
 import net.neoforged.bus.api.SubscribeEvent;
 import net.neoforged.fml.common.EventBusSubscriber;
 import net.neoforged.neoforge.client.event.RenderGuiLayerEvent;
 import net.neoforged.neoforge.client.gui.VanillaGuiLayers;
 
-import static net.justmili.leftforgotten.client.CommonHudModifier.Common.*;
+import static net.justmili.leftforgotten.client.CommonHudModifier.Common.mirrorX;
+import static net.justmili.leftforgotten.client.CommonHudModifier.Common.renderFlippedSprite;
 import static net.justmili.leftforgotten.client.CommonHudModifier.NeoForge.*;
 import static net.justmili.leftforgotten.core.util.ClientUtil.*;
 
@@ -123,6 +125,7 @@ public class HudModifier {
     }
 
     private static boolean nonSurvivalGamemode() {
-        return getPlayer().isCreative() || getPlayer().isSpectator();
+        if (minecraft.gameMode == null) return false;
+        return !(minecraft.gameMode.canHurtPlayer() && minecraft.getCameraEntity() instanceof Player);
     }
 }
