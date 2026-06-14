@@ -47,9 +47,36 @@ This is not a horror mod, but rather a adventure and decoration mod. Just plain 
   - +A chance to get screwed by music disc 13
 
 ## Dependencies and Mod Compatibility
-- Left Forgotten requires Architectury API (and Fabric API on Fabric)
-- Left Forgotten recommends you install Polymorph
-- Left Forgotten is not compatible with True End due to very similar/duplicate codebases.
+<details>
+<summary>REQUIRES</summary>
+
+Fabric - [Fabric API](https://modrinth.com/mod/fabric-api), [Architectury API](https://modrinth.com/mod/architectury-api)<br>
+Forge - [Architectury API](https://modrinth.com/mod/architectury-api)
+
+</details>
+
+<details>
+<summary>RECOMMENDS</summary>
+
+[Polymorph](https://modrinth.com/mod/polymorph), [LambDynamicLights](https://modrinth.com/mod/lambdynamiclights)
+
+</details>
+
+<details>
+<summary>BROKEN BUT PLAYABLE</summary>
+
+[Big Globe](https://modrinth.com/mod/big-globe)<br>
+*Entering and leaving works fine. The Brittle Bedrock though? Can't even place it in the world.
+
+</details>
+
+<details>
+<summary>INCOMPATIBLE</summary>
+
+[True End](https://modrinth.com/mod/true_end)<br>
+*Due to similar codebases, as both were partially or fully made by JustMili.
+
+</details>
 
 <hr>
 
