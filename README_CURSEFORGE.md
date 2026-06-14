@@ -47,14 +47,45 @@ This is not a horror mod, but rather a adventure and decoration mod. Just plain 
   - +A chance to get screwed by music disc 13
 
 ## Dependencies and Mod Compatibility
-- Left Forgotten requires Architectury API (and Fabric API on Fabric)
-- Left Forgotten recommends you install Polymorph
-- Left Forgotten is not compatible with True End due to very similar/duplicate codebases.
+<div class="spoiler-title">
+  <strong>REQUIRES</strong>
+</div>
+<div class="spoiler">
+  <div class="spoiler-content">
+    <p>
+      Fabric - [Fabric API](https://www.curseforge.com/minecraft/mc-mods/fabric-api), [Architectury API](https://www.curseforge.com/minecraft/mc-mods/architectury-api)<br>
+      Forge - [Architectury API](https://www.curseforge.com/minecraft/mc-mods/architectury-api)
+    </p>
+  </div>
+</div>
+
+<details>
+<summary>RECOMMENDS</summary>
+
+[Polymorph](https://www.curseforge.com/minecraft/mc-mods/polymorph), [LambDynamicLights](https://www.curseforge.com/minecraft/mc-mods/lambdynamiclights)
+
+</details>
+
+<details>
+<summary>BROKEN BUT PLAYABLE</summary>
+
+[Big Globe](https://modrinth.com/mod/big-globe)<br>
+*Entering and leaving works fine. The Brittle Bedrock though? Can't even place it in the world.
+
+</details>
+
+<details>
+<summary>INCOMPATIBLE</summary>
+
+[True End](https://www.curseforge.com/minecraft/mc-mods/true-end-cf)<br>
+*Due to similar codebases, as both were partially or fully made by JustMili.
+
+</details>
 
 <hr>
 
 ### When newer Minecraft versions?
-With version 1.1 Left Forgotten will update from Fabric+Forge 1.20.1 to:
+With version 1.1.x Left Forgotten will update from Fabric+Forge 1.20.1 to:
 - 1.21.1 Fabric & NeoForge
 - (1.21.6-)1.21.8 Fabric & NeoForge
 - 1.21.11 Fabric & NeoForge
