@@ -5,10 +5,10 @@
   "name": "${mod_name}",
   "description": "${mod_description}",
   "authors": [
-    "JustMili",
-    "BluSpring"
+    "JustMili"
   ],
   "contributors": [
+    "BluSpring",
     "NBSurprise",
     "Eetgeenappels",
     "Cyber-Sammy"
