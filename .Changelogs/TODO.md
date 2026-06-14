@@ -3,7 +3,7 @@
 - [FABRIC 1.20.1] Account air level and armor level to adjust for status effects that grant additional health
 - [NEOFORGE 1.21.1] Account air level to adjust for status effects that grant additional health
 - [FORGE 1.20.1] Account air level to adjust for status effects that grant additional health
-- Check for any small issues like some features (flowers, shrooms) not getting placed in the world (Might be an issue for Forge/Neo)
+- [NEOFORGE 1.21.1] Fix vegetation patches (flowers, mushrooms, cacti) not getting placed
 
 # TODO - Testing and publishing
 - Do a long playtest of 1.20.1 Fabric and Forge with many mods
