@@ -24,7 +24,7 @@ public class Events {
         EntityEvent.LIVING_HURT.register(WoolDrop::onEntityHurt);
 
         EntityEvent.LIVING_HURT.register(MoveToAlpha::onEntityHurt);
-        EntityEvent.LIVING_HURT.register(MoveToAlpha::onEntityHurt1);
+        EntityEvent.LIVING_HURT.register(MoveToAlpha::onHurtByDimensionEntry);
         TickEvent.PLAYER_POST.register(MoveToAlpha::onPlayerTick);
 
         InteractionEvent.RIGHT_CLICK_ITEM.register(AlphaFoodSystem::onRightClickItem);
