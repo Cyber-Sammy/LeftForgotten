@@ -28,11 +28,12 @@ public class MoveToAlpha {
         return EventResult.interruptFalse();
     }
 
-    public static EventResult onEntityHurt1(LivingEntity entity, DamageSource source, float v) {
+    public static EventResult onHurtByDimensionEntry(LivingEntity entity, DamageSource source, float v) {
         if (!(entity instanceof ServerPlayer player)) return EventResult.pass();
         if (source == null) return EventResult.pass();
         if (!player.level().dimension().equals(LFResources.Levels.ALPHA_MINECRAFT)) return EventResult.pass();
-        if (v > 512f) return EventResult.pass(); // Let through if damage is high enough, otherwise /kill doesn't work - this will also allow a mace hit to kill you
+        if (!source.is(DamageTypes.FALL)) return EventResult.pass(); // Filter only for fall aka for entry
+        if (v > 512f) return EventResult.pass(); // Cancel the damage
         if (player.getHealth() - v > 0) return EventResult.pass();
 
         player.setHealth(2);
