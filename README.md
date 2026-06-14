@@ -68,7 +68,7 @@ Forge - [Architectury API](https://modrinth.com/mod/architectury-api)
 <summary>BROKEN BUT PLAYABLE</summary>
 
 [Big Globe](https://modrinth.com/mod/big-globe)<br>
-*Entering and leaving works fine. The Brittle Bedrock though? Can't even place it in the world.
+*Entering and leaving works fine. The Brittle Bedrock though? It can't even generate at Big Globe's bedrock layer to give the player easier access to this mod's content.
 
 </details>
 
