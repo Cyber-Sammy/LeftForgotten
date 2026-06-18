@@ -32,6 +32,19 @@ public class HudModifier {
     private static final ResourceLocation AIR = ResourceUtil.minecraftResource("hud/air");
     private static final ResourceLocation AIR_BURST = ResourceUtil.minecraftResource("hud/air_bursting");
 
+    private static int extraHealthRowsOffset() {
+        Player player = getPlayer();
+        if (player == null) return 0;
+
+        float maxHealth = Math.max(player.getMaxHealth(), player.getHealth());
+        int absorption = Mth.ceil(player.getAbsorptionAmount());
+        int rows = Mth.ceil((maxHealth + absorption) / 2.0F / 10.0F);
+        if (rows <= 1) return 0;
+
+        int rowHeight = Math.max(10 - (rows - 2), 3);
+        return (rows - 1) * rowHeight;
+    }
+
     @SubscribeEvent
     public static void onGuiOverlayPre(RenderGuiLayerEvent.Pre event) {
         if (getPlayer() == null) return;
@@ -79,7 +92,7 @@ public class HudModifier {
             int full = Mth.ceil((air - 2) * 10.0 / maxAir),
                 partial = Mth.ceil(air * 10.0 / maxAir) - full,
                 rh = minecraft.gui.rightHeight,
-                top = getHeight() - rh - airLvlH - yOffset(),
+                top = getHeight() - rh - airLvlH - yOffset() - extraHealthRowsOffset(),
                 barEnd = getWidth() / 2 + 51;
 
             for (int i = 0; i < full + partial; ++i) {
