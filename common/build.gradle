@@ -26,6 +26,7 @@ dependencies {
     modImplementation("dev.architectury:architectury:${libs.versions.arch.api.get()}")
 
     implementation(annotationProcessor("com.github.bawnorton.mixinsquared:mixinsquared-common:${libs.versions.mixinsquared.get()}"))
+    include(implementation("com.github.bawnorton.mixinsquared:mixinsquared-common:${libs.versions.mixinsquared.get()}"))
 }
 
 tasks.register('generateAccessWidener') {
@@ -37,34 +38,33 @@ tasks.register('generateAccessWidener') {
         accessWidener += "\n"
         accessWidener += file("template.accesswidener").text + "\n"
 
-        def accessWidenerEntries = new LinkedHashSet<String>()
         def classMaps = loom.namedMinecraftProvider.getMinecraftJarPaths().collect { getClasses(it.toFile()) }
         def classes = new TreeMap()
         for (final def map in classMaps) {
             classes += map
         }
 
-        visitClassMethods(classMaps, "net/minecraft/data/recipes/RecipeProvider") { name, desc, owner ->
+        visitMethods(classes["net/minecraft/data/recipes/RecipeProvider"]) { name, desc, owner ->
             if (it.name == "generate")
                 return
 
-            accessWidenerEntries.add("transitive-accessible\tmethod\t${owner}\t${name}\t${desc}")
+            accessWidener += "transitive-accessible\tmethod\t${owner}\t${name}\t${desc}\n"
         }
 
-        visitClassMethods(classMaps, "net/minecraft/data/models/BlockModelGenerators") { name, desc, owner ->
+        visitMethods(classes["net/minecraft/data/models/BlockModelGenerators"]) { name, desc, owner ->
             if (desc == "()V")
             // Skip over methods that dont take any arguments, as they are specific to minecraft.
                 return
 
-            accessWidenerEntries.add("transitive-accessible\tmethod\t${owner}\t${name}\t${desc}")
+            accessWidener += "transitive-accessible\tmethod\t${owner}\t${name}\t${desc}\n"
         }
 
-        visitClassMethods(classMaps, "net/minecraft/data/models/ItemModelGenerators") { name, desc, owner ->
-            accessWidenerEntries.add("transitive-accessible\tmethod\t${owner}\t${name}\t${desc}")
+        visitMethods(classes["net/minecraft/data/models/ItemModelGenerators"]) { name, desc, owner ->
+            accessWidener += "transitive-accessible\tmethod\t${owner}\t${name}\t${desc}\n"
         }
 
-        visitClassMethods(classMaps, "net/minecraft/data/loot/BlockLootSubProvider") { name, desc, owner ->
-            accessWidenerEntries.add("transitive-accessible\tmethod\t${owner}\t${name}\t${desc}")
+        visitMethods(classes["net/minecraft/data/loot/BlockLootSubProvider"]) { name, desc, owner ->
+            accessWidener += "transitive-accessible\tmethod\t${owner}\t${name}\t${desc}\n"
         }
 
         classes.values().forEach { classNode ->
@@ -79,20 +79,11 @@ tasks.register('generateAccessWidener') {
                     return
                 }
 
-                accessWidenerEntries.add("transitive-extendable\tmethod\t${owner}\t${name}\t${desc}")
+                accessWidener += "transitive-extendable\tmethod\t${owner}\t${name}\t${desc}\n"
             }
         }
 
-        accessWidener += accessWidenerEntries.join("\n")
-        accessWidener += "\n"
-
         file("src/main/resources/${rootProject.property("mod_id")}.accesswidener").text = accessWidener
-    }
-}
-
-def visitClassMethods(List<Map<String, ClassNode>> classMaps, String className, closure) {
-    classMaps.forEach { classMap ->
-        visitMethods(classMap[className], closure)
     }
 }
 

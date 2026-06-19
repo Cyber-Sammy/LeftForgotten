@@ -5,7 +5,9 @@ import com.mojang.blaze3d.vertex.*;
 import net.minecraft.client.gui.GuiGraphics;
 import net.minecraft.client.renderer.GameRenderer;
 import net.minecraft.client.renderer.texture.TextureAtlasSprite;
+import net.minecraft.util.Mth;
 import net.minecraft.world.entity.animal.horse.AbstractHorse;
+import net.minecraft.world.entity.player.Player;
 import org.joml.Matrix4f;
 
 import static net.justmili.leftforgotten.core.util.ClientUtil.*;
@@ -21,6 +23,19 @@ public class CommonHudModifier {
 
         public static int mirrorX(int x) {
             return 2 * (getWidth() / 2-91)+72-x;
+        }
+
+        public static int extraHealthRowsOffset() {
+            Player player = getPlayer();
+            if (player == null) return 0;
+
+            float maxHealth = Math.max(player.getMaxHealth(), player.getHealth());
+            int absorption = Mth.ceil(player.getAbsorptionAmount());
+            int rows = Mth.ceil((maxHealth + absorption) / 2.0F / 10.0F);
+            if (rows <= 1) return 0;
+
+            int rowHeight = Math.max(10 - (rows - 2), 3);
+            return (rows - 1) * rowHeight;
         }
 
         public static void renderFlippedSprite(GuiGraphics graphics, TextureAtlasSprite atlasSprite,

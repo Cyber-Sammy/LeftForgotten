@@ -19,6 +19,7 @@ import net.neoforged.fml.common.EventBusSubscriber;
 import net.neoforged.neoforge.client.event.RenderGuiLayerEvent;
 import net.neoforged.neoforge.client.gui.VanillaGuiLayers;
 
+import static net.justmili.leftforgotten.client.CommonHudModifier.Common.extraHealthRowsOffset;
 import static net.justmili.leftforgotten.client.CommonHudModifier.Common.mirrorX;
 import static net.justmili.leftforgotten.client.CommonHudModifier.Common.renderFlippedSprite;
 import static net.justmili.leftforgotten.client.CommonHudModifier.NeoForge.*;
@@ -31,19 +32,6 @@ public class HudModifier {
     private static final ResourceLocation ARMOR_FULL = ResourceUtil.minecraftResource("hud/armor_full");
     private static final ResourceLocation AIR = ResourceUtil.minecraftResource("hud/air");
     private static final ResourceLocation AIR_BURST = ResourceUtil.minecraftResource("hud/air_bursting");
-
-    private static int extraHealthRowsOffset() {
-        Player player = getPlayer();
-        if (player == null) return 0;
-
-        float maxHealth = Math.max(player.getMaxHealth(), player.getHealth());
-        int absorption = Mth.ceil(player.getAbsorptionAmount());
-        int rows = Mth.ceil((maxHealth + absorption) / 2.0F / 10.0F);
-        if (rows <= 1) return 0;
-
-        int rowHeight = Math.max(10 - (rows - 2), 3);
-        return (rows - 1) * rowHeight;
-    }
 
     @SubscribeEvent
     public static void onGuiOverlayPre(RenderGuiLayerEvent.Pre event) {

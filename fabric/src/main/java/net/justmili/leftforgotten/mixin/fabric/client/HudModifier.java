@@ -8,7 +8,6 @@ import net.minecraft.client.gui.Gui;
 import net.minecraft.client.gui.GuiGraphics;
 import net.minecraft.client.renderer.texture.TextureAtlasSprite;
 import net.minecraft.resources.ResourceLocation;
-import net.minecraft.util.Mth;
 import net.minecraft.util.profiling.ProfilerFiller;
 import net.minecraft.world.entity.LivingEntity;
 import net.minecraft.world.entity.player.Player;
@@ -22,6 +21,7 @@ import org.spongepowered.asm.mixin.injection.callback.CallbackInfo;
 
 import java.util.Stack;
 
+import static net.justmili.leftforgotten.client.CommonHudModifier.Common.extraHealthRowsOffset;
 import static net.justmili.leftforgotten.client.CommonHudModifier.Common.mirrorX;
 import static net.justmili.leftforgotten.client.CommonHudModifier.Common.renderFlippedSprite;
 import static net.justmili.leftforgotten.client.CommonHudModifier.Fabric.*;
@@ -38,20 +38,6 @@ public abstract class HudModifier {
 
     @Shadow
     protected abstract int getVehicleMaxHearts(LivingEntity vehicle);
-
-    @Unique
-    private static int lf$extraHealthRowsOffset() {
-        Player player = getPlayer();
-        if (player == null) return 0;
-
-        float maxHealth = Math.max(player.getMaxHealth(), player.getHealth());
-        int absorption = Mth.ceil(player.getAbsorptionAmount());
-        int rows = Mth.ceil((maxHealth + absorption) / 2.0F / 10.0F);
-        if (rows <= 1) return 0;
-
-        int rowHeight = Math.max(10 - (rows - 2), 3);
-        return (rows - 1) * rowHeight;
-    }
 
     // Draw identifier for renderPlayerHealth's redirectBlit profiler section
     @Unique
@@ -107,7 +93,7 @@ public abstract class HudModifier {
 
         TextureAtlasSprite atlasSprite = Minecraft.getInstance().getGuiSprites().getSprite(sprite);
         int x1 = mirrorX(x)+armorW,
-            y1 = y+armorH-yOffset()+lf$extraHealthRowsOffset();
+            y1 = y+armorH-yOffset()+extraHealthRowsOffset();
 
         renderFlippedSprite(graphics, atlasSprite, x1, y1, width, height);
     }
@@ -125,7 +111,7 @@ public abstract class HudModifier {
             // Flip the way it goes
             int barEnd = getWidth() / 2+51,
                 mirroredX = 2 * barEnd-9-x;
-            graphics.blitSprite(sprite, mirroredX-airLvlW, y-airLvlH+yOffset()-lf$extraHealthRowsOffset(), width, height);
+            graphics.blitSprite(sprite, mirroredX-airLvlW, y-airLvlH+yOffset()-extraHealthRowsOffset(), width, height);
         } else {
             original.call(graphics, sprite, x, y, width, height);
         }

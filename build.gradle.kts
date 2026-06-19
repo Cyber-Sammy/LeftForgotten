@@ -1,4 +1,5 @@
 import net.fabricmc.loom.api.LoomGradleExtensionAPI
+import net.fabricmc.loom.api.fabricapi.FabricApiExtension
 import org.gradle.accessors.dm.LibrariesForLibs
 
 plugins {
@@ -42,10 +43,15 @@ subprojects {
     }
 
     val loom = project.extensions.getByName<LoomGradleExtensionAPI>("loom")
+    val fabricApi = project.extensions.getByName<FabricApiExtension>("fabricApi")
     loom.silentMojangMappingsLicense()
 
     dependencies {
         "minecraft"(libs.minecraft.get())
+
+        // Uncomment if you want datagen (fabric)
+        // IMPORTANT: Only for the sake of compiling - not to be used for anything else!
+        "modCompileOnly"(fabricApi.module("fabric-recipe-api-v1", libs.versions.fabric.api.get()))
 
         "mappings"(loom.layered {
             officialMojangMappings()

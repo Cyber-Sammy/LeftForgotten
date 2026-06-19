@@ -3,14 +3,10 @@ plugins {
 }
 
 def generatedResources = file("src/generated")
-def sharedGeneratedResources = file("../fabric/src/main/generated")
 
 sourceSets {
     main {
-        // These data files are platform-independent. Fabric's 1.21 datagen
-        // serializes the current data formats, while NeoForge emits 1.20 paths
-        // and JSON schemas for the same providers.
-        resources.srcDir sharedGeneratedResources
+        resources.srcDir generatedResources
     }
 }
 
@@ -59,7 +55,7 @@ dependencies {
     // NeoForge dependencies go here
     modImplementation("dev.architectury:architectury-neoforge:${libs.versions.arch.api.get()}")
 
-    modImplementation("maven.modrinth:nostalgic-tweaks:${rootProject.property("nt_neoforge")}")
+    modImplementation("maven.modrinth:nostalgic-tweaks:${rootProject.property("nt_fabric")}")
     modImplementation("me.shedaniel.cloth:cloth-config-neoforge:${rootProject.property("cloth_config")}")
 
     // NeoForge mainlines MixinExtras since 20.2.84, still requires MixinSquared tho
